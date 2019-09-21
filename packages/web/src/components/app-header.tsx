@@ -6,7 +6,6 @@ import { AppLogo } from "./app-logo";
 
 export interface IAppHeaderProps {
     title?: string;
-    onCreateCarpool: () => void;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
@@ -26,6 +25,7 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
             zIndex={9}
             top={0}
             elevation={1}
+            backgroundColor="white"
         >
             <Link to="/" style={linkStyles}>
                 <Pane display="flex" alignItems="center">
@@ -39,7 +39,7 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
                         Sign in
                     </Link>
                 </Button>
-                <Button appearance="primary" onClick={props.onCreateCarpool} marginLeft={8}>
+                <Button appearance="primary" marginLeft={8}>
                     <Link to="/get-started" style={linkStyles}>
                         Get started
                     </Link>
