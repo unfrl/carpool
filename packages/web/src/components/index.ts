@@ -1,2 +1,2 @@
-export * from "./Content";
-export * from "./Header";
+export * from "./content";
+export * from "./app-header";

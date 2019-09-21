@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { Pane, Text } from "evergreen-ui";
+import { Pane, Heading } from "evergreen-ui";
 
-export const Header: FunctionComponent = () => {
+export const AppHeader: FunctionComponent = () => {
     return (
         <Pane
             display="flex"
@@ -15,7 +15,7 @@ export const Header: FunctionComponent = () => {
             zIndex={9}
             top={0}
         >
-            <Text>Header!</Text>
+            <Heading>Header!</Heading>
         </Pane>
     );
 };
