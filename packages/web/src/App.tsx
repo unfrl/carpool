@@ -1,7 +1,8 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { Text } from "evergreen-ui";
+import { Switch, Route } from "react-router";
 
 import { AppHeader, Content } from "./components";
+import { Home, GetStarted, NotFound } from "./screens";
 
 export const App: FunctionComponent = () => {
     const handleCreateCarpool = () => {};
@@ -11,7 +12,11 @@ export const App: FunctionComponent = () => {
             <AppHeader onCreateCarpool={handleCreateCarpool} />
             <main>
                 <Content>
-                    <Text>CONTENT!</Text>
+                    <Switch>
+                        <Route path="/" exact={true} component={Home} />
+                        <Route path="/get-started" exact={true} component={GetStarted} />
+                        <Route component={NotFound} />
+                    </Switch>
                 </Content>
             </main>
         </Fragment>
