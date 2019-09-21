@@ -7,9 +7,11 @@ export const App: FunctionComponent = () => {
     return (
         <Fragment>
             <Header />
-            <Content>
-                <Text>CONTENT!</Text>
-            </Content>
+            <main>
+                <Content>
+                    <Text>CONTENT!</Text>
+                </Content>
+            </main>
         </Fragment>
     );
 };

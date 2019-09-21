@@ -11,6 +11,9 @@ export const Header: FunctionComponent = () => {
             paddingLeft={16}
             paddingRight={16}
             borderBottom
+            position="sticky"
+            zIndex={9}
+            top={0}
         >
             <Text>Header!</Text>
         </Pane>
