@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cleanup_debug",
+            "command": "docker",
+            "type": "process",
+            "args": ["stop", "-t", "2", "carpool_postgres", "carpool_adminer"]
+        }
+    ]
+}
