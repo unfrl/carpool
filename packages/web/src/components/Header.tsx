@@ -10,6 +10,7 @@ export const Header: FunctionComponent = () => {
             width="100%"
             paddingLeft={16}
             paddingRight={16}
+            borderBottom
         >
             <Text>Header!</Text>
         </Pane>
