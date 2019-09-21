@@ -6,6 +6,8 @@ import { AppLogo } from "./app-logo";
 
 export interface IAppHeaderProps {
     title?: string;
+    isAuthenticated: boolean;
+    onAuthClick: () => void;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
@@ -34,10 +36,8 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
                 </Pane>
             </Link>
             <Pane display="flex">
-                <Button appearance="minimal">
-                    <Link to="/sign-in" style={linkStyles}>
-                        Sign in
-                    </Link>
+                <Button appearance="minimal" onClick={props.onAuthClick}>
+                    {props.isAuthenticated ? "Sign out" : "Sign in"}
                 </Button>
                 <Button appearance="primary" marginLeft={8}>
                     <Link to="/get-started" style={linkStyles}>
