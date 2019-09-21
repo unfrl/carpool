@@ -1,37 +1,24 @@
-import * as React from 'react';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import indigo from '@material-ui/core/colors/indigo';
+import React, { FunctionComponent, Fragment } from "react";
+import { Switch, Route } from "react-router";
 
-import { Header, Content } from './components';
+import { AppHeader, Content } from "./components";
+import { Home, GetStarted, NotFound } from "./screens";
 
-const theme = createMuiTheme({
-    typography: {
-        useNextVariants: true,
-    },
-    palette: {
-        primary: indigo,
-        secondary: deepOrange,
-    },
-});
+export const App: FunctionComponent = () => {
+    const handleCreateCarpool = () => {};
 
-class App extends React.Component {
-    render() {
-        return (
-            <MuiThemeProvider theme={theme}>
-                <CssBaseline />
-                <Header />
+    return (
+        <Fragment>
+            <AppHeader onCreateCarpool={handleCreateCarpool} />
+            <main>
                 <Content>
-                    <Typography variant="h3">
-                        WIP!
-                    </Typography>
+                    <Switch>
+                        <Route path="/" exact={true} component={Home} />
+                        <Route path="/get-started" exact={true} component={GetStarted} />
+                        <Route component={NotFound} />
+                    </Switch>
                 </Content>
-            </MuiThemeProvider>
-        );
-    }
-}
-
-export default App;
+            </main>
+        </Fragment>
+    );
+};
