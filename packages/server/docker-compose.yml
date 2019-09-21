@@ -1,17 +1,21 @@
-version: '3.7'
+version: "3.7"
 
 services:
-  db:
-    image: postgres
+  postgres:
+    container_name: carpool_postgres
+    image: postgres:11
     environment:
-      POSTGRES_PASSWORD: example
+      - "POSTGRES_PASSWORD=local"
+      - "POSTGRES_USER=local"
+      - "POSTGRES_DB=carpool"
     ports:
-     - 5432:5432
-
-  pgamin:
-    image: dpage/pgadmin4
+      - 5432:5432
+  adminer:
+    container_name: carpool_adminer
+    image: wodby/adminer:4.7
+    ports:
+      - 9000:9000
     environment:
-      PGADMIN_DEFAULT_EMAIL: user@domain.com
-      PGADMIN_DEFAULT_PASSWORD: SuperSecret
-    ports:
-      - 8080:80
+      - "ADMINER_DEFAULT_DB_DRIVER=pgsql"
+      - "ADMINER_DEFAULT_DB_HOST=postgres"
+      - "ADMINER_DEFAULT_DB_NAME=carpool"
