@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+     - 5432:5432
+
+  pgamin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
+    ports:
+      - 8080:80
