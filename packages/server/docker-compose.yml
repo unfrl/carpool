@@ -1,15 +1,29 @@
 version: "3.7"
 
 services:
+  carpool_server:
+    container_name: carpool_server
+    build:
+      context: .
+    ports:
+      - 1337:1337
+    environment:
+      - "CARPOOL_DB_HOST=postgres"
+      - "CARPOOL_DB_PORT=5432"
+      - "CARPOOL_DB_USERNAME=local"
+      - "CARPOOL_DB_PASSWORD=local"
+      - "CARPOOL_DB_NAME=carpool"
+
   postgres:
     container_name: carpool_postgres
     image: postgres:11
+    ports:
+      - 5432:5432
     environment:
       - "POSTGRES_PASSWORD=local"
       - "POSTGRES_USER=local"
       - "POSTGRES_DB=carpool"
-    ports:
-      - 5432:5432
+
   adminer:
     container_name: carpool_adminer
     image: wodby/adminer:4.7
