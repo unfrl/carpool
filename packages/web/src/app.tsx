@@ -5,11 +5,9 @@ import { AppHeader, Content } from "./components";
 import { Home, GetStarted, NotFound } from "./screens";
 
 export const App: FunctionComponent = () => {
-    const handleCreateCarpool = () => {};
-
     return (
         <Fragment>
-            <AppHeader onCreateCarpool={handleCreateCarpool} />
+            <AppHeader />
             <main>
                 <Content>
                     <Switch>

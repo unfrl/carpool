@@ -6,5 +6,9 @@ export interface IContentProps {
 }
 
 export const Content: FunctionComponent<IContentProps> = props => {
-    return <Pane padding={16}>{props.children}</Pane>;
+    return (
+        <Pane padding={24} width={1024} marginX="auto" marginBottom={160}>
+            {props.children}
+        </Pane>
+    );
 };
