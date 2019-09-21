@@ -990,6 +990,14 @@
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-5.1.0.tgz#abbf028290800092724238f5a2c5b68ae035ce86"
   integrity sha512-I9UMWM9yfm/7w50f/glnELfKJUiBa1N2b57nqyOxKCbSApaRQtyvw70uMutbCmaOCkw6bjwBayG3uNrOodFMqw==
 
+"@nestjs/swagger@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-3.1.0.tgz#eea2d2ef7416a588e5f122b58cd194884e265dc4"
+  integrity sha512-12J7cEcj1K2TtCrxVktRrdW6j5bT7BaruNXPlyzBjs3uJopLLOYSR7j5+2JvlPK+uQcnnZFIOiffYEXoozm/zg==
+  dependencies:
+    lodash "4.17.14"
+    path-to-regexp "3.0.0"
+
 "@nestjs/testing@^5.1.0":
   version "5.7.4"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-5.7.4.tgz#418e993416bd0c1b27b3adf14cc7d59f4ff2a622"
@@ -6935,6 +6943,11 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
+lodash@4.17.14:
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
+
 "lodash@>=3.5 <5", lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
@@ -8165,6 +8178,11 @@ path-to-regexp@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-2.2.1.tgz#90b617025a16381a879bc82a38d4e8bdeb2bcf45"
   integrity sha512-gu9bD6Ta5bwGrrU8muHzVOBFFREpp2iRkVfhBJahwJ6p6Xw20SjT0MxLnwkjOibQmGSYhiUnf2FLe7k+jcFmGQ==
+
+path-to-regexp@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-3.0.0.tgz#c981a218f3df543fa28696be2f88e0c58d2e012a"
+  integrity sha512-ZOtfhPttCrqp2M1PBBH4X13XlvnfhIwD7yCLx+GoGoXRPQyxGOTdQMpIzPSPKXAJT/JQrdfFrgdJOyAzvgpQ9A==
 
 path-to-regexp@^1.7.0:
   version "1.7.0"
@@ -10751,6 +10769,18 @@ svgo@^1.0.0, svgo@^1.2.2:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+swagger-ui-dist@^3.18.1:
+  version "3.23.11"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.23.11.tgz#cb15882591bb79cf8d009aafacc01e8135ff3ef2"
+  integrity sha512-ipENHHH/sqpngTpHXUwg55eAOZ7b2UVayUwwuWPA6nQSPhjBVXX4zOPpNKUwQIFOl3oIwVvZF7mqoxH7pMgVzA==
+
+swagger-ui-express@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-4.1.1.tgz#64a111b26c75f75e4bfe2eea3399ac500724e5ce"
+  integrity sha512-PDt7A4JZYszP2/AcnsYj24u1RwVRV3/8LvCZSL6EcxKq918OBhS1e7NHqS+2woBHi0zn8HjeiJVxXDBKVxgwYw==
+  dependencies:
+    swagger-ui-dist "^3.18.1"
 
 symbol-tree@^3.2.2:
   version "3.2.4"
