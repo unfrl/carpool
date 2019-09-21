@@ -1,19 +1,14 @@
-import React, { FunctionComponent, Fragment, useState } from "react";
+import React, { FunctionComponent, Fragment } from "react";
 import { Text } from "evergreen-ui";
 
 import { AppHeader, Content } from "./components";
 
 export const App: FunctionComponent = () => {
-    // TODO: this is temporary for auth state
-    const [temp, setTemp] = useState(false);
-
-    const handleAuthClick = () => {
-        setTemp(!temp);
-    };
+    const handleCreateCarpool = () => {};
 
     return (
         <Fragment>
-            <AppHeader isLoggedIn={temp} onAuthClick={handleAuthClick} />
+            <AppHeader onCreateCarpool={handleCreateCarpool} />
             <main>
                 <Content>
                     <Text>CONTENT!</Text>

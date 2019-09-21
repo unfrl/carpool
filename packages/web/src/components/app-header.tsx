@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react";
 import { Pane, Heading, Button } from "evergreen-ui";
 
+import { AppLogo } from "./app-logo";
+
 export interface IAppHeaderProps {
     title?: string;
-    isLoggedIn: boolean;
-    onAuthClick: () => void;
+    onCreateCarpool: () => void;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
@@ -22,13 +23,16 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
             zIndex={9}
             top={0}
         >
-            <Heading>{props.title || "Carpool"}</Heading>
-            <Button
-                appearance={props.isLoggedIn ? "default" : "primary"}
-                onClick={props.onAuthClick}
-            >
-                {props.isLoggedIn ? "Log out" : "Log in"}
-            </Button>
+            <Pane display="flex" alignItems="center">
+                <AppLogo />
+                <Heading marginLeft={4}>{props.title || "CARPOOL"}</Heading>
+            </Pane>
+            <Pane display="flex">
+                <Button appearance="minimal">Sign in</Button>
+                <Button appearance="primary" onClick={props.onCreateCarpool} marginLeft={8}>
+                    Get started
+                </Button>
+            </Pane>
         </Pane>
     );
 };
