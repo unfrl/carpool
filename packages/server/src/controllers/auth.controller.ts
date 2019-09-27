@@ -1,9 +1,9 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { ApiUseTags, ApiOperation } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
 
 import { UserService } from "../services";
-import { AuthDto, SignUpDto } from "../dtos";
+import { AuthDto, SignUpDto, UserDto } from "../dtos";
 import { IJwtPayload } from "../interfaces";
 
 @ApiUseTags("Auth")
@@ -14,27 +14,26 @@ export class AuthController {
         private readonly jwtService: JwtService
     ) {}
 
-    // TODO: return types should be specified and defined in the APIOkResponse with swagger
     @ApiOperation({
         operationId: "signUp",
         title: "Sign up",
         description: "Sign up a new user",
     })
+    @ApiOkResponse({ type: UserDto })
     @Post("signup")
     @HttpCode(HttpStatus.OK)
-    public async signUp(@Body() signUpDto: SignUpDto): Promise<any> {
-        const { email, password, name } = signUpDto;
-        const user = await this.userService.signUp(email, password, name);
+    public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
+        const { email, password, displayName } = signUpDto;
+        const user = await this.userService.signUp(email, password, displayName);
 
         const tokenPayload: IJwtPayload = { sub: user.id, type: "user" };
         const token = this.jwtService.sign(tokenPayload);
+
         return {
-            data: {
-                id: user.id,
-                email: user.email,
-                name: user.displayName,
-                accessToken: token,
-            },
+            id: user.id,
+            email: user.email,
+            displayName: user.displayName,
+            accessToken: token,
         };
     }
 
@@ -43,14 +42,21 @@ export class AuthController {
         title: "Sign in",
         description: "Sign in an existing user",
     })
+    @ApiOkResponse({ type: UserDto })
     @Post("signin")
     @HttpCode(HttpStatus.OK)
-    public async signIn(@Body() authDto: AuthDto): Promise<any> {
+    public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
         const { email, password } = authDto;
         const user = await this.userService.signIn(email, password);
+
         const tokenPayload: IJwtPayload = { sub: user.id, type: "user" };
         const token = this.jwtService.sign(tokenPayload);
 
-        return { data: { accessToken: token } };
+        return {
+            id: user.id,
+            email: user.email,
+            displayName: user.displayName,
+            accessToken: token,
+        };
     }
 }

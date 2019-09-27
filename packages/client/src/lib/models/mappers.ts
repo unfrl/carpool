@@ -27,9 +27,47 @@ export const SignUpDto: msRest.CompositeMapper = {
           name: "String"
         }
       },
-      name: {
+      displayName: {
         required: true,
-        serializedName: "name",
+        serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const UserDto: msRest.CompositeMapper = {
+  serializedName: "UserDto",
+  type: {
+    name: "Composite",
+    className: "UserDto",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        required: true,
+        serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      },
+      accessToken: {
+        required: true,
+        serializedName: "accessToken",
         type: {
           name: "String"
         }

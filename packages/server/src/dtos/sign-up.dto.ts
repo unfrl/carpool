@@ -3,5 +3,5 @@ import { ApiModelProperty } from "@nestjs/swagger";
 
 export class SignUpDto extends AuthDto {
     @ApiModelProperty()
-    public readonly name: string;
+    public readonly displayName: string;
 }
