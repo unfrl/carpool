@@ -1,3 +1,3 @@
 export const authConfig = {
-    secret: 'superSecret', // TODO: update to pull from env
+    secret: process.env.AUTH_SECRET || "superSecret",
 };

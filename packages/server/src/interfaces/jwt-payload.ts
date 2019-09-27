@@ -1,4 +1,4 @@
-export interface IJwtPayload {
+export interface JwtPayload {
     sub: string;
     type: string;
 }

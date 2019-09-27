@@ -4,7 +4,7 @@ import { ApiUseTags, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
 
 import { UserService } from "../services";
 import { AuthDto, SignUpDto, UserDto } from "../dtos";
-import { IJwtPayload } from "../interfaces";
+import { JwtPayload } from "../interfaces";
 
 @ApiUseTags("Auth")
 @Controller("api/v1/auth")
@@ -26,7 +26,7 @@ export class AuthController {
         const { email, password, displayName } = signUpDto;
         const user = await this.userService.signUp(email, password, displayName);
 
-        const tokenPayload: IJwtPayload = { sub: user.id, type: "user" };
+        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
         const token = this.jwtService.sign(tokenPayload);
 
         return {
@@ -49,7 +49,7 @@ export class AuthController {
         const { email, password } = authDto;
         const user = await this.userService.signIn(email, password);
 
-        const tokenPayload: IJwtPayload = { sub: user.id, type: "user" };
+        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
         const token = this.jwtService.sign(tokenPayload);
 
         return {
