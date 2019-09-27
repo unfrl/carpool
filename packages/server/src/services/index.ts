@@ -1,2 +1,3 @@
-export { UserService } from './user.service';
-export { JwtStrategy } from './jwt.strategy';
+export * from "./auth.service";
+export * from "./user.service";
+export * from "./jwt.strategy";

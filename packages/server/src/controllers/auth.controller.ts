@@ -1,18 +1,13 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
+import { Controller, Post, Body, HttpCode, HttpStatus, HttpException } from "@nestjs/common";
 import { ApiUseTags, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
 
-import { UserService } from "../services";
+import { AuthService } from "../services";
 import { AuthDto, SignUpDto, UserDto } from "../dtos";
-import { JwtPayload } from "../interfaces";
 
 @ApiUseTags("Auth")
 @Controller("api/v1/auth")
 export class AuthController {
-    constructor(
-        private readonly userService: UserService,
-        private readonly jwtService: JwtService
-    ) {}
+    public constructor(private readonly _authService: AuthService) {}
 
     @ApiOperation({
         operationId: "signUp",
@@ -23,18 +18,12 @@ export class AuthController {
     @Post("signup")
     @HttpCode(HttpStatus.OK)
     public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
-        const { email, password, displayName } = signUpDto;
-        const user = await this.userService.signUp(email, password, displayName);
+        const userDto = await this._authService.signUp(signUpDto);
+        if (!userDto) {
+            throw new HttpException("Failed to sign up", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
-        const token = this.jwtService.sign(tokenPayload);
-
-        return {
-            id: user.id,
-            email: user.email,
-            displayName: user.displayName,
-            accessToken: token,
-        };
+        return userDto;
     }
 
     @ApiOperation({
@@ -46,17 +35,11 @@ export class AuthController {
     @Post("signin")
     @HttpCode(HttpStatus.OK)
     public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
-        const { email, password } = authDto;
-        const user = await this.userService.signIn(email, password);
+        const userDto = await this._authService.signIn(authDto);
+        if (!userDto) {
+            throw new HttpException("Failed to sign in", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
-        const token = this.jwtService.sign(tokenPayload);
-
-        return {
-            id: user.id,
-            email: user.email,
-            displayName: user.displayName,
-            accessToken: token,
-        };
+        return userDto;
     }
 }
