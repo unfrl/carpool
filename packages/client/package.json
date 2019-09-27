@@ -1,19 +1,19 @@
 {
-  "name": "@carpool/client",
-  "version": "0.0.2",
-  "description": "Generated carpool API client",
-  "main": "dist",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "tsc"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@azure/ms-rest-js": "^2.0.4"
-  },
-  "devDependencies": {
-    "typescript": "^3.6.3"
-  }
+    "name": "@carpool/client",
+    "version": "0.0.2",
+    "description": "Generated carpool API client",
+    "main": "src",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "build": "tsc"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@azure/ms-rest-js": "^2.0.4"
+    },
+    "devDependencies": {
+        "typescript": "^3.6.3"
+    }
 }
