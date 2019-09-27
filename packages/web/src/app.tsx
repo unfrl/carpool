@@ -77,10 +77,18 @@ export class App extends Component<IAppProps, IAppState> {
     private handleSignIn = async (email: string, password: string) => {
         const { authStore } = this.injectedProps;
         await authStore.signIn(email, password);
+
+        if (authStore.isAuthenticated) {
+            this.handleCloseDialog();
+        }
     };
 
     private handleSignUp = async (email: string, password: string, displayName: string) => {
         const { authStore } = this.injectedProps;
         await authStore.signUp(email, password, displayName);
+
+        if (authStore.isAuthenticated) {
+            this.handleCloseDialog();
+        }
     };
 }

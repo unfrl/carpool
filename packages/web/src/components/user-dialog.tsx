@@ -74,12 +74,17 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                     value={state.password}
                     onChange={e => setState({ ...state, password: e.target.value })}
                 />
-                <Pane marginTop={16} display="flex" justifyContent="center">
-                    <Button appearance="minimal" marginRight={8} onClick={handleToggleSignUp}>
-                        {state.signUp ? "Existing account" : "Create account"}
-                    </Button>
+                <Pane
+                    marginTop={16}
+                    display="flex"
+                    flexDirection="row-reverse"
+                    justifyContent="center"
+                >
                     <Button appearance="primary" type="submit">
                         {state.signUp ? "Sign up" : "Sign in"}
+                    </Button>
+                    <Button appearance="minimal" marginRight={8} onClick={handleToggleSignUp}>
+                        {state.signUp ? "Existing account" : "Create account"}
                     </Button>
                 </Pane>
             </form>
