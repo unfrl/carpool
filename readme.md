@@ -13,9 +13,9 @@ To run the server services and API in dev mode, from the server directory run `y
 
 # Web dev
 
-To start the core and web projects in watch mode, from the root project directory run `yarn start:all`.
+First, from the client directory run `yarn build` -- this is to generate the client build (`dist`) which is not included in source control (**Note** will want this changed eventually!). Then to start the core and web projects in watch mode, from the root project directory run `yarn start:all`.
 
 # Notes
 
--   The `client` project contains the auto-generated API client. Do not modify any code inside the lib directory -- files in this directory are overwritten each time the client is generate.
+-   The `client` project contains the auto-generated API client. Do not modify any code inside the lib directory -- files in this directory are overwritten each time the client is generated.
 -   The `core` project is the centralized application logic for the web (and eventually mobile) apps. It contains state management (mobx stores), biz/app logic, and exposes the models/endpoints of the API client.
