@@ -3,10 +3,9 @@ import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 
 import { AuthDto, SignUpDto, UserDto } from "../dtos";
-import { UserService } from "./user.service";
 import { JwtPayload } from "../interfaces";
-
-const SALT_ROUNDS = 10;
+import { authConfig } from "../config";
+import { UserService } from "./user.service";
 
 @Injectable()
 export class AuthService {
@@ -47,7 +46,7 @@ export class AuthService {
             return null;
         }
 
-        const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+        const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
         const user = await this._userService.createUser(email, hashed, displayName);
 
         const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
