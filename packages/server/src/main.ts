@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
+import * as fs from "fs";
 
 const PORT = process.env.PORT || 1337;
 
@@ -13,6 +14,10 @@ async function bootstrap() {
         .setVersion("1.0")
         .build();
     const document = SwaggerModule.createDocument(app, options);
+
+    // for now, writing out spec changes on startup
+    fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
+
     SwaggerModule.setup("api", app, document);
 
     await app.listen(PORT);

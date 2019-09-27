@@ -1,0 +1,5 @@
+input-file: api-swagger-spec.json
+add-credentials: true
+
+typescript:
+  output-folder: ../client/src

@@ -1,10 +1,12 @@
-import { Controller, Post, Get, Body, HttpCode, HttpStatus } from "@nestjs/common";
+import { Controller, Post, Body, HttpCode, HttpStatus } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { ApiUseTags, ApiOperation } from "@nestjs/swagger";
 
 import { UserService } from "../services";
 import { AuthDto, SignUpDto } from "../dtos";
 import { IJwtPayload } from "../interfaces";
 
+@ApiUseTags("Auth")
 @Controller("api/v1/auth")
 export class AuthController {
     constructor(
@@ -12,6 +14,12 @@ export class AuthController {
         private readonly jwtService: JwtService
     ) {}
 
+    // TODO: return types should be specified and defined in the APIOkResponse with swagger
+    @ApiOperation({
+        operationId: "signUp",
+        title: "Sign up",
+        description: "Sign up a new user",
+    })
     @Post("signup")
     @HttpCode(HttpStatus.OK)
     public async signUp(@Body() signUpDto: SignUpDto): Promise<any> {
@@ -30,6 +38,11 @@ export class AuthController {
         };
     }
 
+    @ApiOperation({
+        operationId: "signIn",
+        title: "Sign in",
+        description: "Sign in an existing user",
+    })
     @Post("signin")
     @HttpCode(HttpStatus.OK)
     public async signIn(@Body() authDto: AuthDto): Promise<any> {
