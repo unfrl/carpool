@@ -1,5 +1,5 @@
 {
-    "name": "carpool-server",
+    "name": "@carpool/server",
     "version": "0.0.0",
     "description": "description",
     "author": "KiwiLabs",

@@ -2,9 +2,9 @@ import React, { Component, Fragment } from "react";
 import { Switch, Route, RouteComponentProps } from "react-router";
 import { observer, inject } from "mobx-react";
 
+import { AuthStore } from "@carpool/core";
 import { AppHeader, Content, UserDialog } from "./components";
 import { Home, GetStarted, NotFound } from "./screens";
-import { AuthStore } from "./stores";
 
 export interface IAppProps extends RouteComponentProps {}
 

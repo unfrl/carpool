@@ -5,8 +5,8 @@ import { Provider } from "mobx-react";
 import { syncHistoryWithStore, RouterStore } from "mobx-react-router";
 import { Router, withRouter } from "react-router";
 
+import { RootStore } from "@carpool/core";
 import { App } from "./app";
-import { RootStore } from "./stores";
 
 const rootStore = new RootStore();
 const routerStore = new RouterStore();
