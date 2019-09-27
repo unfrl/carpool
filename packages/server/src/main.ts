@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 1337;
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
+    // Configure swagger documentation
     const options = new DocumentBuilder()
         .setTitle("Carpool")
         .setDescription("Free carpool app for cool peeps and their friends")
@@ -15,7 +16,7 @@ async function bootstrap() {
         .build();
     const document = SwaggerModule.createDocument(app, options);
 
-    // for now, writing out spec changes on startup
+    // TODO: api spec changes are written file directory on startup - need to find a better way to do this
     fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
 
     SwaggerModule.setup("swagger", app, document);
