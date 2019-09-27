@@ -74,7 +74,13 @@ export class App extends Component<IAppProps, IAppState> {
         this.setState({ showUserDialog: false });
     };
 
-    private handleSignIn = (email: string, password: string) => {};
+    private handleSignIn = async (email: string, password: string) => {
+        const { authStore } = this.injectedProps;
+        await authStore.signIn(email, password);
+    };
 
-    private handleSignUp = (email: string, password: string, displayName: string) => {};
+    private handleSignUp = async (email: string, password: string, displayName: string) => {
+        const { authStore } = this.injectedProps;
+        await authStore.signUp(email, password, displayName);
+    };
 }

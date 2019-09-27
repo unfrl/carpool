@@ -6,6 +6,19 @@ import * as fs from "fs";
 
 const PORT = process.env.PORT || 1337;
 
+// TODO: update this array with any new origins and/or pull from env variable
+const allowedOrigins = ["http://localhost:3000"];
+
+const corsOptions = {
+    origin: (origin: string, cb: Function) => {
+        if (allowedOrigins.indexOf(origin) > -1) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+        }
+    },
+};
+
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
@@ -25,6 +38,9 @@ async function bootstrap() {
     // Bind all endpoints to be automatically checked for incorrect data
     // See Nest auto-validation docs for info: https://docs.nestjs.com/techniques/validation#auto-validation
     app.useGlobalPipes(new ValidationPipe());
+
+    // Configure CORS
+    app.enableCors(corsOptions);
 
     await app.listen(PORT);
 }
