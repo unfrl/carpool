@@ -6,14 +6,7 @@ This is the monorepo for the server and web carpool projects. It is setup using 
 
 1. Ensure Node.js, Docker, and yarn are installed.
 2. From root project directory, run `yarn install`. This will install the dependencies of all projects.
-
-# Server dev
-
-To run the server services and API in dev mode, from the server directory run `yarn start:dev`. This will start the DB/adminer in containers and run the API in watch mode (process restarts when files are changed).
-
-# Web dev
-
-First, from the client directory run `yarn build` -- this is to generate the client build (`dist`) which is not included in source control (**Note** will want this changed eventually!). Then to start the core and web projects in watch mode, from the root project directory run `yarn start:all`.
+3. To run server services/services and the core/web projects in dev mode, run `yarn start:all` after dependencies are installed.
 
 # Notes
 

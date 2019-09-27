@@ -8,9 +8,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "start:all": "concurrently -k  \"yarn start:core\"  \"yarn start:web\"",
+    "start:all": "concurrently -k  \"yarn start:core\"  \"yarn start:web\" \"yarn start:server\"",
     "start:web": "cd packages/web && yarn start",
-    "start:core": "cd packages/core && yarn watch"
+    "start:core": "cd packages/core && yarn watch",
+    "start:server": "cd packages/server && yarn start:dev"
   },
   "keywords": [],
   "author": "",
