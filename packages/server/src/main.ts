@@ -18,7 +18,7 @@ async function bootstrap() {
     // for now, writing out spec changes on startup
     fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
 
-    SwaggerModule.setup("api", app, document);
+    SwaggerModule.setup("swagger", app, document);
 
     await app.listen(PORT);
 }
