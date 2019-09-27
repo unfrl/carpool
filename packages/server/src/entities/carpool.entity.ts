@@ -1,14 +1,18 @@
-import { Entity, OneToMany, ManyToOne, Column } from 'typeorm';
+import { Entity, OneToMany, ManyToOne, Column } from "typeorm";
 
-import { BaseEntity } from './base.entity';
-import { Driver } from './driver.entity';
-import { Passenger } from './passenger.entity';
-import { Event } from './event.entity';
+import { BaseEntity } from "./base.entity";
+import { Driver } from "./driver.entity";
+import { Passenger } from "./passenger.entity";
+import { Event } from "./event.entity";
+import { Address } from "../interfaces";
 
 @Entity()
 export class Carpool extends BaseEntity {
     @Column({ nullable: true, length: 200 })
     public name: string;
+
+    @Column("jsonb")
+    public destination: Address;
 
     @Column()
     public eventId: string;
