@@ -1,4 +1,5 @@
 import { NestFactory } from "@nestjs/core";
+import { ValidationPipe } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
 import * as fs from "fs";
@@ -20,6 +21,10 @@ async function bootstrap() {
     fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
 
     SwaggerModule.setup("swagger", app, document);
+
+    // Bind all endpoints to be automatically checked for incorrect data
+    // See Nest auto-validation docs for info: https://docs.nestjs.com/techniques/validation#auto-validation
+    app.useGlobalPipes(new ValidationPipe());
 
     await app.listen(PORT);
 }
