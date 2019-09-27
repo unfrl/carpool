@@ -39,11 +39,6 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
                 <Button appearance="minimal" onClick={props.onAuthClick}>
                     {props.isAuthenticated ? "Sign out" : "Sign in"}
                 </Button>
-                <Button appearance="primary" marginLeft={8}>
-                    <Link to="/get-started" style={linkStyles}>
-                        Get started
-                    </Link>
-                </Button>
             </Pane>
         </Pane>
     );

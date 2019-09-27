@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 
 import { AuthStore } from "@carpool/core";
 import { AppHeader, Content, UserDialog } from "./components";
-import { Home, GetStarted, NotFound } from "./screens";
+import { Home, CreateEvent, NotFound } from "./screens";
 
 export interface IAppProps extends RouteComponentProps {}
 
@@ -40,7 +40,7 @@ export class App extends Component<IAppProps, IAppState> {
                     <Content>
                         <Switch>
                             <Route path="/" exact={true} component={Home} />
-                            <Route path="/get-started" exact={true} component={GetStarted} />
+                            <Route path="/create-event" exact={true} component={CreateEvent} />
                             <Route component={NotFound} />
                         </Switch>
                     </Content>
