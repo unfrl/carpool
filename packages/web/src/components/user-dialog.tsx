@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, Fragment } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Dialog, TextInputField, Pane, Button } from "evergreen-ui";
 
 export interface IUserDialogProps {

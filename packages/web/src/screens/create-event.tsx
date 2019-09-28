@@ -1,6 +1,21 @@
 import React, { FunctionComponent } from "react";
-import { Text } from "evergreen-ui";
+import { Link } from "react-router-dom";
+import { Heading, Pane, Button } from "evergreen-ui";
+
+import { EventForm } from "../components";
 
 export const CreateEvent: FunctionComponent = () => {
-    return <Text>Create Event!</Text>;
+    return (
+        <Pane margin="auto" width={500} maxWidth="100%" elevation={1} padding={16}>
+            <Pane display="flex" alignItems="center">
+                <Button iconBefore="arrow-left" marginRight={36}>
+                    <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                        Back
+                    </Link>
+                </Button>
+                <Heading>Create Event</Heading>
+            </Pane>
+            <EventForm />
+        </Pane>
+    );
 };
