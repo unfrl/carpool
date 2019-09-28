@@ -4,8 +4,8 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 
 import { authConfig, dbConfig } from "./config";
-import { AuthController } from "./controllers";
-import { AuthService, UserService, JwtStrategy } from "./services";
+import { AuthController, EventController, CarpoolController } from "./controllers";
+import { AuthService, UserService, EventService, JwtStrategy, CarpoolService } from "./services";
 import { Carpool, Driver, Event, Passenger, User } from "./entities";
 
 @Module({
@@ -20,7 +20,7 @@ import { Carpool, Driver, Event, Passenger, User } from "./entities";
             },
         }),
     ],
-    controllers: [AuthController],
-    providers: [AuthService, UserService, JwtStrategy],
+    controllers: [AuthController, EventController, CarpoolController],
+    providers: [AuthService, UserService, EventService, CarpoolService, JwtStrategy],
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { Carpool } from "./carpool.entity";
 
 @Entity()
 export class Event extends BaseEntity {
-    @Column()
+    @Column("varchar", { length: 50 })
     public name: string;
 
     @Column()

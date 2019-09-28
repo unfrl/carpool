@@ -8,7 +8,7 @@ import { Address } from "../interfaces";
 
 @Entity()
 export class Carpool extends BaseEntity {
-    @Column({ nullable: true, length: 200 })
+    @Column({ nullable: true, length: 50 })
     public name: string;
 
     @Column("jsonb")
