@@ -1,16 +1,21 @@
 import React, { FunctionComponent, useState } from "react";
 import { TextInputField, Pane, Button } from "evergreen-ui";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./event-form.css";
 
 export interface IEventFormState {
     name: string;
-    date: Date;
+    date: Date | null;
 }
 
 export const EventForm: FunctionComponent = () => {
     const [state, setState] = useState<IEventFormState>({
         name: "",
-        date: new Date(),
+        date: null,
     });
+
+    const canSave = Boolean(state.name && state.date);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,16 +25,17 @@ export const EventForm: FunctionComponent = () => {
         <form onSubmit={handleSubmit} style={{ marginTop: 16 }}>
             <TextInputField
                 label="Name"
-                required={true}
                 value={state.name}
                 onChange={e => setState({ ...state, name: e.target.value })}
             />
-            <TextInputField
-                label="Date"
-                required={true}
-                type="datetime"
-                value={state.date}
-                onChange={e => setState({ ...state, date: new Date(e.target.value) })}
+            <DatePicker
+                selected={state.date}
+                onChange={date => setState({ ...state, date: date })}
+                showTimeSelect
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                customInput={<TextInputField label="Date" marginBottom={0} />}
             />
             <Pane
                 marginTop={16}
@@ -38,7 +44,7 @@ export const EventForm: FunctionComponent = () => {
                 justifyContent="center"
                 alignItems="center"
             >
-                <Button appearance="primary" type="submit">
+                <Button appearance="primary" type="submit" disabled={!canSave}>
                     Create
                 </Button>
                 <Button appearance="minimal" marginRight={8}>
