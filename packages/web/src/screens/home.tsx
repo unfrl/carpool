@@ -5,11 +5,11 @@ import { Button, Pane } from "evergreen-ui";
 export const Home: FunctionComponent = () => {
     return (
         <Pane display="flex" alignItems="center" justifyContent="center">
-            <Button appearance="primary" marginLeft={8}>
-                <Link to="/create-event" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link to="/create-event" style={{ textDecoration: "none", color: "inherit" }}>
+                <Button appearance="primary" marginLeft={8}>
                     Create a Carpool
-                </Link>
-            </Button>
+                </Button>
+            </Link>
         </Pane>
     );
 };
