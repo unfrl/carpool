@@ -9,11 +9,9 @@ export const CreateEvent: FunctionComponent = () => {
         <Pane margin="auto" width={500} maxWidth="100%" elevation={1} padding={16}>
             <Pane display="flex" alignItems="center">
                 <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-                    <Button iconBefore="arrow-left" marginRight={36}>
-                        Back
-                    </Button>
+                    <Button iconBefore="arrow-left">Back</Button>
                 </Link>
-                <Heading>Create Event</Heading>
+                <Heading marginLeft={16}>Create Event</Heading>
             </Pane>
             <EventForm />
         </Pane>
