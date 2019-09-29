@@ -67,6 +67,183 @@ export interface AuthDto {
 
 /**
  * @interface
+ * An interface representing CreateEventDto.
+ */
+export interface CreateEventDto {
+  /**
+   * @member {string} eventName
+   */
+  eventName: string;
+  /**
+   * @member {any} dateTime
+   */
+  dateTime: any;
+}
+
+/**
+ * @interface
+ * An interface representing Event.
+ */
+export interface Event {
+  /**
+   * @member {string} id
+   */
+  id: string;
+  /**
+   * @member {any} created
+   */
+  created: any;
+  /**
+   * @member {any} updated
+   */
+  updated: any;
+  /**
+   * @member {string} name
+   */
+  name: string;
+  /**
+   * @member {any} dateTime
+   */
+  dateTime: any;
+  /**
+   * @member {string[]} carpools
+   */
+  carpools: string[];
+}
+
+/**
+ * @interface
+ * An interface representing UpdateEventDto.
+ */
+export interface UpdateEventDto {
+  /**
+   * @member {string} [eventName]
+   */
+  eventName?: string;
+  /**
+   * @member {any} [dateTime]
+   */
+  dateTime?: any;
+}
+
+/**
+ * @interface
+ * An interface representing Address.
+ */
+export interface Address {
+  /**
+   * @member {string} name
+   */
+  name: string;
+  /**
+   * @member {string} administrative
+   */
+  administrative: string;
+  /**
+   * @member {string} county
+   */
+  county: string;
+  /**
+   * @member {string} city
+   */
+  city: string;
+  /**
+   * @member {string} country
+   */
+  country: string;
+  /**
+   * @member {string} countryCode
+   */
+  countryCode: string;
+  /**
+   * @member {string} postcode
+   */
+  postcode: string;
+}
+
+/**
+ * @interface
+ * An interface representing CreateCarpoolDto.
+ */
+export interface CreateCarpoolDto {
+  /**
+   * @member {string} [carpoolName]
+   */
+  carpoolName?: string;
+  /**
+   * @member {Address} destination
+   */
+  destination: Address;
+  /**
+   * @member {string} eventId
+   */
+  eventId: string;
+}
+
+/**
+ * @interface
+ * An interface representing CarpoolModel.
+ */
+export interface CarpoolModel {
+  /**
+   * @member {string} id
+   */
+  id: string;
+  /**
+   * @member {any} created
+   */
+  created: any;
+  /**
+   * @member {any} updated
+   */
+  updated: any;
+  /**
+   * @member {string} name
+   */
+  name: string;
+  /**
+   * @member {any} destination
+   */
+  destination: any;
+  /**
+   * @member {string} eventId
+   */
+  eventId: string;
+  /**
+   * @member {string[]} drivers
+   */
+  drivers: string[];
+  /**
+   * @member {string[]} passengers
+   */
+  passengers: string[];
+}
+
+/**
+ * @interface
+ * An interface representing UpdateCarpoolDto.
+ */
+export interface UpdateCarpoolDto {
+  /**
+   * @member {string} [carpoolName]
+   */
+  carpoolName?: string;
+  /**
+   * @member {any} [destination]
+   */
+  destination?: any;
+  /**
+   * @member {string[]} [drivers]
+   */
+  drivers?: string[];
+  /**
+   * @member {string[]} [passengers]
+   */
+  passengers?: string[];
+}
+
+/**
+ * @interface
  * An interface representing CarpoolOptions.
  * @extends ServiceClientOptions
  */
@@ -112,5 +289,157 @@ export type SignInResponse = UserDto & {
        * The response body as parsed JSON or XML
        */
       parsedBody: UserDto;
+    };
+};
+
+/**
+ * Contains response data for the createEvent operation.
+ */
+export type CreateEventResponse = Event & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Event;
+    };
+};
+
+/**
+ * Contains response data for the updateEvent operation.
+ */
+export type UpdateEventResponse = Event & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Event;
+    };
+};
+
+/**
+ * Contains response data for the getEvent operation.
+ */
+export type GetEventResponse = Event & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Event;
+    };
+};
+
+/**
+ * Contains response data for the deleteEvent operation.
+ */
+export type DeleteEventResponse = Event & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Event;
+    };
+};
+
+/**
+ * Contains response data for the createCarpool operation.
+ */
+export type CreateCarpoolResponse = CarpoolModel & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: CarpoolModel;
+    };
+};
+
+/**
+ * Contains response data for the getCarpool operation.
+ */
+export type GetCarpoolResponse = CarpoolModel & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: CarpoolModel;
+    };
+};
+
+/**
+ * Contains response data for the updateCarpool operation.
+ */
+export type UpdateCarpoolResponse = CarpoolModel & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: CarpoolModel;
+    };
+};
+
+/**
+ * Contains response data for the deleteCarpool operation.
+ */
+export type DeleteCarpoolResponse = CarpoolModel & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: CarpoolModel;
     };
 };

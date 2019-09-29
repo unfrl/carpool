@@ -1,33 +1,43 @@
-export interface Address {
+import { ApiModelProperty } from "@nestjs/swagger";
+
+export class Address {
     /**
      * E.g. street name ==> 230 S 500 W
      */
-    name: string;
+    @ApiModelProperty()
+    public name: string;
     /**
      * E.g. state name ==> Utah
      */
-    administrative: string;
+    @ApiModelProperty()
+    public administrative: string;
     /**
      * E.g. Salt Lake County
      */
-    county?: string;
+    @ApiModelProperty()
+    public county?: string;
     /**
      * E.g. Salt Lake City
      */
-    city: string;
+    @ApiModelProperty()
+    public city: string;
     /**
      * E.g. United States of America
      */
-    country: string;
+    @ApiModelProperty()
+    public country: string;
     /**
      * E.g. us
      */
-    countryCode: string;
+    @ApiModelProperty()
+    public countryCode: string;
     /**
      * E.g. 84190
      */
-    postcode: string;
-    latlng?: {
+    @ApiModelProperty()
+    public postcode: string;
+
+    public latlng?: {
         lat: number;
         lng: number;
     };

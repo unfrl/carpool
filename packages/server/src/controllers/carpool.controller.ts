@@ -1,7 +1,6 @@
 import { ApiOperation, ApiUseTags, ApiResponse } from "@nestjs/swagger";
 import {
     Post,
-    HttpCode,
     HttpStatus,
     Body,
     HttpException,
@@ -25,8 +24,8 @@ export class CarpoolController {
         title: "Create Carpool",
         description: "Create a new Carpool",
     })
+    @ApiResponse({ status: HttpStatus.OK, type: Carpool })
     @Post()
-    @HttpCode(HttpStatus.OK)
     public async create(@Body() createCarpoolDto: CreateCarpoolDto): Promise<Carpool> {
         const carpool = await this._carpoolService.create(createCarpoolDto);
         if (!carpool) {
@@ -76,9 +75,9 @@ export class CarpoolController {
         title: "Delete Carpool",
         description: "Delete a Carpool",
     })
+    @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Delete(":id")
-    @HttpCode(HttpStatus.OK)
-    @HttpCode(HttpStatus.NOT_FOUND)
     public async delete(@Param("id") id: string): Promise<Carpool> {
         const carpool = await this._carpoolService.delete(id);
         if (!carpool) {

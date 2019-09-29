@@ -1,14 +1,20 @@
+import { ApiModelProperty } from "@nestjs/swagger";
+
 export enum CarType {
-    sedan = "Sedan",
-    truck = "Truck",
-    suv = "SUV",
-    van = "Van",
+    sedan = "sedan",
+    truck = "truck",
+    suv = "suv",
+    van = "van",
 }
 
-export interface Car {
-    capacity: number;
+export class Car {
+    @ApiModelProperty()
+    public capacity: number;
 
-    color: string;
+    @ApiModelProperty()
+    public color: string;
 
-    type: CarType;
+    // Note: this repition is necessary for swagger: https://docs.nestjs.com/recipes/swagger#working-with-enums
+    @ApiModelProperty({ enum: ["sedan", "truck", "suv", "van"] })
+    public type: CarType;
 }

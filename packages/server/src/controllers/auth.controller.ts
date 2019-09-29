@@ -16,7 +16,6 @@ export class AuthController {
     })
     @ApiOkResponse({ type: UserDto })
     @Post("signup")
-    @HttpCode(HttpStatus.OK)
     public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
         const userDto = await this._authService.signUp(signUpDto);
         if (!userDto) {
@@ -33,7 +32,6 @@ export class AuthController {
     })
     @ApiOkResponse({ type: UserDto })
     @Post("signin")
-    @HttpCode(HttpStatus.OK)
     public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
         const userDto = await this._authService.signIn(authDto);
         if (!userDto) {

@@ -1,6 +1,7 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from "@nestjs/swagger";
 import { Length } from "class-validator";
-import { Address } from "src/interfaces";
+
+import { Address } from "../interfaces";
 
 export class CreateCarpoolDto {
     @ApiModelPropertyOptional()

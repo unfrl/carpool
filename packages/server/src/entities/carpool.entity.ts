@@ -22,7 +22,6 @@ export class Carpool extends BaseEntity {
     public eventId: string;
 
     @ManyToOne(type => Event)
-    @ApiResponseModelProperty()
     public event: Event;
 
     @OneToMany(type => Driver, driver => driver.carpool)

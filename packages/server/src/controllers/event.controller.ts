@@ -1,6 +1,5 @@
 import {
     Post,
-    HttpCode,
     Body,
     HttpStatus,
     HttpException,
@@ -25,8 +24,8 @@ export class EventController {
         title: "Create Event",
         description: "Create a new Event",
     })
+    @ApiResponse({ status: HttpStatus.OK, type: Event })
     @Post()
-    @HttpCode(HttpStatus.OK)
     public async create(@Body() createEventDto: CreateEventDto): Promise<Event> {
         const event = await this._eventService.create(createEventDto);
         if (!event) {
@@ -60,9 +59,9 @@ export class EventController {
         title: "Get Event",
         description: "Retrieve an Event",
     })
-    @Get(":id")
     @ApiResponse({ status: HttpStatus.OK, type: Event })
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
+    @Get(":id")
     public async get(@Param("id") id: string): Promise<Event> {
         const event = await this._eventService.get(id, true);
         if (!event) {
@@ -76,9 +75,9 @@ export class EventController {
         title: "Delete Event",
         description: "Delete an Event",
     })
+    @ApiResponse({ status: HttpStatus.OK, type: Event })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Delete(":id")
-    @HttpCode(HttpStatus.OK)
-    @HttpCode(HttpStatus.NOT_FOUND)
     public async delete(@Param("id") id: string): Promise<Event> {
         const event = await this._eventService.delete(id);
         if (!event) {

@@ -28,10 +28,8 @@ export class User extends BaseEntity {
     public password: string;
 
     @OneToMany(type => Driver, driver => driver.carpool)
-    @ApiResponseModelProperty()
     public drivers: Driver[];
 
     @OneToMany(type => Passenger, passenger => passenger.carpool)
-    @ApiResponseModelProperty()
     public passengers: Passenger[];
 }

@@ -13,7 +13,6 @@ export class Passenger extends BaseEntity {
     public userId: string;
 
     @ManyToOne(type => User)
-    @ApiResponseModelProperty()
     public user: User;
 
     // TODO: name, email, and phonenumber can be pulled from the user record if they're logged in
@@ -39,6 +38,5 @@ export class Passenger extends BaseEntity {
     public carpoolId: string;
 
     @ManyToOne(type => Carpool)
-    @ApiResponseModelProperty()
     public carpool: Carpool;
 }

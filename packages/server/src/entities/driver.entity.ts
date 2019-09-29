@@ -13,7 +13,6 @@ export class Driver extends BaseEntity {
     public userId: string;
 
     @ManyToOne(type => User)
-    @ApiResponseModelProperty()
     public user: User;
 
     @Column("jsonb")
@@ -25,6 +24,5 @@ export class Driver extends BaseEntity {
     public carpoolId: string;
 
     @ManyToOne(type => Carpool)
-    @ApiResponseModelProperty()
     public carpool: Carpool;
 }
