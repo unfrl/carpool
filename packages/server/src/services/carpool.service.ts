@@ -4,6 +4,7 @@ import { CreateCarpoolDto } from "src/dtos";
 import { Carpool } from "src/entities";
 import { Repository } from "typeorm";
 import { EventService } from "./event.service";
+import { UpdateCarpoolDto } from "src/dtos/update-carpool.dto";
 
 @Injectable()
 export class CarpoolService {
@@ -13,6 +14,7 @@ export class CarpoolService {
         private readonly _eventService: EventService
     ) {}
 
+    //TODO: Comment this :)
     public async create(createCarpoolDto: CreateCarpoolDto): Promise<Carpool> {
         const { destination, eventId } = createCarpoolDto;
         let carpoolName = createCarpoolDto.carpoolName;
@@ -46,5 +48,27 @@ export class CarpoolService {
         carpool.eventId = createCarpoolDto.eventId;
 
         return await this._carpoolRepository.save(carpool);
+    }
+
+    public async get(id: string): Promise<Carpool> {
+        let carpool = await this._carpoolRepository.findOneOrFail(id);
+        return carpool;
+    }
+
+    public async update(id: string, updateCarpoolDto: UpdateCarpoolDto): Promise<Carpool> {
+        let carpool = await this._carpoolRepository.findOneOrFail(id);
+
+        //TODO: Add an entity mapper for obvious reasons...
+        carpool.name = updateCarpoolDto.carpoolName;
+        carpool.destination = updateCarpoolDto.destination;
+        carpool.passengers = updateCarpoolDto.passengers;
+        carpool.drivers = updateCarpoolDto.drivers;
+        return await this._carpoolRepository.save(carpool);
+    }
+
+    //TODO: Comment this :)
+    public async delete(id: string): Promise<Carpool> {
+        let carpool = await this._carpoolRepository.findOneOrFail(id);
+        return await this._carpoolRepository.remove(carpool);
     }
 }
