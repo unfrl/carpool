@@ -1,18 +1,33 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextInputField, Pane, Button } from "evergreen-ui";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./event-form.css";
+import { TextField, Button, makeStyles } from "@material-ui/core";
+import { DateTimePicker } from "@material-ui/pickers";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: theme.spacing(2),
+    },
+    actions: {
+        display: "flex",
+        flexDirection: "row-reverse",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: theme.spacing(2),
+    },
+    cancel: {
+        marginRight: theme.spacing(1),
+    },
+}));
 
 export interface IEventFormState {
     name: string;
-    date: Date | null;
+    date: Date;
 }
 
 export const EventForm: FunctionComponent = () => {
+    const classes = useStyles();
     const [state, setState] = useState<IEventFormState>({
         name: "",
-        date: null,
+        date: new Date(),
     });
 
     const canSave = Boolean(state.name && state.date);
@@ -22,35 +37,41 @@ export const EventForm: FunctionComponent = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginTop: 16 }}>
-            <TextInputField
+        <form onSubmit={handleSubmit} className={classes.root}>
+            <TextField
                 label="Name"
                 value={state.name}
                 onChange={e => setState({ ...state, name: e.target.value })}
+                variant="outlined"
+                margin="normal"
+                fullWidth={true}
             />
-            <DatePicker
-                selected={state.date}
-                onChange={date => setState({ ...state, date: date })}
-                showTimeSelect
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="MMMM d, yyyy h:mm aa"
-                customInput={<TextInputField label="Date" marginBottom={0} />}
+            <DateTimePicker
+                value={state.date}
+                onChange={date => date && setState({ ...state, date: date.toDate() })}
+                format="MM/DD/YYYY, hh:mm a"
+                inputVariant="outlined"
+                label="Date"
+                required={true}
+                showTodayButton={true}
+                margin="normal"
+                fullWidth={true}
             />
-            <Pane
-                marginTop={16}
-                display="flex"
-                flexDirection="row-reverse"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Button appearance="primary" type="submit" disabled={!canSave}>
+
+            <div className={classes.actions}>
+                <Button
+                    variant="contained"
+                    size="small"
+                    color="primary"
+                    type="submit"
+                    disabled={!canSave}
+                >
                     Create
                 </Button>
-                <Button appearance="minimal" marginRight={8}>
+                <Button variant="text" size="small" className={classes.cancel}>
                     Cancel
                 </Button>
-            </Pane>
+            </div>
         </form>
     );
 };

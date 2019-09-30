@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Heading } from "evergreen-ui";
+import { Typography } from "@material-ui/core";
 
 export const NotFound: FunctionComponent = () => {
-    return <Heading>Not found!</Heading>;
+    return <Typography>Not found!</Typography>;
 };

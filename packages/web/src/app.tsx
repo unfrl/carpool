@@ -1,10 +1,21 @@
 import React, { Component, Fragment } from "react";
 import { Switch, Route, RouteComponentProps } from "react-router";
 import { observer, inject } from "mobx-react";
+import { CssBaseline, createMuiTheme } from "@material-ui/core";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import teal from "@material-ui/core/colors/teal";
+import deepPurple from "@material-ui/core/colors/deepPurple";
 
 import { AuthStore } from "@carpool/core";
-import { AppHeader, Content, UserDialog } from "./components";
+import { AppHeader, UserDialog, Content } from "./components";
 import { Home, CreateEvent, NotFound } from "./screens";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: deepPurple,
+        secondary: teal,
+    },
+});
 
 export interface IAppProps extends RouteComponentProps {}
 
@@ -31,7 +42,8 @@ export class App extends Component<IAppProps, IAppState> {
         const { authStore } = this.injectedProps;
 
         return (
-            <Fragment>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
                 <AppHeader
                     isAuthenticated={authStore.isAuthenticated}
                     onAuthClick={this.handleAuthClick}
@@ -52,7 +64,7 @@ export class App extends Component<IAppProps, IAppState> {
                         onSignUp={this.handleSignUp}
                     />
                 )}
-            </Fragment>
+            </ThemeProvider>
         );
     }
 

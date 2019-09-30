@@ -1,15 +1,25 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
-import { Button, Pane } from "evergreen-ui";
+import { Fab, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+}));
 
 export const Home: FunctionComponent = () => {
+    const classes = useStyles();
+
     return (
-        <Pane display="flex" alignItems="center" justifyContent="center">
+        <div className={classes.root}>
             <Link to="/create-event" style={{ textDecoration: "none", color: "inherit" }}>
-                <Button appearance="primary" marginLeft={8}>
+                <Fab variant="extended" color="primary" size="large">
                     Create a Carpool
-                </Button>
+                </Fab>
             </Link>
-        </Pane>
+        </div>
     );
 };

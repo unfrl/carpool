@@ -1,5 +1,23 @@
 import React, { FunctionComponent, useState } from "react";
-import { Dialog, TextInputField, Pane, Button } from "evergreen-ui";
+import { TextField, Button, makeStyles } from "@material-ui/core";
+import { AppDialog } from "./";
+
+const useStyles = makeStyles(theme => ({
+    actions: {
+        marginTop: theme.spacing(2),
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "center",
+    },
+    account: {
+        marginRight: theme.spacing(1),
+    },
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        padding: theme.spacing(2, 0),
+    },
+}));
 
 export interface IUserDialogProps {
     onClose: () => void;
@@ -15,6 +33,7 @@ export interface IUserDialogState {
 }
 
 export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
+    const classes = useStyles();
     const [state, setState] = useState<IUserDialogState>({
         signUp: false,
         email: "",
@@ -45,49 +64,45 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
     };
 
     return (
-        <Dialog
-            isShown={true}
-            title={state.signUp ? "Sign Up" : "Sign In"}
-            onCloseComplete={props.onClose}
-            hasFooter={false}
-        >
-            <form onSubmit={handleSubmit}>
+        <AppDialog title={state.signUp ? "Sign Up" : "Sign In"} onClose={props.onClose}>
+            <form onSubmit={handleSubmit} className={classes.form}>
                 {state.signUp && (
-                    <TextInputField
+                    <TextField
                         label="Display name"
                         required={true}
                         value={state.displayName}
                         onChange={e => setState({ ...state, displayName: e.target.value })}
+                        variant="outlined"
+                        margin="normal"
                     />
                 )}
-                <TextInputField
+                <TextField
                     label="Email address"
                     required={true}
                     type="email"
                     value={state.email}
                     onChange={e => setState({ ...state, email: e.target.value })}
+                    variant="outlined"
+                    margin="normal"
                 />
-                <TextInputField
+                <TextField
                     label="Password"
                     required={true}
                     type="password"
                     value={state.password}
                     onChange={e => setState({ ...state, password: e.target.value })}
+                    variant="outlined"
+                    margin="normal"
                 />
-                <Pane
-                    marginTop={16}
-                    display="flex"
-                    flexDirection="row-reverse"
-                    justifyContent="center"
-                >
-                    <Button appearance="primary" type="submit">
+                <div className={classes.actions}>
+                    <Button variant="contained" color="primary" type="submit">
                         {state.signUp ? "Sign up" : "Sign in"}
                     </Button>
-                    <Button appearance="minimal" marginRight={8} onClick={handleToggleSignUp}>
+                    <Button variant="text" className={classes.account} onClick={handleToggleSignUp}>
                         {state.signUp ? "Existing account" : "Create account"}
                     </Button>
-                </Pane>
+                </div>
             </form>
-        </Dialog>
+        </AppDialog>
     );
 };

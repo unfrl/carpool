@@ -1,14 +1,20 @@
 import React, { FunctionComponent } from "react";
-import { Pane } from "evergreen-ui";
+import { Container, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    toolbar: theme.mixins.toolbar,
+}));
 
 export interface IContentProps {
     children: any;
 }
 
 export const Content: FunctionComponent<IContentProps> = props => {
+    const classes = useStyles();
     return (
-        <Pane padding={24} width={1024} maxWidth="100%" marginX="auto" marginBottom={160}>
+        <Container>
+            <div className={classes.toolbar} />
             {props.children}
-        </Pane>
+        </Container>
     );
 };

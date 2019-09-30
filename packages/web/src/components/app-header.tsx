@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
-import { Pane, Heading, Button } from "evergreen-ui";
+import { AppBar, Toolbar, Typography, Button, makeStyles } from "@material-ui/core";
 
-import { AppLogo } from "./app-logo";
+const useStyles = makeStyles(theme => ({
+    title: {
+        flexGrow: 1,
+    },
+}));
 
 export interface IAppHeaderProps {
     title?: string;
@@ -11,35 +14,18 @@ export interface IAppHeaderProps {
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
-    // TODO: link+styles can be moved to sep. component, maybe ButtonLink?
-    const linkStyles = { textDecoration: "none", color: "inherit" };
+    const classes = useStyles();
 
     return (
-        <Pane
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            height={56}
-            width="100%"
-            paddingLeft={16}
-            paddingRight={16}
-            position="sticky"
-            zIndex={9}
-            top={0}
-            elevation={1}
-            backgroundColor="white"
-        >
-            <Link to="/" style={linkStyles}>
-                <Pane display="flex" alignItems="center">
-                    <AppLogo />
-                    <Heading marginLeft={4}>{props.title || "CARPOOL"}</Heading>
-                </Pane>
-            </Link>
-            <Pane display="flex">
-                <Button appearance="minimal" onClick={props.onAuthClick}>
+        <AppBar position="sticky">
+            <Toolbar>
+                <Typography variant="h6" className={classes.title}>
+                    CARPOOL
+                </Typography>
+                <Button variant="text" size="small" color="inherit" onClick={props.onAuthClick}>
                     {props.isAuthenticated ? "Sign out" : "Sign in"}
                 </Button>
-            </Pane>
-        </Pane>
+            </Toolbar>
+        </AppBar>
     );
 };
