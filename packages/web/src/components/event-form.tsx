@@ -2,10 +2,9 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
+import { NavLink } from "./";
+
 const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: theme.spacing(2),
-    },
     actions: {
         display: "flex",
         flexDirection: "row-reverse",
@@ -37,7 +36,7 @@ export const EventForm: FunctionComponent = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={classes.root}>
+        <form onSubmit={handleSubmit}>
             <TextField
                 label="Name"
                 value={state.name}
@@ -57,20 +56,21 @@ export const EventForm: FunctionComponent = () => {
                 margin="normal"
                 fullWidth={true}
             />
-
             <div className={classes.actions}>
                 <Button
                     variant="contained"
-                    size="small"
+                    // size="small"
                     color="primary"
                     type="submit"
                     disabled={!canSave}
                 >
                     Create
                 </Button>
-                <Button variant="text" size="small" className={classes.cancel}>
-                    Cancel
-                </Button>
+                <NavLink to="/">
+                    <Button variant="text" className={classes.cancel}>
+                        Cancel
+                    </Button>
+                </NavLink>
             </div>
         </form>
     );

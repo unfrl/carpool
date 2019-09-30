@@ -3,6 +3,14 @@ import { Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
+    container: {
+        overflow: "hidden",
+        padding: theme.spacing(1),
+        marginBottom: theme.spacing(6),
+        [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(2),
+        },
+    },
 }));
 
 export interface IContentProps {
@@ -11,8 +19,9 @@ export interface IContentProps {
 
 export const Content: FunctionComponent<IContentProps> = props => {
     const classes = useStyles();
+
     return (
-        <Container>
+        <Container maxWidth="md" className={classes.container}>
             <div className={classes.toolbar} />
             {props.children}
         </Container>

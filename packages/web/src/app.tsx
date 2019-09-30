@@ -48,15 +48,13 @@ export class App extends Component<IAppProps, IAppState> {
                     isAuthenticated={authStore.isAuthenticated}
                     onAuthClick={this.handleAuthClick}
                 />
-                <main>
-                    <Content>
-                        <Switch>
-                            <Route path="/" exact={true} component={Home} />
-                            <Route path="/create-event" exact={true} component={CreateEvent} />
-                            <Route component={NotFound} />
-                        </Switch>
-                    </Content>
-                </main>
+                <Content>
+                    <Switch>
+                        <Route path="/" exact={true} component={Home} />
+                        <Route path="/create-event" exact={true} component={CreateEvent} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Content>
                 {this.state.showUserDialog && (
                     <UserDialog
                         onClose={this.handleCloseDialog}

@@ -2,6 +2,8 @@ import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { Fab, makeStyles } from "@material-ui/core";
 
+import { NavLink } from "../components";
+
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -15,11 +17,11 @@ export const Home: FunctionComponent = () => {
 
     return (
         <div className={classes.root}>
-            <Link to="/create-event" style={{ textDecoration: "none", color: "inherit" }}>
+            <NavLink to="/create-event">
                 <Fab variant="extended" color="primary" size="large">
                     Create a Carpool
                 </Fab>
-            </Link>
+            </NavLink>
         </div>
     );
 };
