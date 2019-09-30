@@ -23,9 +23,11 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
         <AppBar position="fixed">
             <Toolbar className={classes.toolbar}>
                 <NavLink to="/">
-                    <Typography variant="h6">CARPOOL</Typography>
+                    <Typography variant="h6">
+                        <span role="img">🚙</span> Carpool
+                    </Typography>
                 </NavLink>
-                <Button variant="text" size="small" color="inherit" onClick={props.onAuthClick}>
+                <Button color="inherit" onClick={props.onAuthClick}>
                     {props.isAuthenticated ? "Sign out" : "Sign in"}
                 </Button>
             </Toolbar>
