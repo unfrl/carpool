@@ -9,10 +9,9 @@ import {
     Delete,
     Get,
 } from "@nestjs/common";
-import { Carpool } from "src/entities";
-import { CreateCarpoolDto } from "src/dtos";
-import { CarpoolService } from "src/services";
-import { UpdateCarpoolDto } from "src/dtos/update-carpool.dto";
+import { Carpool } from "../entities";
+import { CreateCarpoolDto, UpdateCarpoolDto } from "../dtos";
+import { CarpoolService } from "../services";
 
 @ApiUseTags("Carpool")
 @Controller("api/v1/carpool")

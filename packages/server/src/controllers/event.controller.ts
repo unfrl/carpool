@@ -9,15 +9,17 @@ import {
     Get,
 } from "@nestjs/common";
 import { ApiOperation, ApiUseTags, ApiResponse } from "@nestjs/swagger";
-import { CreateEventDto } from "../dtos";
+import { CreateEventDto, UpdateEventDto } from "../dtos";
 import { Event } from "../entities";
-import { EventService } from "src/services/event.service";
-import { UpdateEventDto } from "src/dtos/update-event.dto";
+import { EventService } from "../services";
 
 @ApiUseTags("Event")
 @Controller("api/v1/event")
 export class EventController {
     public constructor(private readonly _eventService: EventService) {}
+
+    //TODO: List Events: GET /api/v1/event
+    //TODO: List carpools For Event: GET /api/v1/event/{id}/carpools <- Maybe...
 
     @ApiOperation({
         operationId: "createEvent",

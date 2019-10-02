@@ -1,10 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCarpoolDto } from "src/dtos";
-import { Carpool } from "src/entities";
+import { Carpool } from "../entities";
 import { Repository } from "typeorm";
 import { EventService } from "./event.service";
-import { UpdateCarpoolDto } from "src/dtos/update-carpool.dto";
+import { UpdateCarpoolDto, CreateCarpoolDto } from "../dtos";
 
 @Injectable()
 export class CarpoolService {
