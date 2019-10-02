@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
 import { Fab, makeStyles } from "@material-ui/core";
 
 import { NavLink } from "../components";
