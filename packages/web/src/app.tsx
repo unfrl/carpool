@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Switch, Route, RouteComponentProps } from "react-router";
 import { observer, inject } from "mobx-react";
 import { CssBaseline, createMuiTheme } from "@material-ui/core";

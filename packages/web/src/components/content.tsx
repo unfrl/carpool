@@ -4,7 +4,6 @@ import { Container, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
     container: {
-        overflow: "hidden",
         padding: theme.spacing(1),
         marginBottom: theme.spacing(6),
         [theme.breakpoints.up("sm")]: {
