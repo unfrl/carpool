@@ -1,1 +1,311 @@
-{"swagger":"2.0","info":{"description":"Free carpool app for cool peeps and their friends","version":"1.0","title":"Carpool"},"basePath":"/","tags":[],"schemes":["http"],"paths":{"/api/v1/auth/signup":{"post":{"summary":"Sign up","description":"Sign up a new user","operationId":"signUp","parameters":[{"name":"SignUpDto","required":true,"in":"body","schema":{"$ref":"#/definitions/SignUpDto"}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/UserDto"}}},"tags":["Auth"],"produces":["application/json"],"consumes":["application/json"]}},"/api/v1/auth/signin":{"post":{"summary":"Sign in","description":"Sign in an existing user","operationId":"signIn","parameters":[{"name":"AuthDto","required":true,"in":"body","schema":{"$ref":"#/definitions/AuthDto"}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/UserDto"}}},"tags":["Auth"],"produces":["application/json"],"consumes":["application/json"]}},"/api/v1/event":{"post":{"summary":"Create Event","description":"Create a new Event","operationId":"createEvent","parameters":[{"name":"CreateEventDto","required":true,"in":"body","schema":{"$ref":"#/definitions/CreateEventDto"}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Event"}}},"tags":["Event"],"produces":["application/json"],"consumes":["application/json"]}},"/api/v1/event/{id}":{"post":{"summary":"Update Event","description":"Update an Event","operationId":"updateEvent","parameters":[{"name":"UpdateEventDto","required":true,"in":"body","schema":{"$ref":"#/definitions/UpdateEventDto"}},{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Event"}},"404":{"description":""}},"tags":["Event"],"produces":["application/json"],"consumes":["application/json"]},"get":{"summary":"Get Event","description":"Retrieve an Event","operationId":"getEvent","parameters":[{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Event"}},"404":{"description":""}},"tags":["Event"],"produces":["application/json"],"consumes":["application/json"]},"delete":{"summary":"Delete Event","description":"Delete an Event","operationId":"deleteEvent","parameters":[{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Event"}},"404":{"description":""}},"tags":["Event"],"produces":["application/json"],"consumes":["application/json"]}},"/api/v1/carpool":{"post":{"summary":"Create Carpool","description":"Create a new Carpool","operationId":"createCarpool","parameters":[{"name":"CreateCarpoolDto","required":true,"in":"body","schema":{"$ref":"#/definitions/CreateCarpoolDto"}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Carpool"}}},"tags":["Carpool"],"produces":["application/json"],"consumes":["application/json"]}},"/api/v1/carpool/{id}":{"get":{"summary":"Get Carpool","description":"Retrieve a Carpool","operationId":"getCarpool","parameters":[{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Carpool"}},"404":{"description":""}},"tags":["Carpool"],"produces":["application/json"],"consumes":["application/json"]},"post":{"summary":"Update Carpool","description":"Update a Carpool","operationId":"updateCarpool","parameters":[{"name":"UpdateCarpoolDto","required":true,"in":"body","schema":{"$ref":"#/definitions/UpdateCarpoolDto"}},{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Carpool"}},"404":{"description":""}},"tags":["Carpool"],"produces":["application/json"],"consumes":["application/json"]},"delete":{"summary":"Delete Carpool","description":"Delete a Carpool","operationId":"deleteCarpool","parameters":[{"type":"string","name":"id","required":true,"in":"path"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/Carpool"}},"404":{"description":""}},"tags":["Carpool"],"produces":["application/json"],"consumes":["application/json"]}}},"definitions":{"SignUpDto":{"type":"object","properties":{"email":{"type":"string"},"password":{"type":"string"},"displayName":{"type":"string"}},"required":["email","password","displayName"]},"UserDto":{"type":"object","properties":{"id":{"type":"string"},"email":{"type":"string"},"displayName":{"type":"string"},"accessToken":{"type":"string"}},"required":["id","email","displayName","accessToken"]},"AuthDto":{"type":"object","properties":{"email":{"type":"string"},"password":{"type":"string"}},"required":["email","password"]},"Date":{"type":"object","properties":{}},"CreateEventDto":{"type":"object","properties":{"eventName":{"type":"string"},"dateTime":{"$ref":"#/definitions/Date"}},"required":["eventName","dateTime"]},"Event":{"type":"object","properties":{"id":{"type":"string"},"created":{"$ref":"#/definitions/Date"},"updated":{"$ref":"#/definitions/Date"},"name":{"type":"string"},"dateTime":{"$ref":"#/definitions/Date"},"carpools":{"type":"array","items":{"type":"string"}}},"required":["id","created","updated","name","dateTime","carpools"]},"UpdateEventDto":{"type":"object","properties":{"eventName":{"type":"string"},"dateTime":{"$ref":"#/definitions/Date"}}},"Address":{"type":"object","properties":{"name":{"type":"string"},"administrative":{"type":"string"},"county":{"type":"string"},"city":{"type":"string"},"country":{"type":"string"},"countryCode":{"type":"string"},"postcode":{"type":"string"}},"required":["name","administrative","county","city","country","countryCode","postcode"]},"CreateCarpoolDto":{"type":"object","properties":{"carpoolName":{"type":"string"},"destination":{"$ref":"#/definitions/Address"},"eventId":{"type":"string"}},"required":["destination","eventId"]},"Carpool":{"type":"object","properties":{"id":{"type":"string"},"created":{"$ref":"#/definitions/Date"},"updated":{"$ref":"#/definitions/Date"},"name":{"type":"string"},"destination":{"$ref":"#/definitions/Address"},"eventId":{"type":"string"},"drivers":{"type":"array","items":{"type":"string"}},"passengers":{"type":"array","items":{"type":"string"}}},"required":["id","created","updated","name","destination","eventId","drivers","passengers"]},"UpdateCarpoolDto":{"type":"object","properties":{"carpoolName":{"type":"string"},"destination":{"type":"object"},"drivers":{"type":"array","items":{"type":"string"}},"passengers":{"type":"array","items":{"type":"string"}}}}}}
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Free carpool app for cool peeps and their friends",
+        "version": "1.0",
+        "title": "Carpool"
+    },
+    "basePath": "/",
+    "tags": [],
+    "schemes": ["http"],
+    "paths": {
+        "/api/v1/auth/signup": {
+            "post": {
+                "summary": "Sign up",
+                "description": "Sign up a new user",
+                "operationId": "signUp",
+                "parameters": [
+                    {
+                        "name": "SignUpDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/SignUpDto" }
+                    }
+                ],
+                "responses": {
+                    "201": { "description": "", "schema": { "$ref": "#/definitions/UserDto" } }
+                },
+                "tags": ["Auth"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/api/v1/auth/signin": {
+            "post": {
+                "summary": "Sign in",
+                "description": "Sign in an existing user",
+                "operationId": "signIn",
+                "parameters": [
+                    {
+                        "name": "AuthDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/AuthDto" }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/UserDto" } }
+                },
+                "tags": ["Auth"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/api/v1/event": {
+            "post": {
+                "summary": "Create Event",
+                "description": "Create a new Event",
+                "operationId": "createEvent",
+                "parameters": [
+                    {
+                        "name": "CreateEventDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/CreateEventDto" }
+                    }
+                ],
+                "responses": {
+                    "201": { "description": "", "schema": { "$ref": "#/definitions/Event" } }
+                },
+                "tags": ["Event"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/api/v1/event/{id}": {
+            "put": {
+                "summary": "Update Event",
+                "description": "Update an Event",
+                "operationId": "updateEvent",
+                "parameters": [
+                    {
+                        "name": "UpdateEventDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/UpdateEventDto" }
+                    },
+                    { "type": "string", "name": "id", "required": true, "in": "path" }
+                ],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Event" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Event"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "get": {
+                "summary": "Get Event",
+                "description": "Retrieve an Event",
+                "operationId": "getEvent",
+                "parameters": [{ "type": "string", "name": "id", "required": true, "in": "path" }],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Event" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Event"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "delete": {
+                "summary": "Delete Event",
+                "description": "Delete an Event",
+                "operationId": "deleteEvent",
+                "parameters": [{ "type": "string", "name": "id", "required": true, "in": "path" }],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Event" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Event"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/api/v1/carpool": {
+            "post": {
+                "summary": "Create Carpool",
+                "description": "Create a new Carpool",
+                "operationId": "createCarpool",
+                "parameters": [
+                    {
+                        "name": "CreateCarpoolDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/CreateCarpoolDto" }
+                    }
+                ],
+                "responses": {
+                    "201": { "description": "", "schema": { "$ref": "#/definitions/Carpool" } }
+                },
+                "tags": ["Carpool"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/api/v1/carpool/{id}": {
+            "get": {
+                "summary": "Get Carpool",
+                "description": "Retrieve a Carpool",
+                "operationId": "getCarpool",
+                "parameters": [{ "type": "string", "name": "id", "required": true, "in": "path" }],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Carpool" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Carpool"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "put": {
+                "summary": "Update Carpool",
+                "description": "Update a Carpool",
+                "operationId": "updateCarpool",
+                "parameters": [
+                    {
+                        "name": "UpdateCarpoolDto",
+                        "required": true,
+                        "in": "body",
+                        "schema": { "$ref": "#/definitions/UpdateCarpoolDto" }
+                    },
+                    { "type": "string", "name": "id", "required": true, "in": "path" }
+                ],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Carpool" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Carpool"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "delete": {
+                "summary": "Delete Carpool",
+                "description": "Delete a Carpool",
+                "operationId": "deleteCarpool",
+                "parameters": [{ "type": "string", "name": "id", "required": true, "in": "path" }],
+                "responses": {
+                    "200": { "description": "", "schema": { "$ref": "#/definitions/Carpool" } },
+                    "404": { "description": "" }
+                },
+                "tags": ["Carpool"],
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        }
+    },
+    "definitions": {
+        "SignUpDto": {
+            "type": "object",
+            "properties": {
+                "email": { "type": "string" },
+                "password": { "type": "string" },
+                "displayName": { "type": "string" }
+            },
+            "required": ["email", "password", "displayName"]
+        },
+        "UserDto": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "email": { "type": "string" },
+                "displayName": { "type": "string" },
+                "accessToken": { "type": "string" }
+            },
+            "required": ["id", "email", "displayName", "accessToken"]
+        },
+        "AuthDto": {
+            "type": "object",
+            "properties": { "email": { "type": "string" }, "password": { "type": "string" } },
+            "required": ["email", "password"]
+        },
+        "Date": { "type": "object", "properties": {} },
+        "CreateEventDto": {
+            "type": "object",
+            "properties": {
+                "eventName": { "type": "string" },
+                "dateTime": { "$ref": "#/definitions/Date" }
+            },
+            "required": ["eventName", "dateTime"]
+        },
+        "Event": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "created": { "$ref": "#/definitions/Date" },
+                "updated": { "$ref": "#/definitions/Date" },
+                "name": { "type": "string" },
+                "dateTime": { "$ref": "#/definitions/Date" },
+                "carpools": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["id", "created", "updated", "name", "dateTime", "carpools"]
+        },
+        "UpdateEventDto": {
+            "type": "object",
+            "properties": {
+                "eventName": { "type": "string" },
+                "dateTime": { "$ref": "#/definitions/Date" }
+            }
+        },
+        "Address": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "administrative": { "type": "string" },
+                "county": { "type": "string" },
+                "city": { "type": "string" },
+                "country": { "type": "string" },
+                "countryCode": { "type": "string" },
+                "postcode": { "type": "string" }
+            },
+            "required": [
+                "name",
+                "administrative",
+                "county",
+                "city",
+                "country",
+                "countryCode",
+                "postcode"
+            ]
+        },
+        "CreateCarpoolDto": {
+            "type": "object",
+            "properties": {
+                "carpoolName": { "type": "string" },
+                "destination": { "$ref": "#/definitions/Address" },
+                "eventId": { "type": "string" }
+            },
+            "required": ["destination", "eventId"]
+        },
+        "Carpool": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "created": { "$ref": "#/definitions/Date" },
+                "updated": { "$ref": "#/definitions/Date" },
+                "name": { "type": "string" },
+                "destination": { "type": "object" },
+                "eventId": { "type": "string" },
+                "drivers": { "type": "array", "items": { "type": "string" } },
+                "passengers": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": [
+                "id",
+                "created",
+                "updated",
+                "name",
+                "destination",
+                "eventId",
+                "drivers",
+                "passengers"
+            ]
+        },
+        "UpdateCarpoolDto": {
+            "type": "object",
+            "properties": {
+                "carpoolName": { "type": "string" },
+                "destination": { "type": "object" },
+                "drivers": { "type": "array", "items": { "type": "string" } },
+                "passengers": { "type": "array", "items": { "type": "string" } }
+            }
+        }
+    }
+}

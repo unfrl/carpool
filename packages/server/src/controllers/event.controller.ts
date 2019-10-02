@@ -1,5 +1,6 @@
 import {
     Post,
+    Put,
     Body,
     HttpStatus,
     HttpException,
@@ -8,8 +9,8 @@ import {
     Param,
     Get,
 } from "@nestjs/common";
-import { ApiOperation, ApiUseTags, ApiResponse } from "@nestjs/swagger";
-import { CreateEventDto, UpdateEventDto } from "../dtos";
+import { ApiOperation, ApiUseTags, ApiResponse, ApiCreatedResponse } from "@nestjs/swagger";
+import { CreateEventDto } from "../dtos";
 import { Event } from "../entities";
 import { EventService } from "../services";
 
@@ -26,7 +27,7 @@ export class EventController {
         title: "Create Event",
         description: "Create a new Event",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Event })
+    @ApiCreatedResponse({ type: Event })
     @Post()
     public async create(@Body() createEventDto: CreateEventDto): Promise<Event> {
         const event = await this._eventService.create(createEventDto);
@@ -43,7 +44,7 @@ export class EventController {
     })
     @ApiResponse({ status: HttpStatus.OK, type: Event })
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
-    @Post(":id")
+    @Put(":id")
     public async update(
         @Param("id") id: string,
         @Body() updateEventDto: UpdateEventDto

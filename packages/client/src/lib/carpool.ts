@@ -332,7 +332,7 @@ const signUpOperationSpec: msRest.OperationSpec = {
     }
   },
   responses: {
-    200: {
+    201: {
       bodyMapper: Mappers.UserDto
     },
     default: {}
@@ -370,7 +370,7 @@ const createEventOperationSpec: msRest.OperationSpec = {
     }
   },
   responses: {
-    200: {
+    201: {
       bodyMapper: Mappers.Event
     },
     default: {}
@@ -379,7 +379,7 @@ const createEventOperationSpec: msRest.OperationSpec = {
 };
 
 const updateEventOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
+  httpMethod: "PUT",
   path: "api/v1/event/{id}",
   urlParameters: [
     Parameters.id
@@ -444,7 +444,7 @@ const createCarpoolOperationSpec: msRest.OperationSpec = {
     }
   },
   responses: {
-    200: {
+    201: {
       bodyMapper: Mappers.CarpoolModel
     },
     default: {}
@@ -469,7 +469,7 @@ const getCarpoolOperationSpec: msRest.OperationSpec = {
 };
 
 const updateCarpoolOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
+  httpMethod: "PUT",
   path: "api/v1/carpool/{id}",
   urlParameters: [
     Parameters.id

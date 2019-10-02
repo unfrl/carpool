@@ -95,4 +95,310 @@ exports.AuthDto = {
         }
     }
 };
+exports.CreateEventDto = {
+    serializedName: "CreateEventDto",
+    type: {
+        name: "Composite",
+        className: "CreateEventDto",
+        modelProperties: {
+            eventName: {
+                required: true,
+                serializedName: "eventName",
+                type: {
+                    name: "String"
+                }
+            },
+            dateTime: {
+                required: true,
+                serializedName: "dateTime",
+                type: {
+                    name: "Object"
+                }
+            }
+        }
+    }
+};
+exports.Event = {
+    serializedName: "Event",
+    type: {
+        name: "Composite",
+        className: "Event",
+        modelProperties: {
+            id: {
+                required: true,
+                serializedName: "id",
+                type: {
+                    name: "String"
+                }
+            },
+            created: {
+                required: true,
+                serializedName: "created",
+                type: {
+                    name: "Object"
+                }
+            },
+            updated: {
+                required: true,
+                serializedName: "updated",
+                type: {
+                    name: "Object"
+                }
+            },
+            name: {
+                required: true,
+                serializedName: "name",
+                type: {
+                    name: "String"
+                }
+            },
+            dateTime: {
+                required: true,
+                serializedName: "dateTime",
+                type: {
+                    name: "Object"
+                }
+            },
+            carpools: {
+                required: true,
+                serializedName: "carpools",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+exports.UpdateEventDto = {
+    serializedName: "UpdateEventDto",
+    type: {
+        name: "Composite",
+        className: "UpdateEventDto",
+        modelProperties: {
+            eventName: {
+                serializedName: "eventName",
+                type: {
+                    name: "String"
+                }
+            },
+            dateTime: {
+                serializedName: "dateTime",
+                type: {
+                    name: "Object"
+                }
+            }
+        }
+    }
+};
+exports.Address = {
+    serializedName: "Address",
+    type: {
+        name: "Composite",
+        className: "Address",
+        modelProperties: {
+            name: {
+                required: true,
+                serializedName: "name",
+                type: {
+                    name: "String"
+                }
+            },
+            administrative: {
+                required: true,
+                serializedName: "administrative",
+                type: {
+                    name: "String"
+                }
+            },
+            county: {
+                required: true,
+                serializedName: "county",
+                type: {
+                    name: "String"
+                }
+            },
+            city: {
+                required: true,
+                serializedName: "city",
+                type: {
+                    name: "String"
+                }
+            },
+            country: {
+                required: true,
+                serializedName: "country",
+                type: {
+                    name: "String"
+                }
+            },
+            countryCode: {
+                required: true,
+                serializedName: "countryCode",
+                type: {
+                    name: "String"
+                }
+            },
+            postcode: {
+                required: true,
+                serializedName: "postcode",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.CreateCarpoolDto = {
+    serializedName: "CreateCarpoolDto",
+    type: {
+        name: "Composite",
+        className: "CreateCarpoolDto",
+        modelProperties: {
+            carpoolName: {
+                serializedName: "carpoolName",
+                type: {
+                    name: "String"
+                }
+            },
+            destination: {
+                required: true,
+                serializedName: "destination",
+                type: {
+                    name: "Composite",
+                    className: "Address"
+                }
+            },
+            eventId: {
+                required: true,
+                serializedName: "eventId",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.CarpoolModel = {
+    serializedName: "Carpool",
+    type: {
+        name: "Composite",
+        className: "CarpoolModel",
+        modelProperties: {
+            id: {
+                required: true,
+                serializedName: "id",
+                type: {
+                    name: "String"
+                }
+            },
+            created: {
+                required: true,
+                serializedName: "created",
+                type: {
+                    name: "Object"
+                }
+            },
+            updated: {
+                required: true,
+                serializedName: "updated",
+                type: {
+                    name: "Object"
+                }
+            },
+            name: {
+                required: true,
+                serializedName: "name",
+                type: {
+                    name: "String"
+                }
+            },
+            destination: {
+                required: true,
+                serializedName: "destination",
+                type: {
+                    name: "Object"
+                }
+            },
+            eventId: {
+                required: true,
+                serializedName: "eventId",
+                type: {
+                    name: "String"
+                }
+            },
+            drivers: {
+                required: true,
+                serializedName: "drivers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            },
+            passengers: {
+                required: true,
+                serializedName: "passengers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+exports.UpdateCarpoolDto = {
+    serializedName: "UpdateCarpoolDto",
+    type: {
+        name: "Composite",
+        className: "UpdateCarpoolDto",
+        modelProperties: {
+            carpoolName: {
+                serializedName: "carpoolName",
+                type: {
+                    name: "String"
+                }
+            },
+            destination: {
+                serializedName: "destination",
+                type: {
+                    name: "Object"
+                }
+            },
+            drivers: {
+                serializedName: "drivers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            },
+            passengers: {
+                serializedName: "passengers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
 //# sourceMappingURL=mappers.js.map
