@@ -11,7 +11,10 @@
     "start:all": "concurrently -k  \"yarn start:core\"  \"yarn start:web\" \"yarn start:server\"",
     "start:web": "cd packages/web && yarn start",
     "start:core": "cd packages/core && yarn watch",
-    "start:server": "cd packages/server && yarn start:dev"
+    "start:server": "cd packages/server && yarn start:dev",
+    "generate:client": "yarn build:client && yarn compile:client",
+    "build:client": "cd packages/server && yarn build:client",
+    "compile:client": "cd packages/client && yarn build"
   },
   "keywords": [],
   "author": "",
