@@ -10,7 +10,7 @@ import {
     Get,
 } from "@nestjs/common";
 import { ApiOperation, ApiUseTags, ApiResponse, ApiCreatedResponse } from "@nestjs/swagger";
-import { CreateEventDto } from "../dtos";
+import { CreateEventDto, UpdateEventDto } from "../dtos";
 import { Event } from "../entities";
 import { EventService } from "../services";
 

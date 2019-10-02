@@ -373,7 +373,8 @@ exports.UpdateCarpoolDto = {
             destination: {
                 serializedName: "destination",
                 type: {
-                    name: "Object"
+                    name: "Composite",
+                    className: "Address"
                 }
             },
             drivers: {

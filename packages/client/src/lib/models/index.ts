@@ -229,9 +229,9 @@ export interface UpdateCarpoolDto {
    */
   carpoolName?: string;
   /**
-   * @member {any} [destination]
+   * @member {Address} [destination]
    */
-  destination?: any;
+  destination?: Address;
   /**
    * @member {string[]} [drivers]
    */

@@ -384,7 +384,8 @@ export const UpdateCarpoolDto: msRest.CompositeMapper = {
       destination: {
         serializedName: "destination",
         type: {
-          name: "Object"
+          name: "Composite",
+          className: "Address"
         }
       },
       drivers: {
