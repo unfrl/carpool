@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@carpool/client": "0.0.3",
+    "@carpool/client": "0.0.6",
     "mobx": "^5.13.0"
   },
   "devDependencies": {

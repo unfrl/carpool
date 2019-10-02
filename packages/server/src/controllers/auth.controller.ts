@@ -1,5 +1,5 @@
 import { Controller, Post, Body, HttpCode, HttpStatus, HttpException } from "@nestjs/common";
-import { ApiUseTags, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiOkResponse, ApiCreatedResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
 import { AuthDto, SignUpDto, UserDto } from "../dtos";
@@ -14,7 +14,7 @@ export class AuthController {
         title: "Sign up",
         description: "Sign up a new user",
     })
-    @ApiOkResponse({ type: UserDto })
+    @ApiCreatedResponse({ type: UserDto })
     @Post("signup")
     public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
         const userDto = await this._authService.signUp(signUpDto);
@@ -31,6 +31,7 @@ export class AuthController {
         description: "Sign in an existing user",
     })
     @ApiOkResponse({ type: UserDto })
+    @HttpCode(200)
     @Post("signin")
     public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
         const userDto = await this._authService.signIn(authDto);
