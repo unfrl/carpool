@@ -12,6 +12,8 @@
             "runtimeExecutable": "yarn",
             "runtimeArgs": ["run", "start:debug"],
             "postDebugTask": "cleanup_debug",
+            "timeout": 30000,
+            "runtimeVersion": "10.16.3",
             "port": 9229
         }
     ]
