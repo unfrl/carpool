@@ -19,7 +19,7 @@ export class AuthController {
     public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
         const userDto = await this._authService.signUp(signUpDto);
         if (!userDto) {
-            throw new HttpException("Failed to sign up", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to sign up", HttpStatus.BAD_REQUEST);
         }
 
         return userDto;
@@ -36,7 +36,7 @@ export class AuthController {
     public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
         const userDto = await this._authService.signIn(authDto);
         if (!userDto) {
-            throw new HttpException("Failed to sign in", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
         }
 
         return userDto;

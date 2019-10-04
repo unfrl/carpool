@@ -29,7 +29,7 @@ export class CarpoolController {
     public async create(@Body() createCarpoolDto: CreateCarpoolDto): Promise<Carpool> {
         const carpool = await this._carpoolService.create(createCarpoolDto);
         if (!carpool) {
-            throw new HttpException("Failed to create Carpool", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to create Carpool", HttpStatus.BAD_REQUEST);
         }
         return carpool;
     }
@@ -81,7 +81,7 @@ export class CarpoolController {
     public async delete(@Param("id") id: string): Promise<Carpool> {
         const carpool = await this._carpoolService.delete(id);
         if (!carpool) {
-            throw new HttpException("Failed to delete Carpool", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to delete Carpool", HttpStatus.BAD_REQUEST);
         }
         return carpool;
     }
