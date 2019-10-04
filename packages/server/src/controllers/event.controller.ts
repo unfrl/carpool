@@ -32,7 +32,7 @@ export class EventController {
     public async create(@Body() createEventDto: CreateEventDto): Promise<Event> {
         const event = await this._eventService.create(createEventDto);
         if (!event) {
-            throw new HttpException("Failed to create Event", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to create Event", HttpStatus.BAD_REQUEST);
         }
         return event;
     }
@@ -84,7 +84,7 @@ export class EventController {
     public async delete(@Param("id") id: string): Promise<Event> {
         const event = await this._eventService.delete(id);
         if (!event) {
-            throw new HttpException("Failed to delete Event", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Failed to delete Event", HttpStatus.BAD_REQUEST);
         }
         return event;
     }
