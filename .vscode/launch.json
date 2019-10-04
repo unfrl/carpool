@@ -15,6 +15,16 @@
             "timeout": 30000,
             "runtimeVersion": "10.16.3",
             "port": 9229
+        },
+        {
+            "name": "Debug Web App",
+            "type": "firefox",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}/packages/web/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
         }
     ]
 }
