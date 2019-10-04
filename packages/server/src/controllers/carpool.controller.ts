@@ -27,11 +27,7 @@ export class CarpoolController {
     @ApiCreatedResponse({ type: Carpool })
     @Post()
     public async create(@Body() createCarpoolDto: CreateCarpoolDto): Promise<Carpool> {
-        const carpool = await this._carpoolService.create(createCarpoolDto);
-        if (!carpool) {
-            throw new HttpException("Failed to create Carpool", HttpStatus.BAD_REQUEST);
-        }
-        return carpool;
+        return await this._carpoolService.create(createCarpoolDto);
     }
 
     @ApiOperation({
@@ -43,11 +39,7 @@ export class CarpoolController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Get(":id")
     public async get(@Param("id") id: string): Promise<Carpool> {
-        const carpool = await this._carpoolService.get(id);
-        if (!carpool) {
-            throw new HttpException("Carpool not found", HttpStatus.NOT_FOUND);
-        }
-        return carpool;
+        return await this._carpoolService.get(id);
     }
 
     @ApiOperation({
@@ -62,12 +54,7 @@ export class CarpoolController {
         @Param("id") id: string,
         @Body() updateCarpoolDto: UpdateCarpoolDto
     ): Promise<Carpool> {
-        const carpool = await this._carpoolService.update(id, updateCarpoolDto);
-        if (!carpool) {
-            //TODO: When we use the class-validator errors we'll be able to tell the difference between not found and some other error here...
-            throw new HttpException("Carpool not found", HttpStatus.NOT_FOUND);
-        }
-        return carpool;
+        return await this._carpoolService.update(id, updateCarpoolDto);
     }
 
     @ApiOperation({
@@ -79,10 +66,6 @@ export class CarpoolController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Delete(":id")
     public async delete(@Param("id") id: string): Promise<Carpool> {
-        const carpool = await this._carpoolService.delete(id);
-        if (!carpool) {
-            throw new HttpException("Failed to delete Carpool", HttpStatus.BAD_REQUEST);
-        }
-        return carpool;
+        return await this._carpoolService.delete(id);
     }
 }

@@ -27,14 +27,22 @@ export class EventController {
         title: "Create Event",
         description: "Create a new Event",
     })
-    @ApiCreatedResponse({ type: Event })
+    @ApiResponse({ status: HttpStatus.CREATED, type: Event })
     @Post()
     public async create(@Body() createEventDto: CreateEventDto): Promise<Event> {
-        const event = await this._eventService.create(createEventDto);
-        if (!event) {
-            throw new HttpException("Failed to create Event", HttpStatus.BAD_REQUEST);
-        }
-        return event;
+        return await this._eventService.create(createEventDto);
+    }
+
+    @ApiOperation({
+        operationId: "getEvent",
+        title: "Get Event",
+        description: "Retrieve an Event",
+    })
+    @ApiResponse({ status: HttpStatus.OK, type: Event })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND })
+    @Get(":id")
+    public async get(@Param("id") id: string): Promise<Event> {
+        return await this._eventService.get(id, true);
     }
 
     @ApiOperation({
@@ -49,28 +57,7 @@ export class EventController {
         @Param("id") id: string,
         @Body() updateEventDto: UpdateEventDto
     ): Promise<Event> {
-        const event = await this._eventService.update(id, updateEventDto);
-        if (!event) {
-            //TODO: When we use the class-validator errors we'll be able to tell the difference between not found and some other error here...
-            throw new HttpException("Event not found", HttpStatus.NOT_FOUND);
-        }
-        return event;
-    }
-
-    @ApiOperation({
-        operationId: "getEvent",
-        title: "Get Event",
-        description: "Retrieve an Event",
-    })
-    @ApiResponse({ status: HttpStatus.OK, type: Event })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND })
-    @Get(":id")
-    public async get(@Param("id") id: string): Promise<Event> {
-        const event = await this._eventService.get(id, true);
-        if (!event) {
-            throw new HttpException("Event not found", HttpStatus.NOT_FOUND);
-        }
-        return event;
+        return await this._eventService.update(id, updateEventDto);
     }
 
     @ApiOperation({
@@ -82,10 +69,6 @@ export class EventController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Delete(":id")
     public async delete(@Param("id") id: string): Promise<Event> {
-        const event = await this._eventService.delete(id);
-        if (!event) {
-            throw new HttpException("Failed to delete Event", HttpStatus.BAD_REQUEST);
-        }
-        return event;
+        return await this._eventService.delete(id);
     }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateEventDto } from "src/dtos";
 import { Event, Carpool } from "../entities";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -17,26 +17,31 @@ export class EventService {
     //TODO: Comment this
     public async create(createEventDto: CreateEventDto): Promise<Event> {
         const { eventName, dateTime } = createEventDto;
-        if (!eventName || !dateTime) {
-            throw new Error("Events require a name and date");
-        }
         const event = new Event();
-        event.name = createEventDto.eventName;
-        event.dateTime = createEventDto.dateTime;
+        event.name = eventName;
+        event.dateTime = dateTime;
 
         return await this._eventRepository.save(event);
     }
 
     //TODO: Comment this :)
     public async get(eventId: string, includeCarpools: boolean = false) {
+        let event: Event;
         if (includeCarpools) {
-            return await this._eventRepository.findOne(eventId, { relations: ["carpools"] });
+            event = await this._eventRepository.findOne(eventId, { relations: ["carpools"] });
         }
-        return await this._eventRepository.findOne(eventId);
+        event = await this._eventRepository.findOne(eventId);
+        if (!event) {
+            throw new NotFoundException("No Event Found with the provided ID");
+        }
+        return event;
     }
 
     public async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
-        let event = await this._eventRepository.findOneOrFail(id);
+        let event = await this._eventRepository.findOne(id);
+        if (!event) {
+            throw new NotFoundException("No event found with the provided ID");
+        }
 
         //TODO: Add an entity mapper
         event.name = updateEventDto.eventName;
@@ -46,7 +51,10 @@ export class EventService {
 
     //TODO: Comment this :)
     public async delete(id: string): Promise<Event> {
-        let event = await this._eventRepository.findOneOrFail(id, { relations: ["carpools"] });
+        let event = await this._eventRepository.findOne(id, { relations: ["carpools"] });
+        if (!event) {
+            throw new NotFoundException("No event found with the provided ID");
+        }
 
         if (event.carpools.values.length > 0) {
             event.carpools.forEach(carpool => {
