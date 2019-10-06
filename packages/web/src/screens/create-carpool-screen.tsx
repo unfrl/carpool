@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const CreateCarpool: FunctionComponent = () => {
+export const CreateCarpoolScreen: FunctionComponent = () => {
     const classes = useStyles();
 
     return (

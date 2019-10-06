@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const Home: FunctionComponent = () => {
+export const HomeScreen: FunctionComponent = () => {
     const classes = useStyles();
 
     return (
@@ -60,6 +60,9 @@ export const Home: FunctionComponent = () => {
                         <Button variant="contained" color="primary" size="large">
                             Create a Carpool
                         </Button>
+                    </NavLink>
+                    <NavLink to="/carpool">
+                        <Button>Temp</Button>
                     </NavLink>
                 </div>
                 <img src={fastCar} alt="Carpool" className={classes.image} />
