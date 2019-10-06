@@ -13,6 +13,9 @@ services:
       - "CARPOOL_DB_USERNAME=local"
       - "CARPOOL_DB_PASSWORD=local"
       - "CARPOOL_DB_NAME=carpool"
+    depends_on:
+      - postgres
+      - redis
 
   postgres:
     container_name: carpool_postgres
@@ -33,3 +36,22 @@ services:
       - "ADMINER_DEFAULT_DB_DRIVER=pgsql"
       - "ADMINER_DEFAULT_DB_HOST=postgres"
       - "ADMINER_DEFAULT_DB_NAME=carpool"
+    depends_on:
+      - postgres
+
+  redis:
+    container_name: carpool_redis
+    image: redis:5.0.6
+    ports:
+      - 6379:6379
+
+  redis_commander:
+    container_name: carpool_redis_commander
+    image: rediscommander/redis-commander
+    environment:
+      - "REDIS_HOST=redis"
+      - "REDIS_PORT=6379"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis

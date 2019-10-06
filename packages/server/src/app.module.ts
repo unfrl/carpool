@@ -2,8 +2,9 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
+import * as IORedis from "ioredis";
 
-import { authConfig, dbConfig } from "./config";
+import { authConfig, dbConfig, redisConfig } from "./config";
 import { AuthController, EventController, CarpoolController } from "./controllers";
 import { AuthService, UserService, EventService, JwtStrategy, CarpoolService } from "./services";
 import { Carpool, Driver, Event, Passenger, User } from "./entities";
@@ -21,6 +22,16 @@ import { Carpool, Driver, Event, Passenger, User } from "./entities";
         }),
     ],
     controllers: [AuthController, EventController, CarpoolController],
-    providers: [AuthService, UserService, EventService, CarpoolService, JwtStrategy],
+    providers: [
+        AuthService,
+        UserService,
+        EventService,
+        CarpoolService,
+        JwtStrategy,
+        {
+            provide: IORedis,
+            useValue: new IORedis(redisConfig),
+        },
+    ],
 })
 export class AppModule {}

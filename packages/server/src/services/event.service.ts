@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, Inject } from "@nestjs/common";
 import { CreateEventDto } from "src/dtos";
 import { Event, Carpool } from "../entities";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UpdateEventDto } from "src/dtos/update-event.dto";
+import * as IORedis from "ioredis";
 
 @Injectable()
 export class EventService {
@@ -12,10 +13,13 @@ export class EventService {
         private readonly _eventRepository: Repository<Event>,
         @InjectRepository(Carpool)
         private readonly _carpoolRepository: Repository<Carpool>
-    ) {}
+    ) // @Inject(IORedis)
+    // private readonly _redisClient: IORedis.Redis
+    {}
 
     //TODO: Comment this
     public async create(createEventDto: CreateEventDto): Promise<Event> {
+        // await this._redisClient.setex("test_key", 20, "test_value");
         const { eventName, dateTime } = createEventDto;
         const event = new Event();
         event.name = eventName;
