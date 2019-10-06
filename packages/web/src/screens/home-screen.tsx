@@ -61,9 +61,6 @@ export const HomeScreen: FunctionComponent = () => {
                             Create a Carpool
                         </Button>
                     </NavLink>
-                    <NavLink to="/carpool">
-                        <Button>Temp</Button>
-                    </NavLink>
                 </div>
                 <img src={fastCar} alt="Carpool" className={classes.image} />
             </div>
