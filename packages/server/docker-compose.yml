@@ -8,11 +8,11 @@ services:
     ports:
       - 1337:1337
     environment:
-      - "CARPOOL_DB_HOST=postgres"
-      - "CARPOOL_DB_PORT=5432"
-      - "CARPOOL_DB_USERNAME=local"
-      - "CARPOOL_DB_PASSWORD=local"
-      - "CARPOOL_DB_NAME=carpool"
+      - "DB_HOST=postgres"
+      - "DB_PORT=5432"
+      - "DB_USERNAME=local"
+      - "DB_PASSWORD=local"
+      - "DB_NAME=carpool"
     depends_on:
       - postgres
       - redis
