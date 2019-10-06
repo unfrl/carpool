@@ -3,8 +3,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import * as IORedis from "ioredis";
+import { MailerModule } from "@nest-modules/mailer";
 
-import { authConfig, dbConfig, redisConfig } from "./config";
+import { authConfig, dbConfig, redisConfig, emailConfig } from "./config";
 import { AuthController, EventController, CarpoolController } from "./controllers";
 import { AuthService, UserService, EventService, JwtStrategy, CarpoolService } from "./services";
 import { Carpool, Driver, Event, Passenger, User } from "./entities";
@@ -19,6 +20,9 @@ import { Carpool, Driver, Event, Passenger, User } from "./entities";
             signOptions: {
                 expiresIn: 3600,
             },
+        }),
+        MailerModule.forRootAsync({
+            useFactory: () => emailConfig,
         }),
     ],
     controllers: [AuthController, EventController, CarpoolController],
