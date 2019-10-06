@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import * as IORedis from "ioredis";
 import { MailerModule } from "@nest-modules/mailer";
 
-import { authConfig, dbConfig, redisConfig } from "./config";
+import { authConfig, dbConfig, redisConfig, emailConfig } from "./config";
 import { AuthController, CarpoolController } from "./controllers";
 import { AuthService, UserService, JwtStrategy, CarpoolService } from "./services";
 import { Carpool, Driver, Passenger, User } from "./entities";
