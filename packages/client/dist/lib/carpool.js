@@ -66,34 +66,9 @@ var Carpool = /** @class */ (function (_super) {
             options: options
         }, signInOperationSpec, callback);
     };
-    Carpool.prototype.createEvent = function (createEventDto, options, callback) {
+    Carpool.prototype.createCarpool = function (carpoolDto, options, callback) {
         return this.sendOperationRequest({
-            createEventDto: createEventDto,
-            options: options
-        }, createEventOperationSpec, callback);
-    };
-    Carpool.prototype.updateEvent = function (updateEventDto, id, options, callback) {
-        return this.sendOperationRequest({
-            updateEventDto: updateEventDto,
-            id: id,
-            options: options
-        }, updateEventOperationSpec, callback);
-    };
-    Carpool.prototype.getEvent = function (id, options, callback) {
-        return this.sendOperationRequest({
-            id: id,
-            options: options
-        }, getEventOperationSpec, callback);
-    };
-    Carpool.prototype.deleteEvent = function (id, options, callback) {
-        return this.sendOperationRequest({
-            id: id,
-            options: options
-        }, deleteEventOperationSpec, callback);
-    };
-    Carpool.prototype.createCarpool = function (createCarpoolDto, options, callback) {
-        return this.sendOperationRequest({
-            createCarpoolDto: createCarpoolDto,
+            carpoolDto: carpoolDto,
             options: options
         }, createCarpoolOperationSpec, callback);
     };
@@ -103,9 +78,9 @@ var Carpool = /** @class */ (function (_super) {
             options: options
         }, getCarpoolOperationSpec, callback);
     };
-    Carpool.prototype.updateCarpool = function (updateCarpoolDto, id, options, callback) {
+    Carpool.prototype.updateCarpool = function (carpoolDto, id, options, callback) {
         return this.sendOperationRequest({
-            updateCarpoolDto: updateCarpoolDto,
+            carpoolDto: carpoolDto,
             id: id,
             options: options
         }, updateCarpoolOperationSpec, callback);
@@ -151,76 +126,12 @@ var signInOperationSpec = {
     },
     serializer: serializer
 };
-var createEventOperationSpec = {
-    httpMethod: "POST",
-    path: "api/v1/event",
-    requestBody: {
-        parameterPath: "createEventDto",
-        mapper: __assign(__assign({}, Mappers.CreateEventDto), { required: true })
-    },
-    responses: {
-        201: {
-            bodyMapper: Mappers.Event
-        },
-        default: {}
-    },
-    serializer: serializer
-};
-var updateEventOperationSpec = {
-    httpMethod: "PUT",
-    path: "api/v1/event/{id}",
-    urlParameters: [
-        Parameters.id
-    ],
-    requestBody: {
-        parameterPath: "updateEventDto",
-        mapper: __assign(__assign({}, Mappers.UpdateEventDto), { required: true })
-    },
-    responses: {
-        200: {
-            bodyMapper: Mappers.Event
-        },
-        404: {},
-        default: {}
-    },
-    serializer: serializer
-};
-var getEventOperationSpec = {
-    httpMethod: "GET",
-    path: "api/v1/event/{id}",
-    urlParameters: [
-        Parameters.id
-    ],
-    responses: {
-        200: {
-            bodyMapper: Mappers.Event
-        },
-        404: {},
-        default: {}
-    },
-    serializer: serializer
-};
-var deleteEventOperationSpec = {
-    httpMethod: "DELETE",
-    path: "api/v1/event/{id}",
-    urlParameters: [
-        Parameters.id
-    ],
-    responses: {
-        200: {
-            bodyMapper: Mappers.Event
-        },
-        404: {},
-        default: {}
-    },
-    serializer: serializer
-};
 var createCarpoolOperationSpec = {
     httpMethod: "POST",
     path: "api/v1/carpool",
     requestBody: {
-        parameterPath: "createCarpoolDto",
-        mapper: __assign(__assign({}, Mappers.CreateCarpoolDto), { required: true })
+        parameterPath: "carpoolDto",
+        mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
     },
     responses: {
         201: {
@@ -252,8 +163,8 @@ var updateCarpoolOperationSpec = {
         Parameters.id
     ],
     requestBody: {
-        parameterPath: "updateCarpoolDto",
-        mapper: __assign(__assign({}, Mappers.UpdateCarpoolDto), { required: true })
+        parameterPath: "carpoolDto",
+        mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
     },
     responses: {
         200: {

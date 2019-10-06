@@ -95,106 +95,6 @@ exports.AuthDto = {
         }
     }
 };
-exports.CreateEventDto = {
-    serializedName: "CreateEventDto",
-    type: {
-        name: "Composite",
-        className: "CreateEventDto",
-        modelProperties: {
-            eventName: {
-                required: true,
-                serializedName: "eventName",
-                type: {
-                    name: "String"
-                }
-            },
-            dateTime: {
-                required: true,
-                serializedName: "dateTime",
-                type: {
-                    name: "Object"
-                }
-            }
-        }
-    }
-};
-exports.Event = {
-    serializedName: "Event",
-    type: {
-        name: "Composite",
-        className: "Event",
-        modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String"
-                }
-            },
-            created: {
-                required: true,
-                serializedName: "created",
-                type: {
-                    name: "Object"
-                }
-            },
-            updated: {
-                required: true,
-                serializedName: "updated",
-                type: {
-                    name: "Object"
-                }
-            },
-            name: {
-                required: true,
-                serializedName: "name",
-                type: {
-                    name: "String"
-                }
-            },
-            dateTime: {
-                required: true,
-                serializedName: "dateTime",
-                type: {
-                    name: "Object"
-                }
-            },
-            carpools: {
-                required: true,
-                serializedName: "carpools",
-                type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String"
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
-exports.UpdateEventDto = {
-    serializedName: "UpdateEventDto",
-    type: {
-        name: "Composite",
-        className: "UpdateEventDto",
-        modelProperties: {
-            eventName: {
-                serializedName: "eventName",
-                type: {
-                    name: "String"
-                }
-            },
-            dateTime: {
-                serializedName: "dateTime",
-                type: {
-                    name: "Object"
-                }
-            }
-        }
-    }
-};
 exports.Address = {
     serializedName: "Address",
     type: {
@@ -253,13 +153,14 @@ exports.Address = {
         }
     }
 };
-exports.CreateCarpoolDto = {
-    serializedName: "CreateCarpoolDto",
+exports.CarpoolDto = {
+    serializedName: "CarpoolDto",
     type: {
         name: "Composite",
-        className: "CreateCarpoolDto",
+        className: "CarpoolDto",
         modelProperties: {
             carpoolName: {
+                required: true,
                 serializedName: "carpoolName",
                 type: {
                     name: "String"
@@ -273,11 +174,11 @@ exports.CreateCarpoolDto = {
                     className: "Address"
                 }
             },
-            eventId: {
+            dateTime: {
                 required: true,
-                serializedName: "eventId",
+                serializedName: "dateTime",
                 type: {
-                    name: "String"
+                    name: "Object"
                 }
             }
         }
@@ -321,75 +222,20 @@ exports.CarpoolModel = {
                 required: true,
                 serializedName: "destination",
                 type: {
-                    name: "Object"
-                }
-            },
-            eventId: {
-                required: true,
-                serializedName: "eventId",
-                type: {
-                    name: "String"
-                }
-            },
-            drivers: {
-                required: true,
-                serializedName: "drivers",
-                type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String"
-                        }
-                    }
-                }
-            },
-            passengers: {
-                required: true,
-                serializedName: "passengers",
-                type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String"
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
-exports.UpdateCarpoolDto = {
-    serializedName: "UpdateCarpoolDto",
-    type: {
-        name: "Composite",
-        className: "UpdateCarpoolDto",
-        modelProperties: {
-            carpoolName: {
-                serializedName: "carpoolName",
-                type: {
-                    name: "String"
-                }
-            },
-            destination: {
-                serializedName: "destination",
-                type: {
                     name: "Composite",
                     className: "Address"
                 }
             },
-            drivers: {
-                serializedName: "drivers",
+            dateTime: {
+                required: true,
+                serializedName: "dateTime",
                 type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String"
-                        }
-                    }
+                    name: "Object"
                 }
             },
-            passengers: {
-                serializedName: "passengers",
+            drivers: {
+                required: true,
+                serializedName: "drivers",
                 type: {
                     name: "Sequence",
                     element: {

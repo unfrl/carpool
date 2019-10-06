@@ -1,17 +1,8 @@
 import { ApiOperation, ApiUseTags, ApiResponse, ApiCreatedResponse } from "@nestjs/swagger";
-import {
-    Post,
-    Put,
-    HttpStatus,
-    Body,
-    HttpException,
-    Controller,
-    Param,
-    Delete,
-    Get,
-} from "@nestjs/common";
+import { Post, Put, HttpStatus, Body, Controller, Param, Delete, Get } from "@nestjs/common";
+
 import { Carpool } from "../entities";
-import { CreateCarpoolDto, UpdateCarpoolDto } from "../dtos";
+import { CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
 
 @ApiUseTags("Carpool")
@@ -26,8 +17,8 @@ export class CarpoolController {
     })
     @ApiCreatedResponse({ type: Carpool })
     @Post()
-    public async create(@Body() createCarpoolDto: CreateCarpoolDto): Promise<Carpool> {
-        return await this._carpoolService.create(createCarpoolDto);
+    public async create(@Body() carpoolDto: CarpoolDto): Promise<Carpool> {
+        return await this._carpoolService.create(carpoolDto);
     }
 
     @ApiOperation({
@@ -50,11 +41,8 @@ export class CarpoolController {
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
     @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Put(":id")
-    public async update(
-        @Param("id") id: string,
-        @Body() updateCarpoolDto: UpdateCarpoolDto
-    ): Promise<Carpool> {
-        return await this._carpoolService.update(id, updateCarpoolDto);
+    public async update(@Param("id") id: string, @Body() carpoolDto: CarpoolDto): Promise<Carpool> {
+        return await this._carpoolService.update(id, carpoolDto);
     }
 
     @ApiOperation({

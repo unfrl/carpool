@@ -5,14 +5,14 @@ import { JwtModule } from "@nestjs/jwt";
 import * as IORedis from "ioredis";
 
 import { authConfig, dbConfig, redisConfig } from "./config";
-import { AuthController, EventController, CarpoolController } from "./controllers";
-import { AuthService, UserService, EventService, JwtStrategy, CarpoolService } from "./services";
-import { Carpool, Driver, Event, Passenger, User } from "./entities";
+import { AuthController, CarpoolController } from "./controllers";
+import { AuthService, UserService, JwtStrategy, CarpoolService } from "./services";
+import { Carpool, Driver, Passenger, User } from "./entities";
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(dbConfig),
-        TypeOrmModule.forFeature([Carpool, Driver, Event, Passenger, User]),
+        TypeOrmModule.forFeature([Carpool, Driver, Passenger, User]),
         PassportModule.register({ defaultStrategy: "jwt" }),
         JwtModule.register({
             secretOrPrivateKey: authConfig.secret,
@@ -21,11 +21,10 @@ import { Carpool, Driver, Event, Passenger, User } from "./entities";
             },
         }),
     ],
-    controllers: [AuthController, EventController, CarpoolController],
+    controllers: [AuthController, CarpoolController],
     providers: [
         AuthService,
         UserService,
-        EventService,
         CarpoolService,
         JwtStrategy,
         {

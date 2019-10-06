@@ -67,67 +67,6 @@ export interface AuthDto {
 
 /**
  * @interface
- * An interface representing CreateEventDto.
- */
-export interface CreateEventDto {
-  /**
-   * @member {string} eventName
-   */
-  eventName: string;
-  /**
-   * @member {any} dateTime
-   */
-  dateTime: any;
-}
-
-/**
- * @interface
- * An interface representing Event.
- */
-export interface Event {
-  /**
-   * @member {string} id
-   */
-  id: string;
-  /**
-   * @member {any} created
-   */
-  created: any;
-  /**
-   * @member {any} updated
-   */
-  updated: any;
-  /**
-   * @member {string} name
-   */
-  name: string;
-  /**
-   * @member {any} dateTime
-   */
-  dateTime: any;
-  /**
-   * @member {string[]} carpools
-   */
-  carpools: string[];
-}
-
-/**
- * @interface
- * An interface representing UpdateEventDto.
- */
-export interface UpdateEventDto {
-  /**
-   * @member {string} [eventName]
-   */
-  eventName?: string;
-  /**
-   * @member {any} [dateTime]
-   */
-  dateTime?: any;
-}
-
-/**
- * @interface
  * An interface representing Address.
  */
 export interface Address {
@@ -163,21 +102,21 @@ export interface Address {
 
 /**
  * @interface
- * An interface representing CreateCarpoolDto.
+ * An interface representing CarpoolDto.
  */
-export interface CreateCarpoolDto {
+export interface CarpoolDto {
   /**
-   * @member {string} [carpoolName]
+   * @member {string} carpoolName
    */
-  carpoolName?: string;
+  carpoolName: string;
   /**
    * @member {Address} destination
    */
   destination: Address;
   /**
-   * @member {string} eventId
+   * @member {any} dateTime
    */
-  eventId: string;
+  dateTime: any;
 }
 
 /**
@@ -202,44 +141,17 @@ export interface CarpoolModel {
    */
   name: string;
   /**
-   * @member {any} destination
+   * @member {Address} destination
    */
-  destination: any;
+  destination: Address;
   /**
-   * @member {string} eventId
+   * @member {any} dateTime
    */
-  eventId: string;
+  dateTime: any;
   /**
    * @member {string[]} drivers
    */
   drivers: string[];
-  /**
-   * @member {string[]} passengers
-   */
-  passengers: string[];
-}
-
-/**
- * @interface
- * An interface representing UpdateCarpoolDto.
- */
-export interface UpdateCarpoolDto {
-  /**
-   * @member {string} [carpoolName]
-   */
-  carpoolName?: string;
-  /**
-   * @member {Address} [destination]
-   */
-  destination?: Address;
-  /**
-   * @member {string[]} [drivers]
-   */
-  drivers?: string[];
-  /**
-   * @member {string[]} [passengers]
-   */
-  passengers?: string[];
 }
 
 /**
@@ -289,82 +201,6 @@ export type SignInResponse = UserDto & {
        * The response body as parsed JSON or XML
        */
       parsedBody: UserDto;
-    };
-};
-
-/**
- * Contains response data for the createEvent operation.
- */
-export type CreateEventResponse = Event & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Event;
-    };
-};
-
-/**
- * Contains response data for the updateEvent operation.
- */
-export type UpdateEventResponse = Event & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Event;
-    };
-};
-
-/**
- * Contains response data for the getEvent operation.
- */
-export type GetEventResponse = Event & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Event;
-    };
-};
-
-/**
- * Contains response data for the deleteEvent operation.
- */
-export type DeleteEventResponse = Event & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Event;
     };
 };
 

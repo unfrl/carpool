@@ -1,10 +1,10 @@
 import { Entity, ManyToOne, Column } from "typeorm";
+import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 import { BaseEntity } from "./base.entity";
 import { User } from "./user.entity";
-import { Carpool } from "./carpool.entity";
+import { Driver } from "./driver.entity";
 import { Address } from "../interfaces";
-import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Passenger extends BaseEntity {
@@ -35,8 +35,8 @@ export class Passenger extends BaseEntity {
 
     @Column()
     @ApiResponseModelProperty()
-    public carpoolId: string;
+    public driverId: string;
 
-    @ManyToOne(type => Carpool)
-    public carpool: Carpool;
+    @ManyToOne(type => Driver, driver => driver.passengers)
+    public driver: Driver;
 }
