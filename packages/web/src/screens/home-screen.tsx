@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const Home: FunctionComponent = () => {
+export const HomeScreen: FunctionComponent = () => {
     const classes = useStyles();
 
     return (
@@ -56,7 +56,7 @@ export const Home: FunctionComponent = () => {
                     <Typography variant="subtitle1" className={classes.subtitle}>
                         Awesome subtitle with more info here like blehs
                     </Typography>
-                    <NavLink to="/create-event">
+                    <NavLink to="/create-carpool">
                         <Button variant="contained" color="primary" size="large">
                             Create a Carpool
                         </Button>

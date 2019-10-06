@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Card, Typography, makeStyles } from "@material-ui/core";
 
-import { EventForm } from "../components";
+import { CarpoolForm } from "../components";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,15 +19,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const CreateEvent: FunctionComponent = () => {
+export const CreateCarpoolScreen: FunctionComponent = () => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
             <Typography variant="h6" align="center">
-                Create an Event
+                Create a Carpool
             </Typography>
-            <EventForm />
+            <CarpoolForm />
         </Card>
     );
 };

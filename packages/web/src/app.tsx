@@ -8,7 +8,7 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 
 import { AuthStore } from "@carpool/core";
 import { AppHeader, UserDialog, Content } from "./components";
-import { Home, CreateEvent, NotFound } from "./screens";
+import { HomeScreen, CreateCarpoolScreen, CarpoolScreen, NotFoundScreen } from "./screens";
 
 const theme = createMuiTheme({
     palette: {
@@ -50,9 +50,14 @@ export class App extends Component<IAppProps, IAppState> {
                 />
                 <Content>
                     <Switch>
-                        <Route path="/" exact={true} component={Home} />
-                        <Route path="/create-event" exact={true} component={CreateEvent} />
-                        <Route component={NotFound} />
+                        <Route path="/" exact={true} component={HomeScreen} />
+                        <Route
+                            path="/create-carpool"
+                            exact={true}
+                            component={CreateCarpoolScreen}
+                        />
+                        <Route path="/carpool/:id" exact={true} component={CarpoolScreen} />
+                        <Route component={NotFoundScreen} />
                     </Switch>
                 </Content>
                 {this.state.showUserDialog && (
