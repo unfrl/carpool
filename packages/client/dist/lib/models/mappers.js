@@ -244,6 +244,20 @@ exports.CarpoolModel = {
                         }
                     }
                 }
+            },
+            createdById: {
+                required: true,
+                serializedName: "createdById",
+                type: {
+                    name: "String"
+                }
+            },
+            updatedById: {
+                required: true,
+                serializedName: "updatedById",
+                type: {
+                    name: "String"
+                }
             }
         }
     }

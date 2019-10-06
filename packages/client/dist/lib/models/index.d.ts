@@ -139,6 +139,14 @@ export interface CarpoolModel {
      * @member {string[]} drivers
      */
     drivers: string[];
+    /**
+     * @member {string} createdById
+     */
+    createdById: string;
+    /**
+     * @member {string} updatedById
+     */
+    updatedById: string;
 }
 /**
  * @interface
