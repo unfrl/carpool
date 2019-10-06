@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
-import { NavLink } from "./";
+import { NavLink } from ".";
 
 const useStyles = makeStyles(theme => ({
     actions: {
@@ -17,14 +17,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export interface IEventFormState {
+export interface ICarpoolFormState {
     name: string;
     date: Date;
 }
 
-export const EventForm: FunctionComponent = () => {
+export const CarpoolForm: FunctionComponent = () => {
     const classes = useStyles();
-    const [state, setState] = useState<IEventFormState>({
+    const [state, setState] = useState<ICarpoolFormState>({
         name: "",
         date: new Date(),
     });
@@ -57,13 +57,7 @@ export const EventForm: FunctionComponent = () => {
                 fullWidth={true}
             />
             <div className={classes.actions}>
-                <Button
-                    variant="contained"
-                    // size="small"
-                    color="primary"
-                    type="submit"
-                    disabled={!canSave}
-                >
+                <Button variant="contained" color="primary" type="submit" disabled={!canSave}>
                     Create
                 </Button>
                 <NavLink to="/">
