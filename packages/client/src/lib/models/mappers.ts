@@ -100,109 +100,6 @@ export const AuthDto: msRest.CompositeMapper = {
   }
 };
 
-export const CreateEventDto: msRest.CompositeMapper = {
-  serializedName: "CreateEventDto",
-  type: {
-    name: "Composite",
-    className: "CreateEventDto",
-    modelProperties: {
-      eventName: {
-        required: true,
-        serializedName: "eventName",
-        type: {
-          name: "String"
-        }
-      },
-      dateTime: {
-        required: true,
-        serializedName: "dateTime",
-        type: {
-          name: "Object"
-        }
-      }
-    }
-  }
-};
-
-export const Event: msRest.CompositeMapper = {
-  serializedName: "Event",
-  type: {
-    name: "Composite",
-    className: "Event",
-    modelProperties: {
-      id: {
-        required: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      created: {
-        required: true,
-        serializedName: "created",
-        type: {
-          name: "Object"
-        }
-      },
-      updated: {
-        required: true,
-        serializedName: "updated",
-        type: {
-          name: "Object"
-        }
-      },
-      name: {
-        required: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      dateTime: {
-        required: true,
-        serializedName: "dateTime",
-        type: {
-          name: "Object"
-        }
-      },
-      carpools: {
-        required: true,
-        serializedName: "carpools",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const UpdateEventDto: msRest.CompositeMapper = {
-  serializedName: "UpdateEventDto",
-  type: {
-    name: "Composite",
-    className: "UpdateEventDto",
-    modelProperties: {
-      eventName: {
-        serializedName: "eventName",
-        type: {
-          name: "String"
-        }
-      },
-      dateTime: {
-        serializedName: "dateTime",
-        type: {
-          name: "Object"
-        }
-      }
-    }
-  }
-};
-
 export const Address: msRest.CompositeMapper = {
   serializedName: "Address",
   type: {
@@ -262,13 +159,14 @@ export const Address: msRest.CompositeMapper = {
   }
 };
 
-export const CreateCarpoolDto: msRest.CompositeMapper = {
-  serializedName: "CreateCarpoolDto",
+export const CarpoolDto: msRest.CompositeMapper = {
+  serializedName: "CarpoolDto",
   type: {
     name: "Composite",
-    className: "CreateCarpoolDto",
+    className: "CarpoolDto",
     modelProperties: {
       carpoolName: {
+        required: true,
         serializedName: "carpoolName",
         type: {
           name: "String"
@@ -282,11 +180,11 @@ export const CreateCarpoolDto: msRest.CompositeMapper = {
           className: "Address"
         }
       },
-      eventId: {
+      dateTime: {
         required: true,
-        serializedName: "eventId",
+        serializedName: "dateTime",
         type: {
-          name: "String"
+          name: "Object"
         }
       }
     }
@@ -331,64 +229,19 @@ export const CarpoolModel: msRest.CompositeMapper = {
         required: true,
         serializedName: "destination",
         type: {
-          name: "Object"
-        }
-      },
-      eventId: {
-        required: true,
-        serializedName: "eventId",
-        type: {
-          name: "String"
-        }
-      },
-      drivers: {
-        required: true,
-        serializedName: "drivers",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      passengers: {
-        required: true,
-        serializedName: "passengers",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const UpdateCarpoolDto: msRest.CompositeMapper = {
-  serializedName: "UpdateCarpoolDto",
-  type: {
-    name: "Composite",
-    className: "UpdateCarpoolDto",
-    modelProperties: {
-      carpoolName: {
-        serializedName: "carpoolName",
-        type: {
-          name: "String"
-        }
-      },
-      destination: {
-        serializedName: "destination",
-        type: {
           name: "Composite",
           className: "Address"
         }
       },
+      dateTime: {
+        required: true,
+        serializedName: "dateTime",
+        type: {
+          name: "Object"
+        }
+      },
       drivers: {
+        required: true,
         serializedName: "drivers",
         type: {
           name: "Sequence",
@@ -399,15 +252,18 @@ export const UpdateCarpoolDto: msRest.CompositeMapper = {
           }
         }
       },
-      passengers: {
-        serializedName: "passengers",
+      createdById: {
+        required: true,
+        serializedName: "createdById",
         type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
+          name: "String"
+        }
+      },
+      updatedById: {
+        required: true,
+        serializedName: "updatedById",
+        type: {
+          name: "String"
         }
       }
     }

@@ -26,10 +26,4 @@ export class User extends BaseEntity {
     @Column()
     @ApiResponseModelProperty()
     public password: string;
-
-    @OneToMany(type => Driver, driver => driver.carpool)
-    public drivers: Driver[];
-
-    @OneToMany(type => Passenger, passenger => passenger.carpool)
-    public passengers: Passenger[];
 }
