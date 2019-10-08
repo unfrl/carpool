@@ -27,6 +27,7 @@ export class AuthStore {
 
         try {
             if (this.getAccessToken()) {
+                this._logger.info("Has access token, fetching user profile...");
                 await this.fetchUserProfile();
             }
         } catch (error) {
