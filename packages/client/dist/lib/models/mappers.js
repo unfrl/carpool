@@ -35,36 +35,15 @@ exports.SignUpDto = {
         }
     }
 };
-exports.UserDto = {
-    serializedName: "UserDto",
+exports.AuthDto = {
+    serializedName: "AuthDto",
     type: {
         name: "Composite",
-        className: "UserDto",
+        className: "AuthDto",
         modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String"
-                }
-            },
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String"
-                }
-            },
-            displayName: {
-                required: true,
-                serializedName: "displayName",
-                type: {
-                    name: "String"
-                }
-            },
             accessToken: {
                 required: true,
-                serializedName: "accessToken",
+                serializedName: "access_token",
                 type: {
                     name: "String"
                 }
@@ -72,11 +51,11 @@ exports.UserDto = {
         }
     }
 };
-exports.AuthDto = {
-    serializedName: "AuthDto",
+exports.SignInDto = {
+    serializedName: "SignInDto",
     type: {
         name: "Composite",
-        className: "AuthDto",
+        className: "SignInDto",
         modelProperties: {
             email: {
                 required: true,
@@ -255,6 +234,36 @@ exports.CarpoolModel = {
             updatedById: {
                 required: true,
                 serializedName: "updatedById",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.UserDto = {
+    serializedName: "UserDto",
+    type: {
+        name: "Composite",
+        className: "UserDto",
+        modelProperties: {
+            id: {
+                required: true,
+                serializedName: "id",
+                type: {
+                    name: "String"
+                }
+            },
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String"
+                }
+            },
+            displayName: {
+                required: true,
+                serializedName: "displayName",
                 type: {
                     name: "String"
                 }

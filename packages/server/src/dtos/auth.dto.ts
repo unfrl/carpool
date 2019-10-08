@@ -1,17 +1,9 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { IsEmail, MinLength, IsDefined } from "class-validator";
+import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 /**
- * AuthDto is used for sign in/up requests. On successful authentication, the UserDto is provided in the response.
+ * DTO is returned from a successful sign in/up.
  */
 export class AuthDto {
-    @ApiModelProperty()
-    @IsEmail()
-    @IsDefined()
-    public readonly email: string;
-
-    @ApiModelProperty()
-    @MinLength(8)
-    @IsDefined()
-    public readonly password: string;
+    @ApiResponseModelProperty()
+    public access_token: string;
 }

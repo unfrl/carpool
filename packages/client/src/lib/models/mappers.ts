@@ -38,36 +38,15 @@ export const SignUpDto: msRest.CompositeMapper = {
   }
 };
 
-export const UserDto: msRest.CompositeMapper = {
-  serializedName: "UserDto",
+export const AuthDto: msRest.CompositeMapper = {
+  serializedName: "AuthDto",
   type: {
     name: "Composite",
-    className: "UserDto",
+    className: "AuthDto",
     modelProperties: {
-      id: {
-        required: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      email: {
-        required: true,
-        serializedName: "email",
-        type: {
-          name: "String"
-        }
-      },
-      displayName: {
-        required: true,
-        serializedName: "displayName",
-        type: {
-          name: "String"
-        }
-      },
       accessToken: {
         required: true,
-        serializedName: "accessToken",
+        serializedName: "access_token",
         type: {
           name: "String"
         }
@@ -76,11 +55,11 @@ export const UserDto: msRest.CompositeMapper = {
   }
 };
 
-export const AuthDto: msRest.CompositeMapper = {
-  serializedName: "AuthDto",
+export const SignInDto: msRest.CompositeMapper = {
+  serializedName: "SignInDto",
   type: {
     name: "Composite",
-    className: "AuthDto",
+    className: "SignInDto",
     modelProperties: {
       email: {
         required: true,
@@ -262,6 +241,37 @@ export const CarpoolModel: msRest.CompositeMapper = {
       updatedById: {
         required: true,
         serializedName: "updatedById",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const UserDto: msRest.CompositeMapper = {
+  serializedName: "UserDto",
+  type: {
+    name: "Composite",
+    className: "UserDto",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        required: true,
+        serializedName: "displayName",
         type: {
           name: "String"
         }

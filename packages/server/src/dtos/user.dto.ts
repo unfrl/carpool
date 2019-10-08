@@ -16,8 +16,4 @@ export class UserDto {
     @ApiModelProperty()
     @IsDefined()
     public readonly displayName: string;
-
-    @ApiModelProperty()
-    @IsDefined()
-    public readonly accessToken: string;
 }

@@ -1,5 +1,12 @@
 import React, { FunctionComponent } from "react";
-import { AppBar, Toolbar, Typography, Button, makeStyles } from "@material-ui/core";
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    CircularProgress,
+    makeStyles,
+} from "@material-ui/core";
 
 import { UserDto } from "@carpool/core";
 import { NavLink, UserMenu } from "./";
@@ -13,13 +20,14 @@ const useStyles = makeStyles(theme => ({
 
 export interface IAppHeaderProps {
     title?: string;
+    initialized: boolean;
     user: UserDto | null;
     onAuthClick: () => void;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
     const classes = useStyles();
-    const { title, user, onAuthClick } = props;
+    const { title, user, onAuthClick, initialized } = props;
 
     return (
         <AppBar position="fixed">
@@ -29,14 +37,16 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
                         <span role="img">🚙</span> {title || "Carpool"}
                     </Typography>
                 </NavLink>
-                {user ? (
+                {!initialized ? (
+                    <CircularProgress color="secondary" />
+                ) : user ? (
                     <UserMenu
                         displayName={user.displayName}
                         email={user.email}
-                        onSignOut={props.onAuthClick}
+                        onSignOut={onAuthClick}
                     />
                 ) : (
-                    <Button color="inherit" onClick={props.onAuthClick}>
+                    <Button color="inherit" onClick={onAuthClick}>
                         Sign in
                     </Button>
                 )}

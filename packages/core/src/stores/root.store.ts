@@ -16,7 +16,7 @@ export class RootStore {
             {
                 signRequest: async resource => {
                     const accessToken = this.authStore.getAccessToken();
-                    resource.headers.set("Authorization", accessToken);
+                    resource.headers.set("Authorization", `Bearer ${accessToken}`);
                     return resource;
                 },
             },

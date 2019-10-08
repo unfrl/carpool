@@ -4,6 +4,8 @@ import { UserDto } from "@carpool/client";
 import { RootStore } from "./root.store";
 import { Logger } from "../utils";
 
+const ACCESS_TOKEN_KEY = "carpool.auth.access_token";
+
 export class AuthStore {
     private readonly _logger = new Logger("AuthStore");
 
@@ -15,15 +17,39 @@ export class AuthStore {
     @observable
     public user: UserDto | null = null;
 
+    @observable
+    public initialized: boolean = false;
+
     public constructor(private readonly _rootStore: RootStore) {}
+
+    public initialize = async () => {
+        if (this.initialized) {
+            return;
+        }
+
+        try {
+            if (this.getAccessToken()) {
+                this._logger.info("Has access token, fetching user profile...");
+                await this.fetchUserProfile();
+            }
+        } catch (error) {
+            // TODO: on error, it's likely the access token expired - will want to use the refresh token (when implemented) to request a new one
+            this._logger.warn("Failed to initialize", error);
+            this.clearAccessToken();
+        } finally {
+            this.setInitialized(true);
+        }
+    };
 
     public signIn = async (email: string, password: string) => {
         try {
-            const user = await this._rootStore.carpoolClient.signIn({ email, password });
+            const result = await this._rootStore.carpoolClient.signIn({ email, password });
 
-            this._logger.info("Sign in success, setting user...");
+            this.setAccessToken(result.accessToken);
 
-            this.setUser(user);
+            this._logger.info("Sign in success, fetching user...");
+
+            await this.fetchUserProfile();
         } catch (error) {
             this._logger.error("Failed to sign in", error);
             throw error;
@@ -32,29 +58,49 @@ export class AuthStore {
 
     public signUp = async (email: string, password: string, displayName: string) => {
         try {
-            const user = await this._rootStore.carpoolClient.signUp({
+            const result = await this._rootStore.carpoolClient.signUp({
                 email,
                 password,
                 displayName,
             });
 
-            this._logger.info("Sign up success, setting user...");
+            this.setAccessToken(result.accessToken);
 
-            this.setUser(user);
+            this._logger.info("Sign up success, fetching user...");
+
+            await this.fetchUserProfile();
         } catch (error) {
             this._logger.error("Failed to sign up", error);
             throw error;
         }
     };
 
-    @action
     public signOut = () => {
         this.clearUser();
+        this.clearAccessToken();
     };
 
-    public getAccessToken(): string {
-        return this.user ? this.user.accessToken : "";
-    }
+    private fetchUserProfile = async () => {
+        const user = await this._rootStore.carpoolClient.getProfile();
+
+        this.setUser(user);
+    };
+
+    //#region Access token
+
+    public getAccessToken = (): string => {
+        return localStorage.getItem(ACCESS_TOKEN_KEY) || "";
+    };
+
+    private setAccessToken = (token: string) => {
+        localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    };
+
+    private clearAccessToken = () => {
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+    };
+
+    //#endregion
 
     //#region Actions
 
@@ -66,6 +112,11 @@ export class AuthStore {
     @action
     private clearUser = () => {
         this.user = null;
+    };
+
+    @action
+    private setInitialized = (initialized: boolean) => {
+        this.initialized = initialized;
     };
 
     //#endregion

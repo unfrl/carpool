@@ -32,14 +32,14 @@ class Carpool extends CarpoolContext {
    * @param signUpDto
    * @param callback The callback
    */
-  signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.UserDto>): void;
+  signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
   /**
    * @param signUpDto
    * @param options The optional parameters
    * @param callback The callback
    */
-  signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
-  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UserDto>, callback?: msRest.ServiceCallback<Models.UserDto>): Promise<Models.SignUpResponse> {
+  signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.SignUpResponse> {
     return this.sendOperationRequest(
       {
         signUpDto,
@@ -52,26 +52,26 @@ class Carpool extends CarpoolContext {
   /**
    * Sign in an existing user
    * @summary Sign in
-   * @param authDto
+   * @param signInDto
    * @param [options] The optional parameters
    * @returns Promise<Models.SignInResponse>
    */
-  signIn(authDto: Models.AuthDto, options?: msRest.RequestOptionsBase): Promise<Models.SignInResponse>;
+  signIn(signInDto: Models.SignInDto, options?: msRest.RequestOptionsBase): Promise<Models.SignInResponse>;
   /**
-   * @param authDto
+   * @param signInDto
    * @param callback The callback
    */
-  signIn(authDto: Models.AuthDto, callback: msRest.ServiceCallback<Models.UserDto>): void;
+  signIn(signInDto: Models.SignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
   /**
-   * @param authDto
+   * @param signInDto
    * @param options The optional parameters
    * @param callback The callback
    */
-  signIn(authDto: Models.AuthDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
-  signIn(authDto: Models.AuthDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UserDto>, callback?: msRest.ServiceCallback<Models.UserDto>): Promise<Models.SignInResponse> {
+  signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  signIn(signInDto: Models.SignInDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.SignInResponse> {
     return this.sendOperationRequest(
       {
-        authDto,
+        signInDto,
         options
       },
       signInOperationSpec,
@@ -197,6 +197,31 @@ class Carpool extends CarpoolContext {
       deleteCarpoolOperationSpec,
       callback) as Promise<Models.DeleteCarpoolResponse>;
   }
+
+  /**
+   * Gets the current user's profile
+   * @summary Get user profile
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetProfileResponse>
+   */
+  getProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetProfileResponse>;
+  /**
+   * @param callback The callback
+   */
+  getProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+  getProfile(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UserDto>, callback?: msRest.ServiceCallback<Models.UserDto>): Promise<Models.GetProfileResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      getProfileOperationSpec,
+      callback) as Promise<Models.GetProfileResponse>;
+  }
 }
 
 // Operation Specifications
@@ -213,8 +238,9 @@ const signUpOperationSpec: msRest.OperationSpec = {
   },
   responses: {
     201: {
-      bodyMapper: Mappers.UserDto
+      bodyMapper: Mappers.AuthDto
     },
+    400: {},
     default: {}
   },
   serializer
@@ -224,16 +250,17 @@ const signInOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "api/v1/auth/signin",
   requestBody: {
-    parameterPath: "authDto",
+    parameterPath: "signInDto",
     mapper: {
-      ...Mappers.AuthDto,
+      ...Mappers.SignInDto,
       required: true
     }
   },
   responses: {
     200: {
-      bodyMapper: Mappers.UserDto
+      bodyMapper: Mappers.AuthDto
     },
+    400: {},
     default: {}
   },
   serializer
@@ -308,6 +335,18 @@ const deleteCarpoolOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.CarpoolModel
     },
     404: {},
+    default: {}
+  },
+  serializer
+};
+
+const getProfileOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/user/me",
+  responses: {
+    200: {
+      bodyMapper: Mappers.UserDto
+    },
     default: {}
   },
   serializer
