@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 
-import { AuthDto, SignUpDto, UserDto } from "../dtos";
+import { AuthDto, SignUpDto, SignInDto } from "../dtos";
 import { JwtPayload } from "../interfaces";
 import { authConfig } from "../config";
 import { UserService } from "./user.service";
@@ -14,36 +14,33 @@ export class AuthService {
         private readonly _jwtService: JwtService
     ) {}
 
-    public async signIn(authDto: AuthDto): Promise<UserDto | null> {
-        const { email, password } = authDto;
+    public async signIn(signInDto: SignInDto): Promise<AuthDto> {
+        const { email, password } = signInDto;
 
         const user = await this._userService.findOneByEmail(email);
         if (!user) {
-            return null;
+            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
         }
 
         const result = await bcrypt.compare(password, user.password);
         if (!result) {
-            return null;
+            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
         }
 
         const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
         const token = this._jwtService.sign(tokenPayload);
 
         return {
-            id: user.id,
-            email: user.email,
-            displayName: user.displayName,
-            accessToken: token,
+            access_token: token,
         };
     }
 
-    public async signUp(signUpDto: SignUpDto): Promise<UserDto | null> {
+    public async signUp(signUpDto: SignUpDto): Promise<AuthDto> {
         const { email, password, displayName } = signUpDto;
 
         const existing = await this._userService.findOneByEmail(email);
         if (existing) {
-            return null;
+            throw new HttpException("Failed to sign up", HttpStatus.BAD_REQUEST);
         }
 
         const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
@@ -53,10 +50,7 @@ export class AuthService {
         const token = this._jwtService.sign(tokenPayload);
 
         return {
-            id: user.id,
-            email: user.email,
-            displayName: user.displayName,
-            accessToken: token,
+            access_token: token,
         };
     }
 }

@@ -6,7 +6,7 @@ import * as IORedis from "ioredis";
 import { MailerModule } from "@nest-modules/mailer";
 
 import { authConfig, dbConfig, redisConfig, emailConfig } from "./config";
-import { AuthController, CarpoolController } from "./controllers";
+import { AuthController, CarpoolController, UserController } from "./controllers";
 import { AuthService, UserService, JwtStrategy, CarpoolService } from "./services";
 import { Carpool, Driver, Passenger, User } from "./entities";
 
@@ -25,7 +25,7 @@ import { Carpool, Driver, Passenger, User } from "./entities";
             useFactory: () => emailConfig,
         }),
     ],
-    controllers: [AuthController, CarpoolController],
+    controllers: [AuthController, CarpoolController, UserController],
     providers: [
         AuthService,
         UserService,

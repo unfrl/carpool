@@ -60,9 +60,9 @@ var Carpool = /** @class */ (function (_super) {
             options: options
         }, signUpOperationSpec, callback);
     };
-    Carpool.prototype.signIn = function (authDto, options, callback) {
+    Carpool.prototype.signIn = function (signInDto, options, callback) {
         return this.sendOperationRequest({
-            authDto: authDto,
+            signInDto: signInDto,
             options: options
         }, signInOperationSpec, callback);
     };
@@ -91,6 +91,11 @@ var Carpool = /** @class */ (function (_super) {
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
+    Carpool.prototype.getProfile = function (options, callback) {
+        return this.sendOperationRequest({
+            options: options
+        }, getProfileOperationSpec, callback);
+    };
     return Carpool;
 }(carpoolContext_1.CarpoolContext));
 exports.Carpool = Carpool;
@@ -105,8 +110,9 @@ var signUpOperationSpec = {
     },
     responses: {
         201: {
-            bodyMapper: Mappers.UserDto
+            bodyMapper: Mappers.AuthDto
         },
+        400: {},
         default: {}
     },
     serializer: serializer
@@ -115,13 +121,14 @@ var signInOperationSpec = {
     httpMethod: "POST",
     path: "api/v1/auth/signin",
     requestBody: {
-        parameterPath: "authDto",
-        mapper: __assign(__assign({}, Mappers.AuthDto), { required: true })
+        parameterPath: "signInDto",
+        mapper: __assign(__assign({}, Mappers.SignInDto), { required: true })
     },
     responses: {
         200: {
-            bodyMapper: Mappers.UserDto
+            bodyMapper: Mappers.AuthDto
         },
+        400: {},
         default: {}
     },
     serializer: serializer
@@ -186,6 +193,17 @@ var deleteCarpoolOperationSpec = {
             bodyMapper: Mappers.CarpoolModel
         },
         404: {},
+        default: {}
+    },
+    serializer: serializer
+};
+var getProfileOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/user/me",
+    responses: {
+        200: {
+            bodyMapper: Mappers.UserDto
+        },
         default: {}
     },
     serializer: serializer

@@ -20,21 +20,9 @@ export interface SignUpDto {
 }
 /**
  * @interface
- * An interface representing UserDto.
+ * An interface representing AuthDto.
  */
-export interface UserDto {
-    /**
-     * @member {string} id
-     */
-    id: string;
-    /**
-     * @member {string} email
-     */
-    email: string;
-    /**
-     * @member {string} displayName
-     */
-    displayName: string;
+export interface AuthDto {
     /**
      * @member {string} accessToken
      */
@@ -42,9 +30,9 @@ export interface UserDto {
 }
 /**
  * @interface
- * An interface representing AuthDto.
+ * An interface representing SignInDto.
  */
-export interface AuthDto {
+export interface SignInDto {
     /**
      * @member {string} email
      */
@@ -150,6 +138,24 @@ export interface CarpoolModel {
 }
 /**
  * @interface
+ * An interface representing UserDto.
+ */
+export interface UserDto {
+    /**
+     * @member {string} id
+     */
+    id: string;
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} displayName
+     */
+    displayName: string;
+}
+/**
+ * @interface
  * An interface representing CarpoolOptions.
  * @extends ServiceClientOptions
  */
@@ -162,7 +168,7 @@ export interface CarpoolOptions extends ServiceClientOptions {
 /**
  * Contains response data for the signUp operation.
  */
-export declare type SignUpResponse = UserDto & {
+export declare type SignUpResponse = AuthDto & {
     /**
      * The underlying HTTP response.
      */
@@ -174,13 +180,13 @@ export declare type SignUpResponse = UserDto & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: UserDto;
+        parsedBody: AuthDto;
     };
 };
 /**
  * Contains response data for the signIn operation.
  */
-export declare type SignInResponse = UserDto & {
+export declare type SignInResponse = AuthDto & {
     /**
      * The underlying HTTP response.
      */
@@ -192,7 +198,7 @@ export declare type SignInResponse = UserDto & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: UserDto;
+        parsedBody: AuthDto;
     };
 };
 /**
@@ -265,5 +271,23 @@ export declare type DeleteCarpoolResponse = CarpoolModel & {
          * The response body as parsed JSON or XML
          */
         parsedBody: CarpoolModel;
+    };
+};
+/**
+ * Contains response data for the getProfile operation.
+ */
+export declare type GetProfileResponse = UserDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: UserDto;
     };
 };

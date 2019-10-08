@@ -19,9 +19,13 @@ export class AuthStore {
 
     public signIn = async (email: string, password: string) => {
         try {
-            const user = await this._rootStore.carpoolClient.signIn({ email, password });
+            const result = await this._rootStore.carpoolClient.signIn({ email, password });
 
-            this._logger.info("Sign in success, setting user...");
+            this.setAccessToken(result.accessToken);
+
+            this._logger.info("Sign in success, fetching user...");
+
+            const user = await this._rootStore.carpoolClient.getProfile();
 
             this.setUser(user);
         } catch (error) {
@@ -32,13 +36,17 @@ export class AuthStore {
 
     public signUp = async (email: string, password: string, displayName: string) => {
         try {
-            const user = await this._rootStore.carpoolClient.signUp({
+            const result = await this._rootStore.carpoolClient.signUp({
                 email,
                 password,
                 displayName,
             });
 
-            this._logger.info("Sign up success, setting user...");
+            this.setAccessToken(result.accessToken);
+
+            this._logger.info("Sign up success, fetching user...");
+
+            const user = await this._rootStore.carpoolClient.getProfile();
 
             this.setUser(user);
         } catch (error) {
@@ -50,11 +58,12 @@ export class AuthStore {
     @action
     public signOut = () => {
         this.clearUser();
+        this.clearAccessToken();
     };
 
-    public getAccessToken(): string {
-        return this.user ? this.user.accessToken : "";
-    }
+    public getAccessToken = (): string => {
+        return localStorage.getItem("ACCESS_TOKEN") || "";
+    };
 
     //#region Actions
 
@@ -66,6 +75,14 @@ export class AuthStore {
     @action
     private clearUser = () => {
         this.user = null;
+    };
+
+    private setAccessToken = (token: string) => {
+        localStorage.setItem("ACCESS_TOKEN", token);
+    };
+
+    private clearAccessToken = () => {
+        localStorage.removeItem("ACCESS_TOKEN");
     };
 
     //#endregion

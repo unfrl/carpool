@@ -27,6 +27,7 @@ async function bootstrap() {
         .setTitle("Carpool")
         .setDescription("Free carpool app for cool peeps and their friends")
         .setVersion("1.0")
+        .addBearerAuth()
         .build();
     const document = SwaggerModule.createDocument(app, options);
 

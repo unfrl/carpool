@@ -1,8 +1,8 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, HttpException } from "@nestjs/common";
-import { ApiUseTags, ApiOperation, ApiOkResponse, ApiCreatedResponse } from "@nestjs/swagger";
+import { Controller, Post, Body, HttpStatus, HttpCode } from "@nestjs/common";
+import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
-import { AuthDto, SignUpDto, UserDto } from "../dtos";
+import { AuthDto, SignUpDto, SignInDto } from "../dtos";
 
 @ApiUseTags("Auth")
 @Controller("api/v1/auth")
@@ -14,15 +14,11 @@ export class AuthController {
         title: "Sign up",
         description: "Sign up a new user",
     })
-    @ApiCreatedResponse({ type: UserDto })
+    @ApiResponse({ status: HttpStatus.CREATED, type: AuthDto })
+    @ApiResponse({ status: HttpStatus.BAD_REQUEST })
     @Post("signup")
-    public async signUp(@Body() signUpDto: SignUpDto): Promise<UserDto> {
-        const userDto = await this._authService.signUp(signUpDto);
-        if (!userDto) {
-            throw new HttpException("Failed to sign up", HttpStatus.BAD_REQUEST);
-        }
-
-        return userDto;
+    public async signUp(@Body() signUpDto: SignUpDto): Promise<AuthDto> {
+        return await this._authService.signUp(signUpDto);
     }
 
     @ApiOperation({
@@ -30,15 +26,11 @@ export class AuthController {
         title: "Sign in",
         description: "Sign in an existing user",
     })
-    @ApiOkResponse({ type: UserDto })
+    @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
+    @ApiResponse({ status: HttpStatus.BAD_REQUEST })
     @HttpCode(200)
     @Post("signin")
-    public async signIn(@Body() authDto: AuthDto): Promise<UserDto> {
-        const userDto = await this._authService.signIn(authDto);
-        if (!userDto) {
-            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
-        }
-
-        return userDto;
+    public async signIn(@Body() signInDto: SignInDto): Promise<AuthDto> {
+        return await this._authService.signIn(signInDto);
     }
 }

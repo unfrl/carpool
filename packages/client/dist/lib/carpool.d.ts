@@ -21,32 +21,32 @@ declare class Carpool extends CarpoolContext {
      * @param signUpDto
      * @param callback The callback
      */
-    signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
      * @param signUpDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
      * Sign in an existing user
      * @summary Sign in
-     * @param authDto
+     * @param signInDto
      * @param [options] The optional parameters
      * @returns Promise<Models.SignInResponse>
      */
-    signIn(authDto: Models.AuthDto, options?: msRest.RequestOptionsBase): Promise<Models.SignInResponse>;
+    signIn(signInDto: Models.SignInDto, options?: msRest.RequestOptionsBase): Promise<Models.SignInResponse>;
     /**
-     * @param authDto
+     * @param signInDto
      * @param callback The callback
      */
-    signIn(authDto: Models.AuthDto, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    signIn(signInDto: Models.SignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
-     * @param authDto
+     * @param signInDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    signIn(authDto: Models.AuthDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
      * Create a new Carpool
      * @summary Create Carpool
@@ -126,5 +126,21 @@ declare class Carpool extends CarpoolContext {
      * @param callback The callback
      */
     deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    /**
+     * Gets the current user's profile
+     * @summary Get user profile
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetProfileResponse>
+     */
+    getProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetProfileResponse>;
+    /**
+     * @param callback The callback
+     */
+    getProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+    /**
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
 }
 export { Carpool, CarpoolContext, Models as CarpoolModels, Mappers as CarpoolMappers };

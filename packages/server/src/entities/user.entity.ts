@@ -1,8 +1,6 @@
-import { Entity, Column, OneToMany } from "typeorm";
+import { Entity, Column } from "typeorm";
 
 import { BaseEntity } from "./base.entity";
-import { Driver } from "./driver.entity";
-import { Passenger } from "./passenger.entity";
 import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 @Entity()
