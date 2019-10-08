@@ -38,13 +38,21 @@ export class App extends Component<IAppProps, IAppState> {
         return this.props as IInjectedProps;
     }
 
+    public async componentDidMount() {
+        await this.injectedProps.authStore.initialize();
+    }
+
     public render() {
         const { authStore } = this.injectedProps;
 
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <AppHeader user={authStore.user} onAuthClick={this.handleAuthClick} />
+                <AppHeader
+                    initialized={authStore.initialized}
+                    user={authStore.user}
+                    onAuthClick={this.handleAuthClick}
+                />
                 <Content>
                     <Switch>
                         <Route path="/" exact={true} component={HomeScreen} />

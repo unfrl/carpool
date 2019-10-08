@@ -15,7 +15,26 @@ export class AuthStore {
     @observable
     public user: UserDto | null = null;
 
+    @observable
+    public initialized: boolean = false;
+
     public constructor(private readonly _rootStore: RootStore) {}
+
+    public initialize = async () => {
+        if (this.initialized) {
+            return;
+        }
+
+        try {
+            if (this.getAccessToken()) {
+                await this.fetchUserProfile();
+            }
+        } catch (error) {
+            this._logger.error("Failed to initialize", error);
+        } finally {
+            this.setInitialized(true);
+        }
+    };
 
     public signIn = async (email: string, password: string) => {
         try {
@@ -25,9 +44,7 @@ export class AuthStore {
 
             this._logger.info("Sign in success, fetching user...");
 
-            const user = await this._rootStore.carpoolClient.getProfile();
-
-            this.setUser(user);
+            await this.fetchUserProfile();
         } catch (error) {
             this._logger.error("Failed to sign in", error);
             throw error;
@@ -46,16 +63,13 @@ export class AuthStore {
 
             this._logger.info("Sign up success, fetching user...");
 
-            const user = await this._rootStore.carpoolClient.getProfile();
-
-            this.setUser(user);
+            await this.fetchUserProfile();
         } catch (error) {
             this._logger.error("Failed to sign up", error);
             throw error;
         }
     };
 
-    @action
     public signOut = () => {
         this.clearUser();
         this.clearAccessToken();
@@ -63,6 +77,12 @@ export class AuthStore {
 
     public getAccessToken = (): string => {
         return localStorage.getItem("ACCESS_TOKEN") || "";
+    };
+
+    private fetchUserProfile = async () => {
+        const user = await this._rootStore.carpoolClient.getProfile();
+
+        this.setUser(user);
     };
 
     //#region Actions
@@ -75,6 +95,11 @@ export class AuthStore {
     @action
     private clearUser = () => {
         this.user = null;
+    };
+
+    @action
+    private setInitialized = (initialized: boolean) => {
+        this.initialized = initialized;
     };
 
     private setAccessToken = (token: string) => {

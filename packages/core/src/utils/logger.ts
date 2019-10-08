@@ -12,7 +12,9 @@ export class Logger {
     }
 
     public log(logLevel: LogLevel, message: string, params?: any): void {
-        console.log(
+        const logMessage = logLevel === LogLevel.Error ? console.error : console.log;
+
+        logMessage(
             `${this.getNow()} [${this._source}] [${logLevel}] ${message}`,
             params !== undefined ? params : ""
         );
