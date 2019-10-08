@@ -4,6 +4,8 @@ import { UserDto } from "@carpool/client";
 import { RootStore } from "./root.store";
 import { Logger } from "../utils";
 
+const ACCESS_TOKEN_KEY = "carpool.auth.access_token";
+
 export class AuthStore {
     private readonly _logger = new Logger("AuthStore");
 
@@ -31,7 +33,9 @@ export class AuthStore {
                 await this.fetchUserProfile();
             }
         } catch (error) {
-            this._logger.error("Failed to initialize", error);
+            // TODO: on error, it's likely the access token expired - will want to use the refresh token (when implemented) to request a new one
+            this._logger.warn("Failed to initialize", error);
+            this.clearAccessToken();
         } finally {
             this.setInitialized(true);
         }
@@ -76,15 +80,27 @@ export class AuthStore {
         this.clearAccessToken();
     };
 
-    public getAccessToken = (): string => {
-        return localStorage.getItem("ACCESS_TOKEN") || "";
-    };
-
     private fetchUserProfile = async () => {
         const user = await this._rootStore.carpoolClient.getProfile();
 
         this.setUser(user);
     };
+
+    //#region Access token
+
+    public getAccessToken = (): string => {
+        return localStorage.getItem(ACCESS_TOKEN_KEY) || "";
+    };
+
+    private setAccessToken = (token: string) => {
+        localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    };
+
+    private clearAccessToken = () => {
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+    };
+
+    //#endregion
 
     //#region Actions
 
@@ -101,14 +117,6 @@ export class AuthStore {
     @action
     private setInitialized = (initialized: boolean) => {
         this.initialized = initialized;
-    };
-
-    private setAccessToken = (token: string) => {
-        localStorage.setItem("ACCESS_TOKEN", token);
-    };
-
-    private clearAccessToken = () => {
-        localStorage.removeItem("ACCESS_TOKEN");
     };
 
     //#endregion
