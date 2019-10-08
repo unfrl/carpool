@@ -44,10 +44,7 @@ export class App extends Component<IAppProps, IAppState> {
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <AppHeader
-                    isAuthenticated={authStore.isAuthenticated}
-                    onAuthClick={this.handleAuthClick}
-                />
+                <AppHeader user={authStore.user} onAuthClick={this.handleAuthClick} />
                 <Content>
                     <Switch>
                         <Route path="/" exact={true} component={HomeScreen} />
