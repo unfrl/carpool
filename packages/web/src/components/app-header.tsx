@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { AppBar, Toolbar, Typography, Button, makeStyles } from "@material-ui/core";
 
-import { NavLink } from "./";
+import { UserDto } from "@carpool/core";
+import { NavLink, UserMenu } from "./";
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -12,24 +13,33 @@ const useStyles = makeStyles(theme => ({
 
 export interface IAppHeaderProps {
     title?: string;
-    isAuthenticated: boolean;
+    user: UserDto | null;
     onAuthClick: () => void;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
     const classes = useStyles();
+    const { title, user, onAuthClick } = props;
 
     return (
         <AppBar position="fixed">
             <Toolbar className={classes.toolbar}>
                 <NavLink to="/">
                     <Typography variant="h6">
-                        <span role="img">🚙</span> Carpool
+                        <span role="img">🚙</span> {title || "Carpool"}
                     </Typography>
                 </NavLink>
-                <Button color="inherit" onClick={props.onAuthClick}>
-                    {props.isAuthenticated ? "Sign out" : "Sign in"}
-                </Button>
+                {user ? (
+                    <UserMenu
+                        displayName={user.displayName}
+                        email={user.email}
+                        onSignOut={props.onAuthClick}
+                    />
+                ) : (
+                    <Button color="inherit" onClick={props.onAuthClick}>
+                        Sign in
+                    </Button>
+                )}
             </Toolbar>
         </AppBar>
     );
