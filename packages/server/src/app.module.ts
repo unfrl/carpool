@@ -6,8 +6,19 @@ import * as IORedis from "ioredis";
 import { MailerModule } from "@nest-modules/mailer";
 
 import { authConfig, dbConfig, redisConfig, emailConfig } from "./config";
-import { AuthController, CarpoolController, UserController } from "./controllers";
-import { AuthService, UserService, JwtStrategy, CarpoolService } from "./services";
+import {
+    AuthController,
+    CarpoolController,
+    UserController,
+    VerificationController,
+} from "./controllers";
+import {
+    AuthService,
+    UserService,
+    JwtStrategy,
+    CarpoolService,
+    VerificationService,
+} from "./services";
 import { Carpool, Driver, Passenger, User } from "./entities";
 
 @Module({
@@ -25,11 +36,12 @@ import { Carpool, Driver, Passenger, User } from "./entities";
             useFactory: () => emailConfig,
         }),
     ],
-    controllers: [AuthController, CarpoolController, UserController],
+    controllers: [AuthController, CarpoolController, UserController, VerificationController],
     providers: [
         AuthService,
         UserService,
         CarpoolService,
+        VerificationService,
         JwtStrategy,
         {
             provide: IORedis,

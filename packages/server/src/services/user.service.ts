@@ -3,16 +3,18 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { User } from "../entities";
+import { VerificationService } from "./verification.service";
 
 @Injectable()
 export class UserService {
     public constructor(
         @InjectRepository(User)
-        private readonly userRepository: Repository<User>
+        private readonly _userRepository: Repository<User>,
+        private readonly _verificationService: VerificationService
     ) {}
 
     public async findOneByEmail(email: string): Promise<User> {
-        return await this.userRepository.findOne({ where: { email } });
+        return await this._userRepository.findOne({ where: { email } });
     }
 
     public async createUser(
@@ -24,11 +26,13 @@ export class UserService {
             throw new Error("Email and hashed password are required");
         }
 
-        const user = new User();
+        let user = new User();
         user.email = email;
         user.password = hashedPassword;
         user.displayName = displayName;
 
-        return await this.userRepository.save(user);
+        user = await this._userRepository.save(user);
+        this._verificationService.sendVerificationEmail(user);
+        return user;
     }
 }
