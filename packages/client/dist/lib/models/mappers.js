@@ -35,22 +35,6 @@ exports.SignUpDto = {
         }
     }
 };
-exports.AuthDto = {
-    serializedName: "AuthDto",
-    type: {
-        name: "Composite",
-        className: "AuthDto",
-        modelProperties: {
-            accessToken: {
-                required: true,
-                serializedName: "access_token",
-                type: {
-                    name: "String"
-                }
-            }
-        }
-    }
-};
 exports.SignInDto = {
     serializedName: "SignInDto",
     type: {
@@ -67,6 +51,22 @@ exports.SignInDto = {
             password: {
                 required: true,
                 serializedName: "password",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.AuthDto = {
+    serializedName: "AuthDto",
+    type: {
+        name: "Composite",
+        className: "AuthDto",
+        modelProperties: {
+            accessToken: {
+                required: true,
+                serializedName: "access_token",
                 type: {
                     name: "String"
                 }
@@ -264,6 +264,29 @@ exports.UserDto = {
             displayName: {
                 required: true,
                 serializedName: "displayName",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.VerificationDto = {
+    serializedName: "VerificationDto",
+    type: {
+        name: "Composite",
+        className: "VerificationDto",
+        modelProperties: {
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String"
+                }
+            },
+            token: {
+                required: true,
+                serializedName: "token",
                 type: {
                     name: "String"
                 }

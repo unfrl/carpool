@@ -18,7 +18,8 @@ export class AuthService {
         const { email, password } = signInDto;
 
         const user = await this._userService.findOneByEmail(email);
-        if (!user) {
+        if (!user || !user.isVerified) {
+            // TODO: if user isn't verified, include message in response that verification is pending
             throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
         }
 
@@ -27,15 +28,10 @@ export class AuthService {
             throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
         }
 
-        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
-        const token = this._jwtService.sign(tokenPayload);
-
-        return {
-            access_token: token,
-        };
+        return this.generateAccessToken(user.id);
     }
 
-    public async signUp(signUpDto: SignUpDto): Promise<AuthDto> {
+    public async signUp(signUpDto: SignUpDto): Promise<void> {
         const { email, password, displayName } = signUpDto;
 
         const existing = await this._userService.findOneByEmail(email);
@@ -44,9 +40,11 @@ export class AuthService {
         }
 
         const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
-        const user = await this._userService.createUser(email, hashed, displayName);
+        await this._userService.createUser(email, hashed, displayName);
+    }
 
-        const tokenPayload: JwtPayload = { sub: user.id, type: "user" };
+    public async generateAccessToken(userId: string): Promise<AuthDto> {
+        const tokenPayload: JwtPayload = { sub: userId };
         const token = this._jwtService.sign(tokenPayload);
 
         return {

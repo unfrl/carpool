@@ -27,7 +27,6 @@ export class CarpoolController {
         description: "Retrieve a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Get(":id")
     public async get(@Param("id") id: string): Promise<Carpool> {
         return await this._carpoolService.get(id);
@@ -39,7 +38,6 @@ export class CarpoolController {
         description: "Update a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Put(":id")
     public async update(@Param("id") id: string, @Body() carpoolDto: CarpoolDto): Promise<Carpool> {
         return await this._carpoolService.update(id, carpoolDto);
@@ -51,7 +49,6 @@ export class CarpoolController {
         description: "Delete a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
-    @ApiResponse({ status: HttpStatus.NOT_FOUND })
     @Delete(":id")
     public async delete(@Param("id") id: string): Promise<Carpool> {
         return await this._carpoolService.delete(id);

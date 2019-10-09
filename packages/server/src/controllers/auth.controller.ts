@@ -14,10 +14,9 @@ export class AuthController {
         title: "Sign up",
         description: "Sign up a new user",
     })
-    @ApiResponse({ status: HttpStatus.CREATED, type: AuthDto })
-    @ApiResponse({ status: HttpStatus.BAD_REQUEST })
+    @ApiResponse({ status: HttpStatus.CREATED })
     @Post("signup")
-    public async signUp(@Body() signUpDto: SignUpDto): Promise<AuthDto> {
+    public async signUp(@Body() signUpDto: SignUpDto): Promise<void> {
         return await this._authService.signUp(signUpDto);
     }
 
@@ -27,7 +26,6 @@ export class AuthController {
         description: "Sign in an existing user",
     })
     @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
-    @ApiResponse({ status: HttpStatus.BAD_REQUEST })
     @HttpCode(200)
     @Post("signin")
     public async signIn(@Body() signInDto: SignInDto): Promise<AuthDto> {

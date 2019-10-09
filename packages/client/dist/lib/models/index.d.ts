@@ -20,16 +20,6 @@ export interface SignUpDto {
 }
 /**
  * @interface
- * An interface representing AuthDto.
- */
-export interface AuthDto {
-    /**
-     * @member {string} accessToken
-     */
-    accessToken: string;
-}
-/**
- * @interface
  * An interface representing SignInDto.
  */
 export interface SignInDto {
@@ -41,6 +31,16 @@ export interface SignInDto {
      * @member {string} password
      */
     password: string;
+}
+/**
+ * @interface
+ * An interface representing AuthDto.
+ */
+export interface AuthDto {
+    /**
+     * @member {string} accessToken
+     */
+    accessToken: string;
 }
 /**
  * @interface
@@ -156,6 +156,20 @@ export interface UserDto {
 }
 /**
  * @interface
+ * An interface representing VerificationDto.
+ */
+export interface VerificationDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} token
+     */
+    token: string;
+}
+/**
+ * @interface
  * An interface representing CarpoolOptions.
  * @extends ServiceClientOptions
  */
@@ -165,24 +179,6 @@ export interface CarpoolOptions extends ServiceClientOptions {
      */
     baseUri?: string;
 }
-/**
- * Contains response data for the signUp operation.
- */
-export declare type SignUpResponse = AuthDto & {
-    /**
-     * The underlying HTTP response.
-     */
-    _response: msRest.HttpResponse & {
-        /**
-         * The response body as text (string format)
-         */
-        bodyAsText: string;
-        /**
-         * The response body as parsed JSON or XML
-         */
-        parsedBody: AuthDto;
-    };
-};
 /**
  * Contains response data for the signIn operation.
  */
@@ -289,5 +285,23 @@ export declare type GetProfileResponse = UserDto & {
          * The response body as parsed JSON or XML
          */
         parsedBody: UserDto;
+    };
+};
+/**
+ * Contains response data for the verifyUser operation.
+ */
+export declare type VerifyUserResponse = AuthDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
     };
 };

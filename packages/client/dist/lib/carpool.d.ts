@@ -14,20 +14,20 @@ declare class Carpool extends CarpoolContext {
      * @summary Sign up
      * @param signUpDto
      * @param [options] The optional parameters
-     * @returns Promise<Models.SignUpResponse>
+     * @returns Promise<msRest.RestResponse>
      */
-    signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase): Promise<Models.SignUpResponse>;
+    signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
     /**
      * @param signUpDto
      * @param callback The callback
      */
-    signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<void>): void;
     /**
      * @param signUpDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
     /**
      * Sign in an existing user
      * @summary Sign in
@@ -142,5 +142,24 @@ declare class Carpool extends CarpoolContext {
      * @param callback The callback
      */
     getProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    /**
+     * Verify a User using the token emailed to them during account creation
+     * @summary Verify User
+     * @param verificationDto
+     * @param [options] The optional parameters
+     * @returns Promise<Models.VerifyUserResponse>
+     */
+    verifyUser(verificationDto: Models.VerificationDto, options?: msRest.RequestOptionsBase): Promise<Models.VerifyUserResponse>;
+    /**
+     * @param verificationDto
+     * @param callback The callback
+     */
+    verifyUser(verificationDto: Models.VerificationDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    /**
+     * @param verificationDto
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    verifyUser(verificationDto: Models.VerificationDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
 }
 export { Carpool, CarpoolContext, Models as CarpoolModels, Mappers as CarpoolMappers };
