@@ -115,7 +115,7 @@ var signUpOperationSpec = {
         mapper: __assign(__assign({}, Mappers.SignUpDto), { required: true })
     },
     responses: {
-        201: {},
+        200: {},
         default: {}
     },
     serializer: serializer

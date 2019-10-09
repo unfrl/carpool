@@ -266,7 +266,7 @@ const signUpOperationSpec: msRest.OperationSpec = {
     }
   },
   responses: {
-    201: {},
+    200: {},
     default: {}
   },
   serializer

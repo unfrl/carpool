@@ -14,7 +14,8 @@ export class AuthController {
         title: "Sign up",
         description: "Sign up a new user",
     })
-    @ApiResponse({ status: HttpStatus.CREATED })
+    @ApiResponse({ status: HttpStatus.OK })
+    @HttpCode(200)
     @Post("signup")
     public async signUp(@Body() signUpDto: SignUpDto): Promise<void> {
         return await this._authService.signUp(signUpDto);
