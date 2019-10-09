@@ -7,7 +7,7 @@ import teal from "@material-ui/core/colors/teal";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 
 import { AuthStore } from "@carpool/core";
-import { AppHeader, UserDialog, Content } from "./components";
+import { AppHeader, UserDialog, Content, DocumentHead } from "./components";
 import { HomeScreen, CreateCarpoolScreen, CarpoolScreen, NotFoundScreen } from "./screens";
 
 const theme = createMuiTheme({
@@ -48,6 +48,7 @@ export class App extends Component<IAppProps, IAppState> {
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline />
+                <DocumentHead />
                 <AppHeader
                     initialized={authStore.initialized}
                     user={authStore.user}

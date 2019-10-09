@@ -1,5 +1,6 @@
 export * from "./app-dialog";
 export * from "./app-header";
+export * from "./document-head";
 export * from "./content";
 export * from "./driver-list";
 export * from "./user-dialog";

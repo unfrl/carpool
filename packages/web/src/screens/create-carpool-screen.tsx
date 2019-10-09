@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Card, Typography, makeStyles } from "@material-ui/core";
 
-import { CarpoolForm } from "../components";
+import { CarpoolForm, DocumentHead } from "../components";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,6 +24,7 @@ export const CreateCarpoolScreen: FunctionComponent = () => {
 
     return (
         <Card className={classes.root}>
+            <DocumentHead screenTitle="Create a Carpool" />
             <Typography variant="h6" align="center">
                 Create a Carpool
             </Typography>
