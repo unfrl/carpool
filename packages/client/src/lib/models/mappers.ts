@@ -38,23 +38,6 @@ export const SignUpDto: msRest.CompositeMapper = {
   }
 };
 
-export const AuthDto: msRest.CompositeMapper = {
-  serializedName: "AuthDto",
-  type: {
-    name: "Composite",
-    className: "AuthDto",
-    modelProperties: {
-      accessToken: {
-        required: true,
-        serializedName: "access_token",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const SignInDto: msRest.CompositeMapper = {
   serializedName: "SignInDto",
   type: {
@@ -71,6 +54,23 @@ export const SignInDto: msRest.CompositeMapper = {
       password: {
         required: true,
         serializedName: "password",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AuthDto: msRest.CompositeMapper = {
+  serializedName: "AuthDto",
+  type: {
+    name: "Composite",
+    className: "AuthDto",
+    modelProperties: {
+      accessToken: {
+        required: true,
+        serializedName: "access_token",
         type: {
           name: "String"
         }
@@ -272,6 +272,30 @@ export const UserDto: msRest.CompositeMapper = {
       displayName: {
         required: true,
         serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const VerificationDto: msRest.CompositeMapper = {
+  serializedName: "VerificationDto",
+  type: {
+    name: "Composite",
+    className: "VerificationDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      token: {
+        required: true,
+        serializedName: "token",
         type: {
           name: "String"
         }

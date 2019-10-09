@@ -58,19 +58,26 @@ export class AuthStore {
 
     public signUp = async (email: string, password: string, displayName: string) => {
         try {
-            const result = await this._rootStore.carpoolClient.signUp({
+            await this._rootStore.carpoolClient.signUp({
                 email,
                 password,
                 displayName,
             });
+        } catch (error) {
+            this._logger.error("Failed to sign up", error);
+            throw error;
+        }
+    };
+
+    public verifyUser = async (email: string, token: string) => {
+        try {
+            const result = await this._rootStore.carpoolClient.verifyUser({ email, token });
 
             this.setAccessToken(result.accessToken);
 
-            this._logger.info("Sign up success, fetching user...");
-
             await this.fetchUserProfile();
         } catch (error) {
-            this._logger.error("Failed to sign up", error);
+            this._logger.error("Failed to verify user", error);
             throw error;
         }
     };
@@ -89,6 +96,8 @@ export class AuthStore {
     //#region Access token
 
     public getAccessToken = (): string => {
+        // TODO: localStorage should be moved into a `storageService` and provided as a dependency to the root store
+        // this way we're not reliant on the browser implementation (e.g. for mobile we'll want to use AsyncStorage)
         return localStorage.getItem(ACCESS_TOKEN_KEY) || "";
     };
 

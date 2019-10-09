@@ -25,28 +25,28 @@ class Carpool extends CarpoolContext {
    * @summary Sign up
    * @param signUpDto
    * @param [options] The optional parameters
-   * @returns Promise<Models.SignUpResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase): Promise<Models.SignUpResponse>;
+  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param signUpDto
    * @param callback The callback
    */
-  signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  signUp(signUpDto: Models.SignUpDto, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param signUpDto
    * @param options The optional parameters
    * @param callback The callback
    */
-  signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
-  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.SignUpResponse> {
+  signUp(signUpDto: Models.SignUpDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  signUp(signUpDto: Models.SignUpDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.sendOperationRequest(
       {
         signUpDto,
         options
       },
       signUpOperationSpec,
-      callback) as Promise<Models.SignUpResponse>;
+      callback);
   }
 
   /**
@@ -222,6 +222,35 @@ class Carpool extends CarpoolContext {
       getProfileOperationSpec,
       callback) as Promise<Models.GetProfileResponse>;
   }
+
+  /**
+   * Verify a User using the token emailed to them during account creation
+   * @summary Verify User
+   * @param verificationDto
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VerifyUserResponse>
+   */
+  verifyUser(verificationDto: Models.VerificationDto, options?: msRest.RequestOptionsBase): Promise<Models.VerifyUserResponse>;
+  /**
+   * @param verificationDto
+   * @param callback The callback
+   */
+  verifyUser(verificationDto: Models.VerificationDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  /**
+   * @param verificationDto
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  verifyUser(verificationDto: Models.VerificationDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  verifyUser(verificationDto: Models.VerificationDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.VerifyUserResponse> {
+    return this.sendOperationRequest(
+      {
+        verificationDto,
+        options
+      },
+      verifyUserOperationSpec,
+      callback) as Promise<Models.VerifyUserResponse>;
+  }
 }
 
 // Operation Specifications
@@ -237,10 +266,7 @@ const signUpOperationSpec: msRest.OperationSpec = {
     }
   },
   responses: {
-    201: {
-      bodyMapper: Mappers.AuthDto
-    },
-    400: {},
+    200: {},
     default: {}
   },
   serializer
@@ -260,7 +286,6 @@ const signInOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.AuthDto
     },
-    400: {},
     default: {}
   },
   serializer
@@ -295,7 +320,6 @@ const getCarpoolOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.CarpoolModel
     },
-    404: {},
     default: {}
   },
   serializer
@@ -318,7 +342,6 @@ const updateCarpoolOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.CarpoolModel
     },
-    404: {},
     default: {}
   },
   serializer
@@ -334,7 +357,6 @@ const deleteCarpoolOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.CarpoolModel
     },
-    404: {},
     default: {}
   },
   serializer
@@ -346,6 +368,25 @@ const getProfileOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.UserDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const verifyUserOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "api/v1/verification",
+  requestBody: {
+    parameterPath: "verificationDto",
+    mapper: {
+      ...Mappers.VerificationDto,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.AuthDto
     },
     default: {}
   },

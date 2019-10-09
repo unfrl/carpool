@@ -2,7 +2,7 @@ import { HandlebarsAdapter } from "@nest-modules/mailer";
 
 const transport =
     process.env.EMAIL_CONNECTION_URL ||
-    "smtps://angrykoolaidman@gmail.com:<password>@smtp.gmail.com"; //More info on connection urls here: https://nodemailer.com/smtp/ and https://nodemailer.com/usage/using-gmail/
+    "smtps://andrew.c.noyes@gmail.com:<password>@smtp.gmail.com"; //More info on connection urls here: https://nodemailer.com/smtp/ and https://nodemailer.com/usage/using-gmail/
 export const emailConfig: any = {
     transport,
     defaults: {

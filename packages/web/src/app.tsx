@@ -8,7 +8,13 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 
 import { AuthStore } from "@carpool/core";
 import { AppHeader, UserDialog, Content, DocumentHead } from "./components";
-import { HomeScreen, CreateCarpoolScreen, CarpoolScreen, NotFoundScreen } from "./screens";
+import {
+    HomeScreen,
+    CreateCarpoolScreen,
+    CarpoolScreen,
+    NotFoundScreen,
+    VerificationScreen,
+} from "./screens";
 
 const theme = createMuiTheme({
     palette: {
@@ -63,6 +69,11 @@ export class App extends Component<IAppProps, IAppState> {
                             component={CreateCarpoolScreen}
                         />
                         <Route path="/carpool/:id" exact={true} component={CarpoolScreen} />
+                        <Route
+                            path="/verification"
+                            exact={true}
+                            render={_routeProps => <VerificationScreen authStore={authStore} />}
+                        />
                         <Route component={NotFoundScreen} />
                     </Switch>
                 </Content>
@@ -107,9 +118,5 @@ export class App extends Component<IAppProps, IAppState> {
     private handleSignUp = async (email: string, password: string, displayName: string) => {
         const { authStore } = this.injectedProps;
         await authStore.signUp(email, password, displayName);
-
-        if (authStore.isAuthenticated) {
-            this.handleCloseDialog();
-        }
     };
 }

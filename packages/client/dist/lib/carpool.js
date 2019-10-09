@@ -96,6 +96,12 @@ var Carpool = /** @class */ (function (_super) {
             options: options
         }, getProfileOperationSpec, callback);
     };
+    Carpool.prototype.verifyUser = function (verificationDto, options, callback) {
+        return this.sendOperationRequest({
+            verificationDto: verificationDto,
+            options: options
+        }, verifyUserOperationSpec, callback);
+    };
     return Carpool;
 }(carpoolContext_1.CarpoolContext));
 exports.Carpool = Carpool;
@@ -109,10 +115,7 @@ var signUpOperationSpec = {
         mapper: __assign(__assign({}, Mappers.SignUpDto), { required: true })
     },
     responses: {
-        201: {
-            bodyMapper: Mappers.AuthDto
-        },
-        400: {},
+        200: {},
         default: {}
     },
     serializer: serializer
@@ -128,7 +131,6 @@ var signInOperationSpec = {
         200: {
             bodyMapper: Mappers.AuthDto
         },
-        400: {},
         default: {}
     },
     serializer: serializer
@@ -158,7 +160,6 @@ var getCarpoolOperationSpec = {
         200: {
             bodyMapper: Mappers.CarpoolModel
         },
-        404: {},
         default: {}
     },
     serializer: serializer
@@ -177,7 +178,6 @@ var updateCarpoolOperationSpec = {
         200: {
             bodyMapper: Mappers.CarpoolModel
         },
-        404: {},
         default: {}
     },
     serializer: serializer
@@ -192,7 +192,6 @@ var deleteCarpoolOperationSpec = {
         200: {
             bodyMapper: Mappers.CarpoolModel
         },
-        404: {},
         default: {}
     },
     serializer: serializer
@@ -203,6 +202,21 @@ var getProfileOperationSpec = {
     responses: {
         200: {
             bodyMapper: Mappers.UserDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var verifyUserOperationSpec = {
+    httpMethod: "PUT",
+    path: "api/v1/verification",
+    requestBody: {
+        parameterPath: "verificationDto",
+        mapper: __assign(__assign({}, Mappers.VerificationDto), { required: true })
+    },
+    responses: {
+        200: {
+            bodyMapper: Mappers.AuthDto
         },
         default: {}
     },
