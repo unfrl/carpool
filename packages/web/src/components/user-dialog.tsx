@@ -20,8 +20,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IUserDialogProps {
+    /**
+     * Callback requesting the dialog to be closed.
+     */
     onClose: () => void;
+    /**
+     * Callback requesting to sign in.
+     */
     onSignIn: (email: string, password: string) => void;
+    /**
+     * Callback requesting to sign up.
+     */
     onSignUp: (email: string, password: string, displayName: string) => void;
 }
 

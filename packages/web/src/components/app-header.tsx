@@ -19,9 +19,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IAppHeaderProps {
+    /**
+     * Optional title of the header, defaults to Carpool.
+     */
     title?: string;
+    /**
+     * If true, displays a loading indicator in place of the sign in/user menu.
+     */
     initialized: boolean;
+    /**
+     * If provided, displays the user's avatar menu.
+     */
     user: UserDto | null;
+    /**
+     * Sign in/out depending on current auth state.
+     */
     onAuthClick: () => void;
 }
 

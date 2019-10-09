@@ -30,8 +30,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IUserMenuProps {
+    /**
+     * User's display name.
+     */
     displayName: string;
+    /**
+     * User's email address.
+     */
     email: string;
+    /**
+     * Callback requesting to be signed out.
+     */
     onSignOut: () => void;
 }
 
