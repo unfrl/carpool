@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export interface IUserMenuProps {
     /**
-     * User's display name,
+     * User's display name.
      */
     displayName: string;
     /**
