@@ -21,6 +21,10 @@ export class User extends BaseEntity {
     @ApiResponseModelProperty()
     public email: string;
 
+    @Column({ default: false })
+    @ApiResponseModelProperty()
+    public isVerified: boolean;
+
     @Column()
     @ApiResponseModelProperty()
     public password: string;
