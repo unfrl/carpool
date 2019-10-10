@@ -44,40 +44,6 @@ export interface AuthDto {
 }
 /**
  * @interface
- * An interface representing Address.
- */
-export interface Address {
-    /**
-     * @member {string} name
-     */
-    name: string;
-    /**
-     * @member {string} administrative
-     */
-    administrative: string;
-    /**
-     * @member {string} county
-     */
-    county: string;
-    /**
-     * @member {string} city
-     */
-    city: string;
-    /**
-     * @member {string} country
-     */
-    country: string;
-    /**
-     * @member {string} countryCode
-     */
-    countryCode: string;
-    /**
-     * @member {string} postcode
-     */
-    postcode: string;
-}
-/**
- * @interface
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
@@ -86,9 +52,9 @@ export interface CarpoolDto {
      */
     carpoolName: string;
     /**
-     * @member {Address} destination
+     * @member {string} destination
      */
-    destination: Address;
+    destination: string;
     /**
      * @member {any} dateTime
      */
@@ -116,9 +82,9 @@ export interface CarpoolModel {
      */
     name: string;
     /**
-     * @member {Address} destination
+     * @member {string} destination
      */
-    destination: Address;
+    destination: string;
     /**
      * @member {any} dateTime
      */

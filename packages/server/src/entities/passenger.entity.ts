@@ -4,7 +4,6 @@ import { ApiResponseModelProperty } from "@nestjs/swagger";
 import { BaseEntity } from "./base.entity";
 import { User } from "./user.entity";
 import { Driver } from "./driver.entity";
-import { Address } from "../interfaces";
 
 @Entity()
 export class Passenger extends BaseEntity {
@@ -29,9 +28,9 @@ export class Passenger extends BaseEntity {
     @ApiResponseModelProperty()
     public phoneNumber: string;
 
-    @Column("jsonb")
+    @Column()
     @ApiResponseModelProperty()
-    public address: Address;
+    public address: string;
 
     @Column()
     @ApiResponseModelProperty()
