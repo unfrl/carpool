@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
-import { NavLink } from ".";
+import { NavLink, AddressSearch } from ".";
 
 const useStyles = makeStyles(theme => ({
     actions: {
@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 export interface ICarpoolFormState {
     name: string;
     date: Date;
+    address: string;
 }
 
 export const CarpoolForm: FunctionComponent = () => {
@@ -27,9 +28,10 @@ export const CarpoolForm: FunctionComponent = () => {
     const [state, setState] = useState<ICarpoolFormState>({
         name: "",
         date: new Date(),
+        address: "",
     });
 
-    const canSave = Boolean(state.name && state.date);
+    const canSave = Boolean(state.name && state.date && state.address);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -44,6 +46,10 @@ export const CarpoolForm: FunctionComponent = () => {
                 variant="outlined"
                 margin="normal"
                 fullWidth={true}
+            />
+            <AddressSearch
+                value={state.address}
+                onChange={val => setState({ ...state, address: val })}
             />
             <DateTimePicker
                 value={state.date}
