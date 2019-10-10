@@ -1,8 +1,8 @@
 import { observable, action, computed } from "mobx";
 
 import { UserDto } from "@carpool/client";
-import { RootStore } from "./root.store";
 import { Logger } from "../utils";
+import { RootStore } from "./root.store";
 
 const ACCESS_TOKEN_KEY = "carpool.auth.access_token";
 
@@ -22,6 +22,10 @@ export class AuthStore {
 
     public constructor(private readonly _rootStore: RootStore) {}
 
+    /**
+     * Initializes the auth store by checking localstorage for an existing access token.
+     * If found, then the user's session will be reestablished.
+     */
     public initialize = async () => {
         if (this.initialized) {
             return;
@@ -69,6 +73,10 @@ export class AuthStore {
         }
     };
 
+    /**
+     * Verifies a new user using the provided email and token.
+     * If successful, then the user will be logged in.
+     */
     public verifyUser = async (email: string, token: string) => {
         try {
             const result = await this._rootStore.carpoolClient.verifyUser({ email, token });
