@@ -1,4 +1,4 @@
-import { observable, action, computed, when } from "mobx";
+import { observable, action, computed } from "mobx";
 
 import { Carpool, CarpoolDto } from "@carpool/client";
 import { Logger } from "../utils";
