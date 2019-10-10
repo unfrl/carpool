@@ -79,65 +79,6 @@ export const AuthDto: msRest.CompositeMapper = {
   }
 };
 
-export const Address: msRest.CompositeMapper = {
-  serializedName: "Address",
-  type: {
-    name: "Composite",
-    className: "Address",
-    modelProperties: {
-      name: {
-        required: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      administrative: {
-        required: true,
-        serializedName: "administrative",
-        type: {
-          name: "String"
-        }
-      },
-      county: {
-        required: true,
-        serializedName: "county",
-        type: {
-          name: "String"
-        }
-      },
-      city: {
-        required: true,
-        serializedName: "city",
-        type: {
-          name: "String"
-        }
-      },
-      country: {
-        required: true,
-        serializedName: "country",
-        type: {
-          name: "String"
-        }
-      },
-      countryCode: {
-        required: true,
-        serializedName: "countryCode",
-        type: {
-          name: "String"
-        }
-      },
-      postcode: {
-        required: true,
-        serializedName: "postcode",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const CarpoolDto: msRest.CompositeMapper = {
   serializedName: "CarpoolDto",
   type: {
@@ -155,8 +96,7 @@ export const CarpoolDto: msRest.CompositeMapper = {
         required: true,
         serializedName: "destination",
         type: {
-          name: "Composite",
-          className: "Address"
+          name: "String"
         }
       },
       dateTime: {
@@ -170,11 +110,11 @@ export const CarpoolDto: msRest.CompositeMapper = {
   }
 };
 
-export const CarpoolModel: msRest.CompositeMapper = {
+export const Carpool: msRest.CompositeMapper = {
   serializedName: "Carpool",
   type: {
     name: "Composite",
-    className: "CarpoolModel",
+    className: "Carpool",
     modelProperties: {
       id: {
         required: true,
@@ -208,8 +148,7 @@ export const CarpoolModel: msRest.CompositeMapper = {
         required: true,
         serializedName: "destination",
         type: {
-          name: "Composite",
-          className: "Address"
+          name: "String"
         }
       },
       dateTime: {

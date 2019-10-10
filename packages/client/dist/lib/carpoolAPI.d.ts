@@ -1,14 +1,14 @@
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "./models";
 import * as Mappers from "./models/mappers";
-import { CarpoolContext } from "./carpoolContext";
-declare class Carpool extends CarpoolContext {
+import { CarpoolAPIContext } from "./carpoolAPIContext";
+declare class CarpoolAPI extends CarpoolAPIContext {
     /**
-     * Initializes a new instance of the Carpool class.
+     * Initializes a new instance of the CarpoolAPI class.
      * @param credentials Subscription credentials which uniquely identify client subscription.
      * @param [options] The parameter options
      */
-    constructor(credentials: msRest.ServiceClientCredentials, options?: Models.CarpoolOptions);
+    constructor(credentials: msRest.ServiceClientCredentials, options?: Models.CarpoolAPIOptions);
     /**
      * Sign up a new user
      * @summary Sign up
@@ -59,13 +59,13 @@ declare class Carpool extends CarpoolContext {
      * @param carpoolDto
      * @param callback The callback
      */
-    createCarpool(carpoolDto: Models.CarpoolDto, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    createCarpool(carpoolDto: Models.CarpoolDto, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * @param carpoolDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    createCarpool(carpoolDto: Models.CarpoolDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    createCarpool(carpoolDto: Models.CarpoolDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * Retrieve a Carpool
      * @summary Get Carpool
@@ -78,13 +78,13 @@ declare class Carpool extends CarpoolContext {
      * @param id
      * @param callback The callback
      */
-    getCarpool(id: string, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    getCarpool(id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    getCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    getCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * Update a Carpool
      * @summary Update Carpool
@@ -99,14 +99,14 @@ declare class Carpool extends CarpoolContext {
      * @param id
      * @param callback The callback
      */
-    updateCarpool(carpoolDto: Models.CarpoolDto, id: string, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    updateCarpool(carpoolDto: Models.CarpoolDto, id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * @param carpoolDto
      * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    updateCarpool(carpoolDto: Models.CarpoolDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    updateCarpool(carpoolDto: Models.CarpoolDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * Delete a Carpool
      * @summary Delete Carpool
@@ -119,13 +119,13 @@ declare class Carpool extends CarpoolContext {
      * @param id
      * @param callback The callback
      */
-    deleteCarpool(id: string, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    deleteCarpool(id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolModel>): void;
+    deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
      * Gets the current user's profile
      * @summary Get user profile
@@ -162,4 +162,4 @@ declare class Carpool extends CarpoolContext {
      */
     verifyUser(verificationDto: Models.VerificationDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
 }
-export { Carpool, CarpoolContext, Models as CarpoolModels, Mappers as CarpoolMappers };
+export { CarpoolAPI, CarpoolAPIContext, Models as CarpoolAPIModels, Mappers as CarpoolAPIMappers };

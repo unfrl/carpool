@@ -10,15 +10,15 @@ import * as Models from "./models";
 const packageName = "";
 const packageVersion = "";
 
-export class CarpoolContext extends msRest.ServiceClient {
+export class CarpoolAPIContext extends msRest.ServiceClient {
   credentials: msRest.ServiceClientCredentials;
 
   /**
-   * Initializes a new instance of the CarpoolContext class.
+   * Initializes a new instance of the CarpoolAPIContext class.
    * @param credentials Subscription credentials which uniquely identify client subscription.
    * @param [options] The parameter options
    */
-  constructor(credentials: msRest.ServiceClientCredentials, options?: Models.CarpoolOptions) {
+  constructor(credentials: msRest.ServiceClientCredentials, options?: Models.CarpoolAPIOptions) {
     if (credentials === null || credentials === undefined) {
       throw new Error('\'credentials\' cannot be null.');
     }

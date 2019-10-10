@@ -74,64 +74,6 @@ exports.AuthDto = {
         }
     }
 };
-exports.Address = {
-    serializedName: "Address",
-    type: {
-        name: "Composite",
-        className: "Address",
-        modelProperties: {
-            name: {
-                required: true,
-                serializedName: "name",
-                type: {
-                    name: "String"
-                }
-            },
-            administrative: {
-                required: true,
-                serializedName: "administrative",
-                type: {
-                    name: "String"
-                }
-            },
-            county: {
-                required: true,
-                serializedName: "county",
-                type: {
-                    name: "String"
-                }
-            },
-            city: {
-                required: true,
-                serializedName: "city",
-                type: {
-                    name: "String"
-                }
-            },
-            country: {
-                required: true,
-                serializedName: "country",
-                type: {
-                    name: "String"
-                }
-            },
-            countryCode: {
-                required: true,
-                serializedName: "countryCode",
-                type: {
-                    name: "String"
-                }
-            },
-            postcode: {
-                required: true,
-                serializedName: "postcode",
-                type: {
-                    name: "String"
-                }
-            }
-        }
-    }
-};
 exports.CarpoolDto = {
     serializedName: "CarpoolDto",
     type: {
@@ -149,8 +91,7 @@ exports.CarpoolDto = {
                 required: true,
                 serializedName: "destination",
                 type: {
-                    name: "Composite",
-                    className: "Address"
+                    name: "String"
                 }
             },
             dateTime: {
@@ -163,11 +104,11 @@ exports.CarpoolDto = {
         }
     }
 };
-exports.CarpoolModel = {
+exports.Carpool = {
     serializedName: "Carpool",
     type: {
         name: "Composite",
-        className: "CarpoolModel",
+        className: "Carpool",
         modelProperties: {
             id: {
                 required: true,
@@ -201,8 +142,7 @@ exports.CarpoolModel = {
                 required: true,
                 serializedName: "destination",
                 type: {
-                    name: "Composite",
-                    className: "Address"
+                    name: "String"
                 }
             },
             dateTime: {

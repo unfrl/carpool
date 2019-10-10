@@ -1,8 +1,9 @@
-import { Controller, Get, HttpStatus, Request, UseGuards } from "@nestjs/common";
 import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from "@nestjs/swagger";
+import { Controller, Get, HttpStatus, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserDto } from "../dtos";
+import { UserRequest } from "../interfaces";
 
 @ApiUseTags("User")
 @ApiBearerAuth()
@@ -16,7 +17,7 @@ export class UserController {
     @ApiResponse({ status: HttpStatus.OK, type: UserDto })
     @UseGuards(AuthGuard("jwt"))
     @Get("me")
-    public getProfile(@Request() request): UserDto {
+    public getProfile(@Req() request: UserRequest): UserDto {
         const { id, displayName, email } = request.user;
 
         return {
