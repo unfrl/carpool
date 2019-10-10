@@ -1,3 +1,4 @@
+export * from "./address-search";
 export * from "./app-dialog";
 export * from "./app-header";
 export * from "./document-head";
