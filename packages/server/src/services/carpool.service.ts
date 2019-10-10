@@ -12,19 +12,29 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>
     ) {}
 
-    //TODO: Comment this :)
-    public async create(carpoolDto: CarpoolDto): Promise<Carpool> {
+    /**
+     * Creates a carpool and returns the new entity.
+     * @param carpoolDto - DTO to the create the carpool with
+     * @param userId - ID of the user creating the carpool
+     */
+    public async createCarpool(carpoolDto: CarpoolDto, userId: string): Promise<Carpool> {
         const { destination, carpoolName, dateTime } = carpoolDto;
 
         const carpool = new Carpool();
         carpool.name = carpoolName;
         carpool.destination = destination;
         carpool.dateTime = dateTime;
+        carpool.createdById = userId; // TODO: find a way to auto-attach these fields!
+        carpool.updatedById = userId;
 
         return await this._carpoolRepository.save(carpool);
     }
 
-    public async get(id: string): Promise<Carpool> {
+    /**
+     * Finds a carpool by its ID.
+     * @param id - ID of the carpool
+     */
+    public async findOneById(id: string): Promise<Carpool> {
         const carpool = await this._carpoolRepository.findOne(id);
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
@@ -33,7 +43,17 @@ export class CarpoolService {
         return carpool;
     }
 
-    public async update(id: string, carpoolDto: CarpoolDto): Promise<Carpool> {
+    /**
+     * Updates an existing carpool and returns the updated entity.
+     * @param id - ID of the carpool to update
+     * @param carpoolDto - DTO to update the carpool with
+     * @param userId - ID of the user updating the carpool
+     */
+    public async updateCarpool(
+        id: string,
+        carpoolDto: CarpoolDto,
+        userId: string
+    ): Promise<Carpool> {
         const carpool = await this._carpoolRepository.findOne(id);
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
@@ -44,12 +64,16 @@ export class CarpoolService {
         carpool.name = carpoolName;
         carpool.destination = destination;
         carpool.dateTime = dateTime;
+        carpool.updatedById = userId;
 
         return await this._carpoolRepository.save(carpool);
     }
 
-    //TODO: Comment this :)
-    public async delete(id: string): Promise<Carpool> {
+    /**
+     * Deletes a carpool by its ID and returns the deleted entity.
+     * @param id - ID of the carpool to delete.
+     */
+    public async deleteCarpool(id: string): Promise<Carpool> {
         const carpool = await this._carpoolRepository.findOne(id);
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
