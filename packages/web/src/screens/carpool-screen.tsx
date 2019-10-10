@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 
 import { CarpoolStore } from "@carpool/core";
-import { CarpoolDetails, DriverList } from "../components";
+import { CarpoolDetails, DriverList, DocumentHead } from "../components";
 
 const useStyles = makeStyles(theme => ({
     progress: {
@@ -51,6 +51,10 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = props => {
 
     return (
         <div>
+            <DocumentHead
+                screenTitle={name}
+                description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
+            />
             <CarpoolDetails name={name} destination={destination} date={dateTime} />
             <DriverList />
         </div>

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { IconButton, Icon, Card, CardHeader, makeStyles } from "@material-ui/core";
+import { IconButton, Icon, Card, CardHeader, Typography, makeStyles } from "@material-ui/core";
+import moment from "moment";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,7 +31,14 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
         <Card className={classes.root}>
             <CardHeader
                 title={name}
-                subheader={`${destination} - ${new Date(date).toLocaleString()}`}
+                subheader={
+                    <div>
+                        <Typography>{destination}</Typography>
+                        <Typography>
+                            {moment(new Date(date)).format("dddd, MMMM Do YYYY, h:mm a")}
+                        </Typography>
+                    </div>
+                }
                 action={
                     <IconButton title="Edit">
                         <Icon>edit</Icon>
