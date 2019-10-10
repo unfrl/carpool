@@ -1,8 +1,9 @@
 import { NestFactory } from "@nestjs/core";
-import { ValidationPipe } from "@nestjs/common";
+import { ValidationPipe, INestApplication, INestExpressApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
 import * as fs from "fs";
+import { RateLimiterMemory } from "rate-limiter-flexible";
 
 const PORT = process.env.PORT || 1337;
 
@@ -43,6 +44,30 @@ async function bootstrap() {
     // Configure CORS
     app.enableCors(corsOptions);
 
+    registerRateLimiters(app);
+
     await app.listen(PORT);
 }
+
+function registerRateLimiters(app: INestApplication & INestExpressApplication) {
+    const opts = {
+        points: 45, // 45 points
+        duration: 60, // Per minute
+    };
+
+    const rateLimiter = new RateLimiterMemory(opts);
+    const rateLimiterMiddleware = (req, res, next) => {
+        rateLimiter
+            .consume(req.ip)
+            .then(() => {
+                next();
+            })
+            .catch(_ => {
+                res.status(429).send("Too Many Requests");
+            });
+    };
+
+    app.use(rateLimiterMiddleware);
+}
+
 bootstrap();
