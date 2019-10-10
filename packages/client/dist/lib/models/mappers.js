@@ -104,11 +104,11 @@ exports.CarpoolDto = {
         }
     }
 };
-exports.CarpoolModel = {
+exports.Carpool = {
     serializedName: "Carpool",
     type: {
         name: "Composite",
-        className: "CarpoolModel",
+        className: "Carpool",
         modelProperties: {
             id: {
                 required: true,

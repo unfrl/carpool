@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 
-import { CarpoolModel, CarpoolDto } from "@carpool/client";
+import { Carpool, CarpoolDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -8,7 +8,7 @@ export class CarpoolStore {
     private readonly _logger = new Logger("CarpoolStore");
 
     @observable
-    public carpools: CarpoolModel[] = [];
+    public carpools: Carpool[] = [];
 
     @observable
     public creating: boolean = false;
@@ -18,7 +18,7 @@ export class CarpoolStore {
     /**
      * Creates a new carpool and returns the model if successful.
      */
-    public createCarpool = async (carpoolDto: CarpoolDto): Promise<CarpoolModel> => {
+    public createCarpool = async (carpoolDto: CarpoolDto): Promise<Carpool> => {
         try {
             this.setCreating(true);
 
@@ -38,7 +38,7 @@ export class CarpoolStore {
     //#region Actions
 
     @action
-    private addCarpool = (carpool: CarpoolModel) => {
+    private addCarpool = (carpool: Carpool) => {
         this.carpools.push(carpool);
     };
 

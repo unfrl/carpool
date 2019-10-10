@@ -74,9 +74,9 @@ export interface CarpoolDto {
 
 /**
  * @interface
- * An interface representing CarpoolModel.
+ * An interface representing Carpool.
  */
-export interface CarpoolModel {
+export interface Carpool {
   /**
    * @member {string} id
    */
@@ -151,10 +151,10 @@ export interface VerificationDto {
 
 /**
  * @interface
- * An interface representing CarpoolOptions.
+ * An interface representing CarpoolAPIOptions.
  * @extends ServiceClientOptions
  */
-export interface CarpoolOptions extends ServiceClientOptions {
+export interface CarpoolAPIOptions extends ServiceClientOptions {
   /**
    * @member {string} [baseUri]
    */
@@ -183,7 +183,7 @@ export type SignInResponse = AuthDto & {
 /**
  * Contains response data for the createCarpool operation.
  */
-export type CreateCarpoolResponse = CarpoolModel & {
+export type CreateCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -195,14 +195,14 @@ export type CreateCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the getCarpool operation.
  */
-export type GetCarpoolResponse = CarpoolModel & {
+export type GetCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -214,14 +214,14 @@ export type GetCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the updateCarpool operation.
  */
-export type UpdateCarpoolResponse = CarpoolModel & {
+export type UpdateCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -233,14 +233,14 @@ export type UpdateCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the deleteCarpool operation.
  */
-export type DeleteCarpoolResponse = CarpoolModel & {
+export type DeleteCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -252,7 +252,7 @@ export type DeleteCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 

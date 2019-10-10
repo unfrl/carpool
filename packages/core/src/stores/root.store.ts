@@ -1,11 +1,11 @@
-import { Carpool } from "@carpool/client";
+import { CarpoolAPI } from "@carpool/client";
 import { AuthStore } from "./auth.store";
 import { CarpoolStore } from "./carpool.store";
 import { apiConfig } from "../config";
 
 export class RootStore {
     // api
-    public readonly carpoolClient: Carpool;
+    public readonly carpoolClient: CarpoolAPI;
 
     // stores
     public readonly authStore: AuthStore;
@@ -15,7 +15,7 @@ export class RootStore {
         this.authStore = new AuthStore(this);
         this.carpoolStore = new CarpoolStore(this);
 
-        this.carpoolClient = new Carpool(
+        this.carpoolClient = new CarpoolAPI(
             {
                 signRequest: async resource => {
                     const accessToken = this.authStore.getAccessToken();

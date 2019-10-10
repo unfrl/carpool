@@ -110,11 +110,11 @@ export const CarpoolDto: msRest.CompositeMapper = {
   }
 };
 
-export const CarpoolModel: msRest.CompositeMapper = {
+export const Carpool: msRest.CompositeMapper = {
   serializedName: "Carpool",
   type: {
     name: "Composite",
-    className: "CarpoolModel",
+    className: "Carpool",
     modelProperties: {
       id: {
         required: true,

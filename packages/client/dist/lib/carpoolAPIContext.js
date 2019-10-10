@@ -28,14 +28,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var msRest = __importStar(require("@azure/ms-rest-js"));
 var packageName = "";
 var packageVersion = "";
-var CarpoolContext = /** @class */ (function (_super) {
-    __extends(CarpoolContext, _super);
+var CarpoolAPIContext = /** @class */ (function (_super) {
+    __extends(CarpoolAPIContext, _super);
     /**
-     * Initializes a new instance of the CarpoolContext class.
+     * Initializes a new instance of the CarpoolAPIContext class.
      * @param credentials Subscription credentials which uniquely identify client subscription.
      * @param [options] The parameter options
      */
-    function CarpoolContext(credentials, options) {
+    function CarpoolAPIContext(credentials, options) {
         var _this = this;
         if (credentials === null || credentials === undefined) {
             throw new Error('\'credentials\' cannot be null.');
@@ -53,7 +53,7 @@ var CarpoolContext = /** @class */ (function (_super) {
         _this.credentials = credentials;
         return _this;
     }
-    return CarpoolContext;
+    return CarpoolAPIContext;
 }(msRest.ServiceClient));
-exports.CarpoolContext = CarpoolContext;
-//# sourceMappingURL=carpoolContext.js.map
+exports.CarpoolAPIContext = CarpoolAPIContext;
+//# sourceMappingURL=carpoolAPIContext.js.map
