@@ -46,10 +46,13 @@ export const CarpoolForm: FunctionComponent = () => {
                 variant="outlined"
                 margin="normal"
                 fullWidth={true}
+                required={true}
+                autoFocus={true}
             />
             <AddressSearch
                 value={state.address}
                 onChange={val => setState({ ...state, address: val })}
+                required={true}
             />
             <DateTimePicker
                 value={state.date}

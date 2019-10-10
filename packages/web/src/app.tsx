@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, RouteComponentProps } from "react-router";
 import { observer, inject } from "mobx-react";
-import { CssBaseline, createMuiTheme } from "@material-ui/core";
+import { CssBaseline, CircularProgress, createMuiTheme } from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import teal from "@material-ui/core/colors/teal";
 import deepPurple from "@material-ui/core/colors/deepPurple";
@@ -60,23 +60,30 @@ export class App extends Component<IAppProps, IAppState> {
                     user={authStore.user}
                     onAuthClick={this.handleAuthClick}
                 />
-                <Content>
-                    <Switch>
-                        <Route path="/" exact={true} component={HomeScreen} />
-                        <Route
-                            path="/create-carpool"
-                            exact={true}
-                            component={CreateCarpoolScreen}
-                        />
-                        <Route path="/carpool/:id" exact={true} component={CarpoolScreen} />
-                        <Route
-                            path="/verification"
-                            exact={true}
-                            render={_routeProps => <VerificationScreen authStore={authStore} />}
-                        />
-                        <Route component={NotFoundScreen} />
-                    </Switch>
-                </Content>
+                {authStore.initialized && (
+                    <Content>
+                        <Switch>
+                            <Route path="/" exact={true} component={HomeScreen} />
+                            <Route
+                                path="/create-carpool"
+                                exact={true}
+                                render={_routeProps => (
+                                    <CreateCarpoolScreen
+                                        isAuthenticated={authStore.isAuthenticated}
+                                        onSignIn={this.handleAuthClick}
+                                    />
+                                )}
+                            />
+                            <Route path="/carpool/:id" exact={true} component={CarpoolScreen} />
+                            <Route
+                                path="/verification"
+                                exact={true}
+                                render={_routeProps => <VerificationScreen authStore={authStore} />}
+                            />
+                            <Route component={NotFoundScreen} />
+                        </Switch>
+                    </Content>
+                )}
                 {this.state.showUserDialog && (
                     <UserDialog
                         onClose={this.handleCloseDialog}
