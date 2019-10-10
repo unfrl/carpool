@@ -12,3 +12,4 @@ This is the monorepo for the server and web carpool projects. It is setup using 
 
 -   The `client` project contains the auto-generated API client. Do not modify any code inside the lib directory -- files in this directory are overwritten each time the client is generated.
 -   The `core` project is the centralized application logic for the web (and eventually mobile) apps. It contains state management (mobx stores), biz/app logic, and exposes the models/endpoints of the API client.
+-   There is a server specific [README.md](./packages/server/README.md)

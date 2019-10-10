@@ -9,12 +9,12 @@ const password = process.env.DB_PASSWORD || "local";
 const database = process.env.DB_NAME || "carpool";
 const entities = ["src/**/**.entity{.ts,.js}"];
 const synchronize = isDevelopment;
-const url = process.env.DATABASE_URL;
 
 export const dbConfig: any = isProduction
     ? {
           type,
-          url,
+          host,
+          port,
           synchronize,
           entities,
       }
