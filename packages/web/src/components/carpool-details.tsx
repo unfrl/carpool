@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { IconButton, Icon, Card, CardHeader } from "@material-ui/core";
+import { IconButton, Icon, Card, CardHeader, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginBottom: theme.spacing(2),
+    },
+}));
 
 export interface ICarpoolDetailsProps {
     /**
@@ -17,10 +23,11 @@ export interface ICarpoolDetailsProps {
 }
 
 export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => {
+    const classes = useStyles();
     const { name, destination, date } = props;
 
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardHeader
                 title={name}
                 subheader={`${destination} - ${new Date(date).toLocaleString()}`}

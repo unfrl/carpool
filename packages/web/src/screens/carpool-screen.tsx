@@ -1,25 +1,57 @@
-import React, { FunctionComponent } from "react";
-import { makeStyles } from "@material-ui/core";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { Redirect } from "react-router";
+import { CircularProgress, makeStyles } from "@material-ui/core";
 
+import { CarpoolStore } from "@carpool/core";
 import { CarpoolDetails, DriverList } from "../components";
 
 const useStyles = makeStyles(theme => ({
-    spacer: {
-        marginTop: theme.spacing(2),
+    progress: {
+        display: "flex",
+        margin: "auto",
     },
 }));
 
-export const CarpoolScreen: FunctionComponent = () => {
+export interface ICarpoolScreenProps extends RouteComponentProps {
+    carpoolStore: CarpoolStore;
+}
+
+export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = props => {
     const classes = useStyles();
+    const { match, carpoolStore } = props;
+    const { id } = match.params as { id: string };
+    const { selectedCarpoolId, selectedCarpool, loading } = carpoolStore;
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+        const selectId = async (id: string) => {
+            await carpoolStore.selectCarpool(id);
+            setReady(true);
+        };
+
+        if (id !== selectedCarpoolId) {
+            selectId(id);
+        }
+
+        return () => {
+            carpoolStore.clearCarpool();
+        };
+    }, [id]);
+
+    if (loading || !ready) {
+        return <CircularProgress className={classes.progress} />;
+    }
+
+    if (!selectedCarpool) {
+        return <Redirect to="/" />;
+    }
+
+    const { name, destination, dateTime } = selectedCarpool;
 
     return (
         <div>
-            <CarpoolDetails
-                name="Jazz Game"
-                destination="Vivint Smart Home Arena"
-                date={new Date()}
-            />
-            <div className={classes.spacer} />
+            <CarpoolDetails name={name} destination={destination} date={dateTime} />
             <DriverList />
         </div>
     );

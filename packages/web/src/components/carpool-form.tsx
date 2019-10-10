@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
-import { NavLink, AddressSearch } from ".";
+import { NavLink, AddressSearch, LoadingButton } from ".";
 
 const useStyles = makeStyles(theme => ({
     actions: {
@@ -17,13 +17,18 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+export interface ICarpoolFormProps {
+    onCreate: (name: string, date: Date, address: string) => void;
+    creating: boolean;
+}
+
 export interface ICarpoolFormState {
     name: string;
     date: Date;
     address: string;
 }
 
-export const CarpoolForm: FunctionComponent = () => {
+export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
     const classes = useStyles();
     const [state, setState] = useState<ICarpoolFormState>({
         name: "",
@@ -31,10 +36,14 @@ export const CarpoolForm: FunctionComponent = () => {
         address: "",
     });
 
-    const canSave = Boolean(state.name && state.date && state.address);
+    const canCreate = Boolean(state.name && state.date && state.address);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (canCreate) {
+            props.onCreate(state.name, state.date, state.address);
+        }
     };
 
     return (
@@ -66,9 +75,13 @@ export const CarpoolForm: FunctionComponent = () => {
                 fullWidth={true}
             />
             <div className={classes.actions}>
-                <Button variant="contained" color="primary" type="submit" disabled={!canSave}>
-                    Create
-                </Button>
+                <LoadingButton
+                    color="primary"
+                    type="submit"
+                    disabled={!canCreate}
+                    text="Create"
+                    loading={props.creating}
+                />
                 <NavLink to="/">
                     <Button variant="text" className={classes.cancel}>
                         Cancel
