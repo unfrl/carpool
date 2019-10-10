@@ -118,6 +118,7 @@ export interface PlaceSuggestion {
 export interface IAddressSearchProps {
     value: string;
     onChange: (newValue: string) => void;
+    required?: boolean;
 }
 
 export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
@@ -164,6 +165,7 @@ export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
                 placeholder: "Search for a destination",
                 value: props.value,
                 onChange: handleChange,
+                required: props.required,
             }}
             theme={{
                 container: classes.container,
