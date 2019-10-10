@@ -293,7 +293,7 @@ const signInOperationSpec: msRest.OperationSpec = {
 
 const createCarpoolOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
-  path: "api/v1/carpool",
+  path: "api/v1/carpools",
   requestBody: {
     parameterPath: "carpoolDto",
     mapper: {
@@ -312,7 +312,7 @@ const createCarpoolOperationSpec: msRest.OperationSpec = {
 
 const getCarpoolOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "api/v1/carpool/{id}",
+  path: "api/v1/carpools/{id}",
   urlParameters: [
     Parameters.id
   ],
@@ -327,7 +327,7 @@ const getCarpoolOperationSpec: msRest.OperationSpec = {
 
 const updateCarpoolOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
-  path: "api/v1/carpool/{id}",
+  path: "api/v1/carpools/{id}",
   urlParameters: [
     Parameters.id
   ],
@@ -349,7 +349,7 @@ const updateCarpoolOperationSpec: msRest.OperationSpec = {
 
 const deleteCarpoolOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
-  path: "api/v1/carpool/{id}",
+  path: "api/v1/carpools/{id}",
   urlParameters: [
     Parameters.id
   ],
@@ -364,7 +364,7 @@ const deleteCarpoolOperationSpec: msRest.OperationSpec = {
 
 const getProfileOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "api/v1/user/me",
+  path: "api/v1/users/me",
   responses: {
     200: {
       bodyMapper: Mappers.UserDto

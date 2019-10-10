@@ -5,9 +5,9 @@ import { AuthGuard } from "@nestjs/passport";
 import { UserDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 
-@ApiUseTags("User")
+@ApiUseTags("Users")
 @ApiBearerAuth()
-@Controller("api/v1/user")
+@Controller("api/v1/users")
 export class UserController {
     @ApiOperation({
         operationId: "getProfile",

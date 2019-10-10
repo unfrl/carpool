@@ -24,9 +24,9 @@ import { CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
 import { UserRequest } from "../interfaces";
 
-@ApiUseTags("Carpool")
+@ApiUseTags("Carpools")
 @ApiBearerAuth()
-@Controller("api/v1/carpool")
+@Controller("api/v1/carpools")
 export class CarpoolController {
     public constructor(private readonly _carpoolService: CarpoolService) {}
 

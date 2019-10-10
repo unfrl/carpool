@@ -137,7 +137,7 @@ var signInOperationSpec = {
 };
 var createCarpoolOperationSpec = {
     httpMethod: "POST",
-    path: "api/v1/carpool",
+    path: "api/v1/carpools",
     requestBody: {
         parameterPath: "carpoolDto",
         mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
@@ -152,7 +152,7 @@ var createCarpoolOperationSpec = {
 };
 var getCarpoolOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -166,7 +166,7 @@ var getCarpoolOperationSpec = {
 };
 var updateCarpoolOperationSpec = {
     httpMethod: "PUT",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -184,7 +184,7 @@ var updateCarpoolOperationSpec = {
 };
 var deleteCarpoolOperationSpec = {
     httpMethod: "DELETE",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -198,7 +198,7 @@ var deleteCarpoolOperationSpec = {
 };
 var getProfileOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/user/me",
+    path: "api/v1/users/me",
     responses: {
         200: {
             bodyMapper: Mappers.UserDto

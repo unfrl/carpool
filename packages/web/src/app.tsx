@@ -77,7 +77,7 @@ export class App extends Component<IAppProps, IAppState> {
                             )}
                         />
                         <Route
-                            path="/carpool/:id"
+                            path="/carpools/:id"
                             exact={true}
                             render={routeProps => (
                                 <CarpoolScreen carpoolStore={carpoolStore} {...routeProps} />
