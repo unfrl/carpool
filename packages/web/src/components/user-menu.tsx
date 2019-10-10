@@ -83,8 +83,15 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
                     <ListItemIcon>
                         <Icon>person</Icon>
                     </ListItemIcon>
-                    Profile
+                    Your profile
                 </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <Icon>directions_car</Icon>
+                    </ListItemIcon>
+                    Your carpools
+                </MenuItem>
+                <Divider className={classes.divider} />
                 <MenuItem onClick={props.onSignOut}>
                     <ListItemIcon>
                         <Icon>exit_to_app</Icon>
