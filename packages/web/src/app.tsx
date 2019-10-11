@@ -15,6 +15,7 @@ import {
     NotFoundScreen,
     VerificationScreen,
 } from "./screens";
+import { ScreenMode } from "./screens/verification-screen";
 
 const theme = createMuiTheme({
     palette: {
@@ -78,7 +79,22 @@ export class App extends Component<IAppProps, IAppState> {
                             <Route
                                 path="/verification"
                                 exact={true}
-                                render={_routeProps => <VerificationScreen authStore={authStore} />}
+                                render={_routeProps => (
+                                    <VerificationScreen
+                                        authStore={authStore}
+                                        mode={ScreenMode.Verification}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/passwordreset"
+                                exact={true}
+                                render={_routeProps => (
+                                    <VerificationScreen
+                                        authStore={authStore}
+                                        mode={ScreenMode.PasswordReset}
+                                    />
+                                )}
                             />
                             <Route component={NotFoundScreen} />
                         </Switch>
