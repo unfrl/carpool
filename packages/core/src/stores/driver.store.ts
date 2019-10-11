@@ -1,6 +1,6 @@
 import { action, observable, reaction } from "mobx";
 
-import { DriverDto } from "@carpool/client";
+import { DriverDto, CreateDriverDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -26,6 +26,19 @@ export class DriverStore {
         );
     }
 
+    public createDriver = async (carpoolId: string, createDriverDto: CreateDriverDto) => {
+        try {
+            const driver = await this._rootStore.carpoolClient.createDriver(
+                createDriverDto,
+                carpoolId
+            );
+            this.addDriver(driver);
+        } catch (error) {
+            this._logger.error("Failed to create driver", error);
+            throw error;
+        }
+    };
+
     private loadDrivers = async (carpoolId: string) => {
         try {
             this.setLoading(true);
@@ -43,6 +56,11 @@ export class DriverStore {
     };
 
     //#region Actions
+
+    @action
+    private addDriver = (driver: DriverDto) => {
+        this.drivers.push(driver);
+    };
 
     @action
     private setDrivers = (drivers: DriverDto[]) => {

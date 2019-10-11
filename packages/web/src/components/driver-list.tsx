@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     progress: {
         display: "flex",
         margin: "auto",
+        marginTop: theme.spacing(2),
     },
     noDrivers: {
         display: "flex",

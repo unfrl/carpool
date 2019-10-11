@@ -4,8 +4,8 @@ import { Redirect } from "react-router";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 
-import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
-import { CarpoolDetails, DriverList, DocumentHead } from "../components";
+import { AuthStore, CarpoolStore, DriverStore, CreateDriverDto } from "@carpool/core";
+import { CarpoolDetails, DriverList, DocumentHead, AppDialog, DriverForm } from "../components";
 
 const useStyles = makeStyles(theme => ({
     progress: {
@@ -26,6 +26,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const { id } = match.params as { id: string };
     const { selectedCarpoolId, selectedCarpool, loading } = carpoolStore;
     const [ready, setReady] = useState(false);
+    const [showDriverForm, setShowDriverForm] = useState(false);
 
     useEffect(() => {
         const selectId = async (id: string) => {
@@ -42,8 +43,13 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         };
     }, [id]);
 
-    const handleOfferToDrive = () => {
-        // TODO
+    const handleToggleDriverForm = () => {
+        setShowDriverForm(!showDriverForm);
+    };
+
+    const handleSaveDriverForm = async (createDriverDto: CreateDriverDto) => {
+        await driverStore.createDriver(id, createDriverDto);
+        handleToggleDriverForm();
     };
 
     if (loading || !ready) {
@@ -64,11 +70,16 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             />
             <CarpoolDetails name={name} destination={destination} date={dateTime} />
             <DriverList
-                drivers={[]}
+                drivers={driverStore.drivers}
                 loading={driverStore.loading}
                 userId={authStore.user ? authStore.user.id : undefined}
-                onOfferToDrive={handleOfferToDrive}
+                onOfferToDrive={handleToggleDriverForm}
             />
+            {showDriverForm && (
+                <AppDialog title="Offer to Drive" onClose={handleToggleDriverForm} color="primary">
+                    <DriverForm onSave={handleSaveDriverForm} onCancel={handleToggleDriverForm} />
+                </AppDialog>
+            )}
         </div>
     );
 });

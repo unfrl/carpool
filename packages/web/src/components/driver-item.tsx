@@ -64,6 +64,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const { displayName, email } = driver.user;
     const remainingSeats = 4; // TODO: eventually needs to be car.capacity - passengers.length
     const canJoin = remainingSeats > 0;
+    const initials = getInitials(displayName);
 
     const handleToggleExpanded = () => {
         setExpanded(!expanded);
@@ -77,7 +78,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
         <div className={classes.root}>
             <div className={classes.card}>
                 <div className={classes.driver} onClick={handleToggleExpanded}>
-                    <Avatar className={classes.avatar}>{getInitials(name)}</Avatar>
+                    <Avatar className={classes.avatar}>{initials}</Avatar>
                     <div>
                         <Typography>{displayName}</Typography>
                         <Typography variant="subtitle2" color="textPrimary">
