@@ -1,15 +1,7 @@
 import React, { FunctionComponent } from "react";
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    Button,
-    CircularProgress,
-    makeStyles,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
 
-import { UserDto } from "@carpool/core";
-import { NavLink, UserMenu } from "./";
+import { NavLink } from "./";
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -24,44 +16,23 @@ export interface IAppHeaderProps {
      */
     title?: string;
     /**
-     * If true, displays a loading indicator in place of the sign in/user menu.
+     * Child node to render on the far right of the header.
      */
-    initialized: boolean;
-    /**
-     * If provided, displays the user's avatar menu.
-     */
-    user: UserDto | null;
-    /**
-     * Sign in/out depending on current auth state.
-     */
-    onAuthClick: () => void;
+    rightOption: React.ReactNode;
 }
 
 export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
     const classes = useStyles();
-    const { title, user, onAuthClick, initialized } = props;
 
     return (
         <AppBar position="fixed">
             <Toolbar className={classes.toolbar}>
                 <NavLink to="/">
                     <Typography variant="h6">
-                        <span role="img">🚙</span> {title || "Carpool"}
+                        <span role="img">🚙</span> {props.title || "Carpool"}
                     </Typography>
                 </NavLink>
-                {!initialized ? (
-                    <CircularProgress color="secondary" />
-                ) : user ? (
-                    <UserMenu
-                        displayName={user.displayName}
-                        email={user.email}
-                        onSignOut={onAuthClick}
-                    />
-                ) : (
-                    <Button color="inherit" onClick={onAuthClick}>
-                        Sign in
-                    </Button>
-                )}
+                {props.rightOption}
             </Toolbar>
         </AppBar>
     );
