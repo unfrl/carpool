@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
+import { TextField, Button, Typography, makeStyles, Link, Dialog } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import { AppDialog } from "./";
 
@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
     },
+    link: {
+        cursor: "pointer",
+    },
 }));
 
 export interface IUserDialogProps {
@@ -40,29 +43,53 @@ export interface IUserDialogProps {
      * Callback requesting to sign up.
      */
     onSignUp: (email: string, password: string, displayName: string) => Promise<void>;
+
+    /**
+     * Callback requesting a password email to be sent.
+     */
+    onRequestPasswordReset: (email: string) => Promise<void>;
 }
 
 export interface IUserDialogState {
-    signUp: boolean;
-    signUpSuccessful: boolean;
+    mode: DialogMode;
     email: string;
     password: string;
     displayName: string;
     error?: string;
 }
 
+enum DialogMode {
+    signIn,
+    signUp,
+    signUpSuccess,
+    passwordReset,
+    passwordResetSuccess,
+}
+
 export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
     const classes = useStyles();
     const [state, setState] = useState<IUserDialogState>({
-        signUp: false,
-        signUpSuccessful: false,
+        mode: DialogMode.signIn,
         email: "",
         password: "",
         displayName: "",
     });
 
+    const handleToggleForgotPassword = () => {
+        setState({
+            ...state,
+            mode:
+                state.mode === DialogMode.passwordReset
+                    ? DialogMode.signIn
+                    : DialogMode.passwordReset,
+        });
+    };
+
     const handleToggleSignUp = () => {
-        setState({ ...state, signUp: !state.signUp });
+        setState({
+            ...state,
+            mode: state.mode === DialogMode.signUp ? DialogMode.signIn : DialogMode.signUp,
+        });
     };
 
     const clearError = () => {
@@ -75,29 +102,98 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         clearError();
 
         try {
-            if (state.signUp) {
-                await props.onSignUp(state.email, state.password, state.displayName);
-
-                setState({ ...state, signUpSuccessful: true });
-            } else {
-                await props.onSignIn(state.email, state.password);
+            switch (state.mode) {
+                case DialogMode.signUp:
+                    await props.onSignUp(state.email, state.password, state.displayName);
+                    setState({ ...state, mode: DialogMode.signUpSuccess });
+                    break;
+                case DialogMode.signIn:
+                    await props.onSignIn(state.email, state.password);
+                    break;
+                case DialogMode.passwordReset:
+                    await props.onRequestPasswordReset(state.email);
+                    setState({ ...state, mode: DialogMode.passwordResetSuccess });
+                    break;
             }
         } catch (error) {
             setState({ ...state, error: error.message });
         }
     };
 
-    return (
-        <AppDialog title={state.signUp ? "Sign Up" : "Sign In"} onClose={props.onClose}>
+    const getDialogTitle = () => {
+        switch (state.mode) {
+            case DialogMode.signIn:
+                return "Sign In";
+            case DialogMode.signUp:
+            case DialogMode.signUpSuccess:
+                return "Sign Up";
+            case DialogMode.passwordReset:
+            case DialogMode.passwordResetSuccess:
+                return "Password Reset";
+        }
+    };
+
+    const renderForm = () => {
+        switch (state.mode) {
+            case DialogMode.signIn:
+            case DialogMode.signUp:
+            case DialogMode.signUpSuccess:
+                return renderSignInUpForm();
+            case DialogMode.passwordReset:
+            case DialogMode.passwordResetSuccess:
+                return renderPasswordResetForm();
+        }
+    };
+
+    const renderPasswordResetForm = () => {
+        return (
             <form onSubmit={handleSubmit} className={classes.form}>
-                {state.signUpSuccessful ? (
+                {state.mode === DialogMode.passwordResetSuccess ? (
+                    <Typography variant="h6" align="center">
+                        Password reset email sent!
+                    </Typography>
+                ) : (
+                    <React.Fragment>
+                        <TextField
+                            label="Email address"
+                            required={true}
+                            type="email"
+                            value={state.email}
+                            onChange={e => setState({ ...state, email: e.target.value })}
+                            variant="outlined"
+                            margin="normal"
+                        />
+                        {state.error && (
+                            <Typography className={classes.error}>{state.error}</Typography>
+                        )}
+                    </React.Fragment>
+                )}
+                <div className={classes.actions}>
+                    {state.mode === DialogMode.passwordResetSuccess ? (
+                        <Button variant="contained" color="primary" onClick={props.onClose}>
+                            Close
+                        </Button>
+                    ) : (
+                        <Button variant="contained" color="primary" type="submit">
+                            Request Password Reset
+                        </Button>
+                    )}
+                </div>
+            </form>
+        );
+    };
+
+    const renderSignInUpForm = () => {
+        return (
+            <form onSubmit={handleSubmit} className={classes.form}>
+                {state.mode === DialogMode.signUpSuccess ? (
                     <Typography variant="h6" align="center">
                         Sign up successful! <br /> Please click the verification link sent to your
                         email.
                     </Typography>
                 ) : (
                     <React.Fragment>
-                        {state.signUp && (
+                        {state.mode === DialogMode.signUp && (
                             <TextField
                                 label="Display name"
                                 required={true}
@@ -125,30 +221,43 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                             variant="outlined"
                             margin="normal"
                         />
+                        {state.mode === DialogMode.signIn && (
+                            <Link onClick={handleToggleForgotPassword} className={classes.link}>
+                                Forgot your password?
+                            </Link>
+                        )}
                     </React.Fragment>
                 )}
                 {state.error && <Typography className={classes.error}>{state.error}</Typography>}
                 <div className={classes.actions}>
-                    {state.signUpSuccessful ? (
+                    {state.mode === DialogMode.signUpSuccess ? (
                         <Button variant="contained" color="primary" onClick={props.onClose}>
                             Close
                         </Button>
                     ) : (
                         <React.Fragment>
                             <Button variant="contained" color="primary" type="submit">
-                                {state.signUp ? "Sign up" : "Sign in"}
+                                {state.mode === DialogMode.signUp ? "Sign up" : "Sign in"}
                             </Button>
                             <Button
                                 variant="text"
                                 className={classes.account}
                                 onClick={handleToggleSignUp}
                             >
-                                {state.signUp ? "Existing account" : "Create account"}
+                                {state.mode === DialogMode.signUp
+                                    ? "Existing account"
+                                    : "Create account"}
                             </Button>
                         </React.Fragment>
                     )}
                 </div>
             </form>
+        );
+    };
+
+    return (
+        <AppDialog title={getDialogTitle()} onClose={props.onClose}>
+            {renderForm()}
         </AppDialog>
     );
 };

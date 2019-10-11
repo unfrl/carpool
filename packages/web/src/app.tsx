@@ -89,6 +89,7 @@ export class App extends Component<IAppProps, IAppState> {
                         onClose={this.handleCloseDialog}
                         onSignIn={this.handleSignIn}
                         onSignUp={this.handleSignUp}
+                        onRequestPasswordReset={this.handleRequestPasswordReset}
                     />
                 )}
             </ThemeProvider>
@@ -120,6 +121,10 @@ export class App extends Component<IAppProps, IAppState> {
         if (authStore.isAuthenticated) {
             this.handleCloseDialog();
         }
+    };
+
+    private handleRequestPasswordReset = async (email: string) => {
+        console.log(`Password reset requested for: ${email}`);
     };
 
     private handleSignUp = async (email: string, password: string, displayName: string) => {
