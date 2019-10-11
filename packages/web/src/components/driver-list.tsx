@@ -45,13 +45,14 @@ export interface IDriverListProps {
 export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
     const classes = useStyles();
     const { drivers, userId, loading, onOfferToDrive } = props;
+    const hasDrivers = drivers.length > 0;
 
     const renderDrivers = () => {
         if (loading) {
             return <CircularProgress className={classes.progress} />;
         }
 
-        if (!drivers.length) {
+        if (!hasDrivers) {
             return (
                 <div className={classes.noDrivers}>
                     <Typography variant="h5">No drivers yet. Be first!</Typography>
@@ -84,12 +85,14 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
 
     return (
         <div className={classes.root}>
-            <div className={classes.header}>
-                <Typography variant="h5">Drivers</Typography>
-                <Button color="primary" onClick={onOfferToDrive}>
-                    Offer to Drive
-                </Button>
-            </div>
+            {hasDrivers && (
+                <div className={classes.header}>
+                    <Typography variant="h5">Drivers</Typography>
+                    <Button color="primary" onClick={onOfferToDrive}>
+                        Offer to Drive
+                    </Button>
+                </div>
+            )}
             {renderDrivers()}
         </div>
     );
