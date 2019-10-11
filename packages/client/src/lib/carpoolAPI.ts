@@ -79,6 +79,64 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Sends a password reset to the specified email if it exists
+   * @summary Request Password Reset
+   * @param passwordResetRequestDto
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param passwordResetRequestDto
+   * @param callback The callback
+   */
+  requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param passwordResetRequestDto
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.sendOperationRequest(
+      {
+        passwordResetRequestDto,
+        options
+      },
+      requestPasswordResetOperationSpec,
+      callback);
+  }
+
+  /**
+   * Reset a User's password using the token emailed to them after requesting a password reset
+   * @summary Reset User Password
+   * @param passwordResetDto
+   * @param [options] The optional parameters
+   * @returns Promise<Models.ResetPasswordResponse>
+   */
+  resetPassword(passwordResetDto: Models.PasswordResetDto, options?: msRest.RequestOptionsBase): Promise<Models.ResetPasswordResponse>;
+  /**
+   * @param passwordResetDto
+   * @param callback The callback
+   */
+  resetPassword(passwordResetDto: Models.PasswordResetDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  /**
+   * @param passwordResetDto
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  resetPassword(passwordResetDto: Models.PasswordResetDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  resetPassword(passwordResetDto: Models.PasswordResetDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.ResetPasswordResponse> {
+    return this.sendOperationRequest(
+      {
+        passwordResetDto,
+        options
+      },
+      resetPasswordOperationSpec,
+      callback) as Promise<Models.ResetPasswordResponse>;
+  }
+
+  /**
    * Create a new Carpool
    * @summary Create Carpool
    * @param carpoolDto
@@ -304,6 +362,42 @@ const signInOperationSpec: msRest.OperationSpec = {
     parameterPath: "signInDto",
     mapper: {
       ...Mappers.SignInDto,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.AuthDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const requestPasswordResetOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "api/v1/auth/requestpasswordreset",
+  requestBody: {
+    parameterPath: "passwordResetRequestDto",
+    mapper: {
+      ...Mappers.PasswordResetRequestDto,
+      required: true
+    }
+  },
+  responses: {
+    200: {},
+    default: {}
+  },
+  serializer
+};
+
+const resetPasswordOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "api/v1/auth/resetpassword",
+  requestBody: {
+    parameterPath: "passwordResetDto",
+    mapper: {
+      ...Mappers.PasswordResetDto,
       required: true
     }
   },

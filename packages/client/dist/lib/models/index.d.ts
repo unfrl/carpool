@@ -44,6 +44,34 @@ export interface AuthDto {
 }
 /**
  * @interface
+ * An interface representing PasswordResetRequestDto.
+ */
+export interface PasswordResetRequestDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+}
+/**
+ * @interface
+ * An interface representing PasswordResetDto.
+ */
+export interface PasswordResetDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} token
+     */
+    token: string;
+    /**
+     * @member {string} newPassword
+     */
+    newPassword: string;
+}
+/**
+ * @interface
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
@@ -149,6 +177,24 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
  * Contains response data for the signIn operation.
  */
 export declare type SignInResponse = AuthDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
+    };
+};
+/**
+ * Contains response data for the resetPassword operation.
+ */
+export declare type ResetPasswordResponse = AuthDto & {
     /**
      * The underlying HTTP response.
      */
