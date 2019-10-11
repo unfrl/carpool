@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Redirect } from "react-router";
 import { CircularProgress, makeStyles } from "@material-ui/core";
+import { observer } from "mobx-react";
 
 import { CarpoolStore } from "@carpool/core";
 import { CarpoolDetails, DriverList, DocumentHead } from "../components";
@@ -17,7 +18,7 @@ export interface ICarpoolScreenProps extends RouteComponentProps {
     carpoolStore: CarpoolStore;
 }
 
-export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = props => {
+export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(props => {
     const classes = useStyles();
     const { match, carpoolStore } = props;
     const { id } = match.params as { id: string };
@@ -59,4 +60,4 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = props => {
             <DriverList />
         </div>
     );
-};
+});

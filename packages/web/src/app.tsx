@@ -5,15 +5,18 @@ import { CssBaseline, createMuiTheme, CircularProgress, Button } from "@material
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import teal from "@material-ui/core/colors/teal";
 import deepPurple from "@material-ui/core/colors/deepPurple";
+import { RouterStore } from "mobx-react-router";
 
 import { AuthStore, CarpoolStore } from "@carpool/core";
 import {
     AppHeader,
+    AppDialog,
     UserDialog,
     Content,
     DocumentHead,
     UserMenu,
     UserMenuOption,
+    CarpoolList,
 } from "./components";
 import {
     HomeScreen,
@@ -35,17 +38,20 @@ export interface IAppProps extends RouteComponentProps {}
 export interface IInjectedProps extends IAppProps {
     authStore: AuthStore;
     carpoolStore: CarpoolStore;
+    routerStore: RouterStore;
 }
 
 export interface IAppState {
     showUserDialog: boolean;
+    showUserCarpools: boolean;
 }
 
-@inject("authStore", "carpoolStore")
+@inject("authStore", "carpoolStore", "routerStore")
 @observer
 export class App extends Component<IAppProps, IAppState> {
     public state: IAppState = {
         showUserDialog: false,
+        showUserCarpools: false,
     };
 
     private get injectedProps(): IInjectedProps {
@@ -101,6 +107,20 @@ export class App extends Component<IAppProps, IAppState> {
                         onSignUp={this.handleSignUp}
                     />
                 )}
+                {this.state.showUserCarpools && (
+                    <AppDialog
+                        title="Your Carpools"
+                        onClose={this.handleToggleUserCarpools}
+                        maxWidth="md"
+                        fullWidth={true}
+                        color="primary"
+                    >
+                        <CarpoolList
+                            carpools={carpoolStore.userCarpools}
+                            onNavigate={this.handleNavigateToCarpool}
+                        />
+                    </AppDialog>
+                )}
             </ThemeProvider>
         );
     }
@@ -129,10 +149,9 @@ export class App extends Component<IAppProps, IAppState> {
             case UserMenuOption.profile:
                 return;
             case UserMenuOption.carpools:
-                return;
+                return this.handleToggleUserCarpools();
             case UserMenuOption.signOut:
-                this.handleAuthClick();
-                break;
+                return this.handleAuthClick();
         }
     };
 
@@ -144,6 +163,17 @@ export class App extends Component<IAppProps, IAppState> {
         } else {
             this.handleShowDialog();
         }
+    };
+
+    /**
+     * Carpool list is a bunch of nav links, we just use this callback to close the dialog on navigation.
+     */
+    private handleNavigateToCarpool = () => {
+        this.handleToggleUserCarpools();
+    };
+
+    private handleToggleUserCarpools = () => {
+        this.setState({ showUserCarpools: !this.state.showUserCarpools });
     };
 
     private handleShowDialog = () => {

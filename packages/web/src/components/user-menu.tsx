@@ -67,6 +67,7 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
 
     const handleSelection = (option: UserMenuOption) => () => {
         props.onMenuOptionSelected(option);
+        handleClose();
     };
 
     return (
