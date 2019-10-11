@@ -47,7 +47,7 @@ export class AuthStore {
 
     public requestPasswordReset = async (email: string) => {
         try {
-            // await this._rootStore.carpoolClient.
+            await this._rootStore.carpoolClient.requestPasswordReset(email);
         } catch (error) {
             this._logger.error("Failed to request password reset", error);
             throw error;

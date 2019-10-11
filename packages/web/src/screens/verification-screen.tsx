@@ -68,11 +68,11 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         this._token = params.get("token");
         this._email = params.get("email");
 
-        if (this.props.mode !== ScreenMode.Verification) {
-            return;
-        }
         if (!this._token || !this._email) {
             this.setState({ readyForRedirect: true });
+            return;
+        }
+        if (this.props.mode !== ScreenMode.Verification) {
             return;
         }
 
@@ -81,6 +81,11 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         } finally {
             this.setState({ readyForRedirect: true });
         }
+    }
+
+    private handlePasswordReset(newPassword: string) {
+        console.log("Doin it!");
+        // await this.props.authStore.resetpassword(this._token, this._email, newPassword);
     }
 
     public render() {
@@ -133,7 +138,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
                             this.state.newPassword !== this.state.newPasswordDuplicate
                         }
                         onClick={() => {
-                            console.log("hi");
+                            this.handlePasswordReset(this.state.newPassword);
                         }}
                     >
                         Change Password

@@ -49,7 +49,7 @@ export class AuthController {
     })
     @ApiResponse({ status: HttpStatus.OK })
     @HttpCode(200)
-    @Post("request-password-reset")
+    @Post("requestpasswordreset")
     public async requestPasswordReset(
         @Body() passwordResetRequestDto: PasswordResetRequestDto
     ): Promise<void> {
@@ -63,7 +63,7 @@ export class AuthController {
             "Reset a User's password using the token emailed to them after requesting a password reset",
     })
     @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
-    @Put("reset-password")
+    @Put("resetpassword")
     public async resetPassword(@Body() passwordResetDto: PasswordResetDto): Promise<AuthDto> {
         return await this._authService.resetUserPassword(passwordResetDto);
     }

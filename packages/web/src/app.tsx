@@ -96,7 +96,22 @@ export class App extends Component<IAppProps, IAppState> {
                         <Route
                             path="/verification"
                             exact={true}
-                            render={_routeProps => <VerificationScreen authStore={authStore} />}
+                            render={_routeProps => (
+                                <VerificationScreen
+                                    authStore={authStore}
+                                    mode={ScreenMode.Verification}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/passwordreset"
+                            exact={true}
+                            render={_routeProps => (
+                                <VerificationScreen
+                                    authStore={authStore}
+                                    mode={ScreenMode.PasswordReset}
+                                />
+                            )}
                         />
                         <Route component={NotFoundScreen} />
                     </Switch>
@@ -196,6 +211,8 @@ export class App extends Component<IAppProps, IAppState> {
     };
 
     private handleRequestPasswordReset = async (email: string) => {
+        const { authStore } = this.injectedProps;
+        await authStore.requestPasswordReset(email);
         console.log(`Password reset requested for: ${email}`);
     };
 
