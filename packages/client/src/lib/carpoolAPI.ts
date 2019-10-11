@@ -79,6 +79,56 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Gets the current user's profile
+   * @summary Get user profile
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetMyProfileResponse>
+   */
+  getMyProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetMyProfileResponse>;
+  /**
+   * @param callback The callback
+   */
+  getMyProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getMyProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+  getMyProfile(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UserDto>, callback?: msRest.ServiceCallback<Models.UserDto>): Promise<Models.GetMyProfileResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      getMyProfileOperationSpec,
+      callback) as Promise<Models.GetMyProfileResponse>;
+  }
+
+  /**
+   * Gets a collection of carpools created by the current user
+   * @summary Get user's carpools
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetMyCarpoolsResponse>
+   */
+  getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+  /**
+   * @param callback The callback
+   */
+  getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  getMyCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool[]>, callback?: msRest.ServiceCallback<Models.Carpool[]>): Promise<Models.GetMyCarpoolsResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      getMyCarpoolsOperationSpec,
+      callback) as Promise<Models.GetMyCarpoolsResponse>;
+  }
+
+  /**
    * Create a new Carpool
    * @summary Create Carpool
    * @param carpoolDto
@@ -199,53 +249,65 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
-   * Gets the current user's profile
-   * @summary Get user profile
+   * Create a driver for a carpool
+   * @summary Create Driver
+   * @param driverDto
+   * @param id
    * @param [options] The optional parameters
-   * @returns Promise<Models.GetMyProfileResponse>
+   * @returns Promise<Models.CreateDriverResponse>
    */
-  getMyProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetMyProfileResponse>;
+  createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
   /**
+   * @param driverDto
+   * @param id
    * @param callback The callback
    */
-  getMyProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+  createDriver(driverDto: Models.DriverDto, id: string, callback: msRest.ServiceCallback<Models.Driver>): void;
   /**
+   * @param driverDto
+   * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMyProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
-  getMyProfile(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UserDto>, callback?: msRest.ServiceCallback<Models.UserDto>): Promise<Models.GetMyProfileResponse> {
+  createDriver(driverDto: Models.DriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver>): void;
+  createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Driver>, callback?: msRest.ServiceCallback<Models.Driver>): Promise<Models.CreateDriverResponse> {
     return this.sendOperationRequest(
       {
+        driverDto,
+        id,
         options
       },
-      getMyProfileOperationSpec,
-      callback) as Promise<Models.GetMyProfileResponse>;
+      createDriverOperationSpec,
+      callback) as Promise<Models.CreateDriverResponse>;
   }
 
   /**
-   * Gets a collection of carpools created by the current user
-   * @summary Get user's carpools
+   * Get all the drivers signed up for a carpool
+   * @summary Get Drivers
+   * @param id
    * @param [options] The optional parameters
-   * @returns Promise<Models.GetMyCarpoolsResponse>
+   * @returns Promise<Models.GetDriversResponse>
    */
-  getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+  getDrivers(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetDriversResponse>;
   /**
+   * @param id
    * @param callback The callback
    */
-  getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  getDrivers(id: string, callback: msRest.ServiceCallback<Models.Driver[]>): void;
   /**
+   * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
-  getMyCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool[]>, callback?: msRest.ServiceCallback<Models.Carpool[]>): Promise<Models.GetMyCarpoolsResponse> {
+  getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver[]>): void;
+  getDrivers(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Driver[]>, callback?: msRest.ServiceCallback<Models.Driver[]>): Promise<Models.GetDriversResponse> {
     return this.sendOperationRequest(
       {
+        id,
         options
       },
-      getMyCarpoolsOperationSpec,
-      callback) as Promise<Models.GetMyCarpoolsResponse>;
+      getDriversOperationSpec,
+      callback) as Promise<Models.GetDriversResponse>;
   }
 
   /**
@@ -310,6 +372,41 @@ const signInOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.AuthDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const getMyProfileOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/users/me",
+  responses: {
+    200: {
+      bodyMapper: Mappers.UserDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/users/me/carpools",
+  responses: {
+    200: {
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "Carpool"
+            }
+          }
+        }
+      }
     },
     default: {}
   },
@@ -387,21 +484,34 @@ const deleteCarpoolOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const getMyProfileOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "api/v1/users/me",
+const createDriverOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "api/v1/carpools/{id}/drivers",
+  urlParameters: [
+    Parameters.id
+  ],
+  requestBody: {
+    parameterPath: "driverDto",
+    mapper: {
+      ...Mappers.DriverDto,
+      required: true
+    }
+  },
   responses: {
-    200: {
-      bodyMapper: Mappers.UserDto
+    201: {
+      bodyMapper: Mappers.Driver
     },
     default: {}
   },
   serializer
 };
 
-const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
+const getDriversOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "api/v1/users/me/carpools",
+  path: "api/v1/carpools/{id}/drivers",
+  urlParameters: [
+    Parameters.id
+  ],
   responses: {
     200: {
       bodyMapper: {
@@ -411,7 +521,7 @@ const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
           element: {
             type: {
               name: "Composite",
-              className: "Carpool"
+              className: "Driver"
             }
           }
         }

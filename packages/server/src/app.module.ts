@@ -8,16 +8,18 @@ import { MailerModule } from "@nest-modules/mailer";
 import { authConfig, dbConfig, redisConfig, emailConfig } from "./config";
 import {
     AuthController,
-    CarpoolController,
     UserController,
+    CarpoolController,
+    DriverController,
     VerificationController,
 } from "./controllers";
 import {
     AuthService,
     UserService,
-    JwtStrategy,
     CarpoolService,
+    DriverService,
     VerificationService,
+    JwtStrategy,
 } from "./services";
 import { Carpool, Driver, Passenger, User } from "./entities";
 
@@ -36,11 +38,18 @@ import { Carpool, Driver, Passenger, User } from "./entities";
             useFactory: () => emailConfig,
         }),
     ],
-    controllers: [AuthController, CarpoolController, UserController, VerificationController],
+    controllers: [
+        AuthController,
+        UserController,
+        CarpoolController,
+        DriverController,
+        VerificationController,
+    ],
     providers: [
         AuthService,
         UserService,
         CarpoolService,
+        DriverService,
         VerificationService,
         JwtStrategy,
         {

@@ -48,6 +48,38 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
+     * Gets the current user's profile
+     * @summary Get user profile
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetMyProfileResponse>
+     */
+    getMyProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetMyProfileResponse>;
+    /**
+     * @param callback The callback
+     */
+    getMyProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+    /**
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getMyProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    /**
+     * Gets a collection of carpools created by the current user
+     * @summary Get user's carpools
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetMyCarpoolsResponse>
+     */
+    getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+    /**
+     * @param callback The callback
+     */
+    getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    /**
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    /**
      * Create a new Carpool
      * @summary Create Carpool
      * @param carpoolDto
@@ -127,37 +159,46 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
-     * Gets the current user's profile
-     * @summary Get user profile
+     * Create a driver for a carpool
+     * @summary Create Driver
+     * @param driverDto
+     * @param id
      * @param [options] The optional parameters
-     * @returns Promise<Models.GetMyProfileResponse>
+     * @returns Promise<Models.CreateDriverResponse>
      */
-    getMyProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetMyProfileResponse>;
+    createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
     /**
+     * @param driverDto
+     * @param id
      * @param callback The callback
      */
-    getMyProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+    createDriver(driverDto: Models.DriverDto, id: string, callback: msRest.ServiceCallback<Models.Driver>): void;
     /**
+     * @param driverDto
+     * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    getMyProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    createDriver(driverDto: Models.DriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver>): void;
     /**
-     * Gets a collection of carpools created by the current user
-     * @summary Get user's carpools
+     * Get all the drivers signed up for a carpool
+     * @summary Get Drivers
+     * @param id
      * @param [options] The optional parameters
-     * @returns Promise<Models.GetMyCarpoolsResponse>
+     * @returns Promise<Models.GetDriversResponse>
      */
-    getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+    getDrivers(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetDriversResponse>;
     /**
+     * @param id
      * @param callback The callback
      */
-    getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    getDrivers(id: string, callback: msRest.ServiceCallback<Models.Driver[]>): void;
     /**
+     * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver[]>): void;
     /**
      * Verify a User using the token emailed to them during account creation
      * @summary Verify User
