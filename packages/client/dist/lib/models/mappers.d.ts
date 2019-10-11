@@ -6,6 +6,6 @@ export declare const UserDto: msRest.CompositeMapper;
 export declare const Carpool: msRest.CompositeMapper;
 export declare const CarpoolDto: msRest.CompositeMapper;
 export declare const Car: msRest.CompositeMapper;
+export declare const CreateDriverDto: msRest.CompositeMapper;
 export declare const DriverDto: msRest.CompositeMapper;
-export declare const Driver: msRest.CompositeMapper;
 export declare const VerificationDto: msRest.CompositeMapper;

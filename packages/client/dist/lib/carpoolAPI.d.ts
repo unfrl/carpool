@@ -161,25 +161,25 @@ declare class CarpoolAPI extends CarpoolAPIContext {
     /**
      * Create a driver for a carpool
      * @summary Create Driver
-     * @param driverDto
+     * @param createDriverDto
      * @param id
      * @param [options] The optional parameters
      * @returns Promise<Models.CreateDriverResponse>
      */
-    createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
+    createDriver(createDriverDto: Models.CreateDriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
     /**
-     * @param driverDto
+     * @param createDriverDto
      * @param id
      * @param callback The callback
      */
-    createDriver(driverDto: Models.DriverDto, id: string, callback: msRest.ServiceCallback<Models.Driver>): void;
+    createDriver(createDriverDto: Models.CreateDriverDto, id: string, callback: msRest.ServiceCallback<Models.DriverDto>): void;
     /**
-     * @param driverDto
+     * @param createDriverDto
      * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    createDriver(driverDto: Models.DriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver>): void;
+    createDriver(createDriverDto: Models.CreateDriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto>): void;
     /**
      * Get all the drivers signed up for a carpool
      * @summary Get Drivers
@@ -192,13 +192,13 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      * @param id
      * @param callback The callback
      */
-    getDrivers(id: string, callback: msRest.ServiceCallback<Models.Driver[]>): void;
+    getDrivers(id: string, callback: msRest.ServiceCallback<Models.DriverDto[]>): void;
     /**
      * @param id
      * @param options The optional parameters
      * @param callback The callback
      */
-    getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver[]>): void;
+    getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto[]>): void;
     /**
      * Verify a User using the token emailed to them during account creation
      * @summary Verify User

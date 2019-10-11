@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Driver, Carpool, User } from "../entities";
-import { DriverDto } from "../dtos";
+import { CreateDriverDto, DriverDto } from "../dtos";
 
 @Injectable()
 export class DriverService {
@@ -25,13 +25,14 @@ export class DriverService {
     public async createDriver(
         carpoolId: string,
         userId: string,
-        driverDto: DriverDto
-    ): Promise<Driver> {
+        driverDto: CreateDriverDto
+    ): Promise<DriverDto> {
         if (!(await this._carpoolRepository.findOne(carpoolId))) {
             throw new NotFoundException("Carpool not found");
         }
 
-        if (!(await this._userRepository.findOne(userId))) {
+        const user = await this._userRepository.findOne(userId);
+        if (!user) {
             throw new NotFoundException("User not found");
         }
 
@@ -40,19 +41,43 @@ export class DriverService {
             throw new ConflictException("User is already signed up as a driver");
         }
 
+        const { car } = driverDto;
         const driver = new Driver();
-        driver.car = driverDto.car;
+        driver.car = car;
         driver.carpoolId = carpoolId;
         driver.userId = userId;
 
-        return await this._driverRepository.save(driver);
+        await this._driverRepository.save(driver);
+
+        return {
+            car,
+            carpoolId,
+            user: {
+                id: user.id,
+                displayName: user.displayName,
+                email: user.email,
+            },
+        };
     }
 
     /**
      * Finds a list of drivers signed up for a carpool
      * @param carpoolId - ID of the carpool to find drivers for
      */
-    public async findDriversByCarpoolId(carpoolId: string): Promise<Driver[]> {
-        return await this._driverRepository.find({ where: { carpoolId } });
+    public async findDriversByCarpoolId(carpoolId: string): Promise<DriverDto[]> {
+        const drivers = await this._driverRepository.find({
+            where: { carpoolId },
+            relations: ["user"],
+        });
+
+        return drivers.map(driver => ({
+            car: driver.car,
+            carpoolId: driver.carpoolId,
+            user: {
+                id: driver.user.id,
+                displayName: driver.user.displayName,
+                email: driver.user.email,
+            },
+        }));
     }
 }

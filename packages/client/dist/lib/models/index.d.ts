@@ -141,9 +141,9 @@ export interface Car {
 }
 /**
  * @interface
- * An interface representing DriverDto.
+ * An interface representing CreateDriverDto.
  */
-export interface DriverDto {
+export interface CreateDriverDto {
     /**
      * @member {Car} car
      */
@@ -151,25 +151,9 @@ export interface DriverDto {
 }
 /**
  * @interface
- * An interface representing Driver.
+ * An interface representing DriverDto.
  */
-export interface Driver {
-    /**
-     * @member {string} id
-     */
-    id: string;
-    /**
-     * @member {any} created
-     */
-    created: any;
-    /**
-     * @member {any} updated
-     */
-    updated: any;
-    /**
-     * @member {string} userId
-     */
-    userId: string;
+export interface DriverDto {
     /**
      * @member {Car} car
      */
@@ -178,6 +162,10 @@ export interface Driver {
      * @member {string} carpoolId
      */
     carpoolId: string;
+    /**
+     * @member {UserDto} user
+     */
+    user: UserDto;
 }
 /**
  * @interface
@@ -340,7 +328,7 @@ export declare type DeleteCarpoolResponse = Carpool & {
 /**
  * Contains response data for the createDriver operation.
  */
-export declare type CreateDriverResponse = Driver & {
+export declare type CreateDriverResponse = DriverDto & {
     /**
      * The underlying HTTP response.
      */
@@ -352,13 +340,13 @@ export declare type CreateDriverResponse = Driver & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Driver;
+        parsedBody: DriverDto;
     };
 };
 /**
  * Contains response data for the getDrivers operation.
  */
-export declare type GetDriversResponse = Array<Driver> & {
+export declare type GetDriversResponse = Array<DriverDto> & {
     /**
      * The underlying HTTP response.
      */
@@ -370,7 +358,7 @@ export declare type GetDriversResponse = Array<Driver> & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Driver[];
+        parsedBody: DriverDto[];
     };
 };
 /**

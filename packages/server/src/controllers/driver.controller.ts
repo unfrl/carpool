@@ -9,8 +9,7 @@ import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserRequest } from "../interfaces";
-import { DriverDto } from "../dtos";
-import { Driver } from "../entities";
+import { CreateDriverDto, DriverDto } from "../dtos";
 import { DriverService } from "../services";
 
 @ApiUseTags("Drivers")
@@ -24,15 +23,15 @@ export class DriverController {
         title: "Create Driver",
         description: "Create a driver for a carpool",
     })
-    @ApiCreatedResponse({ type: Driver })
+    @ApiCreatedResponse({ type: DriverDto })
     @UseGuards(AuthGuard("jwt"))
     @Post()
     public async createDriver(
         @Req() request: UserRequest,
         @Param("id") id: string,
-        @Body() driverDto: DriverDto
-    ): Promise<Driver> {
-        return await this._driverService.createDriver(id, request.user.id, driverDto);
+        @Body() createDriverDto: CreateDriverDto
+    ): Promise<DriverDto> {
+        return await this._driverService.createDriver(id, request.user.id, createDriverDto);
     }
 
     @ApiOperation({
@@ -40,9 +39,9 @@ export class DriverController {
         title: "Get Drivers",
         description: "Get all the drivers signed up for a carpool",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Driver, isArray: true })
+    @ApiResponse({ status: HttpStatus.OK, type: DriverDto, isArray: true })
     @Get()
-    public async getDrivers(@Param("id") id: string): Promise<Driver[]> {
+    public async getDrivers(@Param("id") id: string): Promise<DriverDto[]> {
         return await this._driverService.findDriversByCarpoolId(id);
     }
 }

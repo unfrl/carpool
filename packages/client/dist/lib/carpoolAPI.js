@@ -101,9 +101,9 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
-    CarpoolAPI.prototype.createDriver = function (driverDto, id, options, callback) {
+    CarpoolAPI.prototype.createDriver = function (createDriverDto, id, options, callback) {
         return this.sendOperationRequest({
-            driverDto: driverDto,
+            createDriverDto: createDriverDto,
             id: id,
             options: options
         }, createDriverOperationSpec, callback);
@@ -254,12 +254,12 @@ var createDriverOperationSpec = {
         Parameters.id
     ],
     requestBody: {
-        parameterPath: "driverDto",
-        mapper: __assign(__assign({}, Mappers.DriverDto), { required: true })
+        parameterPath: "createDriverDto",
+        mapper: __assign(__assign({}, Mappers.CreateDriverDto), { required: true })
     },
     responses: {
         201: {
-            bodyMapper: Mappers.Driver
+            bodyMapper: Mappers.DriverDto
         },
         default: {}
     },
@@ -280,7 +280,7 @@ var getDriversOperationSpec = {
                     element: {
                         type: {
                             name: "Composite",
-                            className: "Driver"
+                            className: "DriverDto"
                         }
                     }
                 }

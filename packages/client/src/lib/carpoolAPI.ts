@@ -251,29 +251,29 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Create a driver for a carpool
    * @summary Create Driver
-   * @param driverDto
+   * @param createDriverDto
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.CreateDriverResponse>
    */
-  createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
+  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
   /**
-   * @param driverDto
+   * @param createDriverDto
    * @param id
    * @param callback The callback
    */
-  createDriver(driverDto: Models.DriverDto, id: string, callback: msRest.ServiceCallback<Models.Driver>): void;
+  createDriver(createDriverDto: Models.CreateDriverDto, id: string, callback: msRest.ServiceCallback<Models.DriverDto>): void;
   /**
-   * @param driverDto
+   * @param createDriverDto
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  createDriver(driverDto: Models.DriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver>): void;
-  createDriver(driverDto: Models.DriverDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Driver>, callback?: msRest.ServiceCallback<Models.Driver>): Promise<Models.CreateDriverResponse> {
+  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto>): void;
+  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DriverDto>, callback?: msRest.ServiceCallback<Models.DriverDto>): Promise<Models.CreateDriverResponse> {
     return this.sendOperationRequest(
       {
-        driverDto,
+        createDriverDto,
         id,
         options
       },
@@ -293,14 +293,14 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @param id
    * @param callback The callback
    */
-  getDrivers(id: string, callback: msRest.ServiceCallback<Models.Driver[]>): void;
+  getDrivers(id: string, callback: msRest.ServiceCallback<Models.DriverDto[]>): void;
   /**
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Driver[]>): void;
-  getDrivers(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Driver[]>, callback?: msRest.ServiceCallback<Models.Driver[]>): Promise<Models.GetDriversResponse> {
+  getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto[]>): void;
+  getDrivers(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DriverDto[]>, callback?: msRest.ServiceCallback<Models.DriverDto[]>): Promise<Models.GetDriversResponse> {
     return this.sendOperationRequest(
       {
         id,
@@ -491,15 +491,15 @@ const createDriverOperationSpec: msRest.OperationSpec = {
     Parameters.id
   ],
   requestBody: {
-    parameterPath: "driverDto",
+    parameterPath: "createDriverDto",
     mapper: {
-      ...Mappers.DriverDto,
+      ...Mappers.CreateDriverDto,
       required: true
     }
   },
   responses: {
     201: {
-      bodyMapper: Mappers.Driver
+      bodyMapper: Mappers.DriverDto
     },
     default: {}
   },
@@ -521,7 +521,7 @@ const getDriversOperationSpec: msRest.OperationSpec = {
           element: {
             type: {
               name: "Composite",
-              className: "Driver"
+              className: "DriverDto"
             }
           }
         }

@@ -250,11 +250,11 @@ export const Car: msRest.CompositeMapper = {
   }
 };
 
-export const DriverDto: msRest.CompositeMapper = {
-  serializedName: "DriverDto",
+export const CreateDriverDto: msRest.CompositeMapper = {
+  serializedName: "CreateDriverDto",
   type: {
     name: "Composite",
-    className: "DriverDto",
+    className: "CreateDriverDto",
     modelProperties: {
       car: {
         required: true,
@@ -268,40 +268,12 @@ export const DriverDto: msRest.CompositeMapper = {
   }
 };
 
-export const Driver: msRest.CompositeMapper = {
-  serializedName: "Driver",
+export const DriverDto: msRest.CompositeMapper = {
+  serializedName: "DriverDto",
   type: {
     name: "Composite",
-    className: "Driver",
+    className: "DriverDto",
     modelProperties: {
-      id: {
-        required: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      created: {
-        required: true,
-        serializedName: "created",
-        type: {
-          name: "Object"
-        }
-      },
-      updated: {
-        required: true,
-        serializedName: "updated",
-        type: {
-          name: "Object"
-        }
-      },
-      userId: {
-        required: true,
-        serializedName: "userId",
-        type: {
-          name: "String"
-        }
-      },
       car: {
         required: true,
         serializedName: "car",
@@ -315,6 +287,14 @@ export const Driver: msRest.CompositeMapper = {
         serializedName: "carpoolId",
         type: {
           name: "String"
+        }
+      },
+      user: {
+        required: true,
+        serializedName: "user",
+        type: {
+          name: "Composite",
+          className: "UserDto"
         }
       }
     }

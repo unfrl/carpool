@@ -241,6 +241,23 @@ exports.Car = {
         }
     }
 };
+exports.CreateDriverDto = {
+    serializedName: "CreateDriverDto",
+    type: {
+        name: "Composite",
+        className: "CreateDriverDto",
+        modelProperties: {
+            car: {
+                required: true,
+                serializedName: "car",
+                type: {
+                    name: "Composite",
+                    className: "Car"
+                }
+            }
+        }
+    }
+};
 exports.DriverDto = {
     serializedName: "DriverDto",
     type: {
@@ -254,57 +271,20 @@ exports.DriverDto = {
                     name: "Composite",
                     className: "Car"
                 }
-            }
-        }
-    }
-};
-exports.Driver = {
-    serializedName: "Driver",
-    type: {
-        name: "Composite",
-        className: "Driver",
-        modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String"
-                }
-            },
-            created: {
-                required: true,
-                serializedName: "created",
-                type: {
-                    name: "Object"
-                }
-            },
-            updated: {
-                required: true,
-                serializedName: "updated",
-                type: {
-                    name: "Object"
-                }
-            },
-            userId: {
-                required: true,
-                serializedName: "userId",
-                type: {
-                    name: "String"
-                }
-            },
-            car: {
-                required: true,
-                serializedName: "car",
-                type: {
-                    name: "Composite",
-                    className: "Car"
-                }
             },
             carpoolId: {
                 required: true,
                 serializedName: "carpoolId",
                 type: {
                     name: "String"
+                }
+            },
+            user: {
+                required: true,
+                serializedName: "user",
+                type: {
+                    name: "Composite",
+                    className: "UserDto"
                 }
             }
         }

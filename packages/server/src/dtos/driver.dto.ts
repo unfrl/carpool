@@ -1,10 +1,15 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { IsDefined } from "class-validator";
+import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 import { Car } from "../interfaces";
+import { UserDto } from "./user.dto";
 
 export class DriverDto {
-    @ApiModelProperty()
-    @IsDefined()
+    @ApiResponseModelProperty()
     public readonly car: Car;
+
+    @ApiResponseModelProperty()
+    public readonly carpoolId: string;
+
+    @ApiResponseModelProperty()
+    public readonly user: UserDto;
 }
