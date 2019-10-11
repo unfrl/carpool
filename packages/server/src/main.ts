@@ -25,7 +25,7 @@ async function bootstrap() {
 
     // Configure swagger documentation
     const options = new DocumentBuilder()
-        .setTitle("Carpool")
+        .setTitle("Carpool API")
         .setDescription("Free carpool app for cool peeps and their friends")
         .setVersion("1.0")
         .addBearerAuth()

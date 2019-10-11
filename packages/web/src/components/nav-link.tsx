@@ -10,6 +10,10 @@ export interface INavLinkProps {
      * Link content.
      */
     children: any;
+    /**
+     * Optional class name to apply to link.
+     */
+    className?: string;
 }
 
 /**
@@ -17,7 +21,11 @@ export interface INavLinkProps {
  */
 export const NavLink: FunctionComponent<INavLinkProps> = props => {
     return (
-        <Link to={props.to} style={{ textDecoration: "none", color: "inherit" }}>
+        <Link
+            to={props.to}
+            style={{ textDecoration: "none", color: "inherit" }}
+            className={props.className}
+        >
             {props.children}
         </Link>
     );

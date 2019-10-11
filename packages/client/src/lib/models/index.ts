@@ -55,41 +55,6 @@ export interface AuthDto {
 
 /**
  * @interface
- * An interface representing Address.
- */
-export interface Address {
-  /**
-   * @member {string} name
-   */
-  name: string;
-  /**
-   * @member {string} administrative
-   */
-  administrative: string;
-  /**
-   * @member {string} county
-   */
-  county: string;
-  /**
-   * @member {string} city
-   */
-  city: string;
-  /**
-   * @member {string} country
-   */
-  country: string;
-  /**
-   * @member {string} countryCode
-   */
-  countryCode: string;
-  /**
-   * @member {string} postcode
-   */
-  postcode: string;
-}
-
-/**
- * @interface
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
@@ -98,9 +63,9 @@ export interface CarpoolDto {
    */
   carpoolName: string;
   /**
-   * @member {Address} destination
+   * @member {string} destination
    */
-  destination: Address;
+  destination: string;
   /**
    * @member {any} dateTime
    */
@@ -109,9 +74,9 @@ export interface CarpoolDto {
 
 /**
  * @interface
- * An interface representing CarpoolModel.
+ * An interface representing Carpool.
  */
-export interface CarpoolModel {
+export interface Carpool {
   /**
    * @member {string} id
    */
@@ -129,9 +94,9 @@ export interface CarpoolModel {
    */
   name: string;
   /**
-   * @member {Address} destination
+   * @member {string} destination
    */
-  destination: Address;
+  destination: string;
   /**
    * @member {any} dateTime
    */
@@ -186,10 +151,10 @@ export interface VerificationDto {
 
 /**
  * @interface
- * An interface representing CarpoolOptions.
+ * An interface representing CarpoolAPIOptions.
  * @extends ServiceClientOptions
  */
-export interface CarpoolOptions extends ServiceClientOptions {
+export interface CarpoolAPIOptions extends ServiceClientOptions {
   /**
    * @member {string} [baseUri]
    */
@@ -218,7 +183,7 @@ export type SignInResponse = AuthDto & {
 /**
  * Contains response data for the createCarpool operation.
  */
-export type CreateCarpoolResponse = CarpoolModel & {
+export type CreateCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -230,14 +195,14 @@ export type CreateCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the getCarpool operation.
  */
-export type GetCarpoolResponse = CarpoolModel & {
+export type GetCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -249,14 +214,14 @@ export type GetCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the updateCarpool operation.
  */
-export type UpdateCarpoolResponse = CarpoolModel & {
+export type UpdateCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -268,14 +233,14 @@ export type UpdateCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
  * Contains response data for the deleteCarpool operation.
  */
-export type DeleteCarpoolResponse = CarpoolModel & {
+export type DeleteCarpoolResponse = Carpool & {
   /**
    * The underlying HTTP response.
    */
@@ -287,14 +252,14 @@ export type DeleteCarpoolResponse = CarpoolModel & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolModel;
+      parsedBody: Carpool;
     };
 };
 
 /**
- * Contains response data for the getProfile operation.
+ * Contains response data for the getMyProfile operation.
  */
-export type GetProfileResponse = UserDto & {
+export type GetMyProfileResponse = UserDto & {
   /**
    * The underlying HTTP response.
    */
@@ -307,6 +272,25 @@ export type GetProfileResponse = UserDto & {
        * The response body as parsed JSON or XML
        */
       parsedBody: UserDto;
+    };
+};
+
+/**
+ * Contains response data for the getMyCarpools operation.
+ */
+export type GetMyCarpoolsResponse = Array<Carpool> & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Carpool[];
     };
 };
 

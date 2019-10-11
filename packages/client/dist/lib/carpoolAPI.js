@@ -38,73 +38,78 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var msRest = __importStar(require("@azure/ms-rest-js"));
 var Models = __importStar(require("./models"));
-exports.CarpoolModels = Models;
+exports.CarpoolAPIModels = Models;
 var Mappers = __importStar(require("./models/mappers"));
-exports.CarpoolMappers = Mappers;
+exports.CarpoolAPIMappers = Mappers;
 var Parameters = __importStar(require("./models/parameters"));
-var carpoolContext_1 = require("./carpoolContext");
-exports.CarpoolContext = carpoolContext_1.CarpoolContext;
-var Carpool = /** @class */ (function (_super) {
-    __extends(Carpool, _super);
+var carpoolAPIContext_1 = require("./carpoolAPIContext");
+exports.CarpoolAPIContext = carpoolAPIContext_1.CarpoolAPIContext;
+var CarpoolAPI = /** @class */ (function (_super) {
+    __extends(CarpoolAPI, _super);
     /**
-     * Initializes a new instance of the Carpool class.
+     * Initializes a new instance of the CarpoolAPI class.
      * @param credentials Subscription credentials which uniquely identify client subscription.
      * @param [options] The parameter options
      */
-    function Carpool(credentials, options) {
+    function CarpoolAPI(credentials, options) {
         return _super.call(this, credentials, options) || this;
     }
-    Carpool.prototype.signUp = function (signUpDto, options, callback) {
+    CarpoolAPI.prototype.signUp = function (signUpDto, options, callback) {
         return this.sendOperationRequest({
             signUpDto: signUpDto,
             options: options
         }, signUpOperationSpec, callback);
     };
-    Carpool.prototype.signIn = function (signInDto, options, callback) {
+    CarpoolAPI.prototype.signIn = function (signInDto, options, callback) {
         return this.sendOperationRequest({
             signInDto: signInDto,
             options: options
         }, signInOperationSpec, callback);
     };
-    Carpool.prototype.createCarpool = function (carpoolDto, options, callback) {
+    CarpoolAPI.prototype.createCarpool = function (carpoolDto, options, callback) {
         return this.sendOperationRequest({
             carpoolDto: carpoolDto,
             options: options
         }, createCarpoolOperationSpec, callback);
     };
-    Carpool.prototype.getCarpool = function (id, options, callback) {
+    CarpoolAPI.prototype.getCarpool = function (id, options, callback) {
         return this.sendOperationRequest({
             id: id,
             options: options
         }, getCarpoolOperationSpec, callback);
     };
-    Carpool.prototype.updateCarpool = function (carpoolDto, id, options, callback) {
+    CarpoolAPI.prototype.updateCarpool = function (carpoolDto, id, options, callback) {
         return this.sendOperationRequest({
             carpoolDto: carpoolDto,
             id: id,
             options: options
         }, updateCarpoolOperationSpec, callback);
     };
-    Carpool.prototype.deleteCarpool = function (id, options, callback) {
+    CarpoolAPI.prototype.deleteCarpool = function (id, options, callback) {
         return this.sendOperationRequest({
             id: id,
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
-    Carpool.prototype.getProfile = function (options, callback) {
+    CarpoolAPI.prototype.getMyProfile = function (options, callback) {
         return this.sendOperationRequest({
             options: options
-        }, getProfileOperationSpec, callback);
+        }, getMyProfileOperationSpec, callback);
     };
-    Carpool.prototype.verifyUser = function (verificationDto, options, callback) {
+    CarpoolAPI.prototype.getMyCarpools = function (options, callback) {
+        return this.sendOperationRequest({
+            options: options
+        }, getMyCarpoolsOperationSpec, callback);
+    };
+    CarpoolAPI.prototype.verifyUser = function (verificationDto, options, callback) {
         return this.sendOperationRequest({
             verificationDto: verificationDto,
             options: options
         }, verifyUserOperationSpec, callback);
     };
-    return Carpool;
-}(carpoolContext_1.CarpoolContext));
-exports.Carpool = Carpool;
+    return CarpoolAPI;
+}(carpoolAPIContext_1.CarpoolAPIContext));
+exports.CarpoolAPI = CarpoolAPI;
 // Operation Specifications
 var serializer = new msRest.Serializer(Mappers);
 var signUpOperationSpec = {
@@ -137,14 +142,14 @@ var signInOperationSpec = {
 };
 var createCarpoolOperationSpec = {
     httpMethod: "POST",
-    path: "api/v1/carpool",
+    path: "api/v1/carpools",
     requestBody: {
         parameterPath: "carpoolDto",
         mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
     },
     responses: {
         201: {
-            bodyMapper: Mappers.CarpoolModel
+            bodyMapper: Mappers.Carpool
         },
         default: {}
     },
@@ -152,13 +157,13 @@ var createCarpoolOperationSpec = {
 };
 var getCarpoolOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
     responses: {
         200: {
-            bodyMapper: Mappers.CarpoolModel
+            bodyMapper: Mappers.Carpool
         },
         default: {}
     },
@@ -166,7 +171,7 @@ var getCarpoolOperationSpec = {
 };
 var updateCarpoolOperationSpec = {
     httpMethod: "PUT",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -176,7 +181,7 @@ var updateCarpoolOperationSpec = {
     },
     responses: {
         200: {
-            bodyMapper: Mappers.CarpoolModel
+            bodyMapper: Mappers.Carpool
         },
         default: {}
     },
@@ -184,24 +189,46 @@ var updateCarpoolOperationSpec = {
 };
 var deleteCarpoolOperationSpec = {
     httpMethod: "DELETE",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
     responses: {
         200: {
-            bodyMapper: Mappers.CarpoolModel
+            bodyMapper: Mappers.Carpool
         },
         default: {}
     },
     serializer: serializer
 };
-var getProfileOperationSpec = {
+var getMyProfileOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/user/me",
+    path: "api/v1/users/me",
     responses: {
         200: {
             bodyMapper: Mappers.UserDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var getMyCarpoolsOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/users/me/carpools",
+    responses: {
+        200: {
+            bodyMapper: {
+                serializedName: "parsedResponse",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "Composite",
+                            className: "Carpool"
+                        }
+                    }
+                }
+            }
         },
         default: {}
     },
@@ -222,4 +249,4 @@ var verifyUserOperationSpec = {
     },
     serializer: serializer
 };
-//# sourceMappingURL=carpool.js.map
+//# sourceMappingURL=carpoolAPI.js.map

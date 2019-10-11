@@ -1,8 +1,6 @@
 import { ApiModelProperty } from "@nestjs/swagger";
 import { Length, IsDefined, IsDateString } from "class-validator";
 
-import { Address } from "../interfaces";
-
 export class CarpoolDto {
     @ApiModelProperty()
     @Length(5, 50)
@@ -10,7 +8,7 @@ export class CarpoolDto {
 
     @ApiModelProperty()
     @IsDefined()
-    public readonly destination: Address;
+    public readonly destination: string;
 
     @ApiModelProperty()
     @IsDateString()

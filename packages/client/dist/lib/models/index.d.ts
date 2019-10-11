@@ -44,40 +44,6 @@ export interface AuthDto {
 }
 /**
  * @interface
- * An interface representing Address.
- */
-export interface Address {
-    /**
-     * @member {string} name
-     */
-    name: string;
-    /**
-     * @member {string} administrative
-     */
-    administrative: string;
-    /**
-     * @member {string} county
-     */
-    county: string;
-    /**
-     * @member {string} city
-     */
-    city: string;
-    /**
-     * @member {string} country
-     */
-    country: string;
-    /**
-     * @member {string} countryCode
-     */
-    countryCode: string;
-    /**
-     * @member {string} postcode
-     */
-    postcode: string;
-}
-/**
- * @interface
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
@@ -86,9 +52,9 @@ export interface CarpoolDto {
      */
     carpoolName: string;
     /**
-     * @member {Address} destination
+     * @member {string} destination
      */
-    destination: Address;
+    destination: string;
     /**
      * @member {any} dateTime
      */
@@ -96,9 +62,9 @@ export interface CarpoolDto {
 }
 /**
  * @interface
- * An interface representing CarpoolModel.
+ * An interface representing Carpool.
  */
-export interface CarpoolModel {
+export interface Carpool {
     /**
      * @member {string} id
      */
@@ -116,9 +82,9 @@ export interface CarpoolModel {
      */
     name: string;
     /**
-     * @member {Address} destination
+     * @member {string} destination
      */
-    destination: Address;
+    destination: string;
     /**
      * @member {any} dateTime
      */
@@ -170,10 +136,10 @@ export interface VerificationDto {
 }
 /**
  * @interface
- * An interface representing CarpoolOptions.
+ * An interface representing CarpoolAPIOptions.
  * @extends ServiceClientOptions
  */
-export interface CarpoolOptions extends ServiceClientOptions {
+export interface CarpoolAPIOptions extends ServiceClientOptions {
     /**
      * @member {string} [baseUri]
      */
@@ -200,7 +166,7 @@ export declare type SignInResponse = AuthDto & {
 /**
  * Contains response data for the createCarpool operation.
  */
-export declare type CreateCarpoolResponse = CarpoolModel & {
+export declare type CreateCarpoolResponse = Carpool & {
     /**
      * The underlying HTTP response.
      */
@@ -212,13 +178,13 @@ export declare type CreateCarpoolResponse = CarpoolModel & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: CarpoolModel;
+        parsedBody: Carpool;
     };
 };
 /**
  * Contains response data for the getCarpool operation.
  */
-export declare type GetCarpoolResponse = CarpoolModel & {
+export declare type GetCarpoolResponse = Carpool & {
     /**
      * The underlying HTTP response.
      */
@@ -230,13 +196,13 @@ export declare type GetCarpoolResponse = CarpoolModel & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: CarpoolModel;
+        parsedBody: Carpool;
     };
 };
 /**
  * Contains response data for the updateCarpool operation.
  */
-export declare type UpdateCarpoolResponse = CarpoolModel & {
+export declare type UpdateCarpoolResponse = Carpool & {
     /**
      * The underlying HTTP response.
      */
@@ -248,13 +214,13 @@ export declare type UpdateCarpoolResponse = CarpoolModel & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: CarpoolModel;
+        parsedBody: Carpool;
     };
 };
 /**
  * Contains response data for the deleteCarpool operation.
  */
-export declare type DeleteCarpoolResponse = CarpoolModel & {
+export declare type DeleteCarpoolResponse = Carpool & {
     /**
      * The underlying HTTP response.
      */
@@ -266,13 +232,13 @@ export declare type DeleteCarpoolResponse = CarpoolModel & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: CarpoolModel;
+        parsedBody: Carpool;
     };
 };
 /**
- * Contains response data for the getProfile operation.
+ * Contains response data for the getMyProfile operation.
  */
-export declare type GetProfileResponse = UserDto & {
+export declare type GetMyProfileResponse = UserDto & {
     /**
      * The underlying HTTP response.
      */
@@ -285,6 +251,24 @@ export declare type GetProfileResponse = UserDto & {
          * The response body as parsed JSON or XML
          */
         parsedBody: UserDto;
+    };
+};
+/**
+ * Contains response data for the getMyCarpools operation.
+ */
+export declare type GetMyCarpoolsResponse = Array<Carpool> & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool[];
     };
 };
 /**

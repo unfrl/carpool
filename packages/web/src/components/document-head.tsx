@@ -27,6 +27,10 @@ export const DocumentHead: FunctionComponent<IDocumentHeadProps> = props => {
         <Helmet>
             <title>{docTitle}</title>
             <meta name="description" content={desc} />
+            <meta name="twitter:title" content={docTitle} />
+            <meta name="twitter:description" content={desc} />
+            <meta property="og:title" content={docTitle} />
+            <meta property="og:description" content={desc} />
         </Helmet>
     );
 };

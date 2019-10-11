@@ -1,12 +1,32 @@
-import { ApiOperation, ApiUseTags, ApiResponse, ApiCreatedResponse } from "@nestjs/swagger";
-import { Post, Put, HttpStatus, Body, Controller, Param, Delete, Get } from "@nestjs/common";
+import {
+    ApiOperation,
+    ApiUseTags,
+    ApiResponse,
+    ApiCreatedResponse,
+    ApiBearerAuth,
+} from "@nestjs/swagger";
+import {
+    Post,
+    Put,
+    HttpStatus,
+    Body,
+    Controller,
+    Param,
+    Delete,
+    Get,
+    UseGuards,
+    Req,
+} from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 
 import { Carpool } from "../entities";
 import { CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
+import { UserRequest } from "../interfaces";
 
-@ApiUseTags("Carpool")
-@Controller("api/v1/carpool")
+@ApiUseTags("Carpools")
+@ApiBearerAuth()
+@Controller("api/v1/carpools")
 export class CarpoolController {
     public constructor(private readonly _carpoolService: CarpoolService) {}
 
@@ -16,9 +36,13 @@ export class CarpoolController {
         description: "Create a new Carpool",
     })
     @ApiCreatedResponse({ type: Carpool })
+    @UseGuards(AuthGuard("jwt"))
     @Post()
-    public async create(@Body() carpoolDto: CarpoolDto): Promise<Carpool> {
-        return await this._carpoolService.create(carpoolDto);
+    public async createCarpool(
+        @Req() request: UserRequest,
+        @Body() carpoolDto: CarpoolDto
+    ): Promise<Carpool> {
+        return await this._carpoolService.createCarpool(carpoolDto, request.user.id);
     }
 
     @ApiOperation({
@@ -28,8 +52,8 @@ export class CarpoolController {
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
     @Get(":id")
-    public async get(@Param("id") id: string): Promise<Carpool> {
-        return await this._carpoolService.get(id);
+    public async getBydId(@Param("id") id: string): Promise<Carpool> {
+        return await this._carpoolService.findOneById(id);
     }
 
     @ApiOperation({
@@ -38,9 +62,14 @@ export class CarpoolController {
         description: "Update a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @UseGuards(AuthGuard("jwt"))
     @Put(":id")
-    public async update(@Param("id") id: string, @Body() carpoolDto: CarpoolDto): Promise<Carpool> {
-        return await this._carpoolService.update(id, carpoolDto);
+    public async updateCarpool(
+        @Param("id") id: string,
+        @Req() request: UserRequest,
+        @Body() carpoolDto: CarpoolDto
+    ): Promise<Carpool> {
+        return await this._carpoolService.updateCarpool(id, carpoolDto, request.user.id);
     }
 
     @ApiOperation({
@@ -49,8 +78,9 @@ export class CarpoolController {
         description: "Delete a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @UseGuards(AuthGuard("jwt"))
     @Delete(":id")
-    public async delete(@Param("id") id: string): Promise<Carpool> {
-        return await this._carpoolService.delete(id);
+    public async deleteCarpool(@Param("id") id: string): Promise<Carpool> {
+        return await this._carpoolService.deleteCarpool(id);
     }
 }
