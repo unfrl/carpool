@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { IsDefined, Length } from "class-validator";
+import { IsDefined } from "class-validator";
 
 export enum CarType {
     sedan = "sedan",

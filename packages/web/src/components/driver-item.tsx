@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { deepPurple } from "@material-ui/core/colors";
 
-import { getInitials } from "@carpool/core";
+import { getInitials, DriverDto } from "@carpool/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -53,15 +53,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IDriverItemProps {
-    name: string;
-    email: string;
-    remainingSeats: number;
+    driver: DriverDto;
+    isCurrentUser: boolean;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { name, remainingSeats, email } = props;
+    const { driver } = props;
+    const { displayName, email } = driver.user;
+    const remainingSeats = 4; // TODO: eventually needs to be car.capacity - passengers.length
     const canJoin = remainingSeats > 0;
 
     const handleToggleExpanded = () => {
@@ -78,7 +79,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                 <div className={classes.driver} onClick={handleToggleExpanded}>
                     <Avatar className={classes.avatar}>{getInitials(name)}</Avatar>
                     <div>
-                        <Typography>{name}</Typography>
+                        <Typography>{displayName}</Typography>
                         <Typography variant="subtitle2" color="textPrimary">
                             Remaining seats: {remainingSeats}
                         </Typography>

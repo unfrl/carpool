@@ -155,6 +155,10 @@ export interface CreateDriverDto {
  */
 export interface DriverDto {
     /**
+     * @member {string} id
+     */
+    id: string;
+    /**
      * @member {Car} car
      */
     car: Car;

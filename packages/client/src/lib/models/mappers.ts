@@ -274,6 +274,13 @@ export const DriverDto: msRest.CompositeMapper = {
     name: "Composite",
     className: "DriverDto",
     modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
       car: {
         required: true,
         serializedName: "car",

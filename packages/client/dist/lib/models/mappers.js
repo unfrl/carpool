@@ -264,6 +264,13 @@ exports.DriverDto = {
         name: "Composite",
         className: "DriverDto",
         modelProperties: {
+            id: {
+                required: true,
+                serializedName: "id",
+                type: {
+                    name: "String"
+                }
+            },
             car: {
                 required: true,
                 serializedName: "car",

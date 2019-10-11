@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { Typography, Button, makeStyles } from "@material-ui/core";
+import { observer } from "mobx-react";
 
+import { DriverDto } from "@carpool/core";
 import { DriverItem } from "./driver-item";
 
 const useStyles = makeStyles(theme => ({
@@ -12,7 +14,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const DriverList: FunctionComponent = () => {
+export interface IDriverListProps {
+    drivers: DriverDto[];
+    userId?: string;
+}
+
+export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
     const classes = useStyles();
 
     return (
@@ -21,10 +28,13 @@ export const DriverList: FunctionComponent = () => {
                 <Typography variant="h5">Drivers</Typography>
                 <Button color="primary">Offer to Drive</Button>
             </div>
-            <DriverItem name="Andrew Noyes" email="andrew@noyes.io" remainingSeats={4} />
-            <DriverItem name="Billy Burns" email="bill@billy.com" remainingSeats={0} />
-            <DriverItem name="Jane Jill" email="jilly@billy.com" remainingSeats={2} />
-            <DriverItem name="Zane" email="zane@ggmail.com" remainingSeats={9} />
+            {props.drivers.map(driver => (
+                <DriverItem
+                    key={driver.id}
+                    driver={driver}
+                    isCurrentUser={driver.user.id === props.userId}
+                />
+            ))}
         </div>
     );
-};
+});

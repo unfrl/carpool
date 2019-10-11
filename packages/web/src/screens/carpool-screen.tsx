@@ -57,7 +57,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
             />
             <CarpoolDetails name={name} destination={destination} date={dateTime} />
-            <DriverList />
+            <DriverList drivers={[]} />
         </div>
     );
 });

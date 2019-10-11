@@ -50,6 +50,7 @@ export class DriverService {
         await this._driverRepository.save(driver);
 
         return {
+            id: driver.id,
             car,
             carpoolId,
             user: {
@@ -71,6 +72,7 @@ export class DriverService {
         });
 
         return drivers.map(driver => ({
+            id: driver.id,
             car: driver.car,
             carpoolId: driver.carpoolId,
             user: {

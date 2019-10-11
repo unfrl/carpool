@@ -5,6 +5,9 @@ import { UserDto } from "./user.dto";
 
 export class DriverDto {
     @ApiResponseModelProperty()
+    public readonly id: string;
+
+    @ApiResponseModelProperty()
     public readonly car: Car;
 
     @ApiResponseModelProperty()
