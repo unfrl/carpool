@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 
-import { CarpoolStore } from "@carpool/core";
+import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
 import { CarpoolDetails, DriverList, DocumentHead } from "../components";
 
 const useStyles = makeStyles(theme => ({
@@ -15,12 +15,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface ICarpoolScreenProps extends RouteComponentProps {
+    authStore: AuthStore;
     carpoolStore: CarpoolStore;
+    driverStore: DriverStore;
 }
 
 export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(props => {
     const classes = useStyles();
-    const { match, carpoolStore } = props;
+    const { match, carpoolStore, authStore, driverStore } = props;
     const { id } = match.params as { id: string };
     const { selectedCarpoolId, selectedCarpool, loading } = carpoolStore;
     const [ready, setReady] = useState(false);
@@ -40,6 +42,10 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         };
     }, [id]);
 
+    const handleOfferToDrive = () => {
+        // TODO
+    };
+
     if (loading || !ready) {
         return <CircularProgress className={classes.progress} />;
     }
@@ -57,7 +63,12 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
             />
             <CarpoolDetails name={name} destination={destination} date={dateTime} />
-            <DriverList drivers={[]} />
+            <DriverList
+                drivers={[]}
+                loading={driverStore.loading}
+                userId={authStore.user ? authStore.user.id : undefined}
+                onOfferToDrive={handleOfferToDrive}
+            />
         </div>
     );
 });

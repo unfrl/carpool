@@ -7,7 +7,7 @@ import teal from "@material-ui/core/colors/teal";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import { RouterStore } from "mobx-react-router";
 
-import { AuthStore, CarpoolStore } from "@carpool/core";
+import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
 import {
     AppHeader,
     AppDialog,
@@ -38,6 +38,7 @@ export interface IAppProps extends RouteComponentProps {}
 export interface IInjectedProps extends IAppProps {
     authStore: AuthStore;
     carpoolStore: CarpoolStore;
+    driverStore: DriverStore;
     routerStore: RouterStore;
 }
 
@@ -46,7 +47,7 @@ export interface IAppState {
     showUserCarpools: boolean;
 }
 
-@inject("authStore", "carpoolStore", "routerStore")
+@inject("authStore", "carpoolStore", "driverStore", "routerStore")
 @observer
 export class App extends Component<IAppProps, IAppState> {
     public state: IAppState = {
@@ -63,7 +64,7 @@ export class App extends Component<IAppProps, IAppState> {
     }
 
     public render() {
-        const { authStore, carpoolStore } = this.injectedProps;
+        const { authStore, carpoolStore, driverStore } = this.injectedProps;
 
         return (
             <ThemeProvider theme={theme}>
@@ -89,7 +90,12 @@ export class App extends Component<IAppProps, IAppState> {
                             path="/carpools/:id"
                             exact={true}
                             render={routeProps => (
-                                <CarpoolScreen carpoolStore={carpoolStore} {...routeProps} />
+                                <CarpoolScreen
+                                    authStore={authStore}
+                                    carpoolStore={carpoolStore}
+                                    driverStore={driverStore}
+                                    {...routeProps}
+                                />
                             )}
                         />
                         <Route
