@@ -4,9 +4,12 @@ import { observer } from "mobx-react";
 
 import { DriverDto } from "@carpool/core";
 import { DriverItem } from "./driver-item";
-import searching from "../images/searching.svg";
+import cityDriver from "../images/city-driver.svg";
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(2),
+    },
     header: {
         display: "flex",
         alignItems: "center",
@@ -25,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     },
     callToAction: {
         marginTop: theme.spacing(2),
+    },
+    image: {
+        maxWidth: 300,
+        marginTop: theme.spacing(4),
     },
 }));
 
@@ -53,9 +60,11 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                         color="primary"
                         size="large"
                         className={classes.callToAction}
+                        onClick={onOfferToDrive}
                     >
                         Offer to Drive
                     </Button>
+                    <img src={cityDriver} className={classes.image} />
                 </div>
             );
         }
@@ -74,7 +83,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
     };
 
     return (
-        <div>
+        <div className={classes.root}>
             <div className={classes.header}>
                 <Typography variant="h5">Drivers</Typography>
                 <Button color="primary" onClick={onOfferToDrive}>
