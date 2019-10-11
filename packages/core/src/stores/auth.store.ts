@@ -96,7 +96,7 @@ export class AuthStore {
     };
 
     private fetchUserProfile = async () => {
-        const user = await this._rootStore.carpoolClient.getProfile();
+        const user = await this._rootStore.carpoolClient.getMyProfile();
 
         this.setUser(user);
     };

@@ -53,7 +53,7 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
     };
 
     if (!!redirectId) {
-        return <Redirect to={`/carpool/${redirectId}`} />;
+        return <Redirect to={`/carpools/${redirectId}`} />;
     }
 
     if (!initialized) {

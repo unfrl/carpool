@@ -1,4 +1,4 @@
-import { observable, action, computed } from "mobx";
+import { observable, action, computed, reaction } from "mobx";
 
 import { Carpool, CarpoolDto } from "@carpool/client";
 import { Logger } from "../utils";
@@ -9,6 +9,16 @@ export class CarpoolStore {
 
     @observable
     public carpools: Carpool[] = [];
+
+    @computed
+    public get userCarpools(): Carpool[] {
+        const { user } = this._rootStore.authStore;
+        if (!user) {
+            return [];
+        }
+
+        return this.carpools.filter(c => c.createdById === user.id);
+    }
 
     @observable
     public selectedCarpoolId: string = "";
@@ -24,7 +34,16 @@ export class CarpoolStore {
     @observable
     public loading: boolean = false;
 
-    public constructor(private readonly _rootStore: RootStore) {}
+    public constructor(private readonly _rootStore: RootStore) {
+        reaction(
+            () => this._rootStore.authStore.isAuthenticated,
+            async isAuthenticated => {
+                if (isAuthenticated) {
+                    await this.loadUserCarpools();
+                }
+            }
+        );
+    }
 
     /**
      * Creates a new carpool, returning the model if successful.
@@ -76,6 +95,15 @@ export class CarpoolStore {
         this.setSelectedCarpoolId("");
     };
 
+    /**
+     * Loads the current user's carpools.
+     */
+    private loadUserCarpools = async () => {
+        this._logger.info("Loading current user's carpools...");
+        const carpools = await this._rootStore.carpoolClient.getMyCarpools();
+        this.setCarpools(carpools);
+    };
+
     //#region Actions
 
     @action
@@ -86,6 +114,11 @@ export class CarpoolStore {
     @action
     private addCarpool = (carpool: Carpool) => {
         this.carpools.push(carpool);
+    };
+
+    @action
+    private setCarpools = (carpools: Carpool[]) => {
+        this.carpools = carpools;
     };
 
     @action

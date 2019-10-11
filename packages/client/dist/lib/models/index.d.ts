@@ -236,9 +236,9 @@ export declare type DeleteCarpoolResponse = Carpool & {
     };
 };
 /**
- * Contains response data for the getProfile operation.
+ * Contains response data for the getMyProfile operation.
  */
-export declare type GetProfileResponse = UserDto & {
+export declare type GetMyProfileResponse = UserDto & {
     /**
      * The underlying HTTP response.
      */
@@ -251,6 +251,24 @@ export declare type GetProfileResponse = UserDto & {
          * The response body as parsed JSON or XML
          */
         parsedBody: UserDto;
+    };
+};
+/**
+ * Contains response data for the getMyCarpools operation.
+ */
+export declare type GetMyCarpoolsResponse = Array<Carpool> & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool[];
     };
 };
 /**

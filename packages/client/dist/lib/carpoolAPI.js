@@ -91,10 +91,15 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
-    CarpoolAPI.prototype.getProfile = function (options, callback) {
+    CarpoolAPI.prototype.getMyProfile = function (options, callback) {
         return this.sendOperationRequest({
             options: options
-        }, getProfileOperationSpec, callback);
+        }, getMyProfileOperationSpec, callback);
+    };
+    CarpoolAPI.prototype.getMyCarpools = function (options, callback) {
+        return this.sendOperationRequest({
+            options: options
+        }, getMyCarpoolsOperationSpec, callback);
     };
     CarpoolAPI.prototype.verifyUser = function (verificationDto, options, callback) {
         return this.sendOperationRequest({
@@ -137,7 +142,7 @@ var signInOperationSpec = {
 };
 var createCarpoolOperationSpec = {
     httpMethod: "POST",
-    path: "api/v1/carpool",
+    path: "api/v1/carpools",
     requestBody: {
         parameterPath: "carpoolDto",
         mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
@@ -152,7 +157,7 @@ var createCarpoolOperationSpec = {
 };
 var getCarpoolOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -166,7 +171,7 @@ var getCarpoolOperationSpec = {
 };
 var updateCarpoolOperationSpec = {
     httpMethod: "PUT",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -184,7 +189,7 @@ var updateCarpoolOperationSpec = {
 };
 var deleteCarpoolOperationSpec = {
     httpMethod: "DELETE",
-    path: "api/v1/carpool/{id}",
+    path: "api/v1/carpools/{id}",
     urlParameters: [
         Parameters.id
     ],
@@ -196,12 +201,34 @@ var deleteCarpoolOperationSpec = {
     },
     serializer: serializer
 };
-var getProfileOperationSpec = {
+var getMyProfileOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/user/me",
+    path: "api/v1/users/me",
     responses: {
         200: {
             bodyMapper: Mappers.UserDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var getMyCarpoolsOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/users/me/carpools",
+    responses: {
+        200: {
+            bodyMapper: {
+                serializedName: "parsedResponse",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "Composite",
+                            className: "Carpool"
+                        }
+                    }
+                }
+            }
         },
         default: {}
     },

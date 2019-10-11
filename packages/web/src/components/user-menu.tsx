@@ -10,7 +10,7 @@ import {
     makeStyles,
 } from "@material-ui/core";
 
-import { getInitials } from "@carpool/core";
+import { getInitials, UserDto } from "@carpool/core";
 
 const useStyles = makeStyles(theme => ({
     menuHeader: {
@@ -29,19 +29,21 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+export enum UserMenuOption {
+    profile,
+    carpools,
+    signOut,
+}
+
 export interface IUserMenuProps {
     /**
-     * User's display name.
+     * The signed in user.
      */
-    displayName: string;
+    user: UserDto;
     /**
-     * User's email address.
+     * Callback for selected menu option.
      */
-    email: string;
-    /**
-     * Callback requesting to be signed out.
-     */
-    onSignOut: () => void;
+    onMenuOptionSelected: (option: UserMenuOption) => void;
 }
 
 export interface IUserMenuState {
@@ -52,7 +54,7 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
     const classes = useStyles();
     const [state, setState] = useState<IUserMenuState>({ anchorEl: undefined });
 
-    const { displayName, email } = props;
+    const { displayName, email } = props.user;
     const initials = getInitials(displayName);
 
     const handleClick = (e: React.MouseEvent) => {
@@ -61,6 +63,11 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
 
     const handleClose = () => {
         setState({ anchorEl: undefined });
+    };
+
+    const handleSelection = (option: UserMenuOption) => () => {
+        props.onMenuOptionSelected(option);
+        handleClose();
     };
 
     return (
@@ -79,20 +86,20 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
                     <Typography variant="caption">{email}</Typography>
                 </div>
                 <Divider className={classes.divider} />
-                <MenuItem>
+                <MenuItem onClick={handleSelection(UserMenuOption.profile)}>
                     <ListItemIcon>
                         <Icon>person</Icon>
                     </ListItemIcon>
                     Your profile
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleSelection(UserMenuOption.carpools)}>
                     <ListItemIcon>
                         <Icon>directions_car</Icon>
                     </ListItemIcon>
                     Your carpools
                 </MenuItem>
                 <Divider className={classes.divider} />
-                <MenuItem onClick={props.onSignOut}>
+                <MenuItem onClick={handleSelection(UserMenuOption.signOut)}>
                     <ListItemIcon>
                         <Icon>exit_to_app</Icon>
                     </ListItemIcon>

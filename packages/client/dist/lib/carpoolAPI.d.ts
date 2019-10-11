@@ -130,18 +130,34 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      * Gets the current user's profile
      * @summary Get user profile
      * @param [options] The optional parameters
-     * @returns Promise<Models.GetProfileResponse>
+     * @returns Promise<Models.GetMyProfileResponse>
      */
-    getProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetProfileResponse>;
+    getMyProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetMyProfileResponse>;
     /**
      * @param callback The callback
      */
-    getProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
+    getMyProfile(callback: msRest.ServiceCallback<Models.UserDto>): void;
     /**
      * @param options The optional parameters
      * @param callback The callback
      */
-    getProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    getMyProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UserDto>): void;
+    /**
+     * Gets a collection of carpools created by the current user
+     * @summary Get user's carpools
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetMyCarpoolsResponse>
+     */
+    getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+    /**
+     * @param callback The callback
+     */
+    getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    /**
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
     /**
      * Verify a User using the token emailed to them during account creation
      * @summary Verify User
