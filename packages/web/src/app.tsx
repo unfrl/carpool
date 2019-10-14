@@ -78,7 +78,7 @@ export class App extends Component<IAppProps, IAppState> {
                         <Route
                             path="/create-carpool"
                             exact={true}
-                            render={routeProps => (
+                            render={_routeProps => (
                                 <CreateCarpoolScreen
                                     initialized={authStore.initialized}
                                     isAuthenticated={authStore.isAuthenticated}
