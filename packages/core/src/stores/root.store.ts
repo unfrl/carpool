@@ -1,6 +1,7 @@
 import { CarpoolAPI } from "@carpool/client";
 import { AuthStore } from "./auth.store";
 import { CarpoolStore } from "./carpool.store";
+import { DriverStore } from "./driver.store";
 import { apiConfig } from "../config";
 
 export class RootStore {
@@ -10,10 +11,12 @@ export class RootStore {
     // stores
     public readonly authStore: AuthStore;
     public readonly carpoolStore: CarpoolStore;
+    public readonly driverStore: DriverStore;
 
     public constructor() {
         this.authStore = new AuthStore(this);
         this.carpoolStore = new CarpoolStore(this);
+        this.driverStore = new DriverStore(this);
 
         this.carpoolClient = new CarpoolAPI(
             {

@@ -85,21 +85,21 @@ export interface PasswordResetDto {
 
 /**
  * @interface
- * An interface representing CarpoolDto.
+ * An interface representing UserDto.
  */
-export interface CarpoolDto {
+export interface UserDto {
   /**
-   * @member {string} carpoolName
+   * @member {string} id
    */
-  carpoolName: string;
+  id: string;
   /**
-   * @member {string} destination
+   * @member {string} email
    */
-  destination: string;
+  email: string;
   /**
-   * @member {any} dateTime
+   * @member {string} displayName
    */
-  dateTime: any;
+  displayName: string;
 }
 
 /**
@@ -147,21 +147,75 @@ export interface Carpool {
 
 /**
  * @interface
- * An interface representing UserDto.
+ * An interface representing CarpoolDto.
  */
-export interface UserDto {
+export interface CarpoolDto {
+  /**
+   * @member {string} carpoolName
+   */
+  carpoolName: string;
+  /**
+   * @member {string} destination
+   */
+  destination: string;
+  /**
+   * @member {any} dateTime
+   */
+  dateTime: any;
+}
+
+/**
+ * @interface
+ * An interface representing Car.
+ */
+export interface Car {
+  /**
+   * @member {number} capacity
+   */
+  capacity: number;
+  /**
+   * @member {string} color
+   */
+  color: string;
+  /**
+   * @member {Type} type Possible values include: 'sedan', 'truck', 'suv',
+   * 'van'
+   */
+  type: Type;
+}
+
+/**
+ * @interface
+ * An interface representing CreateDriverDto.
+ */
+export interface CreateDriverDto {
+  /**
+   * @member {Car} car
+   */
+  car: Car;
+}
+
+/**
+ * @interface
+ * An interface representing DriverDto.
+ */
+export interface DriverDto {
   /**
    * @member {string} id
    */
   id: string;
   /**
-   * @member {string} email
+   * @member {Car} car
    */
-  email: string;
+  car: Car;
   /**
-   * @member {string} displayName
+   * @member {string} carpoolId
    */
-  displayName: string;
+  carpoolId: string;
+  /**
+   * @member {UserDto} user
+   */
+  user: UserDto;
 }
 
 /**
@@ -190,6 +244,14 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
    */
   baseUri?: string;
 }
+
+/**
+ * Defines values for Type.
+ * Possible values include: 'sedan', 'truck', 'suv', 'van'
+ * @readonly
+ * @enum {string}
+ */
+export type Type = 'sedan' | 'truck' | 'suv' | 'van';
 
 /**
  * Contains response data for the signIn operation.
@@ -226,6 +288,44 @@ export type ResetPasswordResponse = AuthDto & {
        * The response body as parsed JSON or XML
        */
       parsedBody: AuthDto;
+    };
+};
+
+/**
+ * Contains response data for the getMyProfile operation.
+ */
+export type GetMyProfileResponse = UserDto & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: UserDto;
+    };
+};
+
+/**
+ * Contains response data for the getMyCarpools operation.
+ */
+export type GetMyCarpoolsResponse = Array<Carpool> & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Carpool[];
     };
 };
 
@@ -306,9 +406,9 @@ export type DeleteCarpoolResponse = Carpool & {
 };
 
 /**
- * Contains response data for the getMyProfile operation.
+ * Contains response data for the createDriver operation.
  */
-export type GetMyProfileResponse = UserDto & {
+export type CreateDriverResponse = DriverDto & {
   /**
    * The underlying HTTP response.
    */
@@ -320,14 +420,14 @@ export type GetMyProfileResponse = UserDto & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: UserDto;
+      parsedBody: DriverDto;
     };
 };
 
 /**
- * Contains response data for the getMyCarpools operation.
+ * Contains response data for the getDrivers operation.
  */
-export type GetMyCarpoolsResponse = Array<Carpool> & {
+export type GetDriversResponse = Array<DriverDto> & {
   /**
    * The underlying HTTP response.
    */
@@ -339,7 +439,7 @@ export type GetMyCarpoolsResponse = Array<Carpool> & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: Carpool[];
+      parsedBody: DriverDto[];
     };
 };
 

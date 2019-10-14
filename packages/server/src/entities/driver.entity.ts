@@ -10,18 +10,15 @@ import { Car } from "../interfaces";
 @Entity()
 export class Driver extends BaseEntity {
     @Column()
-    @ApiResponseModelProperty()
     public userId: string;
 
     @ManyToOne(type => User)
     public user: User;
 
     @Column("jsonb")
-    @ApiResponseModelProperty()
     public car: Car;
 
     @Column()
-    @ApiResponseModelProperty()
     public carpoolId: string;
 
     @ManyToOne(type => Carpool, carpool => carpool.drivers)
