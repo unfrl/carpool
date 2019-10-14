@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     },
     subtitle: {
         marginBottom: theme.spacing(2),
+        [theme.breakpoints.down("sm")]: {
+            textAlign: "center",
+        },
     },
     image: {
         width: "100%",
@@ -51,10 +54,10 @@ export const HomeScreen: FunctionComponent = () => {
             <div className={classes.hero}>
                 <div className={classes.info}>
                     <Typography variant="h3" className={classes.heading}>
-                        Dope header here
+                        Carpool
                     </Typography>
                     <Typography variant="subtitle1" className={classes.subtitle}>
-                        Awesome subtitle with more info here like blehs
+                        Awesome subtitle about the app goes here
                     </Typography>
                     <NavLink to="/create-carpool">
                         <Button variant="contained" color="primary" size="large">
