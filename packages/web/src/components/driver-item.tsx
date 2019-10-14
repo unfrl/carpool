@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { deepPurple } from "@material-ui/core/colors";
 
-import { getInitials } from "@carpool/core";
+import { getInitials, DriverDto } from "@carpool/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -53,16 +53,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IDriverItemProps {
-    name: string;
-    email: string;
-    remainingSeats: number;
+    driver: DriverDto;
+    isCurrentUser: boolean;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { name, remainingSeats, email } = props;
+    const { driver, isCurrentUser } = props;
+    const { car, user } = driver;
+    const { displayName, email } = user;
+    const { capacity, color, type } = car;
+    const remainingSeats = capacity; // TODO: eventually needs to be car.capacity - passengers.length
     const canJoin = remainingSeats > 0;
+    const initials = getInitials(displayName);
 
     const handleToggleExpanded = () => {
         setExpanded(!expanded);
@@ -76,9 +80,11 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
         <div className={classes.root}>
             <div className={classes.card}>
                 <div className={classes.driver} onClick={handleToggleExpanded}>
-                    <Avatar className={classes.avatar}>{getInitials(name)}</Avatar>
+                    <Avatar className={classes.avatar}>{initials}</Avatar>
                     <div>
-                        <Typography>{name}</Typography>
+                        <Typography>
+                            {displayName} {isCurrentUser && <strong>(you)</strong>}
+                        </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
                             Remaining seats: {remainingSeats}
                         </Typography>
@@ -119,7 +125,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                         <span role="img" aria-label="email">
                             🚘
                         </span>{" "}
-                        TODO: car details should go here
+                        {car.color} {car.type}
                     </Typography>
                 </div>
             </Collapse>

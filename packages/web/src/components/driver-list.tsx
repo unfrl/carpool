@@ -1,30 +1,104 @@
-import React, { FunctionComponent } from "react";
-import { Typography, Button, makeStyles } from "@material-ui/core";
+import React, { FunctionComponent, Fragment } from "react";
+import { Typography, Button, CircularProgress, makeStyles } from "@material-ui/core";
+import { observer } from "mobx-react";
 
+import { DriverDto } from "@carpool/core";
 import { DriverItem } from "./driver-item";
+import cityDriver from "../images/city-driver.svg";
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: theme.spacing(2),
+    },
     header: {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: theme.spacing(1),
+        padding: theme.spacing(0, 2),
+    },
+    progress: {
+        display: "flex",
+        margin: "auto",
+        marginTop: theme.spacing(2),
+    },
+    noDrivers: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: theme.spacing(2),
+    },
+    callToAction: {
+        marginTop: theme.spacing(2),
+    },
+    image: {
+        maxWidth: 300,
+        marginTop: theme.spacing(4),
     },
 }));
 
-export const DriverList: FunctionComponent = () => {
+export interface IDriverListProps {
+    drivers: DriverDto[];
+    userId?: string;
+    loading: boolean;
+    onOfferToDrive: () => void;
+}
+
+export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
     const classes = useStyles();
+    const { drivers, userId, loading, onOfferToDrive } = props;
+    const hasDrivers = drivers.length > 0;
+    const currentUserIsDriver = Boolean(drivers.find(d => d.user.id === userId));
+    const canOfferToDrive = !!userId && !currentUserIsDriver;
+
+    const renderDrivers = () => {
+        if (loading) {
+            return <CircularProgress className={classes.progress} />;
+        }
+
+        if (!hasDrivers) {
+            return (
+                <div className={classes.noDrivers}>
+                    <Typography variant="h5">No drivers yet. Be first!</Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        className={classes.callToAction}
+                        onClick={onOfferToDrive}
+                        disabled={!canOfferToDrive}
+                    >
+                        Offer to Drive
+                    </Button>
+                    <img src={cityDriver} className={classes.image} />
+                </div>
+            );
+        }
+
+        return (
+            <Fragment>
+                {drivers.map(driver => (
+                    <DriverItem
+                        key={driver.id}
+                        driver={driver}
+                        isCurrentUser={driver.user.id === userId}
+                    />
+                ))}
+            </Fragment>
+        );
+    };
 
     return (
-        <div>
-            <div className={classes.header}>
-                <Typography variant="h5">Drivers</Typography>
-                <Button color="primary">Offer to Drive</Button>
-            </div>
-            <DriverItem name="Andrew Noyes" email="andrew@noyes.io" remainingSeats={4} />
-            <DriverItem name="Billy Burns" email="bill@billy.com" remainingSeats={0} />
-            <DriverItem name="Jane Jill" email="jilly@billy.com" remainingSeats={2} />
-            <DriverItem name="Zane" email="zane@ggmail.com" remainingSeats={9} />
+        <div className={classes.root}>
+            {hasDrivers && (
+                <div className={classes.header}>
+                    <Typography variant="h5">Drivers</Typography>
+                    <Button color="primary" onClick={onOfferToDrive} disabled={!canOfferToDrive}>
+                        Offer to Drive
+                    </Button>
+                </div>
+            )}
+            {renderDrivers()}
         </div>
     );
-};
+});

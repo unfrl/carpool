@@ -78,6 +78,16 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, resetPasswordOperationSpec, callback);
     };
+    CarpoolAPI.prototype.getMyProfile = function (options, callback) {
+        return this.sendOperationRequest({
+            options: options
+        }, getMyProfileOperationSpec, callback);
+    };
+    CarpoolAPI.prototype.getMyCarpools = function (options, callback) {
+        return this.sendOperationRequest({
+            options: options
+        }, getMyCarpoolsOperationSpec, callback);
+    };
     CarpoolAPI.prototype.createCarpool = function (carpoolDto, options, callback) {
         return this.sendOperationRequest({
             carpoolDto: carpoolDto,
@@ -103,15 +113,18 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
-    CarpoolAPI.prototype.getMyProfile = function (options, callback) {
+    CarpoolAPI.prototype.createDriver = function (createDriverDto, id, options, callback) {
         return this.sendOperationRequest({
+            createDriverDto: createDriverDto,
+            id: id,
             options: options
-        }, getMyProfileOperationSpec, callback);
+        }, createDriverOperationSpec, callback);
     };
-    CarpoolAPI.prototype.getMyCarpools = function (options, callback) {
+    CarpoolAPI.prototype.getDrivers = function (id, options, callback) {
         return this.sendOperationRequest({
+            id: id,
             options: options
-        }, getMyCarpoolsOperationSpec, callback);
+        }, getDriversOperationSpec, callback);
     };
     CarpoolAPI.prototype.verifyUser = function (verificationDto, options, callback) {
         return this.sendOperationRequest({
@@ -180,6 +193,39 @@ var resetPasswordOperationSpec = {
     },
     serializer: serializer
 };
+var getMyProfileOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/users/me",
+    responses: {
+        200: {
+            bodyMapper: Mappers.UserDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var getMyCarpoolsOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/users/me/carpools",
+    responses: {
+        200: {
+            bodyMapper: {
+                serializedName: "parsedResponse",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "Composite",
+                            className: "Carpool"
+                        }
+                    }
+                }
+            }
+        },
+        default: {}
+    },
+    serializer: serializer
+};
 var createCarpoolOperationSpec = {
     httpMethod: "POST",
     path: "api/v1/carpools",
@@ -241,20 +287,30 @@ var deleteCarpoolOperationSpec = {
     },
     serializer: serializer
 };
-var getMyProfileOperationSpec = {
-    httpMethod: "GET",
-    path: "api/v1/users/me",
+var createDriverOperationSpec = {
+    httpMethod: "POST",
+    path: "api/v1/carpools/{id}/drivers",
+    urlParameters: [
+        Parameters.id
+    ],
+    requestBody: {
+        parameterPath: "createDriverDto",
+        mapper: __assign(__assign({}, Mappers.CreateDriverDto), { required: true })
+    },
     responses: {
-        200: {
-            bodyMapper: Mappers.UserDto
+        201: {
+            bodyMapper: Mappers.DriverDto
         },
         default: {}
     },
     serializer: serializer
 };
-var getMyCarpoolsOperationSpec = {
+var getDriversOperationSpec = {
     httpMethod: "GET",
-    path: "api/v1/users/me/carpools",
+    path: "api/v1/carpools/{id}/drivers",
+    urlParameters: [
+        Parameters.id
+    ],
     responses: {
         200: {
             bodyMapper: {
@@ -264,7 +320,7 @@ var getMyCarpoolsOperationSpec = {
                     element: {
                         type: {
                             name: "Composite",
-                            className: "Carpool"
+                            className: "DriverDto"
                         }
                     }
                 }

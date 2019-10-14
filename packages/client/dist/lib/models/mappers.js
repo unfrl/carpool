@@ -120,31 +120,31 @@ exports.PasswordResetDto = {
         }
     }
 };
-exports.CarpoolDto = {
-    serializedName: "CarpoolDto",
+exports.UserDto = {
+    serializedName: "UserDto",
     type: {
         name: "Composite",
-        className: "CarpoolDto",
+        className: "UserDto",
         modelProperties: {
-            carpoolName: {
+            id: {
                 required: true,
-                serializedName: "carpoolName",
+                serializedName: "id",
                 type: {
                     name: "String"
                 }
             },
-            destination: {
+            email: {
                 required: true,
-                serializedName: "destination",
+                serializedName: "email",
                 type: {
                     name: "String"
                 }
             },
-            dateTime: {
+            displayName: {
                 required: true,
-                serializedName: "dateTime",
+                serializedName: "displayName",
                 type: {
-                    name: "Object"
+                    name: "String"
                 }
             }
         }
@@ -227,11 +227,88 @@ exports.Carpool = {
         }
     }
 };
-exports.UserDto = {
-    serializedName: "UserDto",
+exports.CarpoolDto = {
+    serializedName: "CarpoolDto",
     type: {
         name: "Composite",
-        className: "UserDto",
+        className: "CarpoolDto",
+        modelProperties: {
+            carpoolName: {
+                required: true,
+                serializedName: "carpoolName",
+                type: {
+                    name: "String"
+                }
+            },
+            destination: {
+                required: true,
+                serializedName: "destination",
+                type: {
+                    name: "String"
+                }
+            },
+            dateTime: {
+                required: true,
+                serializedName: "dateTime",
+                type: {
+                    name: "Object"
+                }
+            }
+        }
+    }
+};
+exports.Car = {
+    serializedName: "Car",
+    type: {
+        name: "Composite",
+        className: "Car",
+        modelProperties: {
+            capacity: {
+                required: true,
+                serializedName: "capacity",
+                type: {
+                    name: "Number"
+                }
+            },
+            color: {
+                required: true,
+                serializedName: "color",
+                type: {
+                    name: "String"
+                }
+            },
+            type: {
+                required: true,
+                serializedName: "type",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.CreateDriverDto = {
+    serializedName: "CreateDriverDto",
+    type: {
+        name: "Composite",
+        className: "CreateDriverDto",
+        modelProperties: {
+            car: {
+                required: true,
+                serializedName: "car",
+                type: {
+                    name: "Composite",
+                    className: "Car"
+                }
+            }
+        }
+    }
+};
+exports.DriverDto = {
+    serializedName: "DriverDto",
+    type: {
+        name: "Composite",
+        className: "DriverDto",
         modelProperties: {
             id: {
                 required: true,
@@ -240,18 +317,27 @@ exports.UserDto = {
                     name: "String"
                 }
             },
-            email: {
+            car: {
                 required: true,
-                serializedName: "email",
+                serializedName: "car",
+                type: {
+                    name: "Composite",
+                    className: "Car"
+                }
+            },
+            carpoolId: {
+                required: true,
+                serializedName: "carpoolId",
                 type: {
                     name: "String"
                 }
             },
-            displayName: {
+            user: {
                 required: true,
-                serializedName: "displayName",
+                serializedName: "user",
                 type: {
-                    name: "String"
+                    name: "Composite",
+                    className: "UserDto"
                 }
             }
         }
