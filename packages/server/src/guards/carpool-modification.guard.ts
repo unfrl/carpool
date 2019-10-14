@@ -11,7 +11,6 @@ This Guard ensures that only the user who created a carpool can modify it.
 @Injectable()
 export class CarpoolModificationGuard implements CanActivate {
     constructor(private readonly _carpoolService: CarpoolService) { }
-    private _carpoolsRouteSelector: string = "carpools/";
 
     canActivate(
         context: ExecutionContext,
@@ -21,8 +20,7 @@ export class CarpoolModificationGuard implements CanActivate {
     }
 
     private async validateRequest(request: UserRequest): Promise<boolean> {
-        const carpoolId = request.url.substring(request.url.lastIndexOf(this._carpoolsRouteSelector) + this._carpoolsRouteSelector.length);
-        const carpool = await this._carpoolService.findOneById(carpoolId);
+        const carpool = await this._carpoolService.findOneById(request.params.id);
         return carpool.createdById === request.user.id;
     }
 }
