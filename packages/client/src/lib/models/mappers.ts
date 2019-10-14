@@ -6,375 +6,376 @@
 
 import * as msRest from "@azure/ms-rest-js";
 
+
 export const SignUpDto: msRest.CompositeMapper = {
-    serializedName: "SignUpDto",
-    type: {
-        name: "Composite",
-        className: "SignUpDto",
-        modelProperties: {
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-            password: {
-                required: true,
-                serializedName: "password",
-                type: {
-                    name: "String",
-                },
-            },
-            displayName: {
-                required: true,
-                serializedName: "displayName",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "SignUpDto",
+  type: {
+    name: "Composite",
+    className: "SignUpDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      password: {
+        required: true,
+        serializedName: "password",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        required: true,
+        serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const SignInDto: msRest.CompositeMapper = {
-    serializedName: "SignInDto",
-    type: {
-        name: "Composite",
-        className: "SignInDto",
-        modelProperties: {
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-            password: {
-                required: true,
-                serializedName: "password",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "SignInDto",
+  type: {
+    name: "Composite",
+    className: "SignInDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      password: {
+        required: true,
+        serializedName: "password",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const AuthDto: msRest.CompositeMapper = {
-    serializedName: "AuthDto",
-    type: {
-        name: "Composite",
-        className: "AuthDto",
-        modelProperties: {
-            accessToken: {
-                required: true,
-                serializedName: "access_token",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "AuthDto",
+  type: {
+    name: "Composite",
+    className: "AuthDto",
+    modelProperties: {
+      accessToken: {
+        required: true,
+        serializedName: "access_token",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const PasswordResetRequestDto: msRest.CompositeMapper = {
-    serializedName: "PasswordResetRequestDto",
-    type: {
-        name: "Composite",
-        className: "PasswordResetRequestDto",
-        modelProperties: {
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "PasswordResetRequestDto",
+  type: {
+    name: "Composite",
+    className: "PasswordResetRequestDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const PasswordResetDto: msRest.CompositeMapper = {
-    serializedName: "PasswordResetDto",
-    type: {
-        name: "Composite",
-        className: "PasswordResetDto",
-        modelProperties: {
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-            token: {
-                required: true,
-                serializedName: "token",
-                type: {
-                    name: "String",
-                },
-            },
-            newPassword: {
-                required: true,
-                serializedName: "newPassword",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "PasswordResetDto",
+  type: {
+    name: "Composite",
+    className: "PasswordResetDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      token: {
+        required: true,
+        serializedName: "token",
+        type: {
+          name: "String"
+        }
+      },
+      newPassword: {
+        required: true,
+        serializedName: "newPassword",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
-export const CarpoolDto: msRest.CompositeMapper = {
-    serializedName: "CarpoolDto",
-    type: {
-        name: "Composite",
-        className: "UserDto",
-        modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String",
-                },
-            },
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-            displayName: {
-                required: true,
-                serializedName: "displayName",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+export const UserDto: msRest.CompositeMapper = {
+  serializedName: "UserDto",
+  type: {
+    name: "Composite",
+    className: "UserDto",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        required: true,
+        serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const Carpool: msRest.CompositeMapper = {
-    serializedName: "Carpool",
-    type: {
-        name: "Composite",
-        className: "Carpool",
-        modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String",
-                },
-            },
-            created: {
-                required: true,
-                serializedName: "created",
-                type: {
-                    name: "Object",
-                },
-            },
-            updated: {
-                required: true,
-                serializedName: "updated",
-                type: {
-                    name: "Object",
-                },
-            },
-            name: {
-                required: true,
-                serializedName: "name",
-                type: {
-                    name: "String",
-                },
-            },
-            destination: {
-                required: true,
-                serializedName: "destination",
-                type: {
-                    name: "String",
-                },
-            },
-            dateTime: {
-                required: true,
-                serializedName: "dateTime",
-                type: {
-                    name: "Object",
-                },
-            },
-            drivers: {
-                required: true,
-                serializedName: "drivers",
-                type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String",
-                        },
-                    },
-                },
-            },
-            createdById: {
-                required: true,
-                serializedName: "createdById",
-                type: {
-                    name: "String",
-                },
-            },
-            updatedById: {
-                required: true,
-                serializedName: "updatedById",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "Carpool",
+  type: {
+    name: "Composite",
+    className: "Carpool",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      created: {
+        required: true,
+        serializedName: "created",
+        type: {
+          name: "Object"
+        }
+      },
+      updated: {
+        required: true,
+        serializedName: "updated",
+        type: {
+          name: "Object"
+        }
+      },
+      name: {
+        required: true,
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      destination: {
+        required: true,
+        serializedName: "destination",
+        type: {
+          name: "String"
+        }
+      },
+      dateTime: {
+        required: true,
+        serializedName: "dateTime",
+        type: {
+          name: "Object"
+        }
+      },
+      drivers: {
+        required: true,
+        serializedName: "drivers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      createdById: {
+        required: true,
+        serializedName: "createdById",
+        type: {
+          name: "String"
+        }
+      },
+      updatedById: {
+        required: true,
+        serializedName: "updatedById",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const CarpoolDto: msRest.CompositeMapper = {
-    serializedName: "CarpoolDto",
-    type: {
-        name: "Composite",
-        className: "CarpoolDto",
-        modelProperties: {
-            carpoolName: {
-                required: true,
-                serializedName: "carpoolName",
-                type: {
-                    name: "String",
-                },
-            },
-            destination: {
-                required: true,
-                serializedName: "destination",
-                type: {
-                    name: "String",
-                },
-            },
-            dateTime: {
-                required: true,
-                serializedName: "dateTime",
-                type: {
-                    name: "Object",
-                },
-            },
-        },
-    },
+  serializedName: "CarpoolDto",
+  type: {
+    name: "Composite",
+    className: "CarpoolDto",
+    modelProperties: {
+      carpoolName: {
+        required: true,
+        serializedName: "carpoolName",
+        type: {
+          name: "String"
+        }
+      },
+      destination: {
+        required: true,
+        serializedName: "destination",
+        type: {
+          name: "String"
+        }
+      },
+      dateTime: {
+        required: true,
+        serializedName: "dateTime",
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  }
 };
 
 export const Car: msRest.CompositeMapper = {
-    serializedName: "Car",
-    type: {
-        name: "Composite",
-        className: "Car",
-        modelProperties: {
-            capacity: {
-                required: true,
-                serializedName: "capacity",
-                type: {
-                    name: "Number",
-                },
-            },
-            color: {
-                required: true,
-                serializedName: "color",
-                type: {
-                    name: "String",
-                },
-            },
-            type: {
-                required: true,
-                serializedName: "type",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "Car",
+  type: {
+    name: "Composite",
+    className: "Car",
+    modelProperties: {
+      capacity: {
+        required: true,
+        serializedName: "capacity",
+        type: {
+          name: "Number"
+        }
+      },
+      color: {
+        required: true,
+        serializedName: "color",
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        required: true,
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };
 
 export const CreateDriverDto: msRest.CompositeMapper = {
-    serializedName: "CreateDriverDto",
-    type: {
-        name: "Composite",
-        className: "CreateDriverDto",
-        modelProperties: {
-            car: {
-                required: true,
-                serializedName: "car",
-                type: {
-                    name: "Composite",
-                    className: "Car",
-                },
-            },
-        },
-    },
+  serializedName: "CreateDriverDto",
+  type: {
+    name: "Composite",
+    className: "CreateDriverDto",
+    modelProperties: {
+      car: {
+        required: true,
+        serializedName: "car",
+        type: {
+          name: "Composite",
+          className: "Car"
+        }
+      }
+    }
+  }
 };
 
 export const DriverDto: msRest.CompositeMapper = {
-    serializedName: "DriverDto",
-    type: {
-        name: "Composite",
-        className: "DriverDto",
-        modelProperties: {
-            id: {
-                required: true,
-                serializedName: "id",
-                type: {
-                    name: "String",
-                },
-            },
-            car: {
-                required: true,
-                serializedName: "car",
-                type: {
-                    name: "Composite",
-                    className: "Car",
-                },
-            },
-            carpoolId: {
-                required: true,
-                serializedName: "carpoolId",
-                type: {
-                    name: "String",
-                },
-            },
-            user: {
-                required: true,
-                serializedName: "user",
-                type: {
-                    name: "Composite",
-                    className: "UserDto",
-                },
-            },
-        },
-    },
+  serializedName: "DriverDto",
+  type: {
+    name: "Composite",
+    className: "DriverDto",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      car: {
+        required: true,
+        serializedName: "car",
+        type: {
+          name: "Composite",
+          className: "Car"
+        }
+      },
+      carpoolId: {
+        required: true,
+        serializedName: "carpoolId",
+        type: {
+          name: "String"
+        }
+      },
+      user: {
+        required: true,
+        serializedName: "user",
+        type: {
+          name: "Composite",
+          className: "UserDto"
+        }
+      }
+    }
+  }
 };
 
 export const VerificationDto: msRest.CompositeMapper = {
-    serializedName: "VerificationDto",
-    type: {
-        name: "Composite",
-        className: "VerificationDto",
-        modelProperties: {
-            email: {
-                required: true,
-                serializedName: "email",
-                type: {
-                    name: "String",
-                },
-            },
-            token: {
-                required: true,
-                serializedName: "token",
-                type: {
-                    name: "String",
-                },
-            },
-        },
-    },
+  serializedName: "VerificationDto",
+  type: {
+    name: "Composite",
+    className: "VerificationDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      token: {
+        required: true,
+        serializedName: "token",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
 };

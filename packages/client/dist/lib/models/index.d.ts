@@ -72,7 +72,7 @@ export interface PasswordResetDto {
 }
 /**
  * @interface
- * An interface representing CarpoolDto.
+ * An interface representing UserDto.
  */
 export interface UserDto {
     /**
@@ -230,7 +230,7 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
  * @readonly
  * @enum {string}
  */
-export declare type Type = "sedan" | "truck" | "suv" | "van";
+export declare type Type = 'sedan' | 'truck' | 'suv' | 'van';
 /**
  * Contains response data for the signIn operation.
  */
@@ -265,6 +265,42 @@ export declare type ResetPasswordResponse = AuthDto & {
          * The response body as parsed JSON or XML
          */
         parsedBody: AuthDto;
+    };
+};
+/**
+ * Contains response data for the getMyProfile operation.
+ */
+export declare type GetMyProfileResponse = UserDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: UserDto;
+    };
+};
+/**
+ * Contains response data for the getMyCarpools operation.
+ */
+export declare type GetMyCarpoolsResponse = Array<Carpool> & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool[];
     };
 };
 /**
