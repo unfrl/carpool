@@ -43,11 +43,14 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
     const classes = useStyles();
     const { existingCarpool } = props;
     const [state, setState] = useState<ICarpoolFormState>(
-        existingCarpool || {
-            carpoolName: "",
-            dateTime: new Date(),
-            destination: "",
-        }
+        Object.assign(
+            {},
+            existingCarpool || {
+                carpoolName: "",
+                dateTime: new Date(),
+                destination: "",
+            }
+        )
     );
 
     const isEditing = !!existingCarpool;
