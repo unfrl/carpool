@@ -89,7 +89,7 @@ export class AuthService {
     }
 
     private getPasswordResetTokenRedisKey(token: string, email: string) {
-        return `VERTOKEN_${email}_${token}`;
+        return `PASSRSTOKEN_${email}_${token}`;
     }
 
     public async resetUserPassword(passwordResetDto: PasswordResetDto): Promise<AuthDto> {
