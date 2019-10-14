@@ -25,6 +25,7 @@ import {
     NotFoundScreen,
     VerificationScreen,
 } from "./screens";
+import { ScreenMode } from "./screens/verification-screen";
 
 const theme = createMuiTheme({
     palette: {
@@ -101,7 +102,22 @@ export class App extends Component<IAppProps, IAppState> {
                         <Route
                             path="/verification"
                             exact={true}
-                            render={_routeProps => <VerificationScreen authStore={authStore} />}
+                            render={_routeProps => (
+                                <VerificationScreen
+                                    authStore={authStore}
+                                    mode={ScreenMode.Verification}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/passwordreset"
+                            exact={true}
+                            render={_routeProps => (
+                                <VerificationScreen
+                                    authStore={authStore}
+                                    mode={ScreenMode.PasswordReset}
+                                />
+                            )}
                         />
                         <Route component={NotFoundScreen} />
                     </Switch>
@@ -111,6 +127,7 @@ export class App extends Component<IAppProps, IAppState> {
                         onClose={this.handleCloseDialog}
                         onSignIn={this.handleSignIn}
                         onSignUp={this.handleSignUp}
+                        onRequestPasswordReset={this.handleRequestPasswordReset}
                     />
                 )}
                 {this.state.showUserCarpools && (
@@ -197,6 +214,12 @@ export class App extends Component<IAppProps, IAppState> {
         if (authStore.isAuthenticated) {
             this.handleCloseDialog();
         }
+    };
+
+    private handleRequestPasswordReset = async (email: string) => {
+        const { authStore } = this.injectedProps;
+        await authStore.requestPasswordReset(email);
+        console.log(`Password reset requested for: ${email}`);
     };
 
     private handleSignUp = async (email: string, password: string, displayName: string) => {

@@ -15,25 +15,25 @@ exports.SignUpDto = {
                 required: true,
                 serializedName: "email",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             password: {
                 required: true,
                 serializedName: "password",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             displayName: {
                 required: true,
                 serializedName: "displayName",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 exports.SignInDto = {
     serializedName: "SignInDto",
@@ -45,18 +45,18 @@ exports.SignInDto = {
                 required: true,
                 serializedName: "email",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             password: {
                 required: true,
                 serializedName: "password",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 exports.AuthDto = {
     serializedName: "AuthDto",
@@ -68,14 +68,60 @@ exports.AuthDto = {
                 required: true,
                 serializedName: "access_token",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
-exports.UserDto = {
-    serializedName: "UserDto",
+exports.PasswordResetRequestDto = {
+    serializedName: "PasswordResetRequestDto",
+    type: {
+        name: "Composite",
+        className: "PasswordResetRequestDto",
+        modelProperties: {
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String",
+                },
+            },
+        },
+    },
+};
+exports.PasswordResetDto = {
+    serializedName: "PasswordResetDto",
+    type: {
+        name: "Composite",
+        className: "PasswordResetDto",
+        modelProperties: {
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String",
+                },
+            },
+            token: {
+                required: true,
+                serializedName: "token",
+                type: {
+                    name: "String",
+                },
+            },
+            newPassword: {
+                required: true,
+                serializedName: "newPassword",
+                type: {
+                    name: "String",
+                },
+            },
+        },
+    },
+};
+exports.CarpoolDto = {
+    serializedName: "CarpoolDto",
     type: {
         name: "Composite",
         className: "UserDto",
@@ -84,25 +130,25 @@ exports.UserDto = {
                 required: true,
                 serializedName: "id",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             email: {
                 required: true,
                 serializedName: "email",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             displayName: {
                 required: true,
                 serializedName: "displayName",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 exports.Carpool = {
     serializedName: "Carpool",
@@ -114,43 +160,43 @@ exports.Carpool = {
                 required: true,
                 serializedName: "id",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             created: {
                 required: true,
                 serializedName: "created",
                 type: {
-                    name: "Object"
-                }
+                    name: "Object",
+                },
             },
             updated: {
                 required: true,
                 serializedName: "updated",
                 type: {
-                    name: "Object"
-                }
+                    name: "Object",
+                },
             },
             name: {
                 required: true,
                 serializedName: "name",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             destination: {
                 required: true,
                 serializedName: "destination",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             dateTime: {
                 required: true,
                 serializedName: "dateTime",
                 type: {
-                    name: "Object"
-                }
+                    name: "Object",
+                },
             },
             drivers: {
                 required: true,
@@ -159,27 +205,27 @@ exports.Carpool = {
                     name: "Sequence",
                     element: {
                         type: {
-                            name: "String"
-                        }
-                    }
-                }
+                            name: "String",
+                        },
+                    },
+                },
             },
             createdById: {
                 required: true,
                 serializedName: "createdById",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             updatedById: {
                 required: true,
                 serializedName: "updatedById",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 exports.CarpoolDto = {
     serializedName: "CarpoolDto",
@@ -191,25 +237,25 @@ exports.CarpoolDto = {
                 required: true,
                 serializedName: "carpoolName",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             destination: {
                 required: true,
                 serializedName: "destination",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             dateTime: {
                 required: true,
                 serializedName: "dateTime",
                 type: {
-                    name: "Object"
-                }
-            }
-        }
-    }
+                    name: "Object",
+                },
+            },
+        },
+    },
 };
 exports.Car = {
     serializedName: "Car",
@@ -221,25 +267,25 @@ exports.Car = {
                 required: true,
                 serializedName: "capacity",
                 type: {
-                    name: "Number"
-                }
+                    name: "Number",
+                },
             },
             color: {
                 required: true,
                 serializedName: "color",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             type: {
                 required: true,
                 serializedName: "type",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 exports.CreateDriverDto = {
     serializedName: "CreateDriverDto",
@@ -252,11 +298,11 @@ exports.CreateDriverDto = {
                 serializedName: "car",
                 type: {
                     name: "Composite",
-                    className: "Car"
-                }
-            }
-        }
-    }
+                    className: "Car",
+                },
+            },
+        },
+    },
 };
 exports.DriverDto = {
     serializedName: "DriverDto",
@@ -268,34 +314,34 @@ exports.DriverDto = {
                 required: true,
                 serializedName: "id",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             car: {
                 required: true,
                 serializedName: "car",
                 type: {
                     name: "Composite",
-                    className: "Car"
-                }
+                    className: "Car",
+                },
             },
             carpoolId: {
                 required: true,
                 serializedName: "carpoolId",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             user: {
                 required: true,
                 serializedName: "user",
                 type: {
                     name: "Composite",
-                    className: "UserDto"
-                }
-            }
-        }
-    }
+                    className: "UserDto",
+                },
+            },
+        },
+    },
 };
 exports.VerificationDto = {
     serializedName: "VerificationDto",
@@ -307,17 +353,17 @@ exports.VerificationDto = {
                 required: true,
                 serializedName: "email",
                 type: {
-                    name: "String"
-                }
+                    name: "String",
+                },
             },
             token: {
                 required: true,
                 serializedName: "token",
                 type: {
-                    name: "String"
-                }
-            }
-        }
-    }
+                    name: "String",
+                },
+            },
+        },
+    },
 };
 //# sourceMappingURL=mappers.js.map

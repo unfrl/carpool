@@ -7,24 +7,23 @@
 import { ServiceClientOptions } from "@azure/ms-rest-js";
 import * as msRest from "@azure/ms-rest-js";
 
-
 /**
  * @interface
  * An interface representing SignUpDto.
  */
 export interface SignUpDto {
-  /**
-   * @member {string} email
-   */
-  email: string;
-  /**
-   * @member {string} password
-   */
-  password: string;
-  /**
-   * @member {string} displayName
-   */
-  displayName: string;
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} password
+     */
+    password: string;
+    /**
+     * @member {string} displayName
+     */
+    displayName: string;
 }
 
 /**
@@ -32,14 +31,14 @@ export interface SignUpDto {
  * An interface representing SignInDto.
  */
 export interface SignInDto {
-  /**
-   * @member {string} email
-   */
-  email: string;
-  /**
-   * @member {string} password
-   */
-  password: string;
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} password
+     */
+    password: string;
 }
 
 /**
@@ -47,29 +46,59 @@ export interface SignInDto {
  * An interface representing AuthDto.
  */
 export interface AuthDto {
-  /**
-   * @member {string} accessToken
-   */
-  accessToken: string;
+    /**
+     * @member {string} accessToken
+     */
+    accessToken: string;
 }
 
 /**
  * @interface
- * An interface representing UserDto.
+ * An interface representing PasswordResetRequestDto.
+ */
+export interface PasswordResetRequestDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+}
+
+/**
+ * @interface
+ * An interface representing PasswordResetDto.
+ */
+export interface PasswordResetDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} token
+     */
+    token: string;
+    /**
+     * @member {string} newPassword
+     */
+    newPassword: string;
+}
+
+/**
+ * @interface
+ * An interface representing CarpoolDto.
  */
 export interface UserDto {
-  /**
-   * @member {string} id
-   */
-  id: string;
-  /**
-   * @member {string} email
-   */
-  email: string;
-  /**
-   * @member {string} displayName
-   */
-  displayName: string;
+    /**
+     * @member {string} id
+     */
+    id: string;
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} displayName
+     */
+    displayName: string;
 }
 
 /**
@@ -77,42 +106,42 @@ export interface UserDto {
  * An interface representing Carpool.
  */
 export interface Carpool {
-  /**
-   * @member {string} id
-   */
-  id: string;
-  /**
-   * @member {any} created
-   */
-  created: any;
-  /**
-   * @member {any} updated
-   */
-  updated: any;
-  /**
-   * @member {string} name
-   */
-  name: string;
-  /**
-   * @member {string} destination
-   */
-  destination: string;
-  /**
-   * @member {any} dateTime
-   */
-  dateTime: any;
-  /**
-   * @member {string[]} drivers
-   */
-  drivers: string[];
-  /**
-   * @member {string} createdById
-   */
-  createdById: string;
-  /**
-   * @member {string} updatedById
-   */
-  updatedById: string;
+    /**
+     * @member {string} id
+     */
+    id: string;
+    /**
+     * @member {any} created
+     */
+    created: any;
+    /**
+     * @member {any} updated
+     */
+    updated: any;
+    /**
+     * @member {string} name
+     */
+    name: string;
+    /**
+     * @member {string} destination
+     */
+    destination: string;
+    /**
+     * @member {any} dateTime
+     */
+    dateTime: any;
+    /**
+     * @member {string[]} drivers
+     */
+    drivers: string[];
+    /**
+     * @member {string} createdById
+     */
+    createdById: string;
+    /**
+     * @member {string} updatedById
+     */
+    updatedById: string;
 }
 
 /**
@@ -120,18 +149,18 @@ export interface Carpool {
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
-  /**
-   * @member {string} carpoolName
-   */
-  carpoolName: string;
-  /**
-   * @member {string} destination
-   */
-  destination: string;
-  /**
-   * @member {any} dateTime
-   */
-  dateTime: any;
+    /**
+     * @member {string} carpoolName
+     */
+    carpoolName: string;
+    /**
+     * @member {string} destination
+     */
+    destination: string;
+    /**
+     * @member {any} dateTime
+     */
+    dateTime: any;
 }
 
 /**
@@ -139,19 +168,19 @@ export interface CarpoolDto {
  * An interface representing Car.
  */
 export interface Car {
-  /**
-   * @member {number} capacity
-   */
-  capacity: number;
-  /**
-   * @member {string} color
-   */
-  color: string;
-  /**
-   * @member {Type} type Possible values include: 'sedan', 'truck', 'suv',
-   * 'van'
-   */
-  type: Type;
+    /**
+     * @member {number} capacity
+     */
+    capacity: number;
+    /**
+     * @member {string} color
+     */
+    color: string;
+    /**
+     * @member {Type} type Possible values include: 'sedan', 'truck', 'suv',
+     * 'van'
+     */
+    type: Type;
 }
 
 /**
@@ -159,10 +188,10 @@ export interface Car {
  * An interface representing CreateDriverDto.
  */
 export interface CreateDriverDto {
-  /**
-   * @member {Car} car
-   */
-  car: Car;
+    /**
+     * @member {Car} car
+     */
+    car: Car;
 }
 
 /**
@@ -170,22 +199,22 @@ export interface CreateDriverDto {
  * An interface representing DriverDto.
  */
 export interface DriverDto {
-  /**
-   * @member {string} id
-   */
-  id: string;
-  /**
-   * @member {Car} car
-   */
-  car: Car;
-  /**
-   * @member {string} carpoolId
-   */
-  carpoolId: string;
-  /**
-   * @member {UserDto} user
-   */
-  user: UserDto;
+    /**
+     * @member {string} id
+     */
+    id: string;
+    /**
+     * @member {Car} car
+     */
+    car: Car;
+    /**
+     * @member {string} carpoolId
+     */
+    carpoolId: string;
+    /**
+     * @member {UserDto} user
+     */
+    user: UserDto;
 }
 
 /**
@@ -193,14 +222,14 @@ export interface DriverDto {
  * An interface representing VerificationDto.
  */
 export interface VerificationDto {
-  /**
-   * @member {string} email
-   */
-  email: string;
-  /**
-   * @member {string} token
-   */
-  token: string;
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} token
+     */
+    token: string;
 }
 
 /**
@@ -209,10 +238,10 @@ export interface VerificationDto {
  * @extends ServiceClientOptions
  */
 export interface CarpoolAPIOptions extends ServiceClientOptions {
-  /**
-   * @member {string} [baseUri]
-   */
-  baseUri?: string;
+    /**
+     * @member {string} [baseUri]
+     */
+    baseUri?: string;
 }
 
 /**
@@ -221,62 +250,43 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
  * @readonly
  * @enum {string}
  */
-export type Type = 'sedan' | 'truck' | 'suv' | 'van';
+export type Type = "sedan" | "truck" | "suv" | "van";
 
 /**
  * Contains response data for the signIn operation.
  */
 export type SignInResponse = AuthDto & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthDto;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
     };
 };
 
 /**
- * Contains response data for the getMyProfile operation.
+ * Contains response data for the resetPassword operation.
  */
-export type GetMyProfileResponse = UserDto & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: UserDto;
-    };
-};
-
-/**
- * Contains response data for the getMyCarpools operation.
- */
-export type GetMyCarpoolsResponse = Array<Carpool> & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Carpool[];
+export type ResetPasswordResponse = AuthDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
     };
 };
 
@@ -284,18 +294,18 @@ export type GetMyCarpoolsResponse = Array<Carpool> & {
  * Contains response data for the createCarpool operation.
  */
 export type CreateCarpoolResponse = Carpool & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Carpool;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool;
     };
 };
 
@@ -303,18 +313,18 @@ export type CreateCarpoolResponse = Carpool & {
  * Contains response data for the getCarpool operation.
  */
 export type GetCarpoolResponse = Carpool & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Carpool;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool;
     };
 };
 
@@ -322,18 +332,18 @@ export type GetCarpoolResponse = Carpool & {
  * Contains response data for the updateCarpool operation.
  */
 export type UpdateCarpoolResponse = Carpool & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Carpool;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool;
     };
 };
 
@@ -341,18 +351,18 @@ export type UpdateCarpoolResponse = Carpool & {
  * Contains response data for the deleteCarpool operation.
  */
 export type DeleteCarpoolResponse = Carpool & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Carpool;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: Carpool;
     };
 };
 
@@ -360,18 +370,18 @@ export type DeleteCarpoolResponse = Carpool & {
  * Contains response data for the createDriver operation.
  */
 export type CreateDriverResponse = DriverDto & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: DriverDto;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: DriverDto;
     };
 };
 
@@ -379,18 +389,18 @@ export type CreateDriverResponse = DriverDto & {
  * Contains response data for the getDrivers operation.
  */
 export type GetDriversResponse = Array<DriverDto> & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: DriverDto[];
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: DriverDto[];
     };
 };
 
@@ -398,17 +408,17 @@ export type GetDriversResponse = Array<DriverDto> & {
  * Contains response data for the verifyUser operation.
  */
 export type VerifyUserResponse = AuthDto & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthDto;
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
     };
 };

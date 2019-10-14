@@ -44,7 +44,35 @@ export interface AuthDto {
 }
 /**
  * @interface
- * An interface representing UserDto.
+ * An interface representing PasswordResetRequestDto.
+ */
+export interface PasswordResetRequestDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+}
+/**
+ * @interface
+ * An interface representing PasswordResetDto.
+ */
+export interface PasswordResetDto {
+    /**
+     * @member {string} email
+     */
+    email: string;
+    /**
+     * @member {string} token
+     */
+    token: string;
+    /**
+     * @member {string} newPassword
+     */
+    newPassword: string;
+}
+/**
+ * @interface
+ * An interface representing CarpoolDto.
  */
 export interface UserDto {
     /**
@@ -202,7 +230,7 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
  * @readonly
  * @enum {string}
  */
-export declare type Type = 'sedan' | 'truck' | 'suv' | 'van';
+export declare type Type = "sedan" | "truck" | "suv" | "van";
 /**
  * Contains response data for the signIn operation.
  */
@@ -222,9 +250,9 @@ export declare type SignInResponse = AuthDto & {
     };
 };
 /**
- * Contains response data for the getMyProfile operation.
+ * Contains response data for the resetPassword operation.
  */
-export declare type GetMyProfileResponse = UserDto & {
+export declare type ResetPasswordResponse = AuthDto & {
     /**
      * The underlying HTTP response.
      */
@@ -236,25 +264,7 @@ export declare type GetMyProfileResponse = UserDto & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: UserDto;
-    };
-};
-/**
- * Contains response data for the getMyCarpools operation.
- */
-export declare type GetMyCarpoolsResponse = Array<Carpool> & {
-    /**
-     * The underlying HTTP response.
-     */
-    _response: msRest.HttpResponse & {
-        /**
-         * The response body as text (string format)
-         */
-        bodyAsText: string;
-        /**
-         * The response body as parsed JSON or XML
-         */
-        parsedBody: Carpool[];
+        parsedBody: AuthDto;
     };
 };
 /**
