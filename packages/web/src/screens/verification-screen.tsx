@@ -34,6 +34,10 @@ const styles = (theme: Theme) =>
             justifyContent: "center",
             marginTop: theme.spacing(2),
         },
+        loader: {
+            display: "flex",
+            justifyContent: "center"
+        }
     });
 
 export interface IVerificationScreenProps extends WithStyles<typeof styles> {
@@ -45,6 +49,7 @@ export interface IVerificationScreenState {
     readyForRedirect: boolean;
     newPassword: string;
     newPasswordDuplicate: string;
+    loading: boolean;
 }
 
 export enum ScreenMode {
@@ -58,6 +63,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         readyForRedirect: false,
         newPassword: "",
         newPasswordDuplicate: "",
+        loading: false
     };
 
     private _token?;
@@ -83,15 +89,27 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         }
     }
 
-    private handlePasswordReset(newPassword: string) {
-        console.log("Doin it!");
-        // await this.props.authStore.resetpassword(this._token, this._email, newPassword);
+    private async handlePasswordReset(newPassword: string): Promise<void> {
+        try{
+            this.setState({ loading: true });
+            await this.props.authStore.resetpassword(this._token, this._email, newPassword);
+        }
+        finally {
+            setTimeout(() => {this.setState({ readyForRedirect: true })}, 500);
+        }
     }
 
     public render() {
         const { classes } = this.props;
         if (this.state.readyForRedirect) {
             return <Redirect to="/" />;
+        }
+        if(this.state.loading) {
+            return(
+                <div className={classes.loader}>
+                    <CircularProgress></CircularProgress>
+                </div>
+            )
         }
         if (this.props.mode === ScreenMode.Verification) {
             return (

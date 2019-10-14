@@ -63,6 +63,7 @@ export class AuthService {
     ): Promise<void> {
         if (!(await this._userService.findOneByEmail(passwordResetRequestDto.email))) {
             //Dont throw anything if they give us a non-member email or they can use that to determin who is and isnt a member
+            console.log(`Password reset requested for ${passwordResetRequestDto.email} but that email is not associated with any user.`)
             return;
         }
 

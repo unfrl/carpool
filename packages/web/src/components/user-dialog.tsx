@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextField, Button, Typography, makeStyles, Link, Dialog } from "@material-ui/core";
+import { TextField, Button, Typography, makeStyles, Link, CircularProgress } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import { AppDialog } from "./";
 
@@ -28,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     link: {
         cursor: "pointer",
     },
+    loader: {
+        display: "flex",
+        justifyContent: "center"
+    }
 }));
 
 export interface IUserDialogProps {
@@ -64,6 +68,7 @@ enum DialogMode {
     signUpSuccess,
     passwordReset,
     passwordResetSuccess,
+    loading
 }
 
 export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
@@ -104,6 +109,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         try {
             switch (state.mode) {
                 case DialogMode.signUp:
+                    setState({ ... state, mode: DialogMode.loading});
                     await props.onSignUp(state.email, state.password, state.displayName);
                     setState({ ...state, mode: DialogMode.signUpSuccess });
                     break;
@@ -111,6 +117,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                     await props.onSignIn(state.email, state.password);
                     break;
                 case DialogMode.passwordReset:
+                    setState({ ... state, mode: DialogMode.loading});
                     await props.onRequestPasswordReset(state.email);
                     setState({ ...state, mode: DialogMode.passwordResetSuccess });
                     break;
@@ -130,6 +137,8 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
             case DialogMode.passwordReset:
             case DialogMode.passwordResetSuccess:
                 return "Password Reset";
+            case DialogMode.loading:
+                    return "Loading";
         }
     };
 
@@ -142,6 +151,8 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
             case DialogMode.passwordReset:
             case DialogMode.passwordResetSuccess:
                 return renderPasswordResetForm();
+            case DialogMode.loading:
+                    return (<div className={classes.loader}><CircularProgress></CircularProgress></div>);
         }
     };
 

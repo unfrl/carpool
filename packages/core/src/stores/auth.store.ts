@@ -47,12 +47,24 @@ export class AuthStore {
 
     public requestPasswordReset = async (email: string) => {
         try {
-            await this._rootStore.carpoolClient.requestPasswordReset(email);
+            await this._rootStore.carpoolClient.requestPasswordReset({email});
         } catch (error) {
             this._logger.error("Failed to request password reset", error);
             throw error;
         }
     };
+
+    public resetpassword = async (token: string, email: string, newPassword: string) => {
+        try{
+            const result = await this._rootStore.carpoolClient.resetPassword({email, token, newPassword});
+            this.setAccessToken(result.accessToken);
+
+            await this.fetchUserProfile();
+        } catch (error) {
+            this._logger.error("Failed to reset user password", error);
+            throw error;
+        }
+    }
 
     public signIn = async (email: string, password: string) => {
         try {
@@ -104,7 +116,7 @@ export class AuthStore {
         this.clearAccessToken();
     };
 
-    private fetchUserProfile = async () => {
+    private fetchUserProfile = async () => { 
         const user = await this._rootStore.carpoolClient.getMyProfile();
 
         this.setUser(user);
