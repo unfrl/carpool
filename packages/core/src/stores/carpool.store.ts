@@ -66,6 +66,26 @@ export class CarpoolStore {
     };
 
     /**
+     * Updates an existing carpool and then updates the carpool in the collection if successful
+     */
+    public updateCarpool = async (carpoolDto: CarpoolDto, carpoolId: string) => {
+        try {
+            this.setSaving(true);
+
+            const carpool = await this._rootStore.carpoolClient.updateCarpool(
+                carpoolDto,
+                carpoolId
+            );
+
+            this.setUpdatedCarpool(carpool);
+        } catch (error) {
+            this._logger.error("Failed to update carpool", error);
+        } finally {
+            this.setSaving(false);
+        }
+    };
+
+    /**
      * Sets the selected carpool ID, first checking if it has the carpool locally. If not, it'll attempt to fetch it from the server.
      */
     public selectCarpool = async (carpoolId: string) => {
@@ -119,6 +139,14 @@ export class CarpoolStore {
     @action
     private setCarpools = (carpools: Carpool[]) => {
         this.carpools = carpools;
+    };
+
+    @action
+    private setUpdatedCarpool = (carpool: Carpool) => {
+        const index = this.carpools.findIndex(c => c.id === carpool.id);
+        if (index > -1) {
+            this.carpools[index] = carpool;
+        }
     };
 
     @action

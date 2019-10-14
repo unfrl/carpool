@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 
-import { AuthStore, CarpoolStore, DriverStore, CreateDriverDto } from "@carpool/core";
+import { AuthStore, CarpoolStore, DriverStore, CreateDriverDto, CarpoolDto } from "@carpool/core";
 import { CarpoolDetails, DriverList, DocumentHead, AppDialog, DriverForm } from "../components";
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +27,9 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const { selectedCarpoolId, selectedCarpool, loading } = carpoolStore;
     const [ready, setReady] = useState(false);
     const [showDriverForm, setShowDriverForm] = useState(false);
+    const canUserEdit = Boolean(
+        authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.createdById
+    );
 
     useEffect(() => {
         const selectId = async (id: string) => {
@@ -52,6 +55,12 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         handleToggleDriverForm();
     };
 
+    const handleSaveCarpoolDetails = async (carpoolDto: CarpoolDto) => {
+        if (canUserEdit) {
+            await carpoolStore.updateCarpool(carpoolDto, selectedCarpoolId);
+        }
+    };
+
     if (loading || !ready) {
         return <CircularProgress className={classes.progress} />;
     }
@@ -68,7 +77,14 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 screenTitle={name}
                 description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
             />
-            <CarpoolDetails name={name} destination={destination} date={dateTime} />
+            <CarpoolDetails
+                name={name}
+                destination={destination}
+                date={dateTime}
+                canEdit={canUserEdit}
+                onSave={handleSaveCarpoolDetails}
+                saving={carpoolStore.saving}
+            />
             <DriverList
                 drivers={driverStore.drivers}
                 loading={driverStore.loading}
