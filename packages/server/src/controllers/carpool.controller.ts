@@ -23,12 +23,13 @@ import { Carpool } from "../entities";
 import { CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
 import { UserRequest } from "../interfaces";
+import { CarpoolModificationGuard } from "../guards";
 
 @ApiUseTags("Carpools")
 @ApiBearerAuth()
 @Controller("api/v1/carpools")
 export class CarpoolController {
-    public constructor(private readonly _carpoolService: CarpoolService) {}
+    public constructor(private readonly _carpoolService: CarpoolService) { }
 
     @ApiOperation({
         operationId: "createCarpool",
@@ -62,7 +63,7 @@ export class CarpoolController {
         description: "Update a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
-    @UseGuards(AuthGuard("jwt"))
+    @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @Put(":id")
     public async updateCarpool(
         @Param("id") id: string,
@@ -78,7 +79,7 @@ export class CarpoolController {
         description: "Delete a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
-    @UseGuards(AuthGuard("jwt"))
+    @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @Delete(":id")
     public async deleteCarpool(@Param("id") id: string): Promise<Carpool> {
         return await this._carpoolService.deleteCarpool(id);
