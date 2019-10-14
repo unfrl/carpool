@@ -66,6 +66,18 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, signInOperationSpec, callback);
     };
+    CarpoolAPI.prototype.requestPasswordReset = function (passwordResetRequestDto, options, callback) {
+        return this.sendOperationRequest({
+            passwordResetRequestDto: passwordResetRequestDto,
+            options: options
+        }, requestPasswordResetOperationSpec, callback);
+    };
+    CarpoolAPI.prototype.resetPassword = function (passwordResetDto, options, callback) {
+        return this.sendOperationRequest({
+            passwordResetDto: passwordResetDto,
+            options: options
+        }, resetPasswordOperationSpec, callback);
+    };
     CarpoolAPI.prototype.createCarpool = function (carpoolDto, options, callback) {
         return this.sendOperationRequest({
             carpoolDto: carpoolDto,
@@ -131,6 +143,34 @@ var signInOperationSpec = {
     requestBody: {
         parameterPath: "signInDto",
         mapper: __assign(__assign({}, Mappers.SignInDto), { required: true })
+    },
+    responses: {
+        200: {
+            bodyMapper: Mappers.AuthDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var requestPasswordResetOperationSpec = {
+    httpMethod: "POST",
+    path: "api/v1/auth/requestpasswordreset",
+    requestBody: {
+        parameterPath: "passwordResetRequestDto",
+        mapper: __assign(__assign({}, Mappers.PasswordResetRequestDto), { required: true })
+    },
+    responses: {
+        200: {},
+        default: {}
+    },
+    serializer: serializer
+};
+var resetPasswordOperationSpec = {
+    httpMethod: "PUT",
+    path: "api/v1/auth/resetpassword",
+    requestBody: {
+        parameterPath: "passwordResetDto",
+        mapper: __assign(__assign({}, Mappers.PasswordResetDto), { required: true })
     },
     responses: {
         200: {

@@ -79,6 +79,54 @@ export const AuthDto: msRest.CompositeMapper = {
   }
 };
 
+export const PasswordResetRequestDto: msRest.CompositeMapper = {
+  serializedName: "PasswordResetRequestDto",
+  type: {
+    name: "Composite",
+    className: "PasswordResetRequestDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const PasswordResetDto: msRest.CompositeMapper = {
+  serializedName: "PasswordResetDto",
+  type: {
+    name: "Composite",
+    className: "PasswordResetDto",
+    modelProperties: {
+      email: {
+        required: true,
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      token: {
+        required: true,
+        serializedName: "token",
+        type: {
+          name: "String"
+        }
+      },
+      newPassword: {
+        required: true,
+        serializedName: "newPassword",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const CarpoolDto: msRest.CompositeMapper = {
   serializedName: "CarpoolDto",
   type: {

@@ -1,8 +1,17 @@
-import { Controller, Post, Body, HttpStatus, HttpCode } from "@nestjs/common";
+import {
+    Controller,
+    Post,
+    Body,
+    HttpStatus,
+    HttpCode,
+    Param,
+    Put,
+    UnauthorizedException,
+} from "@nestjs/common";
 import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
-import { AuthDto, SignUpDto, SignInDto } from "../dtos";
+import { AuthDto, SignUpDto, SignInDto, PasswordResetRequestDto, PasswordResetDto } from "../dtos";
 
 @ApiUseTags("Auth")
 @Controller("api/v1/auth")
@@ -31,5 +40,31 @@ export class AuthController {
     @Post("signin")
     public async signIn(@Body() signInDto: SignInDto): Promise<AuthDto> {
         return await this._authService.signIn(signInDto);
+    }
+
+    @ApiOperation({
+        operationId: "requestPasswordReset",
+        title: "Request Password Reset",
+        description: "Sends a password reset to the specified email if it exists",
+    })
+    @ApiResponse({ status: HttpStatus.OK })
+    @HttpCode(200)
+    @Post("requestpasswordreset")
+    public async requestPasswordReset(
+        @Body() passwordResetRequestDto: PasswordResetRequestDto
+    ): Promise<void> {
+        return await this._authService.requestPasswordReset(passwordResetRequestDto);
+    }
+
+    @ApiOperation({
+        operationId: "resetPassword",
+        title: "Reset User Password",
+        description:
+            "Reset a User's password using the token emailed to them after requesting a password reset",
+    })
+    @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
+    @Put("resetpassword")
+    public async resetPassword(@Body() passwordResetDto: PasswordResetDto): Promise<AuthDto> {
+        return await this._authService.resetUserPassword(passwordResetDto);
     }
 }

@@ -48,6 +48,44 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
+     * Sends a password reset to the specified email if it exists
+     * @summary Request Password Reset
+     * @param passwordResetRequestDto
+     * @param [options] The optional parameters
+     * @returns Promise<msRest.RestResponse>
+     */
+    requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+    /**
+     * @param passwordResetRequestDto
+     * @param callback The callback
+     */
+    requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, callback: msRest.ServiceCallback<void>): void;
+    /**
+     * @param passwordResetRequestDto
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    requestPasswordReset(passwordResetRequestDto: Models.PasswordResetRequestDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+    /**
+     * Reset a User's password using the token emailed to them after requesting a password reset
+     * @summary Reset User Password
+     * @param passwordResetDto
+     * @param [options] The optional parameters
+     * @returns Promise<Models.ResetPasswordResponse>
+     */
+    resetPassword(passwordResetDto: Models.PasswordResetDto, options?: msRest.RequestOptionsBase): Promise<Models.ResetPasswordResponse>;
+    /**
+     * @param passwordResetDto
+     * @param callback The callback
+     */
+    resetPassword(passwordResetDto: Models.PasswordResetDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    /**
+     * @param passwordResetDto
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    resetPassword(passwordResetDto: Models.PasswordResetDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    /**
      * Create a new Carpool
      * @summary Create Carpool
      * @param carpoolDto
