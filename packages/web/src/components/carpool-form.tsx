@@ -19,9 +19,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface ICarpoolFormProps {
+    /**
+     * Callback requesting the carpool be saved.
+     */
     onSave: (carpoolDto: CarpoolDto) => void;
+    /**
+     * Callback requesting to cancel.
+     */
     onCancel: () => void;
+    /**
+     * Set to true to disable buttons and display loading indicator.
+     */
     saving: boolean;
+    /**
+     * Provide an existing carpool to toggle the form as an "edit" not a "create".
+     */
     existingCarpool?: CarpoolDto;
 }
 
