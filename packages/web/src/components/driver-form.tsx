@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import {
     TextField,
     Button,
@@ -59,6 +59,13 @@ export const DriverForm: FunctionComponent<IDriverFormProps> = props => {
 
     const canSave = Boolean(state.capacity > 0 && state.color && state.carType);
 
+    const inputLabel = useRef<HTMLLabelElement>(null);
+    const [labelWidth, setLabelWidth] = useState(0);
+
+    useEffect(() => {
+        setLabelWidth(inputLabel.current!.offsetWidth);
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -79,8 +86,10 @@ export const DriverForm: FunctionComponent<IDriverFormProps> = props => {
                 Thanks for offering to drive! <br />
                 We just need a few details about your car.
             </Typography>
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="car-type">Type</InputLabel>
+            <FormControl variant="outlined" className={classes.formControl} required={true}>
+                <InputLabel htmlFor="car-type" ref={inputLabel}>
+                    Type
+                </InputLabel>
                 <Select
                     value={state.carType}
                     onChange={e => setState({ ...state, carType: `${e.target.value}` })}
@@ -88,7 +97,7 @@ export const DriverForm: FunctionComponent<IDriverFormProps> = props => {
                         name: "carType",
                         id: "car-type",
                     }}
-                    variant="outlined"
+                    labelWidth={labelWidth}
                 >
                     {carTypes.map(type => (
                         <MenuItem key={type} value={type}>
@@ -101,7 +110,12 @@ export const DriverForm: FunctionComponent<IDriverFormProps> = props => {
                 label="Capacity"
                 type="number"
                 value={state.capacity}
-                onChange={e => setState({ ...state, capacity: Number.parseInt(e.target.value) })}
+                onChange={e => {
+                    const number = Number.parseInt(e.target.value);
+                    if (!Number.isNaN(number)) {
+                        setState({ ...state, capacity: number });
+                    }
+                }}
                 inputProps={{ min: 0, max: 15 }}
                 margin="normal"
                 variant="outlined"
