@@ -8,13 +8,14 @@ import cityDriver from "../images/city-driver.svg";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(2),
+        marginTop: theme.spacing(2),
     },
     header: {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: theme.spacing(1),
+        padding: theme.spacing(0, 2),
     },
     progress: {
         display: "flex",
@@ -47,6 +48,8 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
     const classes = useStyles();
     const { drivers, userId, loading, onOfferToDrive } = props;
     const hasDrivers = drivers.length > 0;
+    const currentUserIsDriver = Boolean(drivers.find(d => d.user.id === userId));
+    const canOfferToDrive = !!userId && !currentUserIsDriver;
 
     const renderDrivers = () => {
         if (loading) {
@@ -63,6 +66,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                         size="large"
                         className={classes.callToAction}
                         onClick={onOfferToDrive}
+                        disabled={!canOfferToDrive}
                     >
                         Offer to Drive
                     </Button>
@@ -89,7 +93,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             {hasDrivers && (
                 <div className={classes.header}>
                     <Typography variant="h5">Drivers</Typography>
-                    <Button color="primary" onClick={onOfferToDrive}>
+                    <Button color="primary" onClick={onOfferToDrive} disabled={!canOfferToDrive}>
                         Offer to Drive
                     </Button>
                 </div>

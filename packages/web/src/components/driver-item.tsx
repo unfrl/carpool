@@ -60,9 +60,11 @@ export interface IDriverItemProps {
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { driver } = props;
-    const { displayName, email } = driver.user;
-    const remainingSeats = 4; // TODO: eventually needs to be car.capacity - passengers.length
+    const { driver, isCurrentUser } = props;
+    const { car, user } = driver;
+    const { displayName, email } = user;
+    const { capacity, color, type } = car;
+    const remainingSeats = capacity; // TODO: eventually needs to be car.capacity - passengers.length
     const canJoin = remainingSeats > 0;
     const initials = getInitials(displayName);
 
@@ -80,7 +82,9 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                 <div className={classes.driver} onClick={handleToggleExpanded}>
                     <Avatar className={classes.avatar}>{initials}</Avatar>
                     <div>
-                        <Typography>{displayName}</Typography>
+                        <Typography>
+                            {displayName} {isCurrentUser && <strong>(you)</strong>}
+                        </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
                             Remaining seats: {remainingSeats}
                         </Typography>
@@ -121,7 +125,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                         <span role="img" aria-label="email">
                             🚘
                         </span>{" "}
-                        TODO: car details should go here
+                        {car.color} {car.type}
                     </Typography>
                 </div>
             </Collapse>
