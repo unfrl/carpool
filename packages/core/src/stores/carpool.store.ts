@@ -150,8 +150,8 @@ export class CarpoolStore {
     };
 
     @action
-    private setSaving = (creating: boolean) => {
-        this.saving = creating;
+    private setSaving = (saving: boolean) => {
+        this.saving = saving;
     };
 
     @action
