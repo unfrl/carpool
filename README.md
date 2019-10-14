@@ -5,6 +5,7 @@ This is the monorepo for the server and web carpool projects. It is setup using 
 # Setup
 
 1. Ensure Node.js, Docker, and yarn are installed.
+    * At the moment only node v10.16.3 (the current lts) is supported
 2. From root project directory, run `yarn install`. This will install the dependencies of all projects.
 3. To run server services/services and the core/web projects in dev mode, run `yarn start:all` after dependencies are installed.
 
