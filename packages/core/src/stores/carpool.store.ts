@@ -29,7 +29,7 @@ export class CarpoolStore {
     }
 
     @observable
-    public creating: boolean = false;
+    public saving: boolean = false;
 
     @observable
     public loading: boolean = false;
@@ -50,7 +50,7 @@ export class CarpoolStore {
      */
     public createCarpool = async (carpoolDto: CarpoolDto): Promise<Carpool> => {
         try {
-            this.setCreating(true);
+            this.setSaving(true);
 
             const carpool = await this._rootStore.carpoolClient.createCarpool(carpoolDto);
 
@@ -61,7 +61,7 @@ export class CarpoolStore {
             this._logger.error("Failed to create carpool", error);
             throw error;
         } finally {
-            this.setCreating(false);
+            this.setSaving(false);
         }
     };
 
@@ -122,8 +122,8 @@ export class CarpoolStore {
     };
 
     @action
-    private setCreating = (creating: boolean) => {
-        this.creating = creating;
+    private setSaving = (creating: boolean) => {
+        this.saving = creating;
     };
 
     @action

@@ -65,7 +65,7 @@ export class App extends Component<IAppProps, IAppState> {
     }
 
     public render() {
-        const { authStore, carpoolStore, driverStore } = this.injectedProps;
+        const { authStore, carpoolStore, driverStore, routerStore } = this.injectedProps;
 
         return (
             <ThemeProvider theme={theme}>
@@ -78,12 +78,13 @@ export class App extends Component<IAppProps, IAppState> {
                         <Route
                             path="/create-carpool"
                             exact={true}
-                            render={_routeProps => (
+                            render={routeProps => (
                                 <CreateCarpoolScreen
                                     initialized={authStore.initialized}
                                     isAuthenticated={authStore.isAuthenticated}
                                     onSignIn={this.handleAuthClick}
                                     carpoolStore={carpoolStore}
+                                    routerStore={routerStore}
                                 />
                             )}
                         />
