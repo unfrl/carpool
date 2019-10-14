@@ -2,7 +2,8 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
-import { NavLink, AddressSearch, LoadingButton } from ".";
+import { CarpoolDto } from "@carpool/core";
+import { AddressSearch, LoadingButton } from ".";
 
 const useStyles = makeStyles(theme => ({
     actions: {
@@ -18,31 +19,48 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface ICarpoolFormProps {
-    onCreate: (name: string, date: Date, address: string) => void;
-    creating: boolean;
+    /**
+     * Callback requesting the carpool be saved.
+     */
+    onSave: (carpoolDto: CarpoolDto) => void;
+    /**
+     * Callback requesting to cancel.
+     */
+    onCancel: () => void;
+    /**
+     * Set to true to disable buttons and display loading indicator.
+     */
+    saving: boolean;
+    /**
+     * Provide an existing carpool to toggle the form as an "edit" not a "create".
+     */
+    existingCarpool?: CarpoolDto;
 }
 
-export interface ICarpoolFormState {
-    name: string;
-    date: Date;
-    address: string;
-}
+export interface ICarpoolFormState extends CarpoolDto {}
 
 export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
     const classes = useStyles();
-    const [state, setState] = useState<ICarpoolFormState>({
-        name: "",
-        date: new Date(),
-        address: "",
-    });
+    const { existingCarpool } = props;
+    const [state, setState] = useState<ICarpoolFormState>(
+        Object.assign(
+            {},
+            existingCarpool || {
+                carpoolName: "",
+                dateTime: new Date(),
+                destination: "",
+            }
+        )
+    );
 
-    const canCreate = Boolean(state.name && state.date && state.address);
+    const isEditing = !!existingCarpool;
+    const canSave = Boolean(state.carpoolName && state.dateTime && state.destination);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (canCreate) {
-            props.onCreate(state.name, state.date, state.address);
+        if (canSave) {
+            props.onSave(state);
         }
     };
 
@@ -50,8 +68,8 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
         <form onSubmit={handleSubmit}>
             <TextField
                 label="Name"
-                value={state.name}
-                onChange={e => setState({ ...state, name: e.target.value })}
+                value={state.carpoolName}
+                onChange={e => setState({ ...state, carpoolName: e.target.value })}
                 variant="outlined"
                 margin="normal"
                 fullWidth={true}
@@ -59,13 +77,13 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 autoFocus={true}
             />
             <AddressSearch
-                value={state.address}
-                onChange={val => setState({ ...state, address: val })}
+                value={state.destination}
+                onChange={val => setState({ ...state, destination: val })}
                 required={true}
             />
             <DateTimePicker
-                value={state.date}
-                onChange={date => date && setState({ ...state, date: date.toDate() })}
+                value={state.dateTime}
+                onChange={date => date && setState({ ...state, dateTime: date.toDate() })}
                 format="MM/DD/YYYY, hh:mm a"
                 inputVariant="outlined"
                 label="Date"
@@ -78,15 +96,13 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 <LoadingButton
                     color="primary"
                     type="submit"
-                    disabled={!canCreate}
-                    text="Create"
-                    loading={props.creating}
+                    disabled={!canSave}
+                    text={isEditing ? "Save" : "Create"}
+                    loading={props.saving}
                 />
-                <NavLink to="/">
-                    <Button variant="text" className={classes.cancel}>
-                        Cancel
-                    </Button>
-                </NavLink>
+                <Button variant="text" className={classes.cancel} onClick={props.onCancel}>
+                    Cancel
+                </Button>
             </div>
         </form>
     );

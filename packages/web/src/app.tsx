@@ -65,7 +65,7 @@ export class App extends Component<IAppProps, IAppState> {
     }
 
     public render() {
-        const { authStore, carpoolStore, driverStore } = this.injectedProps;
+        const { authStore, carpoolStore, driverStore, routerStore } = this.injectedProps;
 
         return (
             <ThemeProvider theme={theme}>
@@ -84,6 +84,7 @@ export class App extends Component<IAppProps, IAppState> {
                                     isAuthenticated={authStore.isAuthenticated}
                                     onSignIn={this.handleAuthClick}
                                     carpoolStore={carpoolStore}
+                                    routerStore={routerStore}
                                 />
                             )}
                         />

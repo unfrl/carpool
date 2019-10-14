@@ -29,7 +29,7 @@ export class CarpoolStore {
     }
 
     @observable
-    public creating: boolean = false;
+    public saving: boolean = false;
 
     @observable
     public loading: boolean = false;
@@ -50,7 +50,7 @@ export class CarpoolStore {
      */
     public createCarpool = async (carpoolDto: CarpoolDto): Promise<Carpool> => {
         try {
-            this.setCreating(true);
+            this.setSaving(true);
 
             const carpool = await this._rootStore.carpoolClient.createCarpool(carpoolDto);
 
@@ -61,7 +61,27 @@ export class CarpoolStore {
             this._logger.error("Failed to create carpool", error);
             throw error;
         } finally {
-            this.setCreating(false);
+            this.setSaving(false);
+        }
+    };
+
+    /**
+     * Updates an existing carpool and then updates the carpool in the collection if successful
+     */
+    public updateCarpool = async (carpoolDto: CarpoolDto, carpoolId: string) => {
+        try {
+            this.setSaving(true);
+
+            const carpool = await this._rootStore.carpoolClient.updateCarpool(
+                carpoolDto,
+                carpoolId
+            );
+
+            this.setUpdatedCarpool(carpool);
+        } catch (error) {
+            this._logger.error("Failed to update carpool", error);
+        } finally {
+            this.setSaving(false);
         }
     };
 
@@ -122,8 +142,16 @@ export class CarpoolStore {
     };
 
     @action
-    private setCreating = (creating: boolean) => {
-        this.creating = creating;
+    private setUpdatedCarpool = (carpool: Carpool) => {
+        const index = this.carpools.findIndex(c => c.id === carpool.id);
+        if (index > -1) {
+            this.carpools[index] = carpool;
+        }
+    };
+
+    @action
+    private setSaving = (saving: boolean) => {
+        this.saving = saving;
     };
 
     @action

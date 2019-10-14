@@ -2,8 +2,9 @@ import React, { FunctionComponent, Fragment, useState } from "react";
 import { Redirect } from "react-router";
 import { Card, Typography, Button, CircularProgress, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
+import { RouterStore } from "mobx-react-router";
 
-import { CarpoolStore } from "@carpool/core";
+import { CarpoolStore, CarpoolDto } from "@carpool/core";
 import { CarpoolForm, DocumentHead } from "../components";
 import toyCar from "../images/toy-car.svg";
 
@@ -35,21 +36,22 @@ export interface ICreateCarpoolScreenProps {
     isAuthenticated: boolean;
     onSignIn: () => void;
     carpoolStore: CarpoolStore;
+    routerStore: RouterStore;
 }
 
 export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> = observer(props => {
     const classes = useStyles();
-    const { initialized, isAuthenticated, onSignIn, carpoolStore } = props;
+    const { initialized, isAuthenticated, onSignIn, carpoolStore, routerStore } = props;
     const [redirectId, setRedirectId] = useState("");
 
-    const handleCreate = async (name: string, date: Date, address: string) => {
-        const carpool = await carpoolStore.createCarpool({
-            carpoolName: name,
-            destination: address,
-            dateTime: date,
-        });
+    const handleSave = async (carpoolDto: CarpoolDto) => {
+        const carpool = await carpoolStore.createCarpool(carpoolDto);
 
         setRedirectId(carpool.id);
+    };
+
+    const handleCancel = () => {
+        routerStore.replace({ pathname: "/" });
     };
 
     if (!!redirectId) {
@@ -67,7 +69,11 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
                 Create a Carpool
             </Typography>
             {isAuthenticated ? (
-                <CarpoolForm onCreate={handleCreate} creating={carpoolStore.creating} />
+                <CarpoolForm
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                    saving={carpoolStore.saving}
+                />
             ) : (
                 <Fragment>
                     <Typography variant="subtitle1" align="center">
