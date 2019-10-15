@@ -22,6 +22,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { Carpool } from "../entities";
 import { CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
+import { CarpoolGateway } from "../gateways";
 import { UserRequest } from "../interfaces";
 import { CarpoolModificationGuard } from "../guards";
 
@@ -29,7 +30,10 @@ import { CarpoolModificationGuard } from "../guards";
 @ApiBearerAuth()
 @Controller("api/v1/carpools")
 export class CarpoolController {
-    public constructor(private readonly _carpoolService: CarpoolService) { }
+    public constructor(
+        private readonly _carpoolService: CarpoolService,
+        private readonly _carpoolGateway: CarpoolGateway
+    ) {}
 
     @ApiOperation({
         operationId: "createCarpool",
@@ -70,7 +74,12 @@ export class CarpoolController {
         @Req() request: UserRequest,
         @Body() carpoolDto: CarpoolDto
     ): Promise<Carpool> {
-        return await this._carpoolService.updateCarpool(id, carpoolDto, request.user.id);
+        const carpool = await this._carpoolService.updateCarpool(id, carpoolDto, request.user.id);
+
+        // TODO: don't use gateway directly, move logic to an interceptor (https://docs.nestjs.com/interceptors) or via pub/sub
+        this._carpoolGateway.emitCarpoolUpdated(carpool);
+
+        return carpool;
     }
 
     @ApiOperation({
