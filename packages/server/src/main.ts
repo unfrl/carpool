@@ -1,9 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe, INestApplication, INestExpressApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
-import { AppModule } from "./app.module";
 import * as fs from "fs";
 import { RateLimiterMemory } from "rate-limiter-flexible";
+
+import { AppModule } from "./app.module";
+import { RedisIoAdapter } from "./redis-io-adapter";
 
 const PORT = process.env.PORT || 1337;
 
@@ -19,35 +21,6 @@ const corsOptions = {
         }
     },
 };
-
-async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-
-    // Configure swagger documentation
-    const options = new DocumentBuilder()
-        .setTitle("Carpool API")
-        .setDescription("Free carpool app for cool peeps and their friends")
-        .setVersion("1.0")
-        .addBearerAuth()
-        .build();
-    const document = SwaggerModule.createDocument(app, options);
-
-    // TODO: api spec changes are written file directory on startup - need to find a better way to do this
-    fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
-
-    SwaggerModule.setup("swagger", app, document);
-
-    // Bind all endpoints to be automatically checked for incorrect data
-    // See Nest auto-validation docs for info: https://docs.nestjs.com/techniques/validation#auto-validation
-    app.useGlobalPipes(new ValidationPipe());
-
-    // Configure CORS
-    app.enableCors(corsOptions);
-
-    registerRateLimiters(app);
-
-    await app.listen(PORT);
-}
 
 function registerRateLimiters(app: INestApplication & INestExpressApplication) {
     const opts = {
@@ -68,6 +41,38 @@ function registerRateLimiters(app: INestApplication & INestExpressApplication) {
     };
 
     app.use(rateLimiterMiddleware);
+}
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    // Configure swagger documentation
+    const options = new DocumentBuilder()
+        .setTitle("Carpool API")
+        .setDescription("Free carpool app for cool peeps and their friends")
+        .setVersion("1.0")
+        .addBearerAuth()
+        .build();
+    const document = SwaggerModule.createDocument(app, options);
+
+    // TODO: api spec changes are written file directory on startup - need to find a better way to do this
+    fs.writeFileSync("./api-swagger-spec.json", JSON.stringify(document));
+
+    SwaggerModule.setup("swagger", app, document);
+
+    // Configure WebSocket adapter
+    app.useWebSocketAdapter(new RedisIoAdapter(app));
+
+    // Bind all endpoints to be automatically checked for incorrect data
+    // See Nest auto-validation docs for info: https://docs.nestjs.com/techniques/validation#auto-validation
+    app.useGlobalPipes(new ValidationPipe());
+
+    // Configure CORS
+    app.enableCors(corsOptions);
+
+    registerRateLimiters(app);
+
+    await app.listen(PORT);
 }
 
 bootstrap();
