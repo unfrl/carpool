@@ -89,13 +89,14 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         }
     }
 
-    private async handlePasswordReset(newPassword: string): Promise<void> {
-        try{
+    private handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
             this.setState({ loading: true });
-            await this.props.authStore.resetpassword(this._token, this._email, newPassword);
+            await this.props.authStore.resetpassword(this._token, this._email, this.state.newPassword);
         }
         finally {
-            setTimeout(() => {this.setState({ readyForRedirect: true })}, 500);
+            setTimeout(() => { this.setState({ readyForRedirect: true }) }, 500);
         }
     }
 
@@ -104,8 +105,8 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         if (this.state.readyForRedirect) {
             return <Redirect to="/" />;
         }
-        if(this.state.loading) {
-            return(
+        if (this.state.loading) {
+            return (
                 <div className={classes.loader}>
                     <CircularProgress></CircularProgress>
                 </div>
@@ -125,43 +126,43 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
                 <DocumentHead screenTitle="Reset Password" />
                 <Typography variant="h6" align="center">
                     Password Reset
-                </Typography>
-                <TextField
-                    className={classes.password}
-                    label="Password"
-                    required={true}
-                    type="password"
-                    value={this.state.newPassword}
-                    onChange={e => this.setState({ newPassword: e.target.value })}
-                    variant="outlined"
-                    margin="normal"
-                />
-                <TextField
-                    className={classes.password}
-                    label="Retype Password"
-                    required={true}
-                    type="password"
-                    value={this.state.newPasswordDuplicate}
-                    onChange={e => this.setState({ newPasswordDuplicate: e.target.value })}
-                    variant="outlined"
-                    margin="normal"
-                />
-                <div className={classes.actions}>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        disabled={
-                            this.state.newPassword.length == 0 ||
-                            this.state.newPassword !== this.state.newPasswordDuplicate
-                        }
-                        onClick={() => {
-                            this.handlePasswordReset(this.state.newPassword);
-                        }}
-                    >
-                        Change Password
+                    </Typography>
+                <form onSubmit={this.handleSubmit}>
+                    <TextField
+                        className={classes.password}
+                        label="Password"
+                        required={true}
+                        type="password"
+                        value={this.state.newPassword}
+                        onChange={e => this.setState({ newPassword: e.target.value })}
+                        variant="outlined"
+                        margin="normal"
+                    />
+                    <TextField
+                        className={classes.password}
+                        label="Retype Password"
+                        required={true}
+                        type="password"
+                        value={this.state.newPasswordDuplicate}
+                        onChange={e => this.setState({ newPasswordDuplicate: e.target.value })}
+                        variant="outlined"
+                        margin="normal"
+                    />
+                    <div className={classes.actions}>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            type="submit"
+                            color="primary"
+                            disabled={
+                                this.state.newPassword.length == 0 ||
+                                this.state.newPassword !== this.state.newPasswordDuplicate
+                            }
+                        >
+                            Change Password
                     </Button>
-                </div>
+                    </div>
+                </form>
             </Card>
         );
     }
