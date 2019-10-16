@@ -20,6 +20,7 @@ const corsOptions = {
             cb(null, false);
         }
     },
+    credentials: true,
 };
 
 function registerRateLimiters(app: INestApplication & INestExpressApplication) {
@@ -60,15 +61,15 @@ async function bootstrap() {
 
     SwaggerModule.setup("swagger", app, document);
 
-    // Configure WebSocket adapter
-    app.useWebSocketAdapter(new RedisIoAdapter(app));
-
     // Bind all endpoints to be automatically checked for incorrect data
     // See Nest auto-validation docs for info: https://docs.nestjs.com/techniques/validation#auto-validation
     app.useGlobalPipes(new ValidationPipe());
 
     // Configure CORS
     app.enableCors(corsOptions);
+
+    // Configure WebSocket adapter
+    app.useWebSocketAdapter(new RedisIoAdapter(app));
 
     registerRateLimiters(app);
 

@@ -1,12 +1,12 @@
 import { CarpoolAPI } from "@carpool/client";
-import { AuthStore } from "./auth.store";
-import { CarpoolStore } from "./carpool.store";
-import { DriverStore } from "./driver.store";
+import { AuthStore, CarpoolStore, DriverStore } from ".";
+import { RtmClient } from "../rtm";
 import { apiConfig } from "../config";
 
 export class RootStore {
     // api
     public readonly carpoolClient: CarpoolAPI;
+    public readonly rtmClient: RtmClient;
 
     // stores
     public readonly authStore: AuthStore;
@@ -18,6 +18,7 @@ export class RootStore {
         this.carpoolStore = new CarpoolStore(this);
         this.driverStore = new DriverStore(this);
 
+        this.rtmClient = new RtmClient(apiConfig.baseUri);
         this.carpoolClient = new CarpoolAPI(
             {
                 signRequest: async resource => {
