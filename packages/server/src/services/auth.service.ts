@@ -24,14 +24,24 @@ export class AuthService {
         const { email, password } = signInDto;
 
         const user = await this._userService.findOneByEmail(email);
-        if (!user || !user.isVerified) {
+        if (!user) {
             // TODO: if user isn't verified, include message in response that verification is pending
-            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
+            throw new HttpException(
+                "That email doesn't match an existing account.",
+                HttpStatus.BAD_REQUEST
+            );
         }
 
         const result = await bcrypt.compare(password, user.password);
         if (!result) {
-            throw new HttpException("Failed to sign in", HttpStatus.BAD_REQUEST);
+            throw new HttpException("The email and password don't match.", HttpStatus.BAD_REQUEST);
+        }
+
+        if (!user.isVerified) {
+            throw new HttpException(
+                "Your account hasn't been verified yet.",
+                HttpStatus.BAD_REQUEST
+            );
         }
 
         return this.generateAccessToken(user.id);
@@ -42,7 +52,10 @@ export class AuthService {
 
         const existing = await this._userService.findOneByEmail(email);
         if (existing) {
-            throw new HttpException("Failed to sign up", HttpStatus.BAD_REQUEST);
+            throw new HttpException(
+                "That email address is already in use.",
+                HttpStatus.BAD_REQUEST
+            );
         }
 
         const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
@@ -63,7 +76,9 @@ export class AuthService {
     ): Promise<void> {
         if (!(await this._userService.findOneByEmail(passwordResetRequestDto.email))) {
             //Dont throw anything if they give us a non-member email or they can use that to determin who is and isnt a member
-            console.log(`Password reset requested for ${passwordResetRequestDto.email} but that email is not associated with any user.`)
+            console.log(
+                `Password reset requested for ${passwordResetRequestDto.email} but that email is not associated with any user.`
+            );
             return;
         }
 

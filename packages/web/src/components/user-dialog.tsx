@@ -1,6 +1,14 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextField, Button, Typography, makeStyles, Link, CircularProgress } from "@material-ui/core";
+import {
+    TextField,
+    Button,
+    Typography,
+    makeStyles,
+    Link,
+    CircularProgress,
+} from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
+
 import { AppDialog } from "./";
 
 const useStyles = makeStyles(theme => ({
@@ -30,8 +38,10 @@ const useStyles = makeStyles(theme => ({
     },
     loader: {
         display: "flex",
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+        alignItems: "center",
+        height: 250,
+    },
 }));
 
 export interface IUserDialogProps {
@@ -68,7 +78,7 @@ enum DialogMode {
     signUpSuccess,
     passwordReset,
     passwordResetSuccess,
-    loading
+    loading,
 }
 
 export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
@@ -87,6 +97,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                 state.mode === DialogMode.passwordReset
                     ? DialogMode.signIn
                     : DialogMode.passwordReset,
+            error: undefined,
         });
     };
 
@@ -94,6 +105,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         setState({
             ...state,
             mode: state.mode === DialogMode.signUp ? DialogMode.signIn : DialogMode.signUp,
+            error: undefined,
         });
     };
 
@@ -109,15 +121,16 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         try {
             switch (state.mode) {
                 case DialogMode.signUp:
-                    setState({ ... state, mode: DialogMode.loading});
+                    setState({ ...state, mode: DialogMode.loading });
                     await props.onSignUp(state.email, state.password, state.displayName);
                     setState({ ...state, mode: DialogMode.signUpSuccess });
                     break;
                 case DialogMode.signIn:
+                    setState({ ...state, mode: DialogMode.loading });
                     await props.onSignIn(state.email, state.password);
                     break;
                 case DialogMode.passwordReset:
-                    setState({ ... state, mode: DialogMode.loading});
+                    setState({ ...state, mode: DialogMode.loading });
                     await props.onRequestPasswordReset(state.email);
                     setState({ ...state, mode: DialogMode.passwordResetSuccess });
                     break;
@@ -138,7 +151,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
             case DialogMode.passwordResetSuccess:
                 return "Password Reset";
             case DialogMode.loading:
-                    return "Loading";
+                return "Loading";
         }
     };
 
@@ -152,7 +165,11 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
             case DialogMode.passwordResetSuccess:
                 return renderPasswordResetForm();
             case DialogMode.loading:
-                    return (<div className={classes.loader}><CircularProgress></CircularProgress></div>);
+                return (
+                    <div className={classes.loader}>
+                        <CircularProgress />
+                    </div>
+                );
         }
     };
 
@@ -267,7 +284,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
     };
 
     return (
-        <AppDialog title={getDialogTitle()} onClose={props.onClose}>
+        <AppDialog title={getDialogTitle()} onClose={props.onClose} maxWidth="xs" fullWidth={true}>
             {renderForm()}
         </AppDialog>
     );
