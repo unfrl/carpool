@@ -43,6 +43,8 @@ export class CarpoolStore {
                 }
             }
         );
+
+        this._rootStore.rtmClient.carpool.onCarpoolUpdated(this.setUpdatedCarpool);
     }
 
     /**
@@ -52,7 +54,7 @@ export class CarpoolStore {
         try {
             this.setSaving(true);
 
-            const carpool = await this._rootStore.carpoolClient.createCarpool(carpoolDto);
+            const carpool = await this._rootStore.apiClient.createCarpool(carpoolDto);
 
             this.addCarpool(carpool);
 
@@ -72,10 +74,7 @@ export class CarpoolStore {
         try {
             this.setSaving(true);
 
-            const carpool = await this._rootStore.carpoolClient.updateCarpool(
-                carpoolDto,
-                carpoolId
-            );
+            const carpool = await this._rootStore.apiClient.updateCarpool(carpoolDto, carpoolId);
 
             this.setUpdatedCarpool(carpool);
         } catch (error) {
@@ -95,12 +94,13 @@ export class CarpoolStore {
             if (!this.carpools.find(c => c.id === carpoolId)) {
                 this._logger.info("Carpool not found locally, fetching from server...");
 
-                const carpool = await this._rootStore.carpoolClient.getCarpool(carpoolId);
+                const carpool = await this._rootStore.apiClient.getCarpool(carpoolId);
 
                 this.addCarpool(carpool);
             }
 
             this.setSelectedCarpoolId(carpoolId);
+            await this.joinCarpool(carpoolId);
         } catch (error) {
             this._logger.error("Failed to select carpool", error);
         } finally {
@@ -120,8 +120,16 @@ export class CarpoolStore {
      */
     private loadUserCarpools = async () => {
         this._logger.info("Loading current user's carpools...");
-        const carpools = await this._rootStore.carpoolClient.getMyCarpools();
+        const carpools = await this._rootStore.apiClient.getMyCarpools();
         this.setCarpools(carpools);
+    };
+
+    /**
+     * Joins the carpool room to subscribe for real-time updates.
+     */
+    private joinCarpool = async (carpoolId: string) => {
+        this._logger.info("Joining carpool room:", carpoolId);
+        await this._rootStore.rtmClient.carpool.joinCarpoolRoom(carpoolId);
     };
 
     //#region Actions

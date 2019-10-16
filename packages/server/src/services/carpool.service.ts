@@ -44,6 +44,14 @@ export class CarpoolService {
     }
 
     /**
+     * Returns true if the carpool exists.
+     * @param id - ID of the carpool
+     */
+    public async carpoolExists(id: string): Promise<boolean> {
+        return this._carpoolRepository.findOne(id) !== undefined;
+    }
+
+    /**
      * Finds a list of carpools by the user who created them.
      * @param createdById - ID of the user who created the carpools
      */

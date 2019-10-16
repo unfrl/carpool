@@ -28,10 +28,7 @@ export class DriverStore {
 
     public createDriver = async (carpoolId: string, createDriverDto: CreateDriverDto) => {
         try {
-            const driver = await this._rootStore.carpoolClient.createDriver(
-                createDriverDto,
-                carpoolId
-            );
+            const driver = await this._rootStore.apiClient.createDriver(createDriverDto, carpoolId);
             this.addDriver(driver);
         } catch (error) {
             this._logger.error("Failed to create driver", error);
@@ -45,7 +42,7 @@ export class DriverStore {
 
             this._logger.info("Loading drivers for carpool ID", carpoolId);
 
-            const drivers = await this._rootStore.carpoolClient.getDrivers(carpoolId);
+            const drivers = await this._rootStore.apiClient.getDrivers(carpoolId);
 
             this.setDrivers(drivers);
         } catch (error) {

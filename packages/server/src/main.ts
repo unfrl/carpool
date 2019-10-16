@@ -1,9 +1,11 @@
 import { NestFactory } from "@nestjs/core";
-import { ValidationPipe, INestApplication, INestExpressApplication } from "@nestjs/common";
+import { ValidationPipe, INestApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
-import { AppModule } from "./app.module";
 import * as fs from "fs";
 import { RateLimiterMemory } from "rate-limiter-flexible";
+
+import { AppModule } from "./app.module";
+import { RedisIoAdapter } from "./redis-io-adapter";
 
 const PORT = process.env.PORT || 1337;
 
@@ -19,6 +21,27 @@ const corsOptions = {
         }
     },
 };
+
+function registerRateLimiters(app: INestApplication) {
+    const opts = {
+        points: 45, // 45 points
+        duration: 60, // Per minute
+    };
+
+    const rateLimiter = new RateLimiterMemory(opts);
+    const rateLimiterMiddleware = (req, res, next) => {
+        rateLimiter
+            .consume(req.ip)
+            .then(() => {
+                next();
+            })
+            .catch(_ => {
+                res.status(429).send("Too Many Requests");
+            });
+    };
+
+    app.use(rateLimiterMiddleware);
+}
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -44,30 +67,12 @@ async function bootstrap() {
     // Configure CORS
     app.enableCors(corsOptions);
 
+    // Configure WebSocket adapter
+    app.useWebSocketAdapter(new RedisIoAdapter(app));
+
     registerRateLimiters(app);
 
     await app.listen(PORT);
-}
-
-function registerRateLimiters(app: INestApplication & INestExpressApplication) {
-    const opts = {
-        points: 45, // 45 points
-        duration: 60, // Per minute
-    };
-
-    const rateLimiter = new RateLimiterMemory(opts);
-    const rateLimiterMiddleware = (req, res, next) => {
-        rateLimiter
-            .consume(req.ip)
-            .then(() => {
-                next();
-            })
-            .catch(_ => {
-                res.status(429).send("Too Many Requests");
-            });
-    };
-
-    app.use(rateLimiterMiddleware);
 }
 
 bootstrap();

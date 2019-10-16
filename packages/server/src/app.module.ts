@@ -13,6 +13,7 @@ import {
     DriverController,
     VerificationController,
 } from "./controllers";
+import { CarpoolGateway } from "./gateways";
 import {
     AuthService,
     UserService,
@@ -49,6 +50,7 @@ import { Carpool, Driver, Passenger, User } from "./entities";
         AuthService,
         UserService,
         CarpoolService,
+        CarpoolGateway,
         DriverService,
         VerificationService,
         JwtStrategy,

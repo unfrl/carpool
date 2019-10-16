@@ -47,7 +47,7 @@ export class AuthStore {
 
     public requestPasswordReset = async (email: string) => {
         try {
-            await this._rootStore.carpoolClient.requestPasswordReset({email});
+            await this._rootStore.apiClient.requestPasswordReset({ email });
         } catch (error) {
             this._logger.error("Failed to request password reset", error);
             throw error;
@@ -55,8 +55,12 @@ export class AuthStore {
     };
 
     public resetpassword = async (token: string, email: string, newPassword: string) => {
-        try{
-            const result = await this._rootStore.carpoolClient.resetPassword({email, token, newPassword});
+        try {
+            const result = await this._rootStore.apiClient.resetPassword({
+                email,
+                token,
+                newPassword,
+            });
             this.setAccessToken(result.accessToken);
 
             await this.fetchUserProfile();
@@ -64,11 +68,11 @@ export class AuthStore {
             this._logger.error("Failed to reset user password", error);
             throw error;
         }
-    }
+    };
 
     public signIn = async (email: string, password: string) => {
         try {
-            const result = await this._rootStore.carpoolClient.signIn({ email, password });
+            const result = await this._rootStore.apiClient.signIn({ email, password });
 
             this.setAccessToken(result.accessToken);
 
@@ -83,7 +87,7 @@ export class AuthStore {
 
     public signUp = async (email: string, password: string, displayName: string) => {
         try {
-            await this._rootStore.carpoolClient.signUp({
+            await this._rootStore.apiClient.signUp({
                 email,
                 password,
                 displayName,
@@ -100,7 +104,7 @@ export class AuthStore {
      */
     public verifyUser = async (email: string, token: string) => {
         try {
-            const result = await this._rootStore.carpoolClient.verifyUser({ email, token });
+            const result = await this._rootStore.apiClient.verifyUser({ email, token });
 
             this.setAccessToken(result.accessToken);
 
@@ -116,8 +120,8 @@ export class AuthStore {
         this.clearAccessToken();
     };
 
-    private fetchUserProfile = async () => { 
-        const user = await this._rootStore.carpoolClient.getMyProfile();
+    private fetchUserProfile = async () => {
+        const user = await this._rootStore.apiClient.getMyProfile();
 
         this.setUser(user);
     };
