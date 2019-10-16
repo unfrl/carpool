@@ -37,14 +37,8 @@ export class CarpoolGateway {
             return { successful: false, error: `Carpool not found for ID: ${carpoolId}` };
         }
 
-        // For now, we're only allowing a client to join one carpool room at a time
-        // So on join, we remove them from any existing carpool rooms
-        Object.keys(socket.rooms).forEach(roomId => {
-            if (roomId.indexOf(carpoolPrefix) > -1) {
-                socket.leave(roomId);
-            }
-        });
-
+        // Note: we allow clients to join multiple carpool rooms to listen for changes
+        // When that socket disconnects, they'll be automatically removed from the rooms
         const carpoolRoom = getCarpoolRoom(carpoolId);
         socket.join(carpoolRoom);
 

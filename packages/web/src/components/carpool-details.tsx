@@ -25,7 +25,7 @@ export interface ICarpoolDetailsProps {
      */
     date: Date;
     /**
-     * Set to true of the user can edit the carpool details.
+     * Set to true if the user can edit the carpool details.
      */
     canEdit: boolean;
     /**
