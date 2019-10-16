@@ -14,10 +14,6 @@ export class RootStore {
     public readonly driverStore: DriverStore;
 
     public constructor() {
-        this.authStore = new AuthStore(this);
-        this.carpoolStore = new CarpoolStore(this);
-        this.driverStore = new DriverStore(this);
-
         this.rtmClient = new RtmClient(apiConfig.baseUri);
         this.carpoolClient = new CarpoolAPI(
             {
@@ -31,5 +27,9 @@ export class RootStore {
                 baseUri: apiConfig.baseUri,
             }
         );
+
+        this.authStore = new AuthStore(this);
+        this.carpoolStore = new CarpoolStore(this);
+        this.driverStore = new DriverStore(this);
     }
 }

@@ -43,6 +43,8 @@ export class CarpoolStore {
                 }
             }
         );
+
+        this._rootStore.rtmClient.carpool.onCarpoolUpdated(this.setUpdatedCarpool);
     }
 
     /**
@@ -101,6 +103,7 @@ export class CarpoolStore {
             }
 
             this.setSelectedCarpoolId(carpoolId);
+            await this.joinCarpool(carpoolId);
         } catch (error) {
             this._logger.error("Failed to select carpool", error);
         } finally {
@@ -122,6 +125,14 @@ export class CarpoolStore {
         this._logger.info("Loading current user's carpools...");
         const carpools = await this._rootStore.carpoolClient.getMyCarpools();
         this.setCarpools(carpools);
+    };
+
+    /**
+     * Joins the carpool room to subscribe for real-time updates.
+     */
+    private joinCarpool = async (carpoolId: string) => {
+        this._logger.info("Joining carpool room:", carpoolId);
+        await this._rootStore.rtmClient.carpool.joinCarpoolRoom(carpoolId);
     };
 
     //#region Actions
