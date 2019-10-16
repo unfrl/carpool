@@ -1,5 +1,5 @@
 import { NestFactory } from "@nestjs/core";
-import { ValidationPipe, INestApplication, INestExpressApplication } from "@nestjs/common";
+import { ValidationPipe, INestApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import * as fs from "fs";
 import { RateLimiterMemory } from "rate-limiter-flexible";
@@ -20,10 +20,9 @@ const corsOptions = {
             cb(null, false);
         }
     },
-    credentials: true,
 };
 
-function registerRateLimiters(app: INestApplication & INestExpressApplication) {
+function registerRateLimiters(app: INestApplication) {
     const opts = {
         points: 45, // 45 points
         duration: 60, // Per minute
