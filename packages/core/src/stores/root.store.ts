@@ -5,7 +5,7 @@ import { apiConfig } from "../config";
 
 export class RootStore {
     // api
-    public readonly carpoolClient: CarpoolAPI;
+    public readonly apiClient: CarpoolAPI;
     public readonly rtmClient: RtmClient;
 
     // stores
@@ -15,7 +15,7 @@ export class RootStore {
 
     public constructor() {
         this.rtmClient = new RtmClient(apiConfig.baseUri);
-        this.carpoolClient = new CarpoolAPI(
+        this.apiClient = new CarpoolAPI(
             {
                 signRequest: async resource => {
                     const accessToken = this.authStore.getAccessToken();

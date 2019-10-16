@@ -54,7 +54,7 @@ export class CarpoolStore {
         try {
             this.setSaving(true);
 
-            const carpool = await this._rootStore.carpoolClient.createCarpool(carpoolDto);
+            const carpool = await this._rootStore.apiClient.createCarpool(carpoolDto);
 
             this.addCarpool(carpool);
 
@@ -74,10 +74,7 @@ export class CarpoolStore {
         try {
             this.setSaving(true);
 
-            const carpool = await this._rootStore.carpoolClient.updateCarpool(
-                carpoolDto,
-                carpoolId
-            );
+            const carpool = await this._rootStore.apiClient.updateCarpool(carpoolDto, carpoolId);
 
             this.setUpdatedCarpool(carpool);
         } catch (error) {
@@ -97,7 +94,7 @@ export class CarpoolStore {
             if (!this.carpools.find(c => c.id === carpoolId)) {
                 this._logger.info("Carpool not found locally, fetching from server...");
 
-                const carpool = await this._rootStore.carpoolClient.getCarpool(carpoolId);
+                const carpool = await this._rootStore.apiClient.getCarpool(carpoolId);
 
                 this.addCarpool(carpool);
             }
@@ -123,7 +120,7 @@ export class CarpoolStore {
      */
     private loadUserCarpools = async () => {
         this._logger.info("Loading current user's carpools...");
-        const carpools = await this._rootStore.carpoolClient.getMyCarpools();
+        const carpools = await this._rootStore.apiClient.getMyCarpools();
         this.setCarpools(carpools);
     };
 
