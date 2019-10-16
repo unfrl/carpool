@@ -76,7 +76,7 @@ export class App extends Component<IAppProps, IAppState> {
                     <Switch>
                         <Route path="/" exact={true} component={HomeScreen} />
                         <Route
-                            path="/create-carpool"
+                            path="/carpools/create"
                             exact={true}
                             render={_routeProps => (
                                 <CreateCarpoolScreen
@@ -135,13 +135,12 @@ export class App extends Component<IAppProps, IAppState> {
                     <AppDialog
                         title="Your Carpools"
                         onClose={this.handleToggleUserCarpools}
-                        maxWidth="md"
                         fullWidth={true}
                         color="primary"
                     >
                         <CarpoolList
                             carpools={carpoolStore.userCarpools}
-                            onNavigate={this.handleNavigateToCarpool}
+                            onNavigate={this.handleToggleUserCarpools}
                         />
                     </AppDialog>
                 )}
@@ -187,13 +186,6 @@ export class App extends Component<IAppProps, IAppState> {
         } else {
             this.handleShowDialog();
         }
-    };
-
-    /**
-     * Carpool list is a bunch of nav links, we just use this callback to close the dialog on navigation.
-     */
-    private handleNavigateToCarpool = () => {
-        this.handleToggleUserCarpools();
     };
 
     private handleToggleUserCarpools = () => {

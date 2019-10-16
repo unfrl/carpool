@@ -1,11 +1,28 @@
 import React, { FunctionComponent } from "react";
-import { List, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemText, Typography, Button, makeStyles } from "@material-ui/core";
 import moment from "moment";
 
 import { Carpool } from "@carpool/core";
 import { NavLink } from ".";
+import empty from "../images/empty.svg";
 
 const useStyles = makeStyles(theme => ({
+    noCarpools: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: theme.spacing(2),
+    },
+    image: {
+        maxWidth: 450,
+        marginTop: theme.spacing(4),
+    },
+    createCarpool: {
+        marginTop: theme.spacing(2),
+    },
+    list: {
+        minHeight: 500,
+    },
     secondary: {
         display: "flex",
         flexDirection: "column",
@@ -27,15 +44,32 @@ export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
     const classes = useStyles();
     const { carpools } = props;
 
-    const handleSelect = () => {
-        props.onNavigate && props.onNavigate();
-    };
+    if (!carpools.length) {
+        return (
+            <div className={classes.noCarpools}>
+                <Typography variant="h5" align="center">
+                    No carpools yet. Create one!
+                </Typography>
+                <NavLink to="/carpools/create" className={classes.createCarpool}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={props.onNavigate}
+                    >
+                        Create a Carpool
+                    </Button>
+                </NavLink>
+                <img src={empty} className={classes.image} />
+            </div>
+        );
+    }
 
     return (
-        <List component="nav">
+        <List component="nav" className={classes.list}>
             {carpools.map(carpool => (
                 <NavLink key={carpool.id} to={`/carpools/${carpool.id}`}>
-                    <ListItem button={true} onClick={handleSelect}>
+                    <ListItem button={true} onClick={props.onNavigate}>
                         <ListItemText
                             primary={carpool.name}
                             secondary={
