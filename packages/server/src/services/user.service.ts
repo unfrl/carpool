@@ -24,6 +24,14 @@ export class UserService {
     }
 
     /**
+     * Finds a user by display name, returns undefined if not found.
+     * @param displayName - Display name of the user
+     */
+    public async findOneByDisplayName(displayName: string): Promise<User | undefined> {
+        return await this._userRepository.findOne({ where: { displayName } });
+    }
+
+    /**
      * Updates a user's password.
      * @param email - Email of the user
      * @param password - Hashed password to update with

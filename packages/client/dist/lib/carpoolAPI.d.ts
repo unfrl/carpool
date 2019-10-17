@@ -118,6 +118,25 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
     /**
+     * Get a user's carpools by their display name
+     * @summary Get a user's carpools
+     * @param displayName
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetUserCarpoolsResponse>
+     */
+    getUserCarpools(displayName: string, options?: msRest.RequestOptionsBase): Promise<Models.GetUserCarpoolsResponse>;
+    /**
+     * @param displayName
+     * @param callback The callback
+     */
+    getUserCarpools(displayName: string, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    /**
+     * @param displayName
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getUserCarpools(displayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+    /**
      * Create a new Carpool
      * @summary Create Carpool
      * @param carpoolDto

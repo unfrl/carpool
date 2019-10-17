@@ -37,8 +37,8 @@ var CarpoolAPIContext = /** @class */ (function (_super) {
      */
     function CarpoolAPIContext(credentials, options) {
         var _this = this;
-        if (credentials === null || credentials === undefined) {
-            throw new Error('\'credentials\' cannot be null.');
+        if (credentials == undefined) {
+            throw new Error("'credentials' cannot be null.");
         }
         if (!options) {
             options = {};
