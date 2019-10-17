@@ -3,8 +3,8 @@ import { Switch, Route, RouteComponentProps } from "react-router";
 import { observer, inject } from "mobx-react";
 import { CssBaseline, createMuiTheme, CircularProgress, Button } from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import teal from "@material-ui/core/colors/teal";
 import deepPurple from "@material-ui/core/colors/deepPurple";
+import amber from "@material-ui/core/colors/amber";
 import { RouterStore } from "mobx-react-router";
 
 import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
@@ -29,7 +29,7 @@ import {
 const theme = createMuiTheme({
     palette: {
         primary: deepPurple,
-        secondary: teal,
+        secondary: amber,
     },
 });
 

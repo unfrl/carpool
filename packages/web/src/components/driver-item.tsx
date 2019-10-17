@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
         borderRadius: theme.shape.borderRadius,
         border: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.paper,
     },
     card: {
         display: "flex",
@@ -47,7 +48,14 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
         padding: theme.spacing(1),
     },
-    carInfo: {
+    details: {
+        display: "flex",
+        alignItems: "center",
+    },
+    detailsIcon: {
+        marginRight: theme.spacing(1),
+    },
+    spacer: {
         marginTop: theme.spacing(1),
     },
 }));
@@ -115,18 +123,23 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
             </div>
             <Collapse in={expanded}>
                 <div className={classes.expanded}>
-                    <Typography variant="body2">
-                        <span role="img" aria-label="email">
-                            ✉️
-                        </span>{" "}
-                        <a href={`mailto:${email}`}>{email}</a>
-                    </Typography>
-                    <Typography variant="body2" className={classes.carInfo}>
-                        <span role="img" aria-label="email">
-                            🚘
-                        </span>{" "}
-                        {car.color} {car.type}
-                    </Typography>
+                    <div className={classes.details}>
+                        <Icon className={classes.detailsIcon} color="action">
+                            email
+                        </Icon>
+                        <Typography variant="body2">
+                            <a href={`mailto:${email}`}>{email}</a>
+                        </Typography>
+                    </div>
+                    <div className={classes.spacer} />
+                    <div className={classes.details}>
+                        <Icon className={classes.detailsIcon} color="action">
+                            directions_car
+                        </Icon>
+                        <Typography variant="body2">
+                            {color} {type}
+                        </Typography>
+                    </div>
                 </div>
             </Collapse>
         </div>
