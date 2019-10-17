@@ -58,8 +58,17 @@ export class AuthService {
             );
         }
 
+        const trimmedDisplayName = displayName.trim();
+        if (!trimmedDisplayName) {
+            throw new HttpException("Display name cannot be blank.", HttpStatus.BAD_REQUEST);
+        }
+
+        if (await this._userService.displayNameExists(trimmedDisplayName)) {
+            throw new HttpException("Display name already in use.", HttpStatus.BAD_REQUEST);
+        }
+
         const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
-        await this._userService.createUser(email, hashed, displayName);
+        await this._userService.createUser(email, hashed, trimmedDisplayName);
     }
 
     public async generateAccessToken(userId: string): Promise<AuthDto> {
