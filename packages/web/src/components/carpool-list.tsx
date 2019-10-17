@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { List, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core";
 import moment from "moment";
-import slugify from "slugify";
 
 import { Carpool } from "@carpool/core";
 import { NavLink } from ".";
+import { getCarpoolPath } from "../utils";
 import empty from "../images/empty.svg";
 
 const useStyles = makeStyles(theme => ({
@@ -49,10 +49,7 @@ export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
     return (
         <List component="nav">
             {carpools.map(carpool => (
-                <NavLink
-                    key={carpool.id}
-                    to={`/carpools/${slugify(carpool.name, { lower: true })}/${carpool.id}`}
-                >
+                <NavLink key={carpool.id} to={getCarpoolPath(carpool.name, carpool.id)}>
                     <ListItem button={true}>
                         <ListItemText
                             primary={carpool.name}
