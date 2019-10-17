@@ -9,7 +9,7 @@ import {
     Icon,
     makeStyles,
 } from "@material-ui/core";
-
+import amber from "@material-ui/core/colors/amber";
 import { getInitials, UserDto } from "@carpool/core";
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         cursor: "pointer",
+        backgroundColor: amber["A400"],
+        color: theme.palette.text.primary,
     },
     divider: {
         marginBottom: theme.spacing(1),
