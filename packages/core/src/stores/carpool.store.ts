@@ -10,16 +10,6 @@ export class CarpoolStore {
     @observable
     public carpools: Carpool[] = [];
 
-    @computed
-    public get userCarpools(): Carpool[] {
-        const { user } = this._rootStore.authStore;
-        if (!user) {
-            return [];
-        }
-
-        return this.carpools.filter(c => c.createdById === user.id);
-    }
-
     @observable
     public selectedCarpoolId: string = "";
 
@@ -35,15 +25,6 @@ export class CarpoolStore {
     public loading: boolean = false;
 
     public constructor(private readonly _rootStore: RootStore) {
-        reaction(
-            () => this._rootStore.authStore.isAuthenticated,
-            async isAuthenticated => {
-                if (isAuthenticated) {
-                    await this.loadUserCarpools();
-                }
-            }
-        );
-
         this._rootStore.rtmClient.carpool.onCarpoolUpdated(this.setUpdatedCarpool);
     }
 
@@ -116,12 +97,28 @@ export class CarpoolStore {
     };
 
     /**
-     * Loads the current user's carpools.
+     * Clears the collection of carpools.
      */
-    private loadUserCarpools = async () => {
-        this._logger.info("Loading current user's carpools...");
-        const carpools = await this._rootStore.apiClient.getMyCarpools();
-        this.setCarpools(carpools);
+    public clearCarpools = () => {
+        this.setCarpools([]);
+    };
+
+    /**
+     * Load a user's carpools by their (unique) display name.
+     */
+    public loadUserCarpools = async (displayName: string) => {
+        try {
+            this.setLoading(true);
+
+            const carpools = await this._rootStore.apiClient.getUserCarpools(displayName);
+
+            this.setCarpools(carpools);
+        } catch (error) {
+            this._logger.error("Failed to load user carpools", error);
+            throw error;
+        } finally {
+            this.setLoading(false);
+        }
     };
 
     /**

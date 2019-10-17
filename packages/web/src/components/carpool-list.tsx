@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { List, ListItem, ListItemText, Typography, Button, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core";
 import moment from "moment";
+import slugify from "slugify";
 
 import { Carpool } from "@carpool/core";
 import { NavLink } from ".";
@@ -17,12 +18,6 @@ const useStyles = makeStyles(theme => ({
         maxWidth: 450,
         marginTop: theme.spacing(4),
     },
-    createCarpool: {
-        marginTop: theme.spacing(2),
-    },
-    list: {
-        minHeight: 500,
-    },
     secondary: {
         display: "flex",
         flexDirection: "column",
@@ -34,10 +29,6 @@ export interface ICarpoolListProps {
      * Collection of carpools.
      */
     carpools: Carpool[];
-    /**
-     * Optional callback for when a carpool has been navigated. (useful for e.g. closing a dialog on nav)
-     */
-    onNavigate?: () => void;
 }
 
 export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
@@ -48,28 +39,21 @@ export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
         return (
             <div className={classes.noCarpools}>
                 <Typography variant="h5" align="center">
-                    No carpools yet. Create one!
+                    No carpools yet!
                 </Typography>
-                <NavLink to="/carpools/create" className={classes.createCarpool}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={props.onNavigate}
-                    >
-                        Create a Carpool
-                    </Button>
-                </NavLink>
                 <img src={empty} className={classes.image} />
             </div>
         );
     }
 
     return (
-        <List component="nav" className={classes.list}>
+        <List component="nav">
             {carpools.map(carpool => (
-                <NavLink key={carpool.id} to={`/carpools/${carpool.id}`}>
-                    <ListItem button={true} onClick={props.onNavigate}>
+                <NavLink
+                    key={carpool.id}
+                    to={`/carpools/${slugify(carpool.name, { lower: true })}/${carpool.id}`}
+                >
+                    <ListItem button={true}>
                         <ListItemText
                             primary={carpool.name}
                             secondary={
