@@ -6,6 +6,16 @@
 
 import * as msRest from "@azure/ms-rest-js";
 
+export const displayName: msRest.OperationURLParameter = {
+  parameterPath: "displayName",
+  mapper: {
+    required: true,
+    serializedName: "displayName",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const id: msRest.OperationURLParameter = {
   parameterPath: "id",
   mapper: {

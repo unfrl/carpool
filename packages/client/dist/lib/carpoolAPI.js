@@ -88,6 +88,12 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, getMyCarpoolsOperationSpec, callback);
     };
+    CarpoolAPI.prototype.getUserCarpools = function (displayName, options, callback) {
+        return this.sendOperationRequest({
+            displayName: displayName,
+            options: options
+        }, getUserCarpoolsOperationSpec, callback);
+    };
     CarpoolAPI.prototype.createCarpool = function (carpoolDto, options, callback) {
         return this.sendOperationRequest({
             carpoolDto: carpoolDto,
@@ -207,6 +213,31 @@ var getMyProfileOperationSpec = {
 var getMyCarpoolsOperationSpec = {
     httpMethod: "GET",
     path: "api/v1/users/me/carpools",
+    responses: {
+        200: {
+            bodyMapper: {
+                serializedName: "parsedResponse",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "Composite",
+                            className: "Carpool"
+                        }
+                    }
+                }
+            }
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var getUserCarpoolsOperationSpec = {
+    httpMethod: "GET",
+    path: "api/v1/users/{displayName}/carpools",
+    urlParameters: [
+        Parameters.displayName
+    ],
     responses: {
         200: {
             bodyMapper: {

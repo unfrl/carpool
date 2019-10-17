@@ -5,6 +5,16 @@
  * regenerated.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.displayName = {
+    parameterPath: "displayName",
+    mapper: {
+        required: true,
+        serializedName: "displayName",
+        type: {
+            name: "String"
+        }
+    }
+};
 exports.id = {
     parameterPath: "id",
     mapper: {

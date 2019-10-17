@@ -10,22 +10,21 @@ import { RouterStore } from "mobx-react-router";
 import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
 import {
     AppHeader,
-    AppDialog,
     UserDialog,
     Content,
     DocumentHead,
     UserMenu,
     UserMenuOption,
-    CarpoolList,
 } from "./components";
 import {
     HomeScreen,
     CreateCarpoolScreen,
     CarpoolScreen,
+    UserCarpoolsScreen,
     NotFoundScreen,
     VerificationScreen,
+    ScreenMode,
 } from "./screens";
-import { ScreenMode } from "./screens/verification-screen";
 
 const theme = createMuiTheme({
     palette: {
@@ -45,7 +44,6 @@ export interface IInjectedProps extends IAppProps {
 
 export interface IAppState {
     showUserDialog: boolean;
-    showUserCarpools: boolean;
 }
 
 @inject("authStore", "carpoolStore", "driverStore", "routerStore")
@@ -53,7 +51,6 @@ export interface IAppState {
 export class App extends Component<IAppProps, IAppState> {
     public state: IAppState = {
         showUserDialog: false,
-        showUserCarpools: false,
     };
 
     private get injectedProps(): IInjectedProps {
@@ -76,6 +73,13 @@ export class App extends Component<IAppProps, IAppState> {
                     <Switch>
                         <Route path="/" exact={true} component={HomeScreen} />
                         <Route
+                            path="/:displayName/carpools"
+                            exact={true}
+                            render={routeProps => (
+                                <UserCarpoolsScreen carpoolStore={carpoolStore} {...routeProps} />
+                            )}
+                        />
+                        <Route
                             path="/carpools/create"
                             exact={true}
                             render={_routeProps => (
@@ -89,7 +93,7 @@ export class App extends Component<IAppProps, IAppState> {
                             )}
                         />
                         <Route
-                            path="/carpools/:id"
+                            path="/carpools/:name/:id"
                             exact={true}
                             render={routeProps => (
                                 <CarpoolScreen
@@ -131,19 +135,6 @@ export class App extends Component<IAppProps, IAppState> {
                         onRequestPasswordReset={this.handleRequestPasswordReset}
                     />
                 )}
-                {this.state.showUserCarpools && (
-                    <AppDialog
-                        title="Your Carpools"
-                        onClose={this.handleToggleUserCarpools}
-                        fullWidth={true}
-                        color="primary"
-                    >
-                        <CarpoolList
-                            carpools={carpoolStore.userCarpools}
-                            onNavigate={this.handleToggleUserCarpools}
-                        />
-                    </AppDialog>
-                )}
             </ThemeProvider>
         );
     }
@@ -168,11 +159,13 @@ export class App extends Component<IAppProps, IAppState> {
     };
 
     private handleMenuOptionSelected = (option: UserMenuOption) => {
+        const { authStore, routerStore } = this.injectedProps;
+
         switch (option) {
             case UserMenuOption.profile:
                 return;
             case UserMenuOption.carpools:
-                return this.handleToggleUserCarpools();
+                return routerStore.push({ pathname: `/${authStore.user!.displayName}/carpools` });
             case UserMenuOption.signOut:
                 return this.handleAuthClick();
         }
@@ -186,10 +179,6 @@ export class App extends Component<IAppProps, IAppState> {
         } else {
             this.handleShowDialog();
         }
-    };
-
-    private handleToggleUserCarpools = () => {
-        this.setState({ showUserCarpools: !this.state.showUserCarpools });
     };
 
     private handleShowDialog = () => {
@@ -212,7 +201,6 @@ export class App extends Component<IAppProps, IAppState> {
     private handleRequestPasswordReset = async (email: string) => {
         const { authStore } = this.injectedProps;
         await authStore.requestPasswordReset(email);
-        console.log(`Password reset requested for: ${email}`);
     };
 
     private handleSignUp = async (email: string, password: string, displayName: string) => {

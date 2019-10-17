@@ -4,8 +4,9 @@ import { Card, Typography, Button, CircularProgress, makeStyles } from "@materia
 import { observer } from "mobx-react";
 import { RouterStore } from "mobx-react-router";
 
-import { CarpoolStore, CarpoolDto } from "@carpool/core";
+import { CarpoolStore, CarpoolDto, Carpool } from "@carpool/core";
 import { CarpoolForm, DocumentHead } from "../components";
+import { getCarpoolPath } from "../utils";
 import toyCar from "../images/toy-car.svg";
 
 const useStyles = makeStyles(theme => ({
@@ -42,20 +43,20 @@ export interface ICreateCarpoolScreenProps {
 export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> = observer(props => {
     const classes = useStyles();
     const { initialized, isAuthenticated, onSignIn, carpoolStore, routerStore } = props;
-    const [redirectId, setRedirectId] = useState("");
+    const [newCarpool, setNewCarpool] = useState<Carpool | undefined>();
 
     const handleSave = async (carpoolDto: CarpoolDto) => {
         const carpool = await carpoolStore.createCarpool(carpoolDto);
 
-        setRedirectId(carpool.id);
+        setNewCarpool(carpool);
     };
 
     const handleCancel = () => {
         routerStore.replace({ pathname: "/" });
     };
 
-    if (!!redirectId) {
-        return <Redirect to={`/carpools/${redirectId}`} />;
+    if (newCarpool) {
+        return <Redirect to={getCarpoolPath(newCarpool.name, newCarpool.id)} />;
     }
 
     if (!initialized) {

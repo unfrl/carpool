@@ -1,17 +1,28 @@
 import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from "@nestjs/swagger";
-import { Controller, Get, HttpStatus, Req, UseGuards, Param } from "@nestjs/common";
+import {
+    Controller,
+    Get,
+    HttpStatus,
+    Req,
+    UseGuards,
+    Param,
+    NotFoundException,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { Carpool } from "../entities";
-import { CarpoolService } from "../services";
+import { CarpoolService, UserService } from "../services";
 
 @ApiUseTags("Users")
 @ApiBearerAuth()
 @Controller("api/v1/users")
 export class UserController {
-    public constructor(private readonly _carpoolService: CarpoolService) {}
+    public constructor(
+        private readonly _carpoolService: CarpoolService,
+        private readonly _userService: UserService
+    ) {}
 
     @ApiOperation({
         operationId: "getMyProfile",
@@ -41,5 +52,21 @@ export class UserController {
     @Get("me/carpools")
     public async getMyCarpools(@Req() request: UserRequest): Promise<Carpool[]> {
         return await this._carpoolService.findCarpoolsByCreatedBy(request.user.id);
+    }
+
+    @ApiOperation({
+        operationId: "getUserCarpools",
+        title: "Get a user's carpools",
+        description: "Get a user's carpools by their display name",
+    })
+    @ApiResponse({ status: HttpStatus.OK, type: Carpool, isArray: true })
+    @Get(":displayName/carpools")
+    public async getUserCarpools(@Param("displayName") displayName: string): Promise<Carpool[]> {
+        const user = await this._userService.findOneByDisplayName(displayName);
+        if (!user) {
+            throw new NotFoundException("User not found.");
+        }
+
+        return await this._carpoolService.findCarpoolsByCreatedBy(user.id);
     }
 }

@@ -19,14 +19,15 @@ export class CarpoolAPIContext extends msRest.ServiceClient {
    * @param [options] The parameter options
    */
   constructor(credentials: msRest.ServiceClientCredentials, options?: Models.CarpoolAPIOptions) {
-    if (credentials === null || credentials === undefined) {
-      throw new Error('\'credentials\' cannot be null.');
+    if (credentials == undefined) {
+      throw new Error("'credentials' cannot be null.");
     }
 
     if (!options) {
       options = {};
     }
-    if(!options.userAgent) {
+
+    if (!options.userAgent) {
       const defaultUserAgent = msRest.getDefaultUserAgentValue();
       options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
     }
@@ -36,6 +37,5 @@ export class CarpoolAPIContext extends msRest.ServiceClient {
     this.baseUri = options.baseUri || this.baseUri || "http://localhost";
     this.requestContentType = "application/json; charset=utf-8";
     this.credentials = credentials;
-
   }
 }

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Typography } from "@material-ui/core";
+import { NotFound } from "../components";
 
 export const NotFoundScreen: FunctionComponent = () => {
-    return <Typography>Not found!</Typography>;
+    return <NotFound />;
 };

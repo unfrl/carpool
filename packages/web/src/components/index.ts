@@ -12,3 +12,4 @@ export * from "./carpool-details";
 export * from "./carpool-list";
 export * from "./nav-link";
 export * from "./loading-button";
+export * from "./not-found";

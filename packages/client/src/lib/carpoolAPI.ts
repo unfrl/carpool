@@ -187,6 +187,35 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Get a user's carpools by their display name
+   * @summary Get a user's carpools
+   * @param displayName
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetUserCarpoolsResponse>
+   */
+  getUserCarpools(displayName: string, options?: msRest.RequestOptionsBase): Promise<Models.GetUserCarpoolsResponse>;
+  /**
+   * @param displayName
+   * @param callback The callback
+   */
+  getUserCarpools(displayName: string, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  /**
+   * @param displayName
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getUserCarpools(displayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  getUserCarpools(displayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool[]>, callback?: msRest.ServiceCallback<Models.Carpool[]>): Promise<Models.GetUserCarpoolsResponse> {
+    return this.sendOperationRequest(
+      {
+        displayName,
+        options
+      },
+      getUserCarpoolsOperationSpec,
+      callback) as Promise<Models.GetUserCarpoolsResponse>;
+  }
+
+  /**
    * Create a new Carpool
    * @summary Create Carpool
    * @param carpoolDto
@@ -487,6 +516,32 @@ const getMyProfileOperationSpec: msRest.OperationSpec = {
 const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "api/v1/users/me/carpools",
+  responses: {
+    200: {
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "Carpool"
+            }
+          }
+        }
+      }
+    },
+    default: {}
+  },
+  serializer
+};
+
+const getUserCarpoolsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/users/{displayName}/carpools",
+  urlParameters: [
+    Parameters.displayName
+  ],
   responses: {
     200: {
       bodyMapper: {
