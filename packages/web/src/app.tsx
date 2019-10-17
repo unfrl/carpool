@@ -20,7 +20,7 @@ import {
     HomeScreen,
     CreateCarpoolScreen,
     CarpoolScreen,
-    CarpoolsScreen,
+    UserCarpoolsScreen,
     NotFoundScreen,
     VerificationScreen,
 } from "./screens";
@@ -76,7 +76,7 @@ export class App extends Component<IAppProps, IAppState> {
                             path="/:displayName/carpools"
                             exact={true}
                             render={routeProps => (
-                                <CarpoolsScreen carpoolStore={carpoolStore} {...routeProps} />
+                                <UserCarpoolsScreen carpoolStore={carpoolStore} {...routeProps} />
                             )}
                         />
                         <Route

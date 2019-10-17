@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export interface ICarpoolsScreenProps extends RouteComponentProps {
+export interface IUserCarpoolsScreenProps extends RouteComponentProps {
     carpoolStore: CarpoolStore;
 }
 
-export const CarpoolsScreen: FunctionComponent<ICarpoolsScreenProps> = observer(props => {
+export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = observer(props => {
     const classes = useStyles();
     const [notFound, setNotFound] = useState(false);
     const { match, carpoolStore } = props;
