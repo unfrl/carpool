@@ -23,8 +23,8 @@ import {
     UserCarpoolsScreen,
     NotFoundScreen,
     VerificationScreen,
+    ScreenMode,
 } from "./screens";
-import { ScreenMode } from "./screens/verification-screen";
 
 const theme = createMuiTheme({
     palette: {
