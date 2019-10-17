@@ -1,12 +1,15 @@
 import React, { FunctionComponent, useEffect, useState, Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
-import { makeStyles, CircularProgress, Card } from "@material-ui/core";
+import { makeStyles, CircularProgress, Card, Typography } from "@material-ui/core";
 
 import { CarpoolStore } from "@carpool/core";
 import { CarpoolList, DocumentHead, NotFound } from "../components";
 
 const useStyles = makeStyles(theme => ({
+    heading: {
+        marginTop: theme.spacing(2),
+    },
     loading: {
         display: "flex",
         margin: "auto",
@@ -62,6 +65,9 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                 <CircularProgress className={classes.loading} />
             ) : (
                 <Card>
+                    <Typography variant="h6" align="center" className={classes.heading}>
+                        {displayName} Carpools
+                    </Typography>
                     <CarpoolList carpools={carpoolStore.carpools} />
                 </Card>
             )}
