@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
-import { makeStyles, CircularProgress } from "@material-ui/core";
+import { makeStyles, CircularProgress, Card } from "@material-ui/core";
 
 import { CarpoolStore } from "@carpool/core";
 import { CarpoolList, DocumentHead, NotFound } from "../components";
@@ -59,7 +59,9 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
             {carpoolStore.loading ? (
                 <CircularProgress className={classes.loading} />
             ) : (
-                <CarpoolList carpools={carpoolStore.carpools} />
+                <Card>
+                    <CarpoolList carpools={carpoolStore.carpools} />
+                </Card>
             )}
         </Fragment>
     );
