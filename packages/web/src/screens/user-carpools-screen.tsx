@@ -20,6 +20,7 @@ export interface IUserCarpoolsScreenProps extends RouteComponentProps {
 export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = observer(props => {
     const classes = useStyles();
     const [notFound, setNotFound] = useState(false);
+    const [ready, setReady] = useState(false);
     const { match, carpoolStore } = props;
     const { displayName } = match.params as { displayName: string };
 
@@ -27,6 +28,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
         const load = async () => {
             try {
                 await carpoolStore.loadUserCarpools(displayName);
+                setReady(true);
             } catch (error) {
                 setNotFound(true);
             }
@@ -56,7 +58,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                     )
                     .join("\n")}
             />
-            {carpoolStore.loading ? (
+            {carpoolStore.loading || !ready ? (
                 <CircularProgress className={classes.loading} />
             ) : (
                 <Card>
