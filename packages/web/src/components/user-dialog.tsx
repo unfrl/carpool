@@ -239,6 +239,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                             onChange={e => setState({ ...state, email: e.target.value })}
                             variant="outlined"
                             margin="normal"
+                            autoFocus={true}
                         />
                         <TextField
                             label="Password"
