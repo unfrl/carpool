@@ -72,6 +72,6 @@ export class UserService {
      * @param displayName - Display name to check exists
      */
     public async displayNameExists(displayName: string): Promise<boolean> {
-        return (await this._userRepository.find({ where: { displayName } })).length > 0;
+        return (await this._userRepository.findOne({ where: { displayName } })) !== undefined;
     }
 }
