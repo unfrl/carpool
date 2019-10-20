@@ -82,6 +82,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                         key={driver.id}
                         driver={driver}
                         isCurrentUser={driver.user.id === userId}
+                        currentUserIsDriver={currentUserIsDriver}
                     />
                 ))}
             </Fragment>

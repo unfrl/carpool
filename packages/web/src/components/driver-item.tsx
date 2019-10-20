@@ -63,17 +63,18 @@ const useStyles = makeStyles(theme => ({
 export interface IDriverItemProps {
     driver: DriverDto;
     isCurrentUser: boolean;
+    currentUserIsDriver: boolean;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { driver, isCurrentUser } = props;
-    const { car, user } = driver;
+    const { driver, isCurrentUser, currentUserIsDriver } = props;
+    const { car, user, seatsRemaining } = driver;
     const { displayName, email } = user;
-    const { capacity, color, type } = car;
-    const remainingSeats = capacity; // TODO: eventually needs to be car.capacity - passengers.length
-    const canJoin = remainingSeats > 0;
+    const { color, type } = car;
+
+    const canJoin = seatsRemaining > 0 && !isCurrentUser && !currentUserIsDriver;
     const initials = getInitials(displayName);
 
     const handleToggleExpanded = () => {
@@ -94,7 +95,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                             {displayName} {isCurrentUser && <strong>(you)</strong>}
                         </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
-                            Remaining seats: {remainingSeats}
+                            Remaining seats: {seatsRemaining}
                         </Typography>
                     </div>
                 </div>
