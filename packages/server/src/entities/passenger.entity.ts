@@ -14,8 +14,6 @@ export class Passenger extends BaseEntity {
     @ManyToOne(type => User)
     public user: User;
 
-    // TODO: name, email, and phonenumber can be pulled from the user record if they're logged in
-
     @Column()
     @ApiResponseModelProperty()
     public name: string;

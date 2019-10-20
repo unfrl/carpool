@@ -42,14 +42,30 @@ export interface IDriverListProps {
     userId?: string;
     loading: boolean;
     onOfferToDrive: () => void;
+    onJoinAsPassenger: (driverId: string) => void;
 }
 
 export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
     const classes = useStyles();
     const { drivers, userId, loading, onOfferToDrive } = props;
     const hasDrivers = drivers.length > 0;
-    const currentUserIsDriver = Boolean(drivers.find(d => d.user.id === userId));
-    const canOfferToDrive = !!userId && !currentUserIsDriver;
+
+    let currentUserIsDriving = false;
+    let currentUserIsPassenger = false;
+    for (const driver of drivers) {
+        if (driver.user.id === userId) {
+            currentUserIsDriving = true;
+            break;
+        }
+
+        // TODO: THIS IS TEMPORARY! Passengers will need a corresponding DTO instead of cast to any.
+        if (driver.passengers.find((p: any) => p.userId === userId)) {
+            currentUserIsPassenger = true;
+            break;
+        }
+    }
+
+    const canOfferToDrive = !!userId && !currentUserIsDriving && !currentUserIsPassenger;
 
     const renderDrivers = () => {
         if (loading) {
@@ -77,14 +93,27 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
 
         return (
             <Fragment>
-                {drivers.map(driver => (
-                    <DriverItem
-                        key={driver.id}
-                        driver={driver}
-                        isCurrentUser={driver.user.id === userId}
-                        currentUserIsDriver={currentUserIsDriver}
-                    />
-                ))}
+                {drivers.map(driver => {
+                    const { seatsRemaining } = driver;
+                    const currentUserIsDriver = driver.user.id === userId;
+
+                    const canJoin =
+                        seatsRemaining > 0 &&
+                        !currentUserIsDriver &&
+                        !currentUserIsDriving &&
+                        !currentUserIsPassenger;
+
+                    return (
+                        <DriverItem
+                            key={driver.id}
+                            driver={driver}
+                            currentUserIsDriver={currentUserIsDriver}
+                            canJoin={canJoin}
+                            onJoin={() => props.onJoinAsPassenger(driver.id)}
+                            passengers={driver.passengers}
+                        />
+                    );
+                })}
             </Fragment>
         );
     };

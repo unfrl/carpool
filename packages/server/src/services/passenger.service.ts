@@ -33,6 +33,7 @@ export class PassengerService {
         passenger.email = email;
         passenger.phoneNumber = phoneNumber || "";
         passenger.address = address;
+        passenger.driverId = driverId;
 
         return await this._passengerRepository.save(passenger);
     }

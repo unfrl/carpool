@@ -1,4 +1,4 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiModelProperty, ApiModelPropertyOptional } from "@nestjs/swagger";
 import { IsDefined, IsEmail, IsOptional, Length, IsPhoneNumber } from "class-validator";
 
 /**
@@ -7,16 +7,15 @@ import { IsDefined, IsEmail, IsOptional, Length, IsPhoneNumber } from "class-val
 export class CreatePassengerDto {
     @ApiModelProperty()
     @IsDefined()
-    @Length(5, 50)
+    @Length(1, 50)
     public readonly name: string;
 
     @ApiModelProperty()
     @IsEmail()
     public readonly email: string;
 
-    @ApiModelProperty()
+    @ApiModelPropertyOptional()
     @IsOptional()
-    @IsPhoneNumber("US")
     public readonly phoneNumber: string;
 
     @ApiModelProperty()

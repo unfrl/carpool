@@ -345,6 +345,18 @@ exports.DriverDto = {
                 type: {
                     name: "Number"
                 }
+            },
+            passengers: {
+                required: true,
+                serializedName: "passengers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
             }
         }
     }
@@ -370,7 +382,6 @@ exports.CreatePassengerDto = {
                 }
             },
             phoneNumber: {
-                required: true,
                 serializedName: "phoneNumber",
                 type: {
                     name: "String"
@@ -465,7 +476,6 @@ exports.CreateUserPassengerDto = {
         className: "CreateUserPassengerDto",
         modelProperties: {
             phoneNumber: {
-                required: true,
                 serializedName: "phoneNumber",
                 type: {
                     name: "String"

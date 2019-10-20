@@ -91,6 +91,7 @@ export interface DriverDto {
     carpoolId: string;
     user: UserDto;
     seatsRemaining: number;
+    passengers: string[];
 }
 /**
  * An interface representing CreatePassengerDto.
@@ -98,7 +99,7 @@ export interface DriverDto {
 export interface CreatePassengerDto {
     name: string;
     email: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     address: string;
 }
 /**
@@ -119,7 +120,7 @@ export interface Passenger {
  * An interface representing CreateUserPassengerDto.
  */
 export interface CreateUserPassengerDto {
-    phoneNumber: string;
+    phoneNumber?: string;
     address: string;
 }
 /**

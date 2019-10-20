@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import {
     TextField,
-    Button,
     makeStyles,
     Select,
     MenuItem,
@@ -11,6 +10,7 @@ import {
 } from "@material-ui/core";
 
 import { CreateDriverDto } from "@carpool/core";
+import { FormActions } from ".";
 
 const carTypes = ["Sedan", "Truck", "SUV", "Van"];
 
@@ -127,14 +127,7 @@ export const DriverForm: FunctionComponent<IDriverFormProps> = props => {
                 margin="normal"
                 variant="outlined"
             />
-            <div className={classes.actions}>
-                <Button variant="contained" color="primary" type="submit" disabled={!canSave}>
-                    Finish
-                </Button>
-                <Button className={classes.cancel} onClick={props.onCancel}>
-                    Cancel
-                </Button>
-            </div>
+            <FormActions canSave={canSave} onCancel={props.onCancel} />
         </form>
     );
 };

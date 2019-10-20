@@ -101,6 +101,8 @@ export class DriverService {
                 email: user.email,
             },
             seatsRemaining: car.capacity - (passengers || []).length,
+            // TODO: TEMPORARY! Needs to be replaced with a DTO or removed!
+            passengers,
         };
     }
 }

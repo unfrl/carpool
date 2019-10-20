@@ -1,6 +1,11 @@
 import { action, observable, reaction } from "mobx";
 
-import { DriverDto, CreateDriverDto } from "@carpool/client";
+import {
+    DriverDto,
+    CreateDriverDto,
+    CreatePassengerDto,
+    CreateUserPassengerDto,
+} from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -24,6 +29,8 @@ export class DriverStore {
                 }
             }
         );
+
+        this._rootStore.rtmClient.carpool.onDriverUpdated(this.setUpdatedDriver);
     }
 
     public createDriver = async (carpoolId: string, createDriverDto: CreateDriverDto) => {
@@ -33,6 +40,35 @@ export class DriverStore {
         } catch (error) {
             this._logger.error("Failed to create driver", error);
             throw error;
+        }
+    };
+
+    public createPassenger = async (createPassengerDto: CreatePassengerDto, driverId: string) => {
+        try {
+            const passenger = await this._rootStore.apiClient.createPassenger(
+                createPassengerDto,
+                driverId
+            );
+            // TODO: decide what to do with passengers...
+            this._logger.info("Passenger created!", passenger);
+        } catch (error) {
+            this._logger.error("Failed to create passenger", error);
+        }
+    };
+
+    public createUserPassenger = async (
+        createPassengerDto: CreateUserPassengerDto,
+        driverId: string
+    ) => {
+        try {
+            const passenger = await this._rootStore.apiClient.createUserPassenger(
+                createPassengerDto,
+                driverId
+            );
+            // TODO: decide what to do with passengers...
+            this._logger.info("Passenger created!", passenger);
+        } catch (error) {
+            this._logger.error("Failed to create passenger", error);
         }
     };
 
@@ -62,6 +98,14 @@ export class DriverStore {
     @action
     private setDrivers = (drivers: DriverDto[]) => {
         this.drivers = drivers;
+    };
+
+    @action
+    private setUpdatedDriver = (driver: DriverDto) => {
+        const index = this.drivers.findIndex(d => d.id === driver.id);
+        if (index > -1) {
+            this.drivers[index] = driver;
+        }
     };
 
     @action

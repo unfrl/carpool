@@ -357,6 +357,18 @@ export const DriverDto: msRest.CompositeMapper = {
         type: {
           name: "Number"
         }
+      },
+      passengers: {
+        required: true,
+        serializedName: "passengers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
       }
     }
   }
@@ -383,7 +395,6 @@ export const CreatePassengerDto: msRest.CompositeMapper = {
         }
       },
       phoneNumber: {
-        required: true,
         serializedName: "phoneNumber",
         type: {
           name: "String"
@@ -480,7 +491,6 @@ export const CreateUserPassengerDto: msRest.CompositeMapper = {
     className: "CreateUserPassengerDto",
     modelProperties: {
       phoneNumber: {
-        required: true,
         serializedName: "phoneNumber",
         type: {
           name: "String"
