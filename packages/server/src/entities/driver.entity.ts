@@ -1,5 +1,4 @@
 import { Entity, ManyToOne, OneToMany, Column } from "typeorm";
-import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 import { BaseEntity } from "./base.entity";
 import { Carpool } from "./carpool.entity";
