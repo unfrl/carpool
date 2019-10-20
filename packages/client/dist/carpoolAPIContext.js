@@ -27,7 +27,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var msRest = __importStar(require("@azure/ms-rest-js"));
 var packageName = "";
-var packageVersion = "";
+var packageVersion = "0.0.6";
 var CarpoolAPIContext = /** @class */ (function (_super) {
     __extends(CarpoolAPIContext, _super);
     /**
