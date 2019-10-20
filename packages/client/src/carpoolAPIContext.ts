@@ -8,7 +8,7 @@ import * as msRest from "@azure/ms-rest-js";
 import * as Models from "./models";
 
 const packageName = "";
-const packageVersion = "";
+const packageVersion = "0.0.6";
 
 export class CarpoolAPIContext extends msRest.ServiceClient {
   credentials: msRest.ServiceClientCredentials;

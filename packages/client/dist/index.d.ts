@@ -1,3 +1,3 @@
-export * from "./lib/models";
-export * from "./lib/carpoolAPI";
-export * from "./lib/carpoolAPIContext";
+export * from "./models";
+export * from "./carpoolAPI";
+export * from "./carpoolAPIContext";
