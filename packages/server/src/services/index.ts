@@ -4,3 +4,4 @@ export * from "./jwt.strategy";
 export * from "./carpool.service";
 export * from "./driver.service";
 export * from "./verification.service";
+export * from "./passenger.service";

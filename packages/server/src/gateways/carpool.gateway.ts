@@ -3,6 +3,7 @@ import { Socket, Server } from "socket.io";
 
 import { CarpoolService } from "../services";
 import { Carpool } from "../entities";
+import { DriverDto } from "../dtos";
 
 // TODO: move to shared project so it can be referenced RTM client
 const carpoolMessages = {
@@ -11,6 +12,7 @@ const carpoolMessages = {
     },
     events: {
         updated: "carpool.updated",
+        driverUpdated: "carpool-driver.updated",
     },
 };
 
@@ -48,9 +50,19 @@ export class CarpoolGateway {
 
     /**
      * Emit carpool updated event to the carpool room.
-     * @param carpool - The updated carpool to send.
+     * @param carpool - The updated carpool to send
      */
     public emitCarpoolUpdated(carpool: Carpool) {
         this._wsServer.to(getCarpoolRoom(carpool.id)).emit(carpoolMessages.events.updated, carpool);
+    }
+
+    /**
+     * Emit driver updated event to the carpool room.
+     * @param driverDto - The updated driver to send
+     */
+    public emitDriverUpdated(driverDto: DriverDto) {
+        this._wsServer
+            .to(getCarpoolRoom(driverDto.carpoolId))
+            .emit(carpoolMessages.events.driverUpdated, driverDto);
     }
 }

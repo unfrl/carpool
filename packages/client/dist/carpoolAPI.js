@@ -132,6 +132,20 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, getDriversOperationSpec, callback);
     };
+    CarpoolAPI.prototype.createPassenger = function (createPassengerDto, id, options, callback) {
+        return this.sendOperationRequest({
+            createPassengerDto: createPassengerDto,
+            id: id,
+            options: options
+        }, createPassengerOperationSpec, callback);
+    };
+    CarpoolAPI.prototype.createUserPassenger = function (createUserPassengerDto, id, options, callback) {
+        return this.sendOperationRequest({
+            createUserPassengerDto: createUserPassengerDto,
+            id: id,
+            options: options
+        }, createUserPassengerOperationSpec, callback);
+    };
     CarpoolAPI.prototype.verifyUser = function (verificationDto, options, callback) {
         return this.sendOperationRequest({
             verificationDto: verificationDto,
@@ -356,6 +370,42 @@ var getDriversOperationSpec = {
                     }
                 }
             }
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var createPassengerOperationSpec = {
+    httpMethod: "POST",
+    path: "api/v1/drivers/{id}/passengers",
+    urlParameters: [
+        Parameters.id
+    ],
+    requestBody: {
+        parameterPath: "createPassengerDto",
+        mapper: __assign(__assign({}, Mappers.CreatePassengerDto), { required: true })
+    },
+    responses: {
+        201: {
+            bodyMapper: Mappers.Passenger
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var createUserPassengerOperationSpec = {
+    httpMethod: "POST",
+    path: "api/v1/drivers/{id}/passengers/me",
+    urlParameters: [
+        Parameters.id
+    ],
+    requestBody: {
+        parameterPath: "createUserPassengerDto",
+        mapper: __assign(__assign({}, Mappers.CreateUserPassengerDto), { required: true })
+    },
+    responses: {
+        201: {
+            bodyMapper: Mappers.Passenger
         },
         default: {}
     },

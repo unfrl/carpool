@@ -10,4 +10,7 @@ export declare const CarpoolDto: msRest.CompositeMapper;
 export declare const Car: msRest.CompositeMapper;
 export declare const CreateDriverDto: msRest.CompositeMapper;
 export declare const DriverDto: msRest.CompositeMapper;
+export declare const CreatePassengerDto: msRest.CompositeMapper;
+export declare const Passenger: msRest.CompositeMapper;
+export declare const CreateUserPassengerDto: msRest.CompositeMapper;
 export declare const VerificationDto: msRest.CompositeMapper;
