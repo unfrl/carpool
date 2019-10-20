@@ -338,6 +338,13 @@ exports.DriverDto = {
                     name: "Composite",
                     className: "UserDto"
                 }
+            },
+            seatsRemaining: {
+                required: true,
+                serializedName: "seatsRemaining",
+                type: {
+                    name: "Number"
+                }
             }
         }
     }

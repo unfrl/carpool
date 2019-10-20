@@ -90,6 +90,7 @@ export interface DriverDto {
     car: Car;
     carpoolId: string;
     user: UserDto;
+    seatsRemaining: number;
 }
 /**
  * An interface representing VerificationDto.

@@ -15,4 +15,7 @@ export class DriverDto {
 
     @ApiResponseModelProperty()
     public readonly user: UserDto;
+
+    @ApiResponseModelProperty()
+    public readonly seatsRemaining: number;
 }

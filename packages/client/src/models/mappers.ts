@@ -350,6 +350,13 @@ export const DriverDto: msRest.CompositeMapper = {
           name: "Composite",
           className: "UserDto"
         }
+      },
+      seatsRemaining: {
+        required: true,
+        serializedName: "seatsRemaining",
+        type: {
+          name: "Number"
+        }
       }
     }
   }

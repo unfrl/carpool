@@ -58,6 +58,7 @@ export class DriverService {
                 displayName: user.displayName,
                 email: user.email,
             },
+            seatsRemaining: car.capacity,
         };
     }
 
@@ -68,13 +69,14 @@ export class DriverService {
     public async findDriversByCarpoolId(carpoolId: string): Promise<DriverDto[]> {
         const drivers = await this._driverRepository.find({
             where: { carpoolId },
-            relations: ["user"],
+            relations: ["user", "passengers"],
         });
 
         return drivers.map(driver => ({
             id: driver.id,
             car: driver.car,
             carpoolId: driver.carpoolId,
+            seatsRemaining: driver.car.capacity - driver.passengers.length,
             user: {
                 id: driver.user.id,
                 displayName: driver.user.displayName,
