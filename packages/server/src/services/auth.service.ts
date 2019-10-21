@@ -22,8 +22,9 @@ export class AuthService {
 
     public async signIn(signInDto: SignInDto): Promise<AuthDto> {
         const { email, password } = signInDto;
+        let lowerCaseEmail = email.toLowerCase();
 
-        const user = await this._userService.findOneByEmail(email);
+        const user = await this._userService.findOneByEmail(lowerCaseEmail);
         if (!user) {
             // TODO: if user isn't verified, include message in response that verification is pending
             throw new HttpException(
@@ -49,8 +50,9 @@ export class AuthService {
 
     public async signUp(signUpDto: SignUpDto): Promise<void> {
         const { email, password, displayName } = signUpDto;
+        let lowerCaseEmail = email.toLowerCase()
 
-        const existing = await this._userService.findOneByEmail(email);
+        const existing = await this._userService.findOneByEmail(lowerCaseEmail);
         if (existing) {
             throw new HttpException(
                 "That email address is already in use.",
@@ -68,7 +70,7 @@ export class AuthService {
         }
 
         const hashed = await bcrypt.hash(password, authConfig.saltOrRounds);
-        await this._userService.createUser(email, hashed, trimmedDisplayName);
+        await this._userService.createUser(lowerCaseEmail, hashed, trimmedDisplayName);
     }
 
     public async generateAccessToken(userId: string): Promise<AuthDto> {
@@ -83,10 +85,11 @@ export class AuthService {
     public async requestPasswordReset(
         passwordResetRequestDto: PasswordResetRequestDto
     ): Promise<void> {
-        if (!(await this._userService.findOneByEmail(passwordResetRequestDto.email))) {
+        let lowerCaseEmail = passwordResetRequestDto.email.toLowerCase();
+        if (!(await this._userService.findOneByEmail(lowerCaseEmail))) {
             //Dont throw anything if they give us a non-member email or they can use that to determin who is and isnt a member
             console.log(
-                `Password reset requested for ${passwordResetRequestDto.email} but that email is not associated with any user.`
+                `Password reset requested for ${lowerCaseEmail} but that email is not associated with any user.`
             );
             return;
         }
@@ -94,17 +97,17 @@ export class AuthService {
         let passwordResetToken = cryptoRandomString({ length: 12, type: "url-safe" });
         let redisKey = this.getPasswordResetTokenRedisKey(
             passwordResetToken,
-            passwordResetRequestDto.email
+            lowerCaseEmail
         );
 
         await this._redisClient.setex(redisKey, 86400, ""); //Currently this sets the key to expire in 1 day (86400 seconds)
 
         let hostname = "localhost:3000"; //TODO: This has to be configurable
         let schema = "http"; //TODO: This has to be configurable
-        let passwordResetURL = `${schema}://${hostname}/passwordreset?token=${passwordResetToken}&email=${passwordResetRequestDto.email}`;
+        let passwordResetURL = `${schema}://${hostname}/passwordreset?token=${passwordResetToken}&email=${lowerCaseEmail}`;
 
         await this._mailerService.sendMail({
-            to: passwordResetRequestDto.email,
+            to: lowerCaseEmail,
             from: "noreply@carpool+unfrl.com",
             subject: "Carpool Password Reset Requested",
             html: `<h1>Hello!</h1>\n<p>\A password reset request has been made for your Carpool account. If you did not initiate this request you can ignore this message. If you did request this please go <a href=\"${passwordResetURL}\">here</a> to reset your password\n</p>\n`,
@@ -117,16 +120,17 @@ export class AuthService {
     }
 
     public async resetUserPassword(passwordResetDto: PasswordResetDto): Promise<AuthDto> {
+        let lowerCaseEmail = passwordResetDto.email.toLowerCase();
         let redisKey = this.getPasswordResetTokenRedisKey(
             passwordResetDto.token,
-            passwordResetDto.email
+            lowerCaseEmail
         );
         if (!(await this._redisClient.exists(redisKey))) {
             throw new ConflictException("Token provided is either expired or invalid.");
         }
         await this._redisClient.del(redisKey);
         const user = await this._userService.updatePassword(
-            passwordResetDto.email,
+            lowerCaseEmail,
             passwordResetDto.newPassword
         );
         return this.generateAccessToken(user.id);
