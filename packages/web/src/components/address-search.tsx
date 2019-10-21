@@ -3,7 +3,7 @@ import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
 import geocoding from "@mapbox/mapbox-sdk/services/geocoding";
-import { TextField, Paper, MenuItem, makeStyles } from "@material-ui/core";
+import { TextField, Paper, MenuItem, Popper, makeStyles } from "@material-ui/core";
 import { debounce } from "lodash";
 
 import { mapboxConfig } from "@carpool/core";
@@ -11,9 +11,6 @@ import { mapboxConfig } from "@carpool/core";
 const geocodingClient = geocoding(mapboxConfig);
 
 const useStyles = makeStyles(theme => ({
-    container: {
-        position: "relative",
-    },
     suggestion: {
         display: "block",
     },
@@ -21,12 +18,6 @@ const useStyles = makeStyles(theme => ({
         margin: 0,
         padding: 0,
         listStyleType: "none",
-    },
-    suggestionsContainerOpen: {
-        position: "absolute",
-        zIndex: 2,
-        left: 0,
-        right: 0,
     },
 }));
 
@@ -119,12 +110,15 @@ export interface IAddressSearchProps {
     value: string;
     onChange: (newValue: string) => void;
     required?: boolean;
+    label?: string;
+    placeholder?: string;
+    autoFocus?: boolean;
 }
 
 export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
     const classes = useStyles();
     const [suggestions, setSuggestions] = useState<PlaceSuggestion[]>([]);
-
+    const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
     const handleSuggestionsFetchRequested = async ({ value }: any) => {
         const suggestions = await getSuggestions(value);
 
@@ -161,22 +155,37 @@ export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
             inputProps={{
                 classes: classes,
                 id: "address-search",
-                label: "Destination",
-                placeholder: "Search for a destination",
+                label: props.label,
+                placeholder: props.placeholder,
                 value: props.value,
                 onChange: handleChange,
                 required: props.required,
+                autoFocus: props.autoFocus,
+                inputRef: node => {
+                    setAnchorEl(node);
+                },
+                InputLabelProps: {
+                    shrink: true,
+                },
             }}
             theme={{
-                container: classes.container,
-                suggestionsContainerOpen: classes.suggestionsContainerOpen,
                 suggestionsList: classes.suggestionsList,
                 suggestion: classes.suggestion,
             }}
             renderSuggestionsContainer={options => (
-                <Paper {...options.containerProps} square>
-                    {options.children}
-                </Paper>
+                <Popper
+                    anchorEl={anchorEl}
+                    open={Boolean(options.children)}
+                    style={{ zIndex: 1300 }}
+                >
+                    <Paper
+                        {...options.containerProps}
+                        square
+                        style={{ width: anchorEl ? anchorEl.clientWidth : undefined }}
+                    >
+                        {options.children}
+                    </Paper>
+                </Popper>
             )}
         />
     );

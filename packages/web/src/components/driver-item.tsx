@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, Fragment, useState } from "react";
 import {
     Avatar,
     Typography,
@@ -7,6 +7,7 @@ import {
     Icon,
     Collapse,
     Tooltip,
+    Divider,
     makeStyles,
 } from "@material-ui/core";
 import { deepPurple } from "@material-ui/core/colors";
@@ -62,26 +63,25 @@ const useStyles = makeStyles(theme => ({
 
 export interface IDriverItemProps {
     driver: DriverDto;
-    isCurrentUser: boolean;
+    currentUserIsDriver: boolean;
+    canJoin: boolean;
+    onJoin: () => void;
+    // TODO: THIS IS TEMPORARY! Replace with the new DTO!
+    passengers: any[];
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { driver, isCurrentUser } = props;
-    const { car, user } = driver;
+    const { driver, currentUserIsDriver, canJoin } = props;
+    const { car, user, seatsRemaining, passengers } = driver;
     const { displayName, email } = user;
-    const { capacity, color, type } = car;
-    const remainingSeats = capacity; // TODO: eventually needs to be car.capacity - passengers.length
-    const canJoin = remainingSeats > 0;
+    const { color, type } = car;
+
     const initials = getInitials(displayName);
 
     const handleToggleExpanded = () => {
         setExpanded(!expanded);
-    };
-
-    const handleJoin = (e: React.MouseEvent) => {
-        // TODO: display sign in dialog if not authenticated
     };
 
     return (
@@ -91,10 +91,10 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                     <Avatar className={classes.avatar}>{initials}</Avatar>
                     <div>
                         <Typography>
-                            {displayName} {isCurrentUser && <strong>(you)</strong>}
+                            {displayName} {currentUserIsDriver && <strong>(you)</strong>}
                         </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
-                            Remaining seats: {remainingSeats}
+                            Remaining seats: {seatsRemaining}
                         </Typography>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                         variant="contained"
                         color="primary"
                         className={classes.action}
-                        onClick={handleJoin}
+                        onClick={props.onJoin}
                     >
                         Join
                     </Button>
@@ -123,6 +123,9 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
             </div>
             <Collapse in={expanded}>
                 <div className={classes.expanded}>
+                    <Typography variant="subtitle2">Details</Typography>
+                    <Divider />
+                    <div className={classes.spacer} />
                     <div className={classes.details}>
                         <Icon className={classes.detailsIcon} color="action">
                             email
@@ -139,6 +142,25 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                         <Typography variant="body2">
                             {color} {type}
                         </Typography>
+                    </div>
+                    <div>
+                        {passengers.length > 0 && (
+                            <Fragment>
+                                <div className={classes.spacer} />
+                                <Typography variant="subtitle2">Passengers</Typography>
+                                <Divider />
+                                <div className={classes.spacer} />
+                            </Fragment>
+                        )}
+                        {passengers.map((passenger: any) => (
+                            <Fragment key={passenger.id}>
+                                <Typography variant="body2">
+                                    <strong>{passenger.name}</strong> {passenger.email} -{" "}
+                                    {passenger.address}
+                                </Typography>
+                                <div className={classes.spacer} />
+                            </Fragment>
+                        ))}
                     </div>
                 </div>
             </Collapse>

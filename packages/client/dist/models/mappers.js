@@ -338,6 +338,155 @@ exports.DriverDto = {
                     name: "Composite",
                     className: "UserDto"
                 }
+            },
+            seatsRemaining: {
+                required: true,
+                serializedName: "seatsRemaining",
+                type: {
+                    name: "Number"
+                }
+            },
+            passengers: {
+                required: true,
+                serializedName: "passengers",
+                type: {
+                    name: "Sequence",
+                    element: {
+                        type: {
+                            name: "String"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+exports.CreatePassengerDto = {
+    serializedName: "CreatePassengerDto",
+    type: {
+        name: "Composite",
+        className: "CreatePassengerDto",
+        modelProperties: {
+            name: {
+                required: true,
+                serializedName: "name",
+                type: {
+                    name: "String"
+                }
+            },
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String"
+                }
+            },
+            phoneNumber: {
+                serializedName: "phoneNumber",
+                type: {
+                    name: "String"
+                }
+            },
+            address: {
+                required: true,
+                serializedName: "address",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.Passenger = {
+    serializedName: "Passenger",
+    type: {
+        name: "Composite",
+        className: "Passenger",
+        modelProperties: {
+            id: {
+                required: true,
+                serializedName: "id",
+                type: {
+                    name: "String"
+                }
+            },
+            created: {
+                required: true,
+                serializedName: "created",
+                type: {
+                    name: "Object"
+                }
+            },
+            updated: {
+                required: true,
+                serializedName: "updated",
+                type: {
+                    name: "Object"
+                }
+            },
+            userId: {
+                required: true,
+                serializedName: "userId",
+                type: {
+                    name: "String"
+                }
+            },
+            name: {
+                required: true,
+                serializedName: "name",
+                type: {
+                    name: "String"
+                }
+            },
+            email: {
+                required: true,
+                serializedName: "email",
+                type: {
+                    name: "String"
+                }
+            },
+            phoneNumber: {
+                required: true,
+                serializedName: "phoneNumber",
+                type: {
+                    name: "String"
+                }
+            },
+            address: {
+                required: true,
+                serializedName: "address",
+                type: {
+                    name: "String"
+                }
+            },
+            driverId: {
+                required: true,
+                serializedName: "driverId",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.CreateUserPassengerDto = {
+    serializedName: "CreateUserPassengerDto",
+    type: {
+        name: "Composite",
+        className: "CreateUserPassengerDto",
+        modelProperties: {
+            phoneNumber: {
+                serializedName: "phoneNumber",
+                type: {
+                    name: "String"
+                }
+            },
+            address: {
+                required: true,
+                serializedName: "address",
+                type: {
+                    name: "String"
+                }
             }
         }
     }

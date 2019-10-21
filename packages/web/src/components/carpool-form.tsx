@@ -80,6 +80,8 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 value={state.destination}
                 onChange={val => setState({ ...state, destination: val })}
                 required={true}
+                label="Destination"
+                placeholder="Search for a destination"
             />
             <DateTimePicker
                 value={state.dateTime}

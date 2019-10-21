@@ -257,6 +257,50 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     getDrivers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto[]>): void;
     /**
+     * Creates a passenger for a driver
+     * @summary Create Passenger
+     * @param createPassengerDto
+     * @param id
+     * @param [options] The optional parameters
+     * @returns Promise<Models.CreatePassengerResponse>
+     */
+    createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreatePassengerResponse>;
+    /**
+     * @param createPassengerDto
+     * @param id
+     * @param callback The callback
+     */
+    createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, callback: msRest.ServiceCallback<Models.Passenger>): void;
+    /**
+     * @param createPassengerDto
+     * @param id
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Passenger>): void;
+    /**
+     * Creates a passenger based off the current user for a driver
+     * @summary Create User Passenger
+     * @param createUserPassengerDto
+     * @param id
+     * @param [options] The optional parameters
+     * @returns Promise<Models.CreateUserPassengerResponse>
+     */
+    createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateUserPassengerResponse>;
+    /**
+     * @param createUserPassengerDto
+     * @param id
+     * @param callback The callback
+     */
+    createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, callback: msRest.ServiceCallback<Models.Passenger>): void;
+    /**
+     * @param createUserPassengerDto
+     * @param id
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Passenger>): void;
+    /**
      * Verify a User using the token emailed to them during account creation
      * @summary Verify User
      * @param verificationDto

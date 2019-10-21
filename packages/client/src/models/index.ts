@@ -106,6 +106,41 @@ export interface DriverDto {
   car: Car;
   carpoolId: string;
   user: UserDto;
+  seatsRemaining: number;
+  passengers: string[];
+}
+
+/**
+ * An interface representing CreatePassengerDto.
+ */
+export interface CreatePassengerDto {
+  name: string;
+  email: string;
+  phoneNumber?: string;
+  address: string;
+}
+
+/**
+ * An interface representing Passenger.
+ */
+export interface Passenger {
+  id: string;
+  created: any;
+  updated: any;
+  userId: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  driverId: string;
+}
+
+/**
+ * An interface representing CreateUserPassengerDto.
+ */
+export interface CreateUserPassengerDto {
+  phoneNumber?: string;
+  address: string;
 }
 
 /**
@@ -348,6 +383,46 @@ export type GetDriversResponse = Array<DriverDto> & {
        * The response body as parsed JSON or XML
        */
       parsedBody: DriverDto[];
+    };
+};
+
+/**
+ * Contains response data for the createPassenger operation.
+ */
+export type CreatePassengerResponse = Passenger & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Passenger;
+    };
+};
+
+/**
+ * Contains response data for the createUserPassenger operation.
+ */
+export type CreateUserPassengerResponse = Passenger & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Passenger;
     };
 };
 
