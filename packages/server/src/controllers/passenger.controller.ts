@@ -2,8 +2,7 @@ import { ApiOperation, ApiUseTags, ApiCreatedResponse, ApiBearerAuth } from "@ne
 import { Post, Body, Controller, Param, UseGuards, Req } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
-import { Passenger } from "../entities";
-import { CreatePassengerDto, CreateUserPassengerDto } from "../dtos";
+import { CreatePassengerDto, PassengerDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { PassengerService, DriverService } from "../services";
 import { CarpoolGateway } from "../gateways";
@@ -21,38 +20,20 @@ export class PassengerController {
     @ApiOperation({
         operationId: "createPassenger",
         title: "Create Passenger",
-        description: "Creates a passenger for a driver",
+        description: "Creates a passenger based off the current user ",
     })
-    @ApiCreatedResponse({ type: Passenger })
+    @ApiCreatedResponse({ type: PassengerDto })
+    @UseGuards(AuthGuard("jwt"))
     @Post()
     public async createPassenger(
-        @Param("id") id: string,
-        @Body() createPassengerDto: CreatePassengerDto
-    ): Promise<Passenger> {
-        const passenger = await this._passengerService.createPassenger(id, createPassengerDto);
-
-        await this.notifyDriverUpdated(passenger.driverId);
-
-        return passenger;
-    }
-
-    @ApiOperation({
-        operationId: "createUserPassenger",
-        title: "Create User Passenger",
-        description: "Creates a passenger based off the current user for a driver",
-    })
-    @ApiCreatedResponse({ type: Passenger })
-    @UseGuards(AuthGuard("jwt"))
-    @Post("me")
-    public async createUserPassenger(
         @Req() request: UserRequest,
         @Param("id") id: string,
-        @Body() createUserPassengerDto: CreateUserPassengerDto
-    ): Promise<Passenger> {
-        const passenger = await this._passengerService.createUserPassenger(
+        @Body() createPassengerDto: CreatePassengerDto
+    ): Promise<PassengerDto> {
+        const passenger = await this._passengerService.createPassenger(
             request.user.id,
             id,
-            createUserPassengerDto
+            createPassengerDto
         );
 
         await this.notifyDriverUpdated(passenger.driverId);

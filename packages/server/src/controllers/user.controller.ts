@@ -14,6 +14,7 @@ import { UserDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { Carpool } from "../entities";
 import { CarpoolService, UserService } from "../services";
+import { mapUserToDto } from "../mappers";
 
 @ApiUseTags("Users")
 @ApiBearerAuth()
@@ -33,13 +34,7 @@ export class UserController {
     @UseGuards(AuthGuard("jwt"))
     @Get("me")
     public getMyProfile(@Req() request: UserRequest): UserDto {
-        const { id, displayName, email } = request.user;
-
-        return {
-            id,
-            displayName,
-            email,
-        };
+        return mapUserToDto(request.user);
     }
 
     @ApiOperation({

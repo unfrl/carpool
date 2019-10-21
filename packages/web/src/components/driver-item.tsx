@@ -66,15 +66,13 @@ export interface IDriverItemProps {
     currentUserIsDriver: boolean;
     canJoin: boolean;
     onJoin: () => void;
-    // TODO: THIS IS TEMPORARY! Replace with the new DTO!
-    passengers: any[];
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
     const { driver, currentUserIsDriver, canJoin } = props;
-    const { car, user, seatsRemaining, passengers } = driver;
+    const { car, user, seatsRemaining } = driver;
     const { displayName, email } = user;
     const { color, type } = car;
 
@@ -142,25 +140,6 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                         <Typography variant="body2">
                             {color} {type}
                         </Typography>
-                    </div>
-                    <div>
-                        {passengers.length > 0 && (
-                            <Fragment>
-                                <div className={classes.spacer} />
-                                <Typography variant="subtitle2">Passengers</Typography>
-                                <Divider />
-                                <div className={classes.spacer} />
-                            </Fragment>
-                        )}
-                        {passengers.map((passenger: any) => (
-                            <Fragment key={passenger.id}>
-                                <Typography variant="body2">
-                                    <strong>{passenger.name}</strong> {passenger.email} -{" "}
-                                    {passenger.address}
-                                </Typography>
-                                <div className={classes.spacer} />
-                            </Fragment>
-                        ))}
                     </div>
                 </div>
             </Collapse>

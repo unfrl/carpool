@@ -3,7 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Passenger, Driver, User } from "../entities";
-import { CreatePassengerDto, CreateUserPassengerDto } from "../dtos";
+import { CreatePassengerDto, PassengerDto } from "../dtos";
+import { mapPassengerToDto } from "../mappers";
 
 @Injectable()
 export class PassengerService {
@@ -17,38 +18,16 @@ export class PassengerService {
     ) {}
 
     /**
-     * Creates a passenger and returns the new entity.
+     * Creates a passenger from an existing user and returns the new entity.
+     * @param userId - ID of the user to create a passenger from
      * @param driverId - ID of the driver to create a passenger for
      * @param createPassengerDto - DTO to create passenger entity with
      */
     public async createPassenger(
-        driverId: string,
-        createPassengerDto: CreatePassengerDto
-    ): Promise<Passenger> {
-        await this.verifyPassengerEligibity(driverId);
-
-        const { name, email, phoneNumber, address } = createPassengerDto;
-        const passenger = new Passenger();
-        passenger.name = name;
-        passenger.email = email;
-        passenger.phoneNumber = phoneNumber || "";
-        passenger.address = address;
-        passenger.driverId = driverId;
-
-        return await this._passengerRepository.save(passenger);
-    }
-
-    /**
-     * Creates a passenger from an existing user and returns the new entity.
-     * @param userId - ID of the user to create a passenger from
-     * @param driverId - ID of the driver to create a passenger for
-     * @param createUserPassengerDto - DTO to create passenger entity with
-     */
-    public async createUserPassenger(
         userId: string,
         driverId: string,
-        createUserPassengerDto: CreateUserPassengerDto
-    ): Promise<Passenger> {
+        createPassengerDto: CreatePassengerDto
+    ): Promise<PassengerDto> {
         await this.verifyPassengerEligibity(driverId, userId);
 
         const user = await this._userRepository.findOne(userId);
@@ -60,17 +39,17 @@ export class PassengerService {
             throw new ConflictException("User is already signed up as a passenger");
         }
 
-        const { phoneNumber, address } = createUserPassengerDto;
-        const { id, displayName, email } = user;
+        const { phoneNumber, address } = createPassengerDto;
+        const { id } = user;
+
         const passenger = new Passenger();
-        passenger.name = displayName;
-        passenger.email = email;
         passenger.phoneNumber = phoneNumber || "";
         passenger.address = address;
         passenger.userId = id;
+        passenger.user = user;
         passenger.driverId = driverId;
 
-        return await this._passengerRepository.save(passenger);
+        return mapPassengerToDto(await this._passengerRepository.save(passenger));
     }
 
     /**
@@ -78,7 +57,7 @@ export class PassengerService {
      * @param driverId - ID of the driver to check passenger eligibility for
      * @param userId - Optional user ID to check against driver record
      */
-    private async verifyPassengerEligibity(driverId: string, userId?: string): Promise<void> {
+    private async verifyPassengerEligibity(driverId: string, userId: string): Promise<void> {
         const driver = await this._driverRepository.findOne(driverId, {
             relations: ["passengers"],
         });
@@ -87,7 +66,7 @@ export class PassengerService {
             throw new NotFoundException("Driver not found");
         }
 
-        if (!!userId && driver.id === userId) {
+        if (driver.id === userId) {
             throw new ConflictException("User is the driver");
         }
 

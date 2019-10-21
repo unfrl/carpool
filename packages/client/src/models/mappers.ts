@@ -358,9 +358,9 @@ export const DriverDto: msRest.CompositeMapper = {
           name: "Number"
         }
       },
-      passengers: {
+      passengerUserIds: {
         required: true,
-        serializedName: "passengers",
+        serializedName: "passengerUserIds",
         type: {
           name: "Sequence",
           element: {
@@ -380,20 +380,6 @@ export const CreatePassengerDto: msRest.CompositeMapper = {
     name: "Composite",
     className: "CreatePassengerDto",
     modelProperties: {
-      name: {
-        required: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      email: {
-        required: true,
-        serializedName: "email",
-        type: {
-          name: "String"
-        }
-      },
       phoneNumber: {
         serializedName: "phoneNumber",
         type: {
@@ -411,11 +397,11 @@ export const CreatePassengerDto: msRest.CompositeMapper = {
   }
 };
 
-export const Passenger: msRest.CompositeMapper = {
-  serializedName: "Passenger",
+export const PassengerDto: msRest.CompositeMapper = {
+  serializedName: "PassengerDto",
   type: {
     name: "Composite",
-    className: "Passenger",
+    className: "PassengerDto",
     modelProperties: {
       id: {
         required: true,
@@ -424,41 +410,6 @@ export const Passenger: msRest.CompositeMapper = {
           name: "String"
         }
       },
-      created: {
-        required: true,
-        serializedName: "created",
-        type: {
-          name: "Object"
-        }
-      },
-      updated: {
-        required: true,
-        serializedName: "updated",
-        type: {
-          name: "Object"
-        }
-      },
-      userId: {
-        required: true,
-        serializedName: "userId",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        required: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      email: {
-        required: true,
-        serializedName: "email",
-        type: {
-          name: "String"
-        }
-      },
       phoneNumber: {
         required: true,
         serializedName: "phoneNumber",
@@ -471,34 +422,19 @@ export const Passenger: msRest.CompositeMapper = {
         serializedName: "address",
         type: {
           name: "String"
+        }
+      },
+      user: {
+        required: true,
+        serializedName: "user",
+        type: {
+          name: "Composite",
+          className: "UserDto"
         }
       },
       driverId: {
         required: true,
         serializedName: "driverId",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const CreateUserPassengerDto: msRest.CompositeMapper = {
-  serializedName: "CreateUserPassengerDto",
-  type: {
-    name: "Composite",
-    className: "CreateUserPassengerDto",
-    modelProperties: {
-      phoneNumber: {
-        serializedName: "phoneNumber",
-        type: {
-          name: "String"
-        }
-      },
-      address: {
-        required: true,
-        serializedName: "address",
         type: {
           name: "String"
         }

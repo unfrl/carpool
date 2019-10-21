@@ -398,7 +398,7 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
-   * Creates a passenger for a driver
+   * Creates a passenger based off the current user
    * @summary Create Passenger
    * @param createPassengerDto
    * @param id
@@ -411,15 +411,15 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @param id
    * @param callback The callback
    */
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, callback: msRest.ServiceCallback<Models.Passenger>): void;
+  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
   /**
    * @param createPassengerDto
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Passenger>): void;
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Passenger>, callback?: msRest.ServiceCallback<Models.Passenger>): Promise<Models.CreatePassengerResponse> {
+  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
+  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PassengerDto>, callback?: msRest.ServiceCallback<Models.PassengerDto>): Promise<Models.CreatePassengerResponse> {
     return this.sendOperationRequest(
       {
         createPassengerDto,
@@ -428,39 +428,6 @@ class CarpoolAPI extends CarpoolAPIContext {
       },
       createPassengerOperationSpec,
       callback) as Promise<Models.CreatePassengerResponse>;
-  }
-
-  /**
-   * Creates a passenger based off the current user for a driver
-   * @summary Create User Passenger
-   * @param createUserPassengerDto
-   * @param id
-   * @param [options] The optional parameters
-   * @returns Promise<Models.CreateUserPassengerResponse>
-   */
-  createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateUserPassengerResponse>;
-  /**
-   * @param createUserPassengerDto
-   * @param id
-   * @param callback The callback
-   */
-  createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, callback: msRest.ServiceCallback<Models.Passenger>): void;
-  /**
-   * @param createUserPassengerDto
-   * @param id
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Passenger>): void;
-  createUserPassenger(createUserPassengerDto: Models.CreateUserPassengerDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Passenger>, callback?: msRest.ServiceCallback<Models.Passenger>): Promise<Models.CreateUserPassengerResponse> {
-    return this.sendOperationRequest(
-      {
-        createUserPassengerDto,
-        id,
-        options
-      },
-      createUserPassengerOperationSpec,
-      callback) as Promise<Models.CreateUserPassengerResponse>;
   }
 
   /**
@@ -762,29 +729,7 @@ const createPassengerOperationSpec: msRest.OperationSpec = {
   },
   responses: {
     201: {
-      bodyMapper: Mappers.Passenger
-    },
-    default: {}
-  },
-  serializer
-};
-
-const createUserPassengerOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "api/v1/drivers/{id}/passengers/me",
-  urlParameters: [
-    Parameters.id
-  ],
-  requestBody: {
-    parameterPath: "createUserPassengerDto",
-    mapper: {
-      ...Mappers.CreateUserPassengerDto,
-      required: true
-    }
-  },
-  responses: {
-    201: {
-      bodyMapper: Mappers.Passenger
+      bodyMapper: Mappers.PassengerDto
     },
     default: {}
   },

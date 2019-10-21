@@ -10,7 +10,7 @@ import {
     DriverStore,
     CreateDriverDto,
     CarpoolDto,
-    CreateUserPassengerDto,
+    CreatePassengerDto,
 } from "@carpool/core";
 import {
     CarpoolDetails,
@@ -85,7 +85,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         }
     };
 
-    const handleSavePassengerForm = async (dto: CreateUserPassengerDto) => {
+    const handleSavePassengerForm = async (dto: CreatePassengerDto) => {
         if (!driverId || !authStore.isAuthenticated) {
             return; // shouldn't happen
         }

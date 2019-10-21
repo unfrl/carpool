@@ -58,8 +58,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             break;
         }
 
-        // TODO: THIS IS TEMPORARY! Passengers will need a corresponding DTO instead of cast to any.
-        if (driver.passengers.find((p: any) => p.userId === userId)) {
+        if (driver.passengerUserIds.find(id => id === userId)) {
             currentUserIsPassenger = true;
             break;
         }
@@ -109,7 +108,6 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                             currentUserIsDriver={driver.user.id === userId}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
-                            passengers={driver.passengers}
                         />
                     );
                 })}

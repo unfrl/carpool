@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 
 import { Driver, Carpool, User } from "../entities";
 import { CreateDriverDto, DriverDto } from "../dtos";
+import { mapDriverToDto } from "../mappers";
 
 @Injectable()
 export class DriverService {
@@ -51,7 +52,7 @@ export class DriverService {
 
         await this._driverRepository.save(driver);
 
-        return this.mapDriverToDto(driver);
+        return mapDriverToDto(driver);
     }
 
     /**
@@ -64,7 +65,7 @@ export class DriverService {
             relations: ["user", "passengers"],
         });
 
-        return drivers.map(driver => this.mapDriverToDto(driver));
+        return drivers.map(driver => mapDriverToDto(driver));
     }
 
     /**
@@ -81,28 +82,6 @@ export class DriverService {
             throw new NotFoundException("Driver not found");
         }
 
-        return this.mapDriverToDto(driver);
-    }
-
-    /**
-     * Maps a driver entity to its corresponding DTO.
-     * @param driver - Driver to map to DTO
-     */
-    private mapDriverToDto(driver: Driver): DriverDto {
-        const { car, carpoolId, user, passengers } = driver;
-
-        return {
-            id: driver.id,
-            car,
-            carpoolId,
-            user: {
-                id: user.id,
-                displayName: user.displayName,
-                email: user.email,
-            },
-            seatsRemaining: car.capacity - (passengers || []).length,
-            // TODO: TEMPORARY! Needs to be replaced with a DTO or removed!
-            passengers,
-        };
+        return mapDriverToDto(driver);
     }
 }
