@@ -183,6 +183,13 @@ exports.Carpool = {
                     name: "String"
                 }
             },
+            urlId: {
+                required: true,
+                serializedName: "urlId",
+                type: {
+                    name: "String"
+                }
+            },
             destination: {
                 required: true,
                 serializedName: "destination",

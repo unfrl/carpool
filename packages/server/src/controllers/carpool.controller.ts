@@ -18,6 +18,7 @@ import {
     Req,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import * as shortid from "shortid";
 
 import { Carpool } from "../entities";
 import { CarpoolDto } from "../dtos";
@@ -53,12 +54,17 @@ export class CarpoolController {
     @ApiOperation({
         operationId: "getCarpool",
         title: "Get Carpool",
-        description: "Retrieve a Carpool",
+        description: "Retrieve a Carpool by its GUID or its URL ID",
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
     @Get(":id")
     public async getBydId(@Param("id") id: string): Promise<Carpool> {
-        return await this._carpoolService.findOneById(id);
+        // Allowing GET to be by their GUID or their URL ID
+        if (shortid.isValid(id)) {
+            return await this._carpoolService.findOneByUrlId(id);
+        } else {
+            return await this._carpoolService.findOneById(id);
+        }
     }
 
     @ApiOperation({

@@ -51,6 +51,7 @@ export interface Carpool {
     created: any;
     updated: any;
     name: string;
+    urlId: string;
     destination: string;
     dateTime: any;
     drivers: string[];
