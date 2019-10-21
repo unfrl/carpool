@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useState, Fragment } from "react";
-import { TextField, Typography, makeStyles } from "@material-ui/core";
+import React, { FunctionComponent, useState } from "react";
+import { Typography, makeStyles } from "@material-ui/core";
 
-import { CreatePassengerDto } from "@carpool/core";
-import { AddressSearch, FormActions } from ".";
+import { CreatePassengerDto, isValidPhoneNumber } from "@carpool/core";
+import { AddressSearch, FormActions, PhoneNumberInput } from ".";
 
 const useStyles = makeStyles(theme => ({
     heading: {
@@ -32,12 +32,23 @@ export const PassengerForm: FunctionComponent<IPassengerFormProps> = props => {
         address: "",
     });
 
-    const canSave = Boolean(state.address);
+    const canSave = () => {
+        if (!state.address) {
+            return false;
+        }
+
+        if (!state.phoneNumber) {
+            return true; // phone number not required
+        }
+
+        // but if it's supplied, it needs to be in correct format
+        return isValidPhoneNumber(state.phoneNumber);
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (canSave) {
+        if (canSave()) {
             props.onSave(state);
         }
     };
@@ -55,15 +66,12 @@ export const PassengerForm: FunctionComponent<IPassengerFormProps> = props => {
                 label="Address"
                 autoFocus={true}
             />
-            {/**TODO: this needs to be a masked input!! */}
-            <TextField
+            <PhoneNumberInput
                 value={state.phoneNumber}
-                onChange={e => setState({ ...state, phoneNumber: e.target.value })}
-                variant="outlined"
-                margin="normal"
+                onChange={val => setState({ ...state, phoneNumber: val })}
                 label="Phone Number"
             />
-            <FormActions onCancel={props.onCancel} canSave={canSave} confirmText="Join" />
+            <FormActions onCancel={props.onCancel} canSave={canSave()} confirmText="Join" />
         </form>
     );
 };
