@@ -279,6 +279,25 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
     /**
+     * Get passengers for a driver
+     * @summary Get Passengers
+     * @param id
+     * @param [options] The optional parameters
+     * @returns Promise<Models.GetPassengersResponse>
+     */
+    getPassengers(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetPassengersResponse>;
+    /**
+     * @param id
+     * @param callback The callback
+     */
+    getPassengers(id: string, callback: msRest.ServiceCallback<Models.PassengerDto[]>): void;
+    /**
+     * @param id
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    getPassengers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto[]>): void;
+    /**
      * Verify a User using the token emailed to them during account creation
      * @summary Verify User
      * @param verificationDto

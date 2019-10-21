@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, ConflictException } from "@nestjs/common";
+import {
+    Injectable,
+    NotFoundException,
+    ConflictException,
+    ForbiddenException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -50,6 +55,29 @@ export class PassengerService {
         passenger.driverId = driverId;
 
         return mapPassengerToDto(await this._passengerRepository.save(passenger));
+    }
+
+    /**
+     * Gets collection of passengers for the driver.
+     * @param userId - ID of the user requesting passengers
+     * @param driverId - ID of the driver to pull passengers for
+     */
+    public async getPassengers(userId: string, driverId: string): Promise<PassengerDto[]> {
+        const driver = await this._driverRepository.findOne(driverId);
+        if (!driver) {
+            throw new NotFoundException("Driver not found");
+        }
+
+        if (driver.userId !== userId) {
+            throw new ForbiddenException("User is not the driver");
+        }
+
+        const passengers = await this._passengerRepository.find({
+            where: { driverId },
+            relations: ["user"],
+        });
+
+        return passengers.map(p => mapPassengerToDto(p));
     }
 
     /**

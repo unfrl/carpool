@@ -431,6 +431,35 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Get passengers for a driver
+   * @summary Get Passengers
+   * @param id
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetPassengersResponse>
+   */
+  getPassengers(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetPassengersResponse>;
+  /**
+   * @param id
+   * @param callback The callback
+   */
+  getPassengers(id: string, callback: msRest.ServiceCallback<Models.PassengerDto[]>): void;
+  /**
+   * @param id
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getPassengers(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto[]>): void;
+  getPassengers(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PassengerDto[]>, callback?: msRest.ServiceCallback<Models.PassengerDto[]>): Promise<Models.GetPassengersResponse> {
+    return this.sendOperationRequest(
+      {
+        id,
+        options
+      },
+      getPassengersOperationSpec,
+      callback) as Promise<Models.GetPassengersResponse>;
+  }
+
+  /**
    * Verify a User using the token emailed to them during account creation
    * @summary Verify User
    * @param verificationDto
@@ -730,6 +759,32 @@ const createPassengerOperationSpec: msRest.OperationSpec = {
   responses: {
     201: {
       bodyMapper: Mappers.PassengerDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const getPassengersOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/drivers/{id}/passengers",
+  urlParameters: [
+    Parameters.id
+  ],
+  responses: {
+    200: {
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PassengerDto"
+            }
+          }
+        }
+      }
     },
     default: {}
   },
