@@ -1,5 +1,11 @@
-import { ApiOperation, ApiUseTags, ApiCreatedResponse, ApiBearerAuth } from "@nestjs/swagger";
-import { Post, Body, Controller, Param, UseGuards, Req } from "@nestjs/common";
+import {
+    ApiOperation,
+    ApiUseTags,
+    ApiCreatedResponse,
+    ApiBearerAuth,
+    ApiResponse,
+} from "@nestjs/swagger";
+import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { CreatePassengerDto, PassengerDto } from "../dtos";
@@ -39,6 +45,21 @@ export class PassengerController {
         await this.notifyDriverUpdated(passenger.driverId);
 
         return passenger;
+    }
+
+    @ApiOperation({
+        operationId: "getPassengers",
+        title: "Get Passengers",
+        description: "Get passengers for a driver",
+    })
+    @ApiResponse({ status: HttpStatus.OK, type: PassengerDto, isArray: true })
+    @UseGuards(AuthGuard("jwt"))
+    @Get()
+    public async getPassengers(
+        @Req() request: UserRequest,
+        @Param("id") id: string
+    ): Promise<PassengerDto[]> {
+        return await this._passengerService.getPassengers(request.user.id, id);
     }
 
     private async notifyDriverUpdated(driverId: string) {

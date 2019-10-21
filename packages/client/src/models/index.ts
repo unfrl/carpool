@@ -393,6 +393,26 @@ export type CreatePassengerResponse = PassengerDto & {
 };
 
 /**
+ * Contains response data for the getPassengers operation.
+ */
+export type GetPassengersResponse = Array<PassengerDto> & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PassengerDto[];
+    };
+};
+
+/**
  * Contains response data for the verifyUser operation.
  */
 export type VerifyUserResponse = AuthDto & {
