@@ -43,19 +43,6 @@ export class DriverStore {
         }
     };
 
-    public createPassenger = async (createPassengerDto: CreatePassengerDto, driverId: string) => {
-        try {
-            const passenger = await this._rootStore.apiClient.createPassenger(
-                createPassengerDto,
-                driverId
-            );
-            // TODO: decide what to do with passengers...
-            this._logger.info("Passenger created!", passenger);
-        } catch (error) {
-            this._logger.error("Failed to create passenger", error);
-        }
-    };
-
     public createUserPassenger = async (
         createPassengerDto: CreateUserPassengerDto,
         driverId: string

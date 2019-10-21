@@ -95,11 +95,10 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             <Fragment>
                 {drivers.map(driver => {
                     const { seatsRemaining } = driver;
-                    const currentUserIsDriver = driver.user.id === userId;
 
                     const canJoin =
+                        !!userId &&
                         seatsRemaining > 0 &&
-                        !currentUserIsDriver &&
                         !currentUserIsDriving &&
                         !currentUserIsPassenger;
 
@@ -107,7 +106,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                         <DriverItem
                             key={driver.id}
                             driver={driver}
-                            currentUserIsDriver={currentUserIsDriver}
+                            currentUserIsDriver={driver.user.id === userId}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
                             passengers={driver.passengers}
