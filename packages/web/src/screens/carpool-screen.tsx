@@ -11,7 +11,6 @@ import {
     CreateDriverDto,
     CarpoolDto,
     CreatePassengerDto,
-    CreateUserPassengerDto,
 } from "@carpool/core";
 import {
     CarpoolDetails,
@@ -86,17 +85,13 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         }
     };
 
-    const handleSavePassengerForm = async (dto: CreatePassengerDto | CreateUserPassengerDto) => {
-        if (!driverId) {
+    const handleSavePassengerForm = async (dto: CreatePassengerDto) => {
+        if (!driverId || !authStore.isAuthenticated) {
             return; // shouldn't happen
         }
 
         try {
-            if (authStore.isAuthenticated) {
-                await driverStore.createUserPassenger(dto as CreateUserPassengerDto, driverId);
-            } else {
-                await driverStore.createPassenger(dto as CreatePassengerDto, driverId);
-            }
+            await driverStore.createUserPassenger(dto, driverId);
         } finally {
             // TODO: on error, display it and don't close form
             handleClosePassengerForm();
@@ -154,7 +149,6 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                     maxWidth="xs"
                 >
                     <PassengerForm
-                        isUserAuthenticated={authStore.isAuthenticated}
                         onSave={handleSavePassengerForm}
                         onCancel={handleClosePassengerForm}
                     />

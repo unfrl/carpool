@@ -139,13 +139,6 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, createPassengerOperationSpec, callback);
     };
-    CarpoolAPI.prototype.createUserPassenger = function (createUserPassengerDto, id, options, callback) {
-        return this.sendOperationRequest({
-            createUserPassengerDto: createUserPassengerDto,
-            id: id,
-            options: options
-        }, createUserPassengerOperationSpec, callback);
-    };
     CarpoolAPI.prototype.verifyUser = function (verificationDto, options, callback) {
         return this.sendOperationRequest({
             verificationDto: verificationDto,
@@ -387,25 +380,7 @@ var createPassengerOperationSpec = {
     },
     responses: {
         201: {
-            bodyMapper: Mappers.Passenger
-        },
-        default: {}
-    },
-    serializer: serializer
-};
-var createUserPassengerOperationSpec = {
-    httpMethod: "POST",
-    path: "api/v1/drivers/{id}/passengers/me",
-    urlParameters: [
-        Parameters.id
-    ],
-    requestBody: {
-        parameterPath: "createUserPassengerDto",
-        mapper: __assign(__assign({}, Mappers.CreateUserPassengerDto), { required: true })
-    },
-    responses: {
-        201: {
-            bodyMapper: Mappers.Passenger
+            bodyMapper: Mappers.PassengerDto
         },
         default: {}
     },

@@ -1,11 +1,6 @@
 import { action, observable, reaction } from "mobx";
 
-import {
-    DriverDto,
-    CreateDriverDto,
-    CreatePassengerDto,
-    CreateUserPassengerDto,
-} from "@carpool/client";
+import { DriverDto, CreateDriverDto, CreatePassengerDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -43,25 +38,12 @@ export class DriverStore {
         }
     };
 
-    public createPassenger = async (createPassengerDto: CreatePassengerDto, driverId: string) => {
-        try {
-            const passenger = await this._rootStore.apiClient.createPassenger(
-                createPassengerDto,
-                driverId
-            );
-            // TODO: decide what to do with passengers...
-            this._logger.info("Passenger created!", passenger);
-        } catch (error) {
-            this._logger.error("Failed to create passenger", error);
-        }
-    };
-
     public createUserPassenger = async (
-        createPassengerDto: CreateUserPassengerDto,
+        createPassengerDto: CreatePassengerDto,
         driverId: string
     ) => {
         try {
-            const passenger = await this._rootStore.apiClient.createUserPassenger(
+            const passenger = await this._rootStore.apiClient.createPassenger(
                 createPassengerDto,
                 driverId
             );
