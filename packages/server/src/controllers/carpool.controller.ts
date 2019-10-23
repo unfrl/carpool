@@ -58,7 +58,7 @@ export class CarpoolController {
     })
     @ApiResponse({ status: HttpStatus.OK, type: Carpool })
     @Get(":id")
-    public async getBydId(@Param("id") id: string): Promise<Carpool> {
+    public async getById(@Param("id") id: string): Promise<Carpool> {
         // Allowing GET to be by their GUID or their URL ID
         if (shortid.isValid(id)) {
             return await this._carpoolService.findOneByUrlId(id);
