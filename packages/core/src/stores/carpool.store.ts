@@ -66,22 +66,21 @@ export class CarpoolStore {
     };
 
     /**
-     * Sets the selected carpool ID, first checking if it has the carpool locally. If not, it'll attempt to fetch it from the server.
+     * Fetches the carpool by its `urlId` and then sets it as the selected carpool if successful.
+     * **Note**: it's the URL ID that should be passed in, not its GUID!
      */
-    public selectCarpool = async (carpoolId: string) => {
+    public selectCarpool = async (carpoolUrlId: string) => {
         try {
             this.setLoading(true);
 
-            if (!this.carpools.find(c => c.id === carpoolId)) {
-                this._logger.info("Carpool not found locally, fetching from server...");
-
-                const carpool = await this._rootStore.apiClient.getCarpool(carpoolId);
-
+            let carpool = this.carpools.find(c => c.urlId === carpoolUrlId);
+            if (!carpool) {
+                carpool = await this._rootStore.apiClient.getCarpool(carpoolUrlId);
                 this.addCarpool(carpool);
             }
 
-            this.setSelectedCarpoolId(carpoolId);
-            await this.joinCarpool(carpoolId);
+            await this.joinCarpool(carpool.id);
+            this.setSelectedCarpoolId(carpool.id);
         } catch (error) {
             this._logger.error("Failed to select carpool", error);
         } finally {

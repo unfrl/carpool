@@ -37,7 +37,7 @@ export interface ICarpoolScreenProps extends RouteComponentProps {
 export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(props => {
     const classes = useStyles();
     const { match, carpoolStore, authStore, driverStore } = props;
-    const { id } = match.params as { id: string };
+    const { id: urlId } = match.params as { id: string };
     const { selectedCarpoolId, selectedCarpool, loading } = carpoolStore;
     const [ready, setReady] = useState(false);
     const [showDriverForm, setShowDriverForm] = useState(false);
@@ -53,14 +53,14 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             setReady(true);
         };
 
-        if (id !== selectedCarpoolId) {
-            selectId(id);
+        if (urlId !== selectedCarpoolId) {
+            selectId(urlId);
         }
 
         return () => {
             carpoolStore.clearCarpool();
         };
-    }, [id]);
+    }, [urlId]);
 
     const handleToggleDriverForm = () => {
         setShowDriverForm(!showDriverForm);
@@ -75,7 +75,8 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     };
 
     const handleSaveDriverForm = async (createDriverDto: CreateDriverDto) => {
-        await driverStore.createDriver(id, createDriverDto);
+        // Note the use of the selectedCarpoolId - this is the GUID, don't use the urlId!
+        await driverStore.createDriver(selectedCarpoolId, createDriverDto);
         handleToggleDriverForm();
     };
 

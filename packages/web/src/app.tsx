@@ -25,6 +25,7 @@ import {
     VerificationScreen,
     ScreenMode,
 } from "./screens";
+import { getCarpoolPath } from "./utils";
 
 const theme = createMuiTheme({
     palette: {
@@ -80,7 +81,7 @@ export class App extends Component<IAppProps, IAppState> {
                             )}
                         />
                         <Route
-                            path="/carpools/create"
+                            path="/create"
                             exact={true}
                             render={_routeProps => (
                                 <CreateCarpoolScreen
@@ -93,7 +94,7 @@ export class App extends Component<IAppProps, IAppState> {
                             )}
                         />
                         <Route
-                            path="/carpools/:name/:id"
+                            path={getCarpoolPath(":name", ":id")}
                             exact={true}
                             render={routeProps => (
                                 <CarpoolScreen

@@ -1,5 +1,10 @@
 import slugify from "slugify";
 
-export const getCarpoolPath = (name: string, id: string) => {
-    return `/carpools/${slugify(name, { lower: true })}/${id}`;
+/**
+ * Gets the carpool route path.
+ * @param name - The carpool name
+ * @param urlId - The carpool URL ID, not the GUID!
+ */
+export const getCarpoolPath = (name: string, urlId: string) => {
+    return `/${urlId}/${slugify(name, { lower: true })}`;
 };
