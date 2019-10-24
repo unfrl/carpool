@@ -134,6 +134,7 @@ export class App extends Component<IAppProps, IAppState> {
                         onSignIn={this.handleSignIn}
                         onSignUp={this.handleSignUp}
                         onRequestPasswordReset={this.handleRequestPasswordReset}
+                        onGoogleLogin={this.handleGoogleLogin}
                     />
                 )}
             </ThemeProvider>
@@ -193,6 +194,15 @@ export class App extends Component<IAppProps, IAppState> {
     private handleSignIn = async (email: string, password: string) => {
         const { authStore } = this.injectedProps;
         await authStore.signIn(email, password);
+
+        if (authStore.isAuthenticated) {
+            this.handleCloseDialog();
+        }
+    };
+
+    private handleGoogleLogin = async (idToken: string) => {
+        const { authStore } = this.injectedProps;
+        await authStore.signInWithGoogle(idToken);
 
         if (authStore.isAuthenticated) {
             this.handleCloseDialog();

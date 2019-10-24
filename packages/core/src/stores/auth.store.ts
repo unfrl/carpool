@@ -70,6 +70,21 @@ export class AuthStore {
         }
     };
 
+    public signInWithGoogle = async (idToken: string) => {
+        try {
+            const result = await this._rootStore.apiClient.signInWithGoogle({ idToken });
+
+            this.setAccessToken(result.accessToken);
+
+            this._logger.info("Sign in success, fetching user...");
+
+            await this.fetchUserProfile();
+        } catch (error) {
+            this._logger.error("Failed to sign in with server using google idToken", error);
+            throw error;
+        }
+    };
+
     public signIn = async (email: string, password: string) => {
         try {
             const result = await this._rootStore.apiClient.signIn({ email, password });

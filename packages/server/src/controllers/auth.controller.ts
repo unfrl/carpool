@@ -11,7 +11,14 @@ import {
 import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
-import { AuthDto, SignUpDto, SignInDto, PasswordResetRequestDto, PasswordResetDto } from "../dtos";
+import {
+    AuthDto,
+    SignUpDto,
+    SignInDto,
+    PasswordResetRequestDto,
+    PasswordResetDto,
+    GoogleSignInDto,
+} from "../dtos";
 
 @ApiUseTags("Auth")
 @Controller("api/v1/auth")
@@ -40,6 +47,20 @@ export class AuthController {
     @Post("signin")
     public async signIn(@Body() signInDto: SignInDto): Promise<AuthDto> {
         return await this._authService.signIn(signInDto);
+    }
+
+    @ApiOperation({
+        operationId: "signInWithGoogle",
+        title: "Sign in with Google",
+        description:
+            "Sign in using a google user's idToken. This will create a user if it doesnt exist.",
+    })
+    @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
+    @HttpCode(200)
+    @Post("signinwithgoogle")
+    public async signInWithGoogle(@Body() googleSignInDto: GoogleSignInDto): Promise<AuthDto> {
+        let result = await this._authService.signInOrCreateUserWithGoogle(googleSignInDto);
+        return result;
     }
 
     @ApiOperation({

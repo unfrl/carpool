@@ -36,6 +36,7 @@
         "class-transformer": "^0.2.3",
         "class-validator": "^0.10.1",
         "crypto-random-string": "^3.0.1",
+        "google-auth-library": "^5.5.1",
         "guid-typescript": "^1.0.9",
         "ioredis": "^4.14.1",
         "passport": "^0.4.0",

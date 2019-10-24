@@ -8,6 +8,7 @@ import {
     CircularProgress,
 } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
+import { GoogleLogin } from "react-google-login";
 
 import { AppDialog } from "./";
 
@@ -57,7 +58,10 @@ export interface IUserDialogProps {
      * Callback requesting to sign up.
      */
     onSignUp: (email: string, password: string, displayName: string) => Promise<void>;
-
+    /**
+     * Callback requesting server verify google login
+     */
+    onGoogleLogin: (idToken: string) => Promise<void>;
     /**
      * Callback requesting a password email to be sent.
      */
@@ -211,6 +215,19 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         );
     };
 
+    const googleLoginSuccess = async response => {
+        const idToken = response.Zi.id_token;
+        if (!idToken) {
+            console.log("Unable to extract google user idToken from login response");
+        }
+        await props.onGoogleLogin(idToken);
+    };
+
+    const googleLoginFailure = response => {
+        console.log(`Failed to authenticate with google.`);
+        console.log(response);
+    };
+
     const renderSignInUpForm = () => {
         return (
             <form onSubmit={handleSubmit} className={classes.form}>
@@ -255,6 +272,12 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                                 Forgot your password?
                             </Link>
                         )}
+                        <GoogleLogin
+                            clientId="585555232904-uotrkv26hmrmni591q78an8s6jgouit6.apps.googleusercontent.com" //TODO: Needs to be configuration-based
+                            onSuccess={googleLoginSuccess}
+                            onFailure={googleLoginFailure}
+                            cookiePolicy={"single_host_origin"}
+                        />
                     </React.Fragment>
                 )}
                 {state.error && <Typography className={classes.error}>{state.error}</Typography>}

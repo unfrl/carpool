@@ -66,6 +66,12 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, signInOperationSpec, callback);
     };
+    CarpoolAPI.prototype.signInWithGoogle = function (googleSignInDto, options, callback) {
+        return this.sendOperationRequest({
+            googleSignInDto: googleSignInDto,
+            options: options
+        }, signInWithGoogleOperationSpec, callback);
+    };
     CarpoolAPI.prototype.requestPasswordReset = function (passwordResetRequestDto, options, callback) {
         return this.sendOperationRequest({
             passwordResetRequestDto: passwordResetRequestDto,
@@ -175,6 +181,21 @@ var signInOperationSpec = {
     requestBody: {
         parameterPath: "signInDto",
         mapper: __assign(__assign({}, Mappers.SignInDto), { required: true })
+    },
+    responses: {
+        200: {
+            bodyMapper: Mappers.AuthDto
+        },
+        default: {}
+    },
+    serializer: serializer
+};
+var signInWithGoogleOperationSpec = {
+    httpMethod: "POST",
+    path: "api/v1/auth/signinwithgoogle",
+    requestBody: {
+        parameterPath: "googleSignInDto",
+        mapper: __assign(__assign({}, Mappers.GoogleSignInDto), { required: true })
     },
     responses: {
         200: {

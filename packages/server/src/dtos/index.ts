@@ -10,3 +10,4 @@ export * from "./passenger.dto";
 export * from "./verification.dto";
 export * from "./password-reset.dto";
 export * from "./password-reset-request.dto";
+export * from "./google-sign-in.dto";

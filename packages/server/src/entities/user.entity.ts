@@ -19,6 +19,9 @@ export class User extends BaseEntity {
     @Column({ default: false })
     public isVerified: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     public password: string;
+
+    @Column({ nullable: true })
+    public google_id: string;
 }
