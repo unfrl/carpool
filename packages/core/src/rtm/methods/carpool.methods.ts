@@ -1,4 +1,4 @@
-import { Carpool, DriverDto } from "@carpool/client";
+import { CarpoolDto, DriverDto } from "@carpool/client";
 import { RtmClient } from "../rtm-client";
 
 export class CarpoolMethods {
@@ -15,7 +15,7 @@ export class CarpoolMethods {
 
     //#region Events
 
-    public onCarpoolUpdated = (cb: (carpool: Carpool) => void) => {
+    public onCarpoolUpdated = (cb: (carpool: CarpoolDto) => void) => {
         this._rtmClient.on("carpool.updated", cb);
     };
 

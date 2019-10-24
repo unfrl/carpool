@@ -44,24 +44,22 @@ export interface UserDto {
     displayName: string;
 }
 /**
- * An interface representing Carpool.
+ * An interface representing CarpoolDto.
  */
-export interface Carpool {
+export interface CarpoolDto {
     id: string;
-    created: any;
-    updated: any;
     name: string;
     urlId: string;
     destination: string;
     dateTime: any;
-    drivers: string[];
-    createdById: string;
-    updatedById: string;
+    created: any;
+    updated: any;
+    user: UserDto;
 }
 /**
- * An interface representing CarpoolDto.
+ * An interface representing UpsertCarpoolDto.
  */
-export interface CarpoolDto {
+export interface UpsertCarpoolDto {
     carpoolName: string;
     destination: string;
     dateTime: any;
@@ -78,9 +76,9 @@ export interface Car {
     type: Type;
 }
 /**
- * An interface representing CreateDriverDto.
+ * An interface representing UpsertDriverDto.
  */
-export interface CreateDriverDto {
+export interface UpsertDriverDto {
     car: Car;
 }
 /**
@@ -95,9 +93,9 @@ export interface DriverDto {
     passengerUserIds: string[];
 }
 /**
- * An interface representing CreatePassengerDto.
+ * An interface representing UpsertPassengerDto.
  */
-export interface CreatePassengerDto {
+export interface UpsertPassengerDto {
     phoneNumber?: string;
     address: string;
 }
@@ -188,7 +186,7 @@ export declare type GetMyProfileResponse = UserDto & {
 /**
  * Contains response data for the getMyCarpools operation.
  */
-export declare type GetMyCarpoolsResponse = Array<Carpool> & {
+export declare type GetMyCarpoolsResponse = Array<CarpoolDto> & {
     /**
      * The underlying HTTP response.
      */
@@ -200,13 +198,13 @@ export declare type GetMyCarpoolsResponse = Array<Carpool> & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Carpool[];
+        parsedBody: CarpoolDto[];
     };
 };
 /**
  * Contains response data for the getUserCarpools operation.
  */
-export declare type GetUserCarpoolsResponse = Array<Carpool> & {
+export declare type GetUserCarpoolsResponse = Array<CarpoolDto> & {
     /**
      * The underlying HTTP response.
      */
@@ -218,13 +216,13 @@ export declare type GetUserCarpoolsResponse = Array<Carpool> & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Carpool[];
+        parsedBody: CarpoolDto[];
     };
 };
 /**
  * Contains response data for the createCarpool operation.
  */
-export declare type CreateCarpoolResponse = Carpool & {
+export declare type CreateCarpoolResponse = CarpoolDto & {
     /**
      * The underlying HTTP response.
      */
@@ -236,13 +234,13 @@ export declare type CreateCarpoolResponse = Carpool & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Carpool;
+        parsedBody: CarpoolDto;
     };
 };
 /**
  * Contains response data for the getCarpool operation.
  */
-export declare type GetCarpoolResponse = Carpool & {
+export declare type GetCarpoolResponse = CarpoolDto & {
     /**
      * The underlying HTTP response.
      */
@@ -254,13 +252,13 @@ export declare type GetCarpoolResponse = Carpool & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Carpool;
+        parsedBody: CarpoolDto;
     };
 };
 /**
  * Contains response data for the updateCarpool operation.
  */
-export declare type UpdateCarpoolResponse = Carpool & {
+export declare type UpdateCarpoolResponse = CarpoolDto & {
     /**
      * The underlying HTTP response.
      */
@@ -272,25 +270,7 @@ export declare type UpdateCarpoolResponse = Carpool & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: Carpool;
-    };
-};
-/**
- * Contains response data for the deleteCarpool operation.
- */
-export declare type DeleteCarpoolResponse = Carpool & {
-    /**
-     * The underlying HTTP response.
-     */
-    _response: msRest.HttpResponse & {
-        /**
-         * The response body as text (string format)
-         */
-        bodyAsText: string;
-        /**
-         * The response body as parsed JSON or XML
-         */
-        parsedBody: Carpool;
+        parsedBody: CarpoolDto;
     };
 };
 /**

@@ -1,6 +1,6 @@
 import { observable, action, computed } from "mobx";
 
-import { Carpool, CarpoolDto } from "@carpool/client";
+import { UpsertCarpoolDto, CarpoolDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -8,13 +8,13 @@ export class CarpoolStore {
     private readonly _logger = new Logger("CarpoolStore");
 
     @observable
-    public carpools: Carpool[] = [];
+    public carpools: CarpoolDto[] = [];
 
     @observable
     public selectedCarpoolId: string = "";
 
     @computed
-    public get selectedCarpool(): Carpool | undefined {
+    public get selectedCarpool(): CarpoolDto | undefined {
         return this.carpools.find(c => c.id === this.selectedCarpoolId);
     }
 
@@ -31,7 +31,7 @@ export class CarpoolStore {
     /**
      * Creates a new carpool, returning the model if successful.
      */
-    public createCarpool = async (carpoolDto: CarpoolDto): Promise<Carpool> => {
+    public createCarpool = async (carpoolDto: UpsertCarpoolDto): Promise<CarpoolDto> => {
         try {
             this.setSaving(true);
 
@@ -51,7 +51,7 @@ export class CarpoolStore {
     /**
      * Updates an existing carpool and then updates the carpool in the collection if successful
      */
-    public updateCarpool = async (carpoolDto: CarpoolDto, carpoolId: string) => {
+    public updateCarpool = async (carpoolDto: UpsertCarpoolDto, carpoolId: string) => {
         try {
             this.setSaving(true);
 
@@ -137,17 +137,17 @@ export class CarpoolStore {
     };
 
     @action
-    private addCarpool = (carpool: Carpool) => {
+    private addCarpool = (carpool: CarpoolDto) => {
         this.carpools.push(carpool);
     };
 
     @action
-    private setCarpools = (carpools: Carpool[]) => {
+    private setCarpools = (carpools: CarpoolDto[]) => {
         this.carpools = carpools;
     };
 
     @action
-    private setUpdatedCarpool = (carpool: Carpool) => {
+    private setUpdatedCarpool = (carpool: CarpoolDto) => {
         const index = this.carpools.findIndex(c => c.id === carpool.id);
         if (index > -1) {
             this.carpools[index] = carpool;

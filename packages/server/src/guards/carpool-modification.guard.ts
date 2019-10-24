@@ -18,6 +18,6 @@ export class CarpoolModificationGuard implements CanActivate {
 
     private async validateRequest(request: UserRequest): Promise<boolean> {
         const carpool = await this._carpoolService.findCarpoolById(request.params.id);
-        return carpool.createdById === request.user.id;
+        return carpool.user.id === request.user.id;
     }
 }

@@ -10,9 +10,8 @@ import {
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
-import { UserDto } from "../dtos";
+import { UserDto, CarpoolDto } from "../dtos";
 import { UserRequest } from "../interfaces";
-import { Carpool } from "../entities";
 import { CarpoolService, UserService } from "../services";
 import { mapUserToDto } from "../mappers";
 
@@ -42,10 +41,10 @@ export class UserController {
         title: "Get user's carpools",
         description: "Gets a collection of carpools created by the current user",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Carpool, isArray: true })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools")
-    public async getMyCarpools(@Req() request: UserRequest): Promise<Carpool[]> {
+    public async getMyCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
         return await this._carpoolService.findCarpoolsByCreatedBy(request.user.id);
     }
 
@@ -54,9 +53,9 @@ export class UserController {
         title: "Get a user's carpools",
         description: "Get a user's carpools by their display name",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Carpool, isArray: true })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })
     @Get(":displayName/carpools")
-    public async getUserCarpools(@Param("displayName") displayName: string): Promise<Carpool[]> {
+    public async getUserCarpools(@Param("displayName") displayName: string): Promise<CarpoolDto[]> {
         const user = await this._userService.findOneByDisplayName(displayName);
         if (!user) {
             throw new NotFoundException("User not found.");

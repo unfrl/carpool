@@ -149,31 +149,17 @@ exports.UserDto = {
         }
     }
 };
-exports.Carpool = {
-    serializedName: "Carpool",
+exports.CarpoolDto = {
+    serializedName: "CarpoolDto",
     type: {
         name: "Composite",
-        className: "Carpool",
+        className: "CarpoolDto",
         modelProperties: {
             id: {
                 required: true,
                 serializedName: "id",
                 type: {
                     name: "String"
-                }
-            },
-            created: {
-                required: true,
-                serializedName: "created",
-                type: {
-                    name: "Object"
-                }
-            },
-            updated: {
-                required: true,
-                serializedName: "updated",
-                type: {
-                    name: "Object"
                 }
             },
             name: {
@@ -204,40 +190,36 @@ exports.Carpool = {
                     name: "Object"
                 }
             },
-            drivers: {
+            created: {
                 required: true,
-                serializedName: "drivers",
+                serializedName: "created",
                 type: {
-                    name: "Sequence",
-                    element: {
-                        type: {
-                            name: "String"
-                        }
-                    }
+                    name: "Object"
                 }
             },
-            createdById: {
+            updated: {
                 required: true,
-                serializedName: "createdById",
+                serializedName: "updated",
                 type: {
-                    name: "String"
+                    name: "Object"
                 }
             },
-            updatedById: {
+            user: {
                 required: true,
-                serializedName: "updatedById",
+                serializedName: "user",
                 type: {
-                    name: "String"
+                    name: "Composite",
+                    className: "UserDto"
                 }
             }
         }
     }
 };
-exports.CarpoolDto = {
-    serializedName: "CarpoolDto",
+exports.UpsertCarpoolDto = {
+    serializedName: "UpsertCarpoolDto",
     type: {
         name: "Composite",
-        className: "CarpoolDto",
+        className: "UpsertCarpoolDto",
         modelProperties: {
             carpoolName: {
                 required: true,
@@ -293,11 +275,11 @@ exports.Car = {
         }
     }
 };
-exports.CreateDriverDto = {
-    serializedName: "CreateDriverDto",
+exports.UpsertDriverDto = {
+    serializedName: "UpsertDriverDto",
     type: {
         name: "Composite",
-        className: "CreateDriverDto",
+        className: "UpsertDriverDto",
         modelProperties: {
             car: {
                 required: true,
@@ -368,11 +350,11 @@ exports.DriverDto = {
         }
     }
 };
-exports.CreatePassengerDto = {
-    serializedName: "CreatePassengerDto",
+exports.UpsertPassengerDto = {
+    serializedName: "UpsertPassengerDto",
     type: {
         name: "Composite",
-        className: "CreatePassengerDto",
+        className: "UpsertPassengerDto",
         modelProperties: {
             phoneNumber: {
                 serializedName: "phoneNumber",

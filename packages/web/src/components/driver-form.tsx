@@ -9,7 +9,7 @@ import {
     Typography,
 } from "@material-ui/core";
 
-import { CreateDriverDto } from "@carpool/core";
+import { UpsertDriverDto } from "@carpool/core";
 import { FormActions } from ".";
 
 const carTypes = ["Sedan", "Truck", "SUV", "Van"];
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IDriverFormProps {
-    onSave: (createDriverDto: CreateDriverDto) => Promise<void>;
+    onSave: (createDriverDto: UpsertDriverDto) => Promise<void>;
     onCancel: () => void;
 }
 
