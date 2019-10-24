@@ -1,0 +1,16 @@
+{
+    "name": "@carpool/common",
+    "version": "1.0.0",
+    "description": "Project that can be shared between the backend and frontend",
+    "main": "dist",
+    "author": "Unfrl",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "postinstall": "yarn build"
+    },
+    "devDependencies": {
+        "typescript": "^3.6.3"
+    }
+}
