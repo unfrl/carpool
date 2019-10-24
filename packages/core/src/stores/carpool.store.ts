@@ -79,8 +79,9 @@ export class CarpoolStore {
                 this.addCarpool(carpool);
             }
 
-            await this.joinCarpool(carpool.id);
             this.setSelectedCarpoolId(carpool.id);
+
+            await this.joinCarpool(carpool.id);
         } catch (error) {
             this._logger.error("Failed to select carpool", error);
         } finally {
