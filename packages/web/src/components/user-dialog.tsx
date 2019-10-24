@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import { GoogleLogin } from "react-google-login";
+import { authProviderConfig } from "@carpool/core";
 
 import { AppDialog } from "./";
 
@@ -42,6 +43,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "center",
         height: 250,
+    },
+    socialLogin: {
+        marginTop: theme.spacing(2),
     },
 }));
 
@@ -218,7 +222,7 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
     const googleLoginSuccess = async response => {
         const idToken = response.Zi.id_token;
         if (!idToken) {
-            console.log("Unable to extract google user idToken from login response");
+            console.error("Unable to extract google user idToken from login response");
         }
         await props.onGoogleLogin(idToken);
     };
@@ -272,12 +276,15 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                                 Forgot your password?
                             </Link>
                         )}
-                        <GoogleLogin
-                            clientId="585555232904-uotrkv26hmrmni591q78an8s6jgouit6.apps.googleusercontent.com" //TODO: Needs to be configuration-based
-                            onSuccess={googleLoginSuccess}
-                            onFailure={googleLoginFailure}
-                            cookiePolicy={"single_host_origin"}
-                        />
+                        {authProviderConfig.googleClientId && state.mode === DialogMode.signIn && (
+                            <GoogleLogin
+                                className={classes.socialLogin}
+                                clientId={authProviderConfig.googleClientId}
+                                onSuccess={googleLoginSuccess}
+                                onFailure={googleLoginFailure}
+                                cookiePolicy={"single_host_origin"}
+                            />
+                        )}
                     </React.Fragment>
                 )}
                 {state.error && <Typography className={classes.error}>{state.error}</Typography>}

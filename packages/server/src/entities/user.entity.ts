@@ -23,5 +23,5 @@ export class User extends BaseEntity {
     public password: string;
 
     @Column({ nullable: true })
-    public google_id: string;
+    public googleId: string;
 }

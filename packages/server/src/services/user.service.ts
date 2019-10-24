@@ -60,8 +60,8 @@ export class UserService {
             throw new Error("Email, google UserID, and display name are required");
         }
         let user = new User();
-        user.email = email;
-        user.google_id = googleUserId; //TODO: remove underscores here
+        user.email = email.toLowerCase();
+        user.googleId = googleUserId;
         user.displayName = displayName;
         user.firstName = firstName;
         user.lastName = lastName;
