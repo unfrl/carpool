@@ -1,26 +1,19 @@
 import React, { FunctionComponent } from "react";
-import { Typography, Button, makeStyles } from "@material-ui/core";
+import { Typography, Button, Grid, makeStyles } from "@material-ui/core";
 
 import { NavLink } from "../components";
 import fastCar from "../images/fast-car.svg";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        left: 0,
-        right: 0,
-        position: "absolute",
+        marginTop: theme.spacing(2),
         padding: theme.spacing(2),
     },
-    hero: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-    },
     info: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         [theme.breakpoints.down("sm")]: {
-            display: "flex",
-            flexDirection: "column",
             alignItems: "center",
         },
     },
@@ -36,13 +29,24 @@ const useStyles = makeStyles(theme => ({
             textAlign: "center",
         },
     },
-    image: {
-        width: "100%",
-        marginTop: theme.spacing(3),
-        [theme.breakpoints.up("sm")]: {
-            maxWidth: "50%",
-            marginTop: 0,
+    imageContainer: {
+        display: "flex",
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center",
         },
+    },
+    image: {
+        maxWidth: "100%",
+        [theme.breakpoints.down("sm")]: {
+            maxWidth: "70%",
+        },
+        [theme.breakpoints.down("xs")]: {
+            maxWidth: "90%",
+        },
+    },
+    createCarpool: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
     },
 }));
 
@@ -50,23 +54,24 @@ export const HomeScreen: FunctionComponent = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <div className={classes.hero}>
-                <div className={classes.info}>
-                    <Typography variant="h3" className={classes.heading}>
-                        Carpool
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.subtitle}>
-                        Awesome subtitle about the app goes here
-                    </Typography>
-                    <NavLink to="/create">
-                        <Button variant="contained" color="primary" size="large">
-                            Create a Carpool
-                        </Button>
-                    </NavLink>
-                </div>
+        <Grid spacing={4} container={true} className={classes.root}>
+            <Grid item={true} md={6} sm={12} xs={12} className={classes.info}>
+                <Typography variant="h3" className={classes.heading}>
+                    Unfrl carpool
+                </Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                    Save on gas, make new friends, reduce your carbon footprint, and get where you
+                    need to go!
+                </Typography>
+                <NavLink to="/create" className={classes.createCarpool}>
+                    <Button variant="contained" color="primary" size="large">
+                        Create a Carpool
+                    </Button>
+                </NavLink>
+            </Grid>
+            <Grid item={true} md={6} sm={12} xs={12} className={classes.imageContainer}>
                 <img src={fastCar} alt="Carpool" className={classes.image} />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
