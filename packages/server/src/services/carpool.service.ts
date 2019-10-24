@@ -34,8 +34,21 @@ export class CarpoolService {
      * Finds a carpool by its ID.
      * @param id - ID of the carpool
      */
-    public async findOneById(id: string): Promise<Carpool> {
+    public async findCarpoolById(id: string): Promise<Carpool> {
         const carpool = await this._carpoolRepository.findOne(id);
+        if (!carpool) {
+            throw new NotFoundException("No Carpool was found with the provided ID");
+        }
+
+        return carpool;
+    }
+
+    /**
+     * Finds a carpool by its URL ID.
+     * @param urlId - URL ID of the carpool
+     */
+    public async findCarpoolByUrlId(urlId: string): Promise<Carpool> {
+        const carpool = await this._carpoolRepository.findOne({ where: { urlId } });
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }

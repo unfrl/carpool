@@ -156,7 +156,7 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     createCarpool(carpoolDto: Models.CarpoolDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
     /**
-     * Retrieve a Carpool
+     * Retrieve a Carpool by its GUID or its URL ID
      * @summary Get Carpool
      * @param id
      * @param [options] The optional parameters

@@ -191,6 +191,13 @@ export const Carpool: msRest.CompositeMapper = {
           name: "String"
         }
       },
+      urlId: {
+        required: true,
+        serializedName: "urlId",
+        type: {
+          name: "String"
+        }
+      },
       destination: {
         required: true,
         serializedName: "destination",

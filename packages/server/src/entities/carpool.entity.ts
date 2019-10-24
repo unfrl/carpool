@@ -1,5 +1,6 @@
-import { Entity, OneToMany, ManyToOne, Column } from "typeorm";
+import { Entity, OneToMany, ManyToOne, Column, BeforeInsert } from "typeorm";
 import { ApiResponseModelProperty } from "@nestjs/swagger";
+import * as shortid from "shortid";
 
 import { BaseEntity } from "./base.entity";
 import { Driver } from "./driver.entity";
@@ -10,6 +11,10 @@ export class Carpool extends BaseEntity {
     @Column({ length: 50 })
     @ApiResponseModelProperty()
     public name: string;
+
+    @Column({ length: 14, unique: true })
+    @ApiResponseModelProperty()
+    public urlId: string;
 
     @Column()
     @ApiResponseModelProperty()
@@ -36,4 +41,9 @@ export class Carpool extends BaseEntity {
 
     @ManyToOne(type => User)
     public updatedBy: User;
+
+    @BeforeInsert()
+    private beforeInsert() {
+        this.urlId = shortid.generate();
+    }
 }

@@ -49,7 +49,7 @@ export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
     return (
         <List component="nav">
             {carpools.map(carpool => (
-                <NavLink key={carpool.id} to={getCarpoolPath(carpool.name, carpool.id)}>
+                <NavLink key={carpool.id} to={getCarpoolPath(carpool.name, carpool.urlId)}>
                     <ListItem button={true}>
                         <ListItemText
                             primary={carpool.name}

@@ -59,7 +59,7 @@ export const HomeScreen: FunctionComponent = () => {
                     <Typography variant="subtitle1" className={classes.subtitle}>
                         Awesome subtitle about the app goes here
                     </Typography>
-                    <NavLink to="/carpools/create">
+                    <NavLink to="/create">
                         <Button variant="contained" color="primary" size="large">
                             Create a Carpool
                         </Button>

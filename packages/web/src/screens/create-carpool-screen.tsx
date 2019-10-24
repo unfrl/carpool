@@ -56,7 +56,7 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
     };
 
     if (newCarpool) {
-        return <Redirect to={getCarpoolPath(newCarpool.name, newCarpool.id)} />;
+        return <Redirect to={getCarpoolPath(newCarpool.name, newCarpool.urlId)} />;
     }
 
     if (!initialized) {
