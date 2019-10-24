@@ -61,9 +61,9 @@ export class CarpoolController {
     public async getById(@Param("id") id: string): Promise<Carpool> {
         // Allowing GET to be by their GUID or their URL ID
         if (shortid.isValid(id)) {
-            return await this._carpoolService.findOneByUrlId(id);
+            return await this._carpoolService.findCarpoolByUrlId(id);
         } else {
-            return await this._carpoolService.findOneById(id);
+            return await this._carpoolService.findCarpoolById(id);
         }
     }
 
