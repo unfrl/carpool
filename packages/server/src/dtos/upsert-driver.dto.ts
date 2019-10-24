@@ -3,7 +3,7 @@ import { IsDefined } from "class-validator";
 
 import { Car } from "../interfaces";
 
-export class CreateDriverDto {
+export class UpsertDriverDto {
     @ApiModelProperty()
     @IsDefined()
     public readonly car: Car;

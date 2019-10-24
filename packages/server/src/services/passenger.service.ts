@@ -8,7 +8,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Passenger, Driver, User } from "../entities";
-import { CreatePassengerDto, PassengerDto } from "../dtos";
+import { UpsertPassengerDto, PassengerDto } from "../dtos";
 import { mapPassengerToDto } from "../mappers";
 
 @Injectable()
@@ -31,7 +31,7 @@ export class PassengerService {
     public async createPassenger(
         userId: string,
         driverId: string,
-        createPassengerDto: CreatePassengerDto
+        createPassengerDto: UpsertPassengerDto
     ): Promise<PassengerDto> {
         await this.verifyPassengerEligibity(driverId, userId);
 

@@ -4,7 +4,7 @@ import { Card, Typography, Button, CircularProgress, makeStyles } from "@materia
 import { observer } from "mobx-react";
 import { RouterStore } from "mobx-react-router";
 
-import { CarpoolStore, CarpoolDto, Carpool } from "@carpool/core";
+import { CarpoolStore, CarpoolDto, UpsertCarpoolDto } from "@carpool/core";
 import { CarpoolForm, DocumentHead } from "../components";
 import { getCarpoolPath } from "../utils";
 import toyCar from "../images/toy-car.svg";
@@ -43,9 +43,9 @@ export interface ICreateCarpoolScreenProps {
 export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> = observer(props => {
     const classes = useStyles();
     const { initialized, isAuthenticated, onSignIn, carpoolStore, routerStore } = props;
-    const [newCarpool, setNewCarpool] = useState<Carpool | undefined>();
+    const [newCarpool, setNewCarpool] = useState<CarpoolDto | undefined>();
 
-    const handleSave = async (carpoolDto: CarpoolDto) => {
+    const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         const carpool = await carpoolStore.createCarpool(carpoolDto);
 
         setNewCarpool(carpool);

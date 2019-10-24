@@ -2,8 +2,9 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Carpool } from "../entities";
-import { CarpoolDto } from "../dtos";
+import { Carpool, User } from "../entities";
+import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
+import { mapCarpoolToDto } from "../mappers";
 
 @Injectable()
 export class CarpoolService {
@@ -17,43 +18,48 @@ export class CarpoolService {
      * @param carpoolDto - DTO to the create the carpool with
      * @param userId - ID of the user creating the carpool
      */
-    public async createCarpool(carpoolDto: CarpoolDto, userId: string): Promise<Carpool> {
+    public async createCarpool(carpoolDto: UpsertCarpoolDto, user: User): Promise<CarpoolDto> {
         const { destination, carpoolName, dateTime } = carpoolDto;
 
         const carpool = new Carpool();
         carpool.name = carpoolName;
         carpool.destination = destination;
         carpool.dateTime = dateTime;
-        carpool.createdById = userId; // TODO: find a way to auto-attach these fields!
-        carpool.updatedById = userId;
+        carpool.createdBy = user;
+        carpool.updatedBy = user;
+        carpool.createdById = user.id; // TODO: find a way to auto-attach these fields!
+        carpool.updatedById = user.id;
 
-        return await this._carpoolRepository.save(carpool);
+        return mapCarpoolToDto(await this._carpoolRepository.save(carpool));
     }
 
     /**
      * Finds a carpool by its ID.
      * @param id - ID of the carpool
      */
-    public async findCarpoolById(id: string): Promise<Carpool> {
-        const carpool = await this._carpoolRepository.findOne(id);
+    public async findCarpoolById(id: string): Promise<CarpoolDto> {
+        const carpool = await this._carpoolRepository.findOne(id, { relations: ["createdBy"] });
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return carpool;
+        return mapCarpoolToDto(carpool);
     }
 
     /**
      * Finds a carpool by its URL ID.
      * @param urlId - URL ID of the carpool
      */
-    public async findCarpoolByUrlId(urlId: string): Promise<Carpool> {
-        const carpool = await this._carpoolRepository.findOne({ where: { urlId } });
+    public async findCarpoolByUrlId(urlId: string): Promise<CarpoolDto> {
+        const carpool = await this._carpoolRepository.findOne({
+            where: { urlId },
+            relations: ["createdBy"],
+        });
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return carpool;
+        return mapCarpoolToDto(carpool);
     }
 
     /**
@@ -68,8 +74,12 @@ export class CarpoolService {
      * Finds a list of carpools by the user who created them.
      * @param createdById - ID of the user who created the carpools
      */
-    public async findCarpoolsByCreatedBy(createdById: string): Promise<Carpool[]> {
-        return await this._carpoolRepository.find({ where: { createdById } });
+    public async findCarpoolsByCreatedBy(createdById: string): Promise<CarpoolDto[]> {
+        const carpools = await this._carpoolRepository.find({
+            where: { createdById },
+            relations: ["createdBy"],
+        });
+        return carpools.map(carpool => mapCarpoolToDto(carpool));
     }
 
     /**
@@ -80,9 +90,9 @@ export class CarpoolService {
      */
     public async updateCarpool(
         id: string,
-        carpoolDto: CarpoolDto,
+        carpoolDto: UpsertCarpoolDto,
         userId: string
-    ): Promise<Carpool> {
+    ): Promise<CarpoolDto> {
         const carpool = await this._carpoolRepository.findOne(id);
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
@@ -95,7 +105,9 @@ export class CarpoolService {
         carpool.dateTime = dateTime;
         carpool.updatedById = userId;
 
-        return await this._carpoolRepository.save(carpool);
+        await this._carpoolRepository.save(carpool);
+
+        return await this.findCarpoolById(id);
     }
 
     /**

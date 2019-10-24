@@ -20,8 +20,7 @@ import {
 import { AuthGuard } from "@nestjs/passport";
 import * as shortid from "shortid";
 
-import { Carpool } from "../entities";
-import { CarpoolDto } from "../dtos";
+import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
 import { CarpoolGateway } from "../gateways";
 import { UserRequest } from "../interfaces";
@@ -41,14 +40,14 @@ export class CarpoolController {
         title: "Create Carpool",
         description: "Create a new Carpool",
     })
-    @ApiCreatedResponse({ type: Carpool })
+    @ApiCreatedResponse({ type: CarpoolDto })
     @UseGuards(AuthGuard("jwt"))
     @Post()
     public async createCarpool(
         @Req() request: UserRequest,
-        @Body() carpoolDto: CarpoolDto
-    ): Promise<Carpool> {
-        return await this._carpoolService.createCarpool(carpoolDto, request.user.id);
+        @Body() carpoolDto: UpsertCarpoolDto
+    ): Promise<CarpoolDto> {
+        return await this._carpoolService.createCarpool(carpoolDto, request.user);
     }
 
     @ApiOperation({
@@ -56,9 +55,9 @@ export class CarpoolController {
         title: "Get Carpool",
         description: "Retrieve a Carpool by its GUID or its URL ID",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
     @Get(":id")
-    public async getById(@Param("id") id: string): Promise<Carpool> {
+    public async getById(@Param("id") id: string): Promise<CarpoolDto> {
         // Allowing GET to be by their GUID or their URL ID
         if (shortid.isValid(id)) {
             return await this._carpoolService.findCarpoolByUrlId(id);
@@ -72,14 +71,14 @@ export class CarpoolController {
         title: "Update Carpool",
         description: "Update a Carpool",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
     @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @Put(":id")
     public async updateCarpool(
         @Param("id") id: string,
         @Req() request: UserRequest,
-        @Body() carpoolDto: CarpoolDto
-    ): Promise<Carpool> {
+        @Body() carpoolDto: UpsertCarpoolDto
+    ): Promise<CarpoolDto> {
         const carpool = await this._carpoolService.updateCarpool(id, carpoolDto, request.user.id);
 
         // TODO: don't use gateway directly, move logic to an interceptor (https://docs.nestjs.com/interceptors) or via pub/sub
@@ -93,10 +92,10 @@ export class CarpoolController {
         title: "Delete Carpool",
         description: "Delete a Carpool",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: Carpool })
+    @ApiResponse({ status: HttpStatus.NO_CONTENT })
     @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @Delete(":id")
-    public async deleteCarpool(@Param("id") id: string): Promise<Carpool> {
-        return await this._carpoolService.deleteCarpool(id);
+    public async deleteCarpool(@Param("id") id: string): Promise<void> {
+        await this._carpoolService.deleteCarpool(id);
     }
 }

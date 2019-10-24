@@ -8,7 +8,7 @@ import {
 import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
-import { CreatePassengerDto, PassengerDto } from "../dtos";
+import { UpsertPassengerDto, PassengerDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { PassengerService, DriverService } from "../services";
 import { CarpoolGateway } from "../gateways";
@@ -34,7 +34,7 @@ export class PassengerController {
     public async createPassenger(
         @Req() request: UserRequest,
         @Param("id") id: string,
-        @Body() createPassengerDto: CreatePassengerDto
+        @Body() createPassengerDto: UpsertPassengerDto
     ): Promise<PassengerDto> {
         const passenger = await this._passengerService.createPassenger(
             request.user.id,

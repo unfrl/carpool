@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { IconButton, Icon, Card, CardHeader, Typography, makeStyles } from "@material-ui/core";
 import moment from "moment";
 
-import { CarpoolDto } from "@carpool/core";
+import { CarpoolDto, UpsertCarpoolDto } from "@carpool/core";
 import { CarpoolForm } from ".";
 
 const useStyles = makeStyles(theme => ({
@@ -13,17 +13,9 @@ const useStyles = makeStyles(theme => ({
 
 export interface ICarpoolDetailsProps {
     /**
-     * Name of the carpool.
+     * The carpool details to display.
      */
-    name: string;
-    /**
-     * Destination of the carpool.
-     */
-    destination: string;
-    /**
-     * Date of the carpool.
-     */
-    date: Date;
+    carpoolDto: CarpoolDto;
     /**
      * Set to true if the user can edit the carpool details.
      */
@@ -31,7 +23,7 @@ export interface ICarpoolDetailsProps {
     /**
      * Callback for saving edits made to the carpool. Note: this callback won't be invoked if `canEdit` is set to false.
      */
-    onSave: (carpoolDto: CarpoolDto) => Promise<void>;
+    onSave: (carpoolDto: UpsertCarpoolDto) => Promise<void>;
     /**
      * Set to true if the carpool is being saved.
      */
@@ -41,9 +33,10 @@ export interface ICarpoolDetailsProps {
 export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => {
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
-    const { name, destination, date, canEdit, onSave, saving } = props;
+    const { carpoolDto, canEdit, onSave, saving } = props;
+    const { name, destination, dateTime } = carpoolDto;
 
-    const handleSave = async (carpoolDto: CarpoolDto) => {
+    const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
             await onSave(carpoolDto);
             handleToggleEditing();
@@ -65,7 +58,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                         existingCarpool={{
                             carpoolName: name,
                             destination: destination,
-                            dateTime: date,
+                            dateTime: dateTime,
                         }}
                     />
                 </div>
@@ -76,7 +69,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                         <div>
                             <Typography>{destination}</Typography>
                             <Typography>
-                                {moment(new Date(date)).format("dddd, MMMM Do YYYY, h:mm a")}
+                                {moment(new Date(dateTime)).format("dddd, MMMM Do YYYY, h:mm a")}
                             </Typography>
                         </div>
                     }

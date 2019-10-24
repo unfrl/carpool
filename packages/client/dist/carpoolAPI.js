@@ -100,9 +100,9 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, getUserCarpoolsOperationSpec, callback);
     };
-    CarpoolAPI.prototype.createCarpool = function (carpoolDto, options, callback) {
+    CarpoolAPI.prototype.createCarpool = function (upsertCarpoolDto, options, callback) {
         return this.sendOperationRequest({
-            carpoolDto: carpoolDto,
+            upsertCarpoolDto: upsertCarpoolDto,
             options: options
         }, createCarpoolOperationSpec, callback);
     };
@@ -112,9 +112,9 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, getCarpoolOperationSpec, callback);
     };
-    CarpoolAPI.prototype.updateCarpool = function (carpoolDto, id, options, callback) {
+    CarpoolAPI.prototype.updateCarpool = function (upsertCarpoolDto, id, options, callback) {
         return this.sendOperationRequest({
-            carpoolDto: carpoolDto,
+            upsertCarpoolDto: upsertCarpoolDto,
             id: id,
             options: options
         }, updateCarpoolOperationSpec, callback);
@@ -125,9 +125,9 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, deleteCarpoolOperationSpec, callback);
     };
-    CarpoolAPI.prototype.createDriver = function (createDriverDto, id, options, callback) {
+    CarpoolAPI.prototype.createDriver = function (upsertDriverDto, id, options, callback) {
         return this.sendOperationRequest({
-            createDriverDto: createDriverDto,
+            upsertDriverDto: upsertDriverDto,
             id: id,
             options: options
         }, createDriverOperationSpec, callback);
@@ -138,9 +138,9 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, getDriversOperationSpec, callback);
     };
-    CarpoolAPI.prototype.createPassenger = function (createPassengerDto, id, options, callback) {
+    CarpoolAPI.prototype.createPassenger = function (upsertPassengerDto, id, options, callback) {
         return this.sendOperationRequest({
-            createPassengerDto: createPassengerDto,
+            upsertPassengerDto: upsertPassengerDto,
             id: id,
             options: options
         }, createPassengerOperationSpec, callback);
@@ -256,7 +256,7 @@ var getMyCarpoolsOperationSpec = {
                     element: {
                         type: {
                             name: "Composite",
-                            className: "Carpool"
+                            className: "CarpoolDto"
                         }
                     }
                 }
@@ -281,7 +281,7 @@ var getUserCarpoolsOperationSpec = {
                     element: {
                         type: {
                             name: "Composite",
-                            className: "Carpool"
+                            className: "CarpoolDto"
                         }
                     }
                 }
@@ -295,12 +295,12 @@ var createCarpoolOperationSpec = {
     httpMethod: "POST",
     path: "api/v1/carpools",
     requestBody: {
-        parameterPath: "carpoolDto",
-        mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
+        parameterPath: "upsertCarpoolDto",
+        mapper: __assign(__assign({}, Mappers.UpsertCarpoolDto), { required: true })
     },
     responses: {
         201: {
-            bodyMapper: Mappers.Carpool
+            bodyMapper: Mappers.CarpoolDto
         },
         default: {}
     },
@@ -314,7 +314,7 @@ var getCarpoolOperationSpec = {
     ],
     responses: {
         200: {
-            bodyMapper: Mappers.Carpool
+            bodyMapper: Mappers.CarpoolDto
         },
         default: {}
     },
@@ -327,12 +327,12 @@ var updateCarpoolOperationSpec = {
         Parameters.id
     ],
     requestBody: {
-        parameterPath: "carpoolDto",
-        mapper: __assign(__assign({}, Mappers.CarpoolDto), { required: true })
+        parameterPath: "upsertCarpoolDto",
+        mapper: __assign(__assign({}, Mappers.UpsertCarpoolDto), { required: true })
     },
     responses: {
         200: {
-            bodyMapper: Mappers.Carpool
+            bodyMapper: Mappers.CarpoolDto
         },
         default: {}
     },
@@ -345,9 +345,7 @@ var deleteCarpoolOperationSpec = {
         Parameters.id
     ],
     responses: {
-        200: {
-            bodyMapper: Mappers.Carpool
-        },
+        204: {},
         default: {}
     },
     serializer: serializer
@@ -359,8 +357,8 @@ var createDriverOperationSpec = {
         Parameters.id
     ],
     requestBody: {
-        parameterPath: "createDriverDto",
-        mapper: __assign(__assign({}, Mappers.CreateDriverDto), { required: true })
+        parameterPath: "upsertDriverDto",
+        mapper: __assign(__assign({}, Mappers.UpsertDriverDto), { required: true })
     },
     responses: {
         201: {
@@ -402,8 +400,8 @@ var createPassengerOperationSpec = {
         Parameters.id
     ],
     requestBody: {
-        parameterPath: "createPassengerDto",
-        mapper: __assign(__assign({}, Mappers.CreatePassengerDto), { required: true })
+        parameterPath: "upsertPassengerDto",
+        mapper: __assign(__assign({}, Mappers.UpsertPassengerDto), { required: true })
     },
     responses: {
         201: {

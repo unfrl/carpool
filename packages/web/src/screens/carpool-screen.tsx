@@ -8,9 +8,9 @@ import {
     AuthStore,
     CarpoolStore,
     DriverStore,
-    CreateDriverDto,
-    CarpoolDto,
-    CreatePassengerDto,
+    UpsertDriverDto,
+    UpsertCarpoolDto,
+    UpsertPassengerDto,
 } from "@carpool/core";
 import {
     CarpoolDetails,
@@ -44,7 +44,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const [driverId, setDriverId] = useState<string | undefined>();
 
     const canUserEdit = Boolean(
-        authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.createdById
+        authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.user.id
     );
 
     useEffect(() => {
@@ -74,19 +74,19 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         setDriverId(undefined);
     };
 
-    const handleSaveDriverForm = async (createDriverDto: CreateDriverDto) => {
+    const handleSaveDriverForm = async (createDriverDto: UpsertDriverDto) => {
         // Note the use of the selectedCarpoolId - this is the GUID, don't use the urlId!
         await driverStore.createDriver(selectedCarpoolId, createDriverDto);
         handleToggleDriverForm();
     };
 
-    const handleSaveCarpoolDetails = async (carpoolDto: CarpoolDto) => {
+    const handleSaveCarpoolDetails = async (carpoolDto: UpsertCarpoolDto) => {
         if (canUserEdit) {
             await carpoolStore.updateCarpool(carpoolDto, selectedCarpoolId);
         }
     };
 
-    const handleSavePassengerForm = async (dto: CreatePassengerDto) => {
+    const handleSavePassengerForm = async (dto: UpsertPassengerDto) => {
         if (!driverId || !authStore.isAuthenticated) {
             return; // shouldn't happen
         }
@@ -116,9 +116,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
             />
             <CarpoolDetails
-                name={name}
-                destination={destination}
-                date={dateTime}
+                carpoolDto={selectedCarpool}
                 canEdit={canUserEdit}
                 onSave={handleSaveCarpoolDetails}
                 saving={carpoolStore.saving}

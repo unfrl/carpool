@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import { Typography, makeStyles } from "@material-ui/core";
 
-import { CreatePassengerDto, isValidPhoneNumber } from "@carpool/core";
+import { UpsertPassengerDto, isValidPhoneNumber } from "@carpool/core";
 import { AddressSearch, FormActions, PhoneNumberInput } from ".";
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface IPassengerFormProps {
-    onSave: (dto: CreatePassengerDto) => void;
+    onSave: (dto: UpsertPassengerDto) => void;
     onCancel: () => void;
 }
 
