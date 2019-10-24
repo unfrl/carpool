@@ -9,7 +9,7 @@ import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserRequest } from "../interfaces";
-import { CreateDriverDto, DriverDto } from "../dtos";
+import { UpsertDriverDto, DriverDto } from "../dtos";
 import { DriverService } from "../services";
 
 @ApiUseTags("Drivers")
@@ -29,7 +29,7 @@ export class DriverController {
     public async createDriver(
         @Req() request: UserRequest,
         @Param("id") id: string,
-        @Body() createDriverDto: CreateDriverDto
+        @Body() createDriverDto: UpsertDriverDto
     ): Promise<DriverDto> {
         return await this._driverService.createDriver(id, request.user.id, createDriverDto);
     }

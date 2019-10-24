@@ -157,31 +157,17 @@ export const UserDto: msRest.CompositeMapper = {
   }
 };
 
-export const Carpool: msRest.CompositeMapper = {
-  serializedName: "Carpool",
+export const CarpoolDto: msRest.CompositeMapper = {
+  serializedName: "CarpoolDto",
   type: {
     name: "Composite",
-    className: "Carpool",
+    className: "CarpoolDto",
     modelProperties: {
       id: {
         required: true,
         serializedName: "id",
         type: {
           name: "String"
-        }
-      },
-      created: {
-        required: true,
-        serializedName: "created",
-        type: {
-          name: "Object"
-        }
-      },
-      updated: {
-        required: true,
-        serializedName: "updated",
-        type: {
-          name: "Object"
         }
       },
       name: {
@@ -212,41 +198,37 @@ export const Carpool: msRest.CompositeMapper = {
           name: "Object"
         }
       },
-      drivers: {
+      created: {
         required: true,
-        serializedName: "drivers",
+        serializedName: "created",
         type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
+          name: "Object"
         }
       },
-      createdById: {
+      updated: {
         required: true,
-        serializedName: "createdById",
+        serializedName: "updated",
         type: {
-          name: "String"
+          name: "Object"
         }
       },
-      updatedById: {
+      user: {
         required: true,
-        serializedName: "updatedById",
+        serializedName: "user",
         type: {
-          name: "String"
+          name: "Composite",
+          className: "UserDto"
         }
       }
     }
   }
 };
 
-export const CarpoolDto: msRest.CompositeMapper = {
-  serializedName: "CarpoolDto",
+export const UpsertCarpoolDto: msRest.CompositeMapper = {
+  serializedName: "UpsertCarpoolDto",
   type: {
     name: "Composite",
-    className: "CarpoolDto",
+    className: "UpsertCarpoolDto",
     modelProperties: {
       carpoolName: {
         required: true,
@@ -304,11 +286,11 @@ export const Car: msRest.CompositeMapper = {
   }
 };
 
-export const CreateDriverDto: msRest.CompositeMapper = {
-  serializedName: "CreateDriverDto",
+export const UpsertDriverDto: msRest.CompositeMapper = {
+  serializedName: "UpsertDriverDto",
   type: {
     name: "Composite",
-    className: "CreateDriverDto",
+    className: "UpsertDriverDto",
     modelProperties: {
       car: {
         required: true,
@@ -381,11 +363,11 @@ export const DriverDto: msRest.CompositeMapper = {
   }
 };
 
-export const CreatePassengerDto: msRest.CompositeMapper = {
-  serializedName: "CreatePassengerDto",
+export const UpsertPassengerDto: msRest.CompositeMapper = {
+  serializedName: "UpsertPassengerDto",
   type: {
     name: "Composite",
-    className: "CreatePassengerDto",
+    className: "UpsertPassengerDto",
     modelProperties: {
       phoneNumber: {
         serializedName: "phoneNumber",

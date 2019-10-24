@@ -1,6 +1,6 @@
 import { action, observable, reaction } from "mobx";
 
-import { DriverDto, CreateDriverDto, CreatePassengerDto } from "@carpool/client";
+import { DriverDto, UpsertDriverDto, UpsertPassengerDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -28,7 +28,7 @@ export class DriverStore {
         this._rootStore.rtmClient.carpool.onDriverUpdated(this.setUpdatedDriver);
     }
 
-    public createDriver = async (carpoolId: string, createDriverDto: CreateDriverDto) => {
+    public createDriver = async (carpoolId: string, createDriverDto: UpsertDriverDto) => {
         try {
             const driver = await this._rootStore.apiClient.createDriver(createDriverDto, carpoolId);
             this.addDriver(driver);
@@ -39,7 +39,7 @@ export class DriverStore {
     };
 
     public createUserPassenger = async (
-        createPassengerDto: CreatePassengerDto,
+        createPassengerDto: UpsertPassengerDto,
         driverId: string
     ) => {
         try {

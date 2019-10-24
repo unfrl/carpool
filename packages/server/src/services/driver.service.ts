@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Driver, Carpool, User } from "../entities";
-import { CreateDriverDto, DriverDto } from "../dtos";
+import { UpsertDriverDto, DriverDto } from "../dtos";
 import { mapDriverToDto } from "../mappers";
 
 @Injectable()
@@ -26,7 +26,7 @@ export class DriverService {
     public async createDriver(
         carpoolId: string,
         userId: string,
-        driverDto: CreateDriverDto
+        driverDto: UpsertDriverDto
     ): Promise<DriverDto> {
         if (!(await this._carpoolRepository.findOne(carpoolId))) {
             throw new NotFoundException("Carpool not found");

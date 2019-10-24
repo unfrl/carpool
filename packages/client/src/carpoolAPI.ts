@@ -171,13 +171,13 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * @param callback The callback
    */
-  getMyCarpools(callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  getMyCarpools(callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
   /**
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
-  getMyCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool[]>, callback?: msRest.ServiceCallback<Models.Carpool[]>): Promise<Models.GetMyCarpoolsResponse> {
+  getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
+  getMyCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto[]>, callback?: msRest.ServiceCallback<Models.CarpoolDto[]>): Promise<Models.GetMyCarpoolsResponse> {
     return this.sendOperationRequest(
       {
         options
@@ -198,14 +198,14 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @param displayName
    * @param callback The callback
    */
-  getUserCarpools(displayName: string, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
+  getUserCarpools(displayName: string, callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
   /**
    * @param displayName
    * @param options The optional parameters
    * @param callback The callback
    */
-  getUserCarpools(displayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool[]>): void;
-  getUserCarpools(displayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool[]>, callback?: msRest.ServiceCallback<Models.Carpool[]>): Promise<Models.GetUserCarpoolsResponse> {
+  getUserCarpools(displayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
+  getUserCarpools(displayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto[]>, callback?: msRest.ServiceCallback<Models.CarpoolDto[]>): Promise<Models.GetUserCarpoolsResponse> {
     return this.sendOperationRequest(
       {
         displayName,
@@ -218,26 +218,26 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Create a new Carpool
    * @summary Create Carpool
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param [options] The optional parameters
    * @returns Promise<Models.CreateCarpoolResponse>
    */
-  createCarpool(carpoolDto: Models.CarpoolDto, options?: msRest.RequestOptionsBase): Promise<Models.CreateCarpoolResponse>;
+  createCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, options?: msRest.RequestOptionsBase): Promise<Models.CreateCarpoolResponse>;
   /**
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param callback The callback
    */
-  createCarpool(carpoolDto: Models.CarpoolDto, callback: msRest.ServiceCallback<Models.Carpool>): void;
+  createCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
   /**
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param options The optional parameters
    * @param callback The callback
    */
-  createCarpool(carpoolDto: Models.CarpoolDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
-  createCarpool(carpoolDto: Models.CarpoolDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool>, callback?: msRest.ServiceCallback<Models.Carpool>): Promise<Models.CreateCarpoolResponse> {
+  createCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
+  createCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto>, callback?: msRest.ServiceCallback<Models.CarpoolDto>): Promise<Models.CreateCarpoolResponse> {
     return this.sendOperationRequest(
       {
-        carpoolDto,
+        upsertCarpoolDto,
         options
       },
       createCarpoolOperationSpec,
@@ -256,14 +256,14 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @param id
    * @param callback The callback
    */
-  getCarpool(id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
+  getCarpool(id: string, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
   /**
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
-  getCarpool(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool>, callback?: msRest.ServiceCallback<Models.Carpool>): Promise<Models.GetCarpoolResponse> {
+  getCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
+  getCarpool(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto>, callback?: msRest.ServiceCallback<Models.CarpoolDto>): Promise<Models.GetCarpoolResponse> {
     return this.sendOperationRequest(
       {
         id,
@@ -276,29 +276,29 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Update a Carpool
    * @summary Update Carpool
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.UpdateCarpoolResponse>
    */
-  updateCarpool(carpoolDto: Models.CarpoolDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.UpdateCarpoolResponse>;
+  updateCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.UpdateCarpoolResponse>;
   /**
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param id
    * @param callback The callback
    */
-  updateCarpool(carpoolDto: Models.CarpoolDto, id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
+  updateCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, id: string, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
   /**
-   * @param carpoolDto
+   * @param upsertCarpoolDto
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  updateCarpool(carpoolDto: Models.CarpoolDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
-  updateCarpool(carpoolDto: Models.CarpoolDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool>, callback?: msRest.ServiceCallback<Models.Carpool>): Promise<Models.UpdateCarpoolResponse> {
+  updateCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
+  updateCarpool(upsertCarpoolDto: Models.UpsertCarpoolDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto>, callback?: msRest.ServiceCallback<Models.CarpoolDto>): Promise<Models.UpdateCarpoolResponse> {
     return this.sendOperationRequest(
       {
-        carpoolDto,
+        upsertCarpoolDto,
         id,
         options
       },
@@ -311,56 +311,56 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @summary Delete Carpool
    * @param id
    * @param [options] The optional parameters
-   * @returns Promise<Models.DeleteCarpoolResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteCarpool(id: string, options?: msRest.RequestOptionsBase): Promise<Models.DeleteCarpoolResponse>;
+  deleteCarpool(id: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param id
    * @param callback The callback
    */
-  deleteCarpool(id: string, callback: msRest.ServiceCallback<Models.Carpool>): void;
+  deleteCarpool(id: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Carpool>): void;
-  deleteCarpool(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Carpool>, callback?: msRest.ServiceCallback<Models.Carpool>): Promise<Models.DeleteCarpoolResponse> {
+  deleteCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deleteCarpool(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.sendOperationRequest(
       {
         id,
         options
       },
       deleteCarpoolOperationSpec,
-      callback) as Promise<Models.DeleteCarpoolResponse>;
+      callback);
   }
 
   /**
    * Create a driver for a carpool
    * @summary Create Driver
-   * @param createDriverDto
+   * @param upsertDriverDto
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.CreateDriverResponse>
    */
-  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
+  createDriver(upsertDriverDto: Models.UpsertDriverDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreateDriverResponse>;
   /**
-   * @param createDriverDto
+   * @param upsertDriverDto
    * @param id
    * @param callback The callback
    */
-  createDriver(createDriverDto: Models.CreateDriverDto, id: string, callback: msRest.ServiceCallback<Models.DriverDto>): void;
+  createDriver(upsertDriverDto: Models.UpsertDriverDto, id: string, callback: msRest.ServiceCallback<Models.DriverDto>): void;
   /**
-   * @param createDriverDto
+   * @param upsertDriverDto
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto>): void;
-  createDriver(createDriverDto: Models.CreateDriverDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DriverDto>, callback?: msRest.ServiceCallback<Models.DriverDto>): Promise<Models.CreateDriverResponse> {
+  createDriver(upsertDriverDto: Models.UpsertDriverDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverDto>): void;
+  createDriver(upsertDriverDto: Models.UpsertDriverDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DriverDto>, callback?: msRest.ServiceCallback<Models.DriverDto>): Promise<Models.CreateDriverResponse> {
     return this.sendOperationRequest(
       {
-        createDriverDto,
+        upsertDriverDto,
         id,
         options
       },
@@ -400,29 +400,29 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Creates a passenger based off the current user
    * @summary Create Passenger
-   * @param createPassengerDto
+   * @param upsertPassengerDto
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.CreatePassengerResponse>
    */
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreatePassengerResponse>;
+  createPassenger(upsertPassengerDto: Models.UpsertPassengerDto, id: string, options?: msRest.RequestOptionsBase): Promise<Models.CreatePassengerResponse>;
   /**
-   * @param createPassengerDto
+   * @param upsertPassengerDto
    * @param id
    * @param callback The callback
    */
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
+  createPassenger(upsertPassengerDto: Models.UpsertPassengerDto, id: string, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
   /**
-   * @param createPassengerDto
+   * @param upsertPassengerDto
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
-  createPassenger(createPassengerDto: Models.CreatePassengerDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PassengerDto>, callback?: msRest.ServiceCallback<Models.PassengerDto>): Promise<Models.CreatePassengerResponse> {
+  createPassenger(upsertPassengerDto: Models.UpsertPassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
+  createPassenger(upsertPassengerDto: Models.UpsertPassengerDto, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PassengerDto>, callback?: msRest.ServiceCallback<Models.PassengerDto>): Promise<Models.CreatePassengerResponse> {
     return this.sendOperationRequest(
       {
-        createPassengerDto,
+        upsertPassengerDto,
         id,
         options
       },
@@ -587,7 +587,7 @@ const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
           element: {
             type: {
               name: "Composite",
-              className: "Carpool"
+              className: "CarpoolDto"
             }
           }
         }
@@ -613,7 +613,7 @@ const getUserCarpoolsOperationSpec: msRest.OperationSpec = {
           element: {
             type: {
               name: "Composite",
-              className: "Carpool"
+              className: "CarpoolDto"
             }
           }
         }
@@ -628,15 +628,15 @@ const createCarpoolOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "api/v1/carpools",
   requestBody: {
-    parameterPath: "carpoolDto",
+    parameterPath: "upsertCarpoolDto",
     mapper: {
-      ...Mappers.CarpoolDto,
+      ...Mappers.UpsertCarpoolDto,
       required: true
     }
   },
   responses: {
     201: {
-      bodyMapper: Mappers.Carpool
+      bodyMapper: Mappers.CarpoolDto
     },
     default: {}
   },
@@ -651,7 +651,7 @@ const getCarpoolOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.Carpool
+      bodyMapper: Mappers.CarpoolDto
     },
     default: {}
   },
@@ -665,15 +665,15 @@ const updateCarpoolOperationSpec: msRest.OperationSpec = {
     Parameters.id
   ],
   requestBody: {
-    parameterPath: "carpoolDto",
+    parameterPath: "upsertCarpoolDto",
     mapper: {
-      ...Mappers.CarpoolDto,
+      ...Mappers.UpsertCarpoolDto,
       required: true
     }
   },
   responses: {
     200: {
-      bodyMapper: Mappers.Carpool
+      bodyMapper: Mappers.CarpoolDto
     },
     default: {}
   },
@@ -687,9 +687,7 @@ const deleteCarpoolOperationSpec: msRest.OperationSpec = {
     Parameters.id
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.Carpool
-    },
+    204: {},
     default: {}
   },
   serializer
@@ -702,9 +700,9 @@ const createDriverOperationSpec: msRest.OperationSpec = {
     Parameters.id
   ],
   requestBody: {
-    parameterPath: "createDriverDto",
+    parameterPath: "upsertDriverDto",
     mapper: {
-      ...Mappers.CreateDriverDto,
+      ...Mappers.UpsertDriverDto,
       required: true
     }
   },
@@ -750,9 +748,9 @@ const createPassengerOperationSpec: msRest.OperationSpec = {
     Parameters.id
   ],
   requestBody: {
-    parameterPath: "createPassengerDto",
+    parameterPath: "upsertPassengerDto",
     mapper: {
-      ...Mappers.CreatePassengerDto,
+      ...Mappers.UpsertPassengerDto,
       required: true
     }
   },

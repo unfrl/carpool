@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { DateTimePicker } from "@material-ui/pickers";
 
-import { CarpoolDto } from "@carpool/core";
+import { UpsertCarpoolDto } from "@carpool/core";
 import { AddressSearch, LoadingButton } from ".";
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +22,7 @@ export interface ICarpoolFormProps {
     /**
      * Callback requesting the carpool be saved.
      */
-    onSave: (carpoolDto: CarpoolDto) => void;
+    onSave: (carpoolDto: UpsertCarpoolDto) => void;
     /**
      * Callback requesting to cancel.
      */
@@ -34,10 +34,10 @@ export interface ICarpoolFormProps {
     /**
      * Provide an existing carpool to toggle the form as an "edit" not a "create".
      */
-    existingCarpool?: CarpoolDto;
+    existingCarpool?: UpsertCarpoolDto;
 }
 
-export interface ICarpoolFormState extends CarpoolDto {}
+export interface ICarpoolFormState extends UpsertCarpoolDto {}
 
 export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
     const classes = useStyles();

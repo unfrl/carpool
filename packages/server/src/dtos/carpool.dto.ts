@@ -1,17 +1,29 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { Length, IsDefined, IsDateString } from "class-validator";
+import { ApiResponseModelProperty } from "@nestjs/swagger";
+
+import { UserDto } from ".";
 
 export class CarpoolDto {
-    @ApiModelProperty()
-    @Length(5, 50)
-    public readonly carpoolName: string;
+    @ApiResponseModelProperty()
+    public readonly id: string;
 
-    @ApiModelProperty()
-    @IsDefined()
+    @ApiResponseModelProperty()
+    public readonly name: string;
+
+    @ApiResponseModelProperty()
+    public readonly urlId: string;
+
+    @ApiResponseModelProperty()
     public readonly destination: string;
 
-    @ApiModelProperty()
-    @IsDateString()
-    @IsDefined()
+    @ApiResponseModelProperty()
     public readonly dateTime: Date;
+
+    @ApiResponseModelProperty()
+    public readonly created: Date;
+
+    @ApiResponseModelProperty()
+    public readonly updated: Date;
+
+    @ApiResponseModelProperty()
+    public readonly user: UserDto;
 }

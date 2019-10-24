@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { List, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core";
 import moment from "moment";
 
-import { Carpool } from "@carpool/core";
+import { CarpoolDto } from "@carpool/core";
 import { NavLink } from ".";
 import { getCarpoolPath } from "../utils";
 import empty from "../images/empty.svg";
@@ -28,7 +28,7 @@ export interface ICarpoolListProps {
     /**
      * Collection of carpools.
      */
-    carpools: Carpool[];
+    carpools: CarpoolDto[];
 }
 
 export const CarpoolList: FunctionComponent<ICarpoolListProps> = props => {
