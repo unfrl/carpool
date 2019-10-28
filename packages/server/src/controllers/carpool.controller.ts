@@ -16,6 +16,7 @@ import {
     Get,
     UseGuards,
     Req,
+    UseInterceptors,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import * as shortid from "shortid";
@@ -25,6 +26,7 @@ import { CarpoolService } from "../services";
 import { CarpoolGateway } from "../gateways";
 import { UserRequest } from "../interfaces";
 import { CarpoolModificationGuard } from "../guards";
+import { CarpoolUpdateInterceptor } from "src/interceptors";
 
 @ApiUseTags("Carpools")
 @ApiBearerAuth()
@@ -73,16 +75,14 @@ export class CarpoolController {
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
     @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
+    @UseInterceptors(CarpoolUpdateInterceptor)
     @Put(":id")
     public async updateCarpool(
         @Param("id") id: string,
         @Req() request: UserRequest,
         @Body() carpoolDto: UpsertCarpoolDto
     ): Promise<CarpoolDto> {
-        const carpool = await this._carpoolService.updateCarpool(id, carpoolDto, request.user.id);
-
-        // TODO: don't use gateway directly, move logic to an interceptor (https://docs.nestjs.com/interceptors) or via pub/sub
-        this._carpoolGateway.emitCarpoolUpdated(carpool);
+        const carpool = await this._carpoolService.updateCarpool(id, carpoolDto, request.user);
 
         return carpool;
     }
