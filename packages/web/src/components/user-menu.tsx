@@ -7,10 +7,13 @@ import {
     Divider,
     ListItemIcon,
     Icon,
+    Button,
     makeStyles,
 } from "@material-ui/core";
 import amber from "@material-ui/core/colors/amber";
+
 import { getInitials, UserDto } from "@carpool/core";
+import { NavLink } from ".";
 
 const useStyles = makeStyles(theme => ({
     menuHeader: {
@@ -28,6 +31,13 @@ const useStyles = makeStyles(theme => ({
     divider: {
         marginBottom: theme.spacing(1),
         marginTop: theme.spacing(1),
+    },
+    buttons: {
+        display: "flex",
+        alignItems: "center",
+    },
+    createLink: {
+        marginRight: theme.spacing(2),
     },
 }));
 
@@ -74,9 +84,16 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
 
     return (
         <div>
-            <Avatar className={classes.avatar} onClick={handleClick}>
-                {initials}
-            </Avatar>
+            <div className={classes.buttons}>
+                <NavLink to="/create" className={classes.createLink}>
+                    <Button variant="outlined" color="secondary">
+                        Create
+                    </Button>
+                </NavLink>
+                <Avatar className={classes.avatar} onClick={handleClick}>
+                    {initials}
+                </Avatar>
+            </div>
             <Menu
                 id="user-menu"
                 open={Boolean(state.anchorEl)}
