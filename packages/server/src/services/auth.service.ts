@@ -21,8 +21,6 @@ import { OAuth2Client } from "google-auth-library";
 
 @Injectable()
 export class AuthService {
-    private _oath2Client: OAuth2Client;
-
     public constructor(
         private readonly _userService: UserService,
         private readonly _jwtService: JwtService,
