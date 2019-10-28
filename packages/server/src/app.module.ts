@@ -25,6 +25,7 @@ import {
     JwtStrategy,
 } from "./services";
 import { Carpool, Driver, Passenger, User } from "./entities";
+import { OAuth2Client } from "google-auth-library";
 
 @Module({
     imports: [
@@ -61,6 +62,10 @@ import { Carpool, Driver, Passenger, User } from "./entities";
         {
             provide: IORedis,
             useValue: new IORedis(redisConfig),
+        },
+        {
+            provide: OAuth2Client,
+            useValue: new OAuth2Client(),
         },
     ],
 })

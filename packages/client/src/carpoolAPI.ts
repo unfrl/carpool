@@ -79,6 +79,35 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Sign in using a google user's idToken. This will create a user if it doesnt exist.
+   * @summary Sign in with Google
+   * @param googleSignInDto
+   * @param [options] The optional parameters
+   * @returns Promise<Models.SignInWithGoogleResponse>
+   */
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options?: msRest.RequestOptionsBase): Promise<Models.SignInWithGoogleResponse>;
+  /**
+   * @param googleSignInDto
+   * @param callback The callback
+   */
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  /**
+   * @param googleSignInDto
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.SignInWithGoogleResponse> {
+    return this.sendOperationRequest(
+      {
+        googleSignInDto,
+        options
+      },
+      signInWithGoogleOperationSpec,
+      callback) as Promise<Models.SignInWithGoogleResponse>;
+  }
+
+  /**
    * Sends a password reset to the specified email if it exists
    * @summary Request Password Reset
    * @param passwordResetRequestDto
@@ -515,6 +544,25 @@ const signInOperationSpec: msRest.OperationSpec = {
     parameterPath: "signInDto",
     mapper: {
       ...Mappers.SignInDto,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.AuthDto
+    },
+    default: {}
+  },
+  serializer
+};
+
+const signInWithGoogleOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "api/v1/auth/signinwithgoogle",
+  requestBody: {
+    parameterPath: "googleSignInDto",
+    mapper: {
+      ...Mappers.GoogleSignInDto,
       required: true
     }
   },

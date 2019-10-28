@@ -22,6 +22,12 @@ export interface AuthDto {
     accessToken: string;
 }
 /**
+ * An interface representing GoogleSignInDto.
+ */
+export interface GoogleSignInDto {
+    idToken: string;
+}
+/**
  * An interface representing PasswordResetRequestDto.
  */
 export interface PasswordResetRequestDto {
@@ -133,6 +139,24 @@ export declare type Type = 'sedan' | 'truck' | 'suv' | 'van';
  * Contains response data for the signIn operation.
  */
 export declare type SignInResponse = AuthDto & {
+    /**
+     * The underlying HTTP response.
+     */
+    _response: msRest.HttpResponse & {
+        /**
+         * The response body as text (string format)
+         */
+        bodyAsText: string;
+        /**
+         * The response body as parsed JSON or XML
+         */
+        parsedBody: AuthDto;
+    };
+};
+/**
+ * Contains response data for the signInWithGoogle operation.
+ */
+export declare type SignInWithGoogleResponse = AuthDto & {
     /**
      * The underlying HTTP response.
      */

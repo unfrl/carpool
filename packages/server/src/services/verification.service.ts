@@ -4,6 +4,7 @@ import * as IORedis from "ioredis";
 import { MailerService } from "@nest-modules/mailer";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
+import { appConfig } from "@carpool/core";
 
 import { User } from "../entities";
 import { VerificationDto } from "../dtos";
@@ -24,8 +25,8 @@ export class VerificationService {
 
         await this._redisClient.setex(redisKey, 86400, ""); //Currently this sets the key to expire in 1 day (86400 seconds)
 
-        let hostname = "localhost:3000"; //TODO: This has to be configurable
-        let schema = "http"; //TODO: This has to be configurable
+        let hostname = appConfig.host;
+        let schema = appConfig.scheme;
         let verificationUrl = `${schema}://${hostname}/verification?token=${verificationToken}&email=${user.email}`;
 
         await this._mailerService.sendMail({

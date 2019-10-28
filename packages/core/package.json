@@ -1,25 +1,26 @@
 {
-  "name": "@carpool/core",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist",
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "echo \"NOTE: need tests for core still!\" && exit 0",
-    "postinstall": "yarn build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@carpool/client": "0.0.6",
-    "mobx": "^5.13.0",
-    "socket.io-client": "^2.3.0"
-  },
-  "devDependencies": {
-    "@types/node": "^12.7.8",
-    "@types/socket.io-client": "^1.4.32",
-    "typescript": "^3.6.3"
-  }
+    "name": "@carpool/core",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "test": "echo \"NOTE: need tests for core still!\" && exit 0",
+        "postinstall": "yarn build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@carpool/common": "^1.0.0",
+        "@carpool/client": "0.0.6",
+        "mobx": "^5.13.0",
+        "socket.io-client": "^2.3.0"
+    },
+    "devDependencies": {
+        "@types/node": "^12.7.8",
+        "@types/socket.io-client": "^1.4.32",
+        "typescript": "^3.6.3"
+    }
 }

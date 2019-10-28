@@ -65,7 +65,23 @@ exports.AuthDto = {
         modelProperties: {
             accessToken: {
                 required: true,
-                serializedName: "access_token",
+                serializedName: "accessToken",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.GoogleSignInDto = {
+    serializedName: "GoogleSignInDto",
+    type: {
+        name: "Composite",
+        className: "GoogleSignInDto",
+        modelProperties: {
+            idToken: {
+                required: true,
+                serializedName: "idToken",
                 type: {
                     name: "String"
                 }

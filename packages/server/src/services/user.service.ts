@@ -43,6 +43,35 @@ export class UserService {
     }
 
     /**
+     * Creates a verified user from a googleUserId and returns the new entity.
+     * @param email - Email of the user
+     * @param googleUserId - The google idToken provided by google after authentication
+     * @param displayName - Unique display name for the user
+     */
+
+    public async createGoogleUser(
+        email: string,
+        googleUserId: string,
+        displayName: string,
+        firstName: string,
+        lastName: string
+    ): Promise<User> {
+        if (!email || !googleUserId || !displayName) {
+            throw new Error("Email, google UserID, and display name are required");
+        }
+        let user = new User();
+        user.email = email.toLowerCase();
+        user.googleId = googleUserId;
+        user.displayName = displayName;
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.isVerified = true;
+
+        user = await this._userRepository.save(user);
+        return user;
+    }
+
+    /**
      * Creates a user and returns the new entity.
      * @param email - Email of the user
      * @param hashedPassword - User's hashed password
@@ -54,7 +83,7 @@ export class UserService {
         displayName: string
     ): Promise<User> {
         if (!email || !hashedPassword || !displayName) {
-            throw new Error("Email and hashed password are required");
+            throw new Error("Email, hashed password, and display name are required");
         }
 
         let user = new User();

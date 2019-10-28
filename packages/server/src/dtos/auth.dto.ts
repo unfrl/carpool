@@ -5,5 +5,5 @@ import { ApiResponseModelProperty } from "@nestjs/swagger";
  */
 export class AuthDto {
     @ApiResponseModelProperty()
-    public access_token: string;
+    public accessToken: string;
 }

@@ -8,6 +8,8 @@ import {
     CircularProgress,
 } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
+import { GoogleLogin } from "react-google-login";
+import { authProviderConfig } from "@carpool/core";
 
 import { AppDialog } from "./";
 
@@ -42,6 +44,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         height: 250,
     },
+    socialLogin: {
+        marginTop: theme.spacing(2),
+    },
 }));
 
 export interface IUserDialogProps {
@@ -57,7 +62,10 @@ export interface IUserDialogProps {
      * Callback requesting to sign up.
      */
     onSignUp: (email: string, password: string, displayName: string) => Promise<void>;
-
+    /**
+     * Callback requesting server verify google login
+     */
+    onGoogleLogin: (idToken: string) => Promise<void>;
     /**
      * Callback requesting a password email to be sent.
      */
@@ -211,6 +219,19 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
         );
     };
 
+    const googleLoginSuccess = async response => {
+        const idToken = response.Zi.id_token;
+        if (!idToken) {
+            console.error("Unable to extract google user idToken from login response");
+        }
+        await props.onGoogleLogin(idToken);
+    };
+
+    const googleLoginFailure = response => {
+        console.log(`Failed to authenticate with google.`);
+        console.log(response);
+    };
+
     const renderSignInUpForm = () => {
         return (
             <form onSubmit={handleSubmit} className={classes.form}>
@@ -254,6 +275,15 @@ export const UserDialog: FunctionComponent<IUserDialogProps> = props => {
                             <Link onClick={handleToggleForgotPassword} className={classes.link}>
                                 Forgot your password?
                             </Link>
+                        )}
+                        {authProviderConfig.googleClientId && state.mode === DialogMode.signIn && (
+                            <GoogleLogin
+                                className={classes.socialLogin}
+                                clientId={authProviderConfig.googleClientId}
+                                onSuccess={googleLoginSuccess}
+                                onFailure={googleLoginFailure}
+                                cookiePolicy={"single_host_origin"}
+                            />
                         )}
                     </React.Fragment>
                 )}
