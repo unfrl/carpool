@@ -93,7 +93,9 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                             {displayName} {currentUserIsDriver && <strong>(you)</strong>}
                         </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
-                            Remaining seats: {seatsRemaining}
+                            {currentUserIsPassenger
+                                ? "You're a passenger!"
+                                : `Remaining seats: ${seatsRemaining}`}
                         </Typography>
                     </div>
                 </div>
