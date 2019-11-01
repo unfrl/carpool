@@ -106,6 +106,9 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                             key={driver.id}
                             driver={driver}
                             currentUserIsDriver={driver.user.id === userId}
+                            currentUserIsPassenger={Boolean(
+                                userId && driver.passengerUserIds.indexOf(userId) > -1
+                            )}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
                         />

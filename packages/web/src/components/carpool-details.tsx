@@ -38,6 +38,9 @@ const useStyles = makeStyles(theme => ({
     displayName: {
         fontWeight: 500,
     },
+    metadata: {
+        fontSize: 14,
+    },
 }));
 
 export interface ICarpoolDetailsProps {
@@ -63,7 +66,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
-    const { name, destination, dateTime, user } = carpoolDto;
+    const { name, destination, dateTime, created, user } = carpoolDto;
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
@@ -119,11 +122,24 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                                 {getInitials(user.displayName)}
                             </Avatar>
                         </NavLink>
-                        <Typography className={classes.displayName}>
-                            <NavLink to={`/${user.displayName}/carpools`}>
-                                {user.displayName}
-                            </NavLink>
-                        </Typography>
+                        <div>
+                            <Typography className={classes.displayName}>
+                                <NavLink to={`/${user.displayName}/carpools`}>
+                                    {user.displayName}
+                                </NavLink>
+                            </Typography>
+                            <Typography
+                                className={classes.metadata}
+                                title={moment(created)
+                                    .local()
+                                    .format("dddd, MMMM Do YYYY, h:mm a")}
+                            >
+                                created{" "}
+                                {moment(created)
+                                    .local()
+                                    .fromNow()}
+                            </Typography>
+                        </div>
                     </CardContent>
                 </Fragment>
             )}

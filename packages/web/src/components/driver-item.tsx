@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import {
     Avatar,
     Typography,
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
     driver: {
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         cursor: "pointer",
         flexGrow: 1,
     },
@@ -64,6 +64,7 @@ const useStyles = makeStyles(theme => ({
 export interface IDriverItemProps {
     driver: DriverDto;
     currentUserIsDriver: boolean;
+    currentUserIsPassenger: boolean;
     canJoin: boolean;
     onJoin: () => void;
 }
@@ -71,7 +72,7 @@ export interface IDriverItemProps {
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { driver, currentUserIsDriver, canJoin } = props;
+    const { driver, currentUserIsDriver, currentUserIsPassenger, canJoin } = props;
     const { car, user, seatsRemaining } = driver;
     const { displayName, email } = user;
     const { color, type } = car;
@@ -92,20 +93,30 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                             {displayName} {currentUserIsDriver && <strong>(you)</strong>}
                         </Typography>
                         <Typography variant="subtitle2" color="textPrimary">
-                            Remaining seats: {seatsRemaining}
+                            {currentUserIsPassenger
+                                ? "You're a passenger!"
+                                : `Remaining seats: ${seatsRemaining}`}
                         </Typography>
                     </div>
                 </div>
                 <div className={classes.actions}>
-                    <Button
-                        disabled={!canJoin}
-                        variant="contained"
-                        color="primary"
-                        className={classes.action}
-                        onClick={props.onJoin}
-                    >
-                        Join
-                    </Button>
+                    {currentUserIsPassenger ? (
+                        <Tooltip title="You're a passenger!">
+                            <Button color="primary" variant="contained">
+                                Leave
+                            </Button>
+                        </Tooltip>
+                    ) : (
+                        <Button
+                            disabled={!canJoin}
+                            variant="contained"
+                            color="primary"
+                            className={classes.action}
+                            onClick={props.onJoin}
+                        >
+                            Join
+                        </Button>
+                    )}
                     <Tooltip title={expanded ? "Hide details" : "Show details"}>
                         <IconButton
                             size="small"
