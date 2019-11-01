@@ -72,7 +72,7 @@ export class DriverService {
      * Finds one driver by its ID.
      * @param id - ID of the driver to find
      */
-    public async findOneById(id: string): Promise<DriverDto> {
+    public async findDriverById(id: string): Promise<DriverDto> {
         const driver = await this._driverRepository.findOne({
             where: { id },
             relations: ["user", "passengers"],

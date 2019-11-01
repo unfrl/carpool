@@ -460,6 +460,35 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Deletes a passenger based off the current user
+   * @summary Delete Passenger
+   * @param id
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  deletePassenger(id: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param id
+   * @param callback The callback
+   */
+  deletePassenger(id: string, callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param id
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  deletePassenger(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deletePassenger(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.sendOperationRequest(
+      {
+        id,
+        options
+      },
+      deletePassengerOperationSpec,
+      callback);
+  }
+
+  /**
    * Get passengers for a driver
    * @summary Get Passengers
    * @param id
@@ -806,6 +835,19 @@ const createPassengerOperationSpec: msRest.OperationSpec = {
     201: {
       bodyMapper: Mappers.PassengerDto
     },
+    default: {}
+  },
+  serializer
+};
+
+const deletePassengerOperationSpec: msRest.OperationSpec = {
+  httpMethod: "DELETE",
+  path: "api/v1/drivers/{id}/passengers",
+  urlParameters: [
+    Parameters.id
+  ],
+  responses: {
+    204: {},
     default: {}
   },
   serializer

@@ -298,6 +298,25 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     createPassenger(upsertPassengerDto: Models.UpsertPassengerDto, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PassengerDto>): void;
     /**
+     * Deletes a passenger based off the current user
+     * @summary Delete Passenger
+     * @param id
+     * @param [options] The optional parameters
+     * @returns Promise<msRest.RestResponse>
+     */
+    deletePassenger(id: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+    /**
+     * @param id
+     * @param callback The callback
+     */
+    deletePassenger(id: string, callback: msRest.ServiceCallback<void>): void;
+    /**
+     * @param id
+     * @param options The optional parameters
+     * @param callback The callback
+     */
+    deletePassenger(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+    /**
      * Get passengers for a driver
      * @summary Get Passengers
      * @param id

@@ -58,6 +58,25 @@ export class PassengerService {
     }
 
     /**
+     * Deletes a passenger for an existing user and driver.
+     * @param userId - ID of the user to remove as passenger
+     * @param driverId - ID of the driver to remove passenger from
+     */
+    public async deletePassenger(userId: string, driverId: string): Promise<void> {
+        const user = await this._userRepository.findOne(userId);
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const passenger = await this._passengerRepository.findOne({ where: { userId, driverId } });
+        if (!passenger) {
+            throw new NotFoundException("Passenger not found");
+        }
+
+        await this._passengerRepository.remove(passenger);
+    }
+
+    /**
      * Gets collection of passengers for the driver.
      * @param userId - ID of the user requesting passengers
      * @param driverId - ID of the driver to pull passengers for
