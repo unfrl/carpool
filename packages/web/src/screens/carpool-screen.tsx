@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Redirect } from "react-router";
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { CircularProgress, Typography, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 
 import {
@@ -19,12 +19,21 @@ import {
     AppDialog,
     DriverForm,
     PassengerForm,
+    FormActions,
 } from "../components";
 
 const useStyles = makeStyles(theme => ({
     progress: {
         display: "flex",
         margin: "auto",
+    },
+    confirmContent: {
+        display: "flex",
+        flexDirection: "column",
+        padding: theme.spacing(2, 0),
+    },
+    confirmText: {
+        marginBottom: theme.spacing(2),
     },
 }));
 
@@ -42,6 +51,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const [ready, setReady] = useState(false);
     const [showDriverForm, setShowDriverForm] = useState(false);
     const [driverId, setDriverId] = useState<string | undefined>();
+    const [removeFromDriverId, setRemoveFromDriverId] = useState<string | undefined>();
 
     const canUserEdit = Boolean(
         authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.user.id
@@ -72,6 +82,21 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
 
     const handleClosePassengerForm = () => {
         setDriverId(undefined);
+    };
+
+    const handleShowLeaveConfirmation = (driverId: string) => {
+        setRemoveFromDriverId(driverId);
+    };
+
+    const handleCancelLeave = () => {
+        setRemoveFromDriverId(undefined);
+    };
+
+    const handleConfirmLeave = async () => {
+        if (removeFromDriverId) {
+            await driverStore.removeUserPassenger(removeFromDriverId);
+        }
+        setRemoveFromDriverId(undefined);
     };
 
     const handleSaveDriverForm = async (createDriverDto: UpsertDriverDto) => {
@@ -127,6 +152,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 userId={authStore.user ? authStore.user.id : undefined}
                 onOfferToDrive={handleToggleDriverForm}
                 onJoinAsPassenger={handleShowPassengerForm}
+                onRemovePassenger={handleShowLeaveConfirmation}
             />
             {showDriverForm && (
                 <AppDialog
@@ -151,6 +177,27 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                         onSave={handleSavePassengerForm}
                         onCancel={handleClosePassengerForm}
                     />
+                </AppDialog>
+            )}
+            {removeFromDriverId && (
+                <AppDialog title="Leave the carpool?" onClose={handleCancelLeave} color="primary">
+                    <div className={classes.confirmContent}>
+                        <Typography
+                            variant="subtitle1"
+                            align="center"
+                            className={classes.confirmText}
+                        >
+                            Are you sure you want to leave?
+                            <br />
+                            You can always rejoin if you change your mind later.
+                        </Typography>
+                        <FormActions
+                            confirmText="Leave"
+                            canSave={true}
+                            onCancel={handleCancelLeave}
+                            onConfirm={handleConfirmLeave}
+                        />
+                    </div>
                 </AppDialog>
             )}
         </div>

@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 export interface IFormActionsProps {
     confirmText?: string;
     canSave: boolean;
+    onConfirm?: () => void;
     onCancel: () => void;
 }
 
@@ -25,7 +26,13 @@ export const FormActions: FunctionComponent<IFormActionsProps> = props => {
 
     return (
         <div className={classes.actions}>
-            <Button variant="contained" color="primary" type="submit" disabled={!props.canSave}>
+            <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={!props.canSave}
+                onClick={props.onConfirm}
+            >
                 {props.confirmText || "Finish"}
             </Button>
             <Button className={classes.cancel} onClick={props.onCancel}>

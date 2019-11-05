@@ -5,7 +5,18 @@ import {
     ApiBearerAuth,
     ApiResponse,
 } from "@nestjs/swagger";
-import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "@nestjs/common";
+import {
+    Post,
+    Body,
+    Controller,
+    Param,
+    UseGuards,
+    Req,
+    HttpStatus,
+    Get,
+    Delete,
+    HttpCode,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { UpsertPassengerDto, PassengerDto } from "../dtos";
@@ -48,6 +59,24 @@ export class PassengerController {
     }
 
     @ApiOperation({
+        operationId: "deletePassenger",
+        title: "Delete Passenger",
+        description: "Deletes a passenger based off the current user ",
+    })
+    @ApiResponse({ status: HttpStatus.NO_CONTENT })
+    @UseGuards(AuthGuard("jwt"))
+    @Delete()
+    @HttpCode(204)
+    public async deletePassenger(
+        @Req() request: UserRequest,
+        @Param("id") id: string
+    ): Promise<void> {
+        await this._passengerService.deletePassenger(request.user.id, id);
+
+        await this.notifyDriverUpdated(id);
+    }
+
+    @ApiOperation({
         operationId: "getPassengers",
         title: "Get Passengers",
         description: "Get passengers for a driver",
@@ -63,7 +92,7 @@ export class PassengerController {
     }
 
     private async notifyDriverUpdated(driverId: string) {
-        const driver = await this._driverService.findOneById(driverId);
+        const driver = await this._driverService.findDriverById(driverId);
         this._carpoolGateway.emitDriverUpdated(driver);
     }
 }

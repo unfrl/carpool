@@ -67,6 +67,7 @@ export interface IDriverItemProps {
     currentUserIsPassenger: boolean;
     canJoin: boolean;
     onJoin: () => void;
+    onLeave: () => void;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
@@ -102,7 +103,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                 <div className={classes.actions}>
                     {currentUserIsPassenger ? (
                         <Tooltip title="You're a passenger!">
-                            <Button color="primary" variant="contained">
+                            <Button color="primary" variant="contained" onClick={props.onLeave}>
                                 Leave
                             </Button>
                         </Tooltip>
