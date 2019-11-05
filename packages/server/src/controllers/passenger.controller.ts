@@ -15,6 +15,7 @@ import {
     HttpStatus,
     Get,
     Delete,
+    HttpCode,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
@@ -65,6 +66,7 @@ export class PassengerController {
     @ApiResponse({ status: HttpStatus.NO_CONTENT })
     @UseGuards(AuthGuard("jwt"))
     @Delete()
+    @HttpCode(204)
     public async deletePassenger(
         @Req() request: UserRequest,
         @Param("id") id: string
