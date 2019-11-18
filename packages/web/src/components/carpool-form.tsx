@@ -78,7 +78,7 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 autoFocus={true}
             />
             <AddressSearch
-                value={state.destination}
+                value={state.destination || ""}
                 onChange={val => setState({ ...state, destination: val })}
                 required={true}
                 label="Destination"
