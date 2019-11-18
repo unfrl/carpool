@@ -9,11 +9,12 @@ import {
     PasswordResetRequestDto,
     PasswordResetDto,
     GoogleSignInDto,
+    SocialAuthDto,
 } from "../dtos";
 import { JwtPayload } from "../interfaces";
 import { authConfig } from "../config";
 import { UserService } from "./user.service";
-import { authProviderConfig, appConfig } from "@carpool/core";
+import { authProviderConfig, appConfig, SocialLoginSteps } from "@carpool/core";
 import cryptoRandomString = require("crypto-random-string");
 import IORedis = require("ioredis");
 import { MailerService } from "@nest-modules/mailer";
@@ -31,8 +32,10 @@ export class AuthService {
         private readonly _oauth2Client: OAuth2Client
     ) {}
 
-    public async signInOrCreateUserWithGoogle(googleSignInDto: GoogleSignInDto): Promise<AuthDto> {
-        const { idToken } = googleSignInDto;
+    public async signInOrCreateUserWithGoogle(
+        googleSignInDto: GoogleSignInDto
+    ): Promise<SocialAuthDto> {
+        const { idToken, displayName } = googleSignInDto;
         if (!authProviderConfig.googleClientId) {
             throw new HttpException(
                 "This server is not configured to support Google Authentication",
@@ -49,12 +52,17 @@ export class AuthService {
         let user = await this._userService.findOneByEmail(payload.email);
         const googleUserId = payload.sub;
         if (!user) {
+            if (!displayName) {
+                let response = new SocialAuthDto();
+                response.nextStep = SocialLoginSteps.DisplayNameRequired;
+                return response;
+            }
             user = await this._userService.createGoogleUser(
                 payload.email,
                 googleUserId,
-                `${payload.given_name} ${payload.family_name}`,
+                displayName,
                 payload.given_name,
-                payload.family_name //TODO: Displayname probably needs to be more sophisticated. Its not guaranteed that their 'first + last' will be available
+                payload.family_name
             );
         }
 
@@ -63,7 +71,10 @@ export class AuthService {
         //     user.googleId = googleUserId;
         //     Save this user???
         // }
-        return this.generateAccessToken(user.id);
+        let response = new SocialAuthDto();
+        response.nextStep = SocialLoginSteps.None;
+        response.accessToken = (await this.generateAccessToken(user.id)).accessToken;
+        return response;
     }
 
     public async signIn(signInDto: SignInDto): Promise<AuthDto> {

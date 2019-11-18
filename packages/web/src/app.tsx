@@ -7,7 +7,7 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 import amber from "@material-ui/core/colors/amber";
 import { RouterStore } from "mobx-react-router";
 
-import { AuthStore, CarpoolStore, DriverStore } from "@carpool/core";
+import { AuthStore, CarpoolStore, DriverStore, SocialLoginSteps } from "@carpool/core";
 import {
     AppHeader,
     UserDialog,
@@ -15,6 +15,8 @@ import {
     DocumentHead,
     UserMenu,
     UserMenuOption,
+    AdditionalInfoDialog,
+    IAdditionalInfoDialogState,
 } from "./components";
 import {
     HomeScreen,
@@ -45,6 +47,8 @@ export interface IInjectedProps extends IAppProps {
 
 export interface IAppState {
     showUserDialog: boolean;
+    showAdditionalInfoDialog: boolean;
+    socialProviderToken: string;
 }
 
 @inject("authStore", "carpoolStore", "driverStore", "routerStore")
@@ -52,6 +56,8 @@ export interface IAppState {
 export class App extends Component<IAppProps, IAppState> {
     public state: IAppState = {
         showUserDialog: false,
+        showAdditionalInfoDialog: false,
+        socialProviderToken: "",
     };
 
     private get injectedProps(): IInjectedProps {
@@ -130,11 +136,19 @@ export class App extends Component<IAppProps, IAppState> {
                 </Content>
                 {this.state.showUserDialog && (
                     <UserDialog
-                        onClose={this.handleCloseDialog}
+                        onClose={this.handleCloseDialogs}
                         onSignIn={this.handleSignIn}
                         onSignUp={this.handleSignUp}
                         onRequestPasswordReset={this.handleRequestPasswordReset}
                         onGoogleLogin={this.handleGoogleLogin}
+                    />
+                )}
+                {this.state.showAdditionalInfoDialog && (
+                    <AdditionalInfoDialog
+                        onSubmitAdditionalInfo={data => {
+                            this.handleGoogleLogin(this.state.socialProviderToken, data);
+                        }}
+                        onClose={this.handleCloseDialogs}
                     />
                 )}
             </ThemeProvider>
@@ -187,8 +201,12 @@ export class App extends Component<IAppProps, IAppState> {
         this.setState({ showUserDialog: true });
     };
 
-    private handleCloseDialog = () => {
-        this.setState({ showUserDialog: false });
+    private handleCloseDialogs = () => {
+        this.setState({ showUserDialog: false, showAdditionalInfoDialog: false });
+    };
+
+    private handleShowAdditionalInfoDialog = () => {
+        this.setState({ showAdditionalInfoDialog: true });
     };
 
     private handleSignIn = async (email: string, password: string) => {
@@ -196,16 +214,28 @@ export class App extends Component<IAppProps, IAppState> {
         await authStore.signIn(email, password);
 
         if (authStore.isAuthenticated) {
-            this.handleCloseDialog();
+            this.handleCloseDialogs();
         }
     };
 
-    private handleGoogleLogin = async (idToken: string) => {
+    private handleGoogleLogin = async (
+        idToken: string,
+        googleLoginData?: IAdditionalInfoDialogState
+    ) => {
         const { authStore } = this.injectedProps;
-        await authStore.signInWithGoogle(idToken);
+        let additionalSteps = await authStore.signInWithGoogle(
+            idToken,
+            googleLoginData ? googleLoginData.displayName : undefined
+        );
+        if (additionalSteps === SocialLoginSteps.DisplayNameRequired) {
+            this.handleCloseDialogs();
+            this.setState({ socialProviderToken: idToken });
+            this.handleShowAdditionalInfoDialog();
+            return;
+        }
 
         if (authStore.isAuthenticated) {
-            this.handleCloseDialog();
+            this.handleCloseDialogs();
         }
     };
 

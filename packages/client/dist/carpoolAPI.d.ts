@@ -59,13 +59,13 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      * @param googleSignInDto
      * @param callback The callback
      */
-    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
     /**
      * @param googleSignInDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
     /**
      * Sends a password reset to the specified email if it exists
      * @summary Request Password Reset

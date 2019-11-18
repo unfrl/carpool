@@ -26,6 +26,14 @@ export interface AuthDto {
  */
 export interface GoogleSignInDto {
     idToken: string;
+    displayName?: string;
+}
+/**
+ * An interface representing SocialAuthDto.
+ */
+export interface SocialAuthDto {
+    accessToken: string;
+    nextStep: number;
 }
 /**
  * An interface representing PasswordResetRequestDto.
@@ -156,7 +164,7 @@ export declare type SignInResponse = AuthDto & {
 /**
  * Contains response data for the signInWithGoogle operation.
  */
-export declare type SignInWithGoogleResponse = AuthDto & {
+export declare type SignInWithGoogleResponse = SocialAuthDto & {
     /**
      * The underlying HTTP response.
      */
@@ -168,7 +176,7 @@ export declare type SignInWithGoogleResponse = AuthDto & {
         /**
          * The response body as parsed JSON or XML
          */
-        parsedBody: AuthDto;
+        parsedBody: SocialAuthDto;
     };
 };
 /**

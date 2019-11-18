@@ -85,6 +85,35 @@ exports.GoogleSignInDto = {
                 type: {
                     name: "String"
                 }
+            },
+            displayName: {
+                serializedName: "displayName",
+                type: {
+                    name: "String"
+                }
+            }
+        }
+    }
+};
+exports.SocialAuthDto = {
+    serializedName: "SocialAuthDto",
+    type: {
+        name: "Composite",
+        className: "SocialAuthDto",
+        modelProperties: {
+            accessToken: {
+                required: true,
+                serializedName: "accessToken",
+                type: {
+                    name: "String"
+                }
+            },
+            nextStep: {
+                required: true,
+                serializedName: "nextStep",
+                type: {
+                    name: "Number"
+                }
             }
         }
     }

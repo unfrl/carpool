@@ -3,6 +3,7 @@ import { observable, action, computed } from "mobx";
 import { UserDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
+import { SocialLoginSteps } from "@carpool/common/dist";
 
 const ACCESS_TOKEN_KEY = "carpool.auth.access_token";
 
@@ -70,15 +71,24 @@ export class AuthStore {
         }
     };
 
-    public signInWithGoogle = async (idToken: string) => {
+    public signInWithGoogle = async (
+        idToken: string,
+        displayName?: string
+    ): Promise<SocialLoginSteps> => {
         try {
-            const result = await this._rootStore.apiClient.signInWithGoogle({ idToken });
-
+            const result = await this._rootStore.apiClient.signInWithGoogle({
+                idToken,
+                displayName,
+            });
+            if (result.nextStep !== SocialLoginSteps.None) {
+                return result.nextStep;
+            }
             this.setAccessToken(result.accessToken);
 
             this._logger.info("Sign in success, fetching user...");
 
             await this.fetchUserProfile();
+            return SocialLoginSteps.None;
         } catch (error) {
             this._logger.error("Failed to sign in with server using google idToken", error);
             throw error;

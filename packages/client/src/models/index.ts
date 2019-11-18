@@ -35,6 +35,15 @@ export interface AuthDto {
  */
 export interface GoogleSignInDto {
   idToken: string;
+  displayName?: string;
+}
+
+/**
+ * An interface representing SocialAuthDto.
+ */
+export interface SocialAuthDto {
+  accessToken: string;
+  nextStep: number;
 }
 
 /**
@@ -181,7 +190,7 @@ export type SignInResponse = AuthDto & {
 /**
  * Contains response data for the signInWithGoogle operation.
  */
-export type SignInWithGoogleResponse = AuthDto & {
+export type SignInWithGoogleResponse = SocialAuthDto & {
   /**
    * The underlying HTTP response.
    */
@@ -194,7 +203,7 @@ export type SignInWithGoogleResponse = AuthDto & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: AuthDto;
+      parsedBody: SocialAuthDto;
     };
 };
 
