@@ -54,6 +54,16 @@ export class DriverStore {
         }
     };
 
+    public removeUserPassenger = async (driverId: string) => {
+        try {
+            await this._rootStore.apiClient.deletePassenger(driverId);
+
+            this._logger.info("Passenger deleted!");
+        } catch (error) {
+            this._logger.error("Failed to delete passenger", error);
+        }
+    };
+
     private loadDrivers = async (carpoolId: string) => {
         try {
             this.setLoading(true);

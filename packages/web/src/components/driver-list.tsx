@@ -43,6 +43,7 @@ export interface IDriverListProps {
     loading: boolean;
     onOfferToDrive: () => void;
     onJoinAsPassenger: (driverId: string) => void;
+    onRemovePassenger: (driverId: string) => void;
 }
 
 export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
@@ -63,7 +64,6 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             break;
         }
     }
-
     const canOfferToDrive = !!userId && !currentUserIsDriving && !currentUserIsPassenger;
 
     const renderDrivers = () => {
@@ -106,8 +106,12 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                             key={driver.id}
                             driver={driver}
                             currentUserIsDriver={driver.user.id === userId}
+                            currentUserIsPassenger={Boolean(
+                                userId && driver.passengerUserIds.indexOf(userId) > -1
+                            )}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
+                            onLeave={() => props.onRemovePassenger(driver.id)}
                         />
                     );
                 })}

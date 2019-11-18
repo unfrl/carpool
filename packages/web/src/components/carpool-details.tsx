@@ -1,13 +1,45 @@
-import React, { FunctionComponent, useState } from "react";
-import { IconButton, Icon, Card, CardHeader, Typography, makeStyles } from "@material-ui/core";
+import React, { FunctionComponent, Fragment, useState } from "react";
+import {
+    IconButton,
+    Icon,
+    Card,
+    CardHeader,
+    CardContent,
+    Typography,
+    Avatar,
+    makeStyles,
+} from "@material-ui/core";
+import amber from "@material-ui/core/colors/amber";
 import moment from "moment";
 
-import { CarpoolDto, UpsertCarpoolDto } from "@carpool/core";
-import { CarpoolForm } from ".";
+import { CarpoolDto, UpsertCarpoolDto, getInitials } from "@carpool/core";
+import { CarpoolForm, NavLink } from ".";
 
 const useStyles = makeStyles(theme => ({
     form: {
         padding: theme.spacing(2),
+    },
+    content: {
+        paddingTop: theme.spacing(2),
+        paddingBottom: `${theme.spacing(2)}px !important`,
+        borderTop: `1px solid ${theme.palette.divider}`,
+    },
+    row: {
+        display: "flex",
+        alignItems: "center",
+    },
+    avatar: {
+        backgroundColor: amber["A400"],
+        color: theme.palette.text.primary,
+    },
+    userLink: {
+        marginRight: theme.spacing(1),
+    },
+    displayName: {
+        fontWeight: 500,
+    },
+    metadata: {
+        fontSize: 14,
     },
 }));
 
@@ -34,7 +66,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
-    const { name, destination, dateTime } = carpoolDto;
+    const { name, destination, dateTime, created, user } = carpoolDto;
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
@@ -63,24 +95,53 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                     />
                 </div>
             ) : (
-                <CardHeader
-                    title={name}
-                    subheader={
+                <Fragment>
+                    <CardHeader
+                        title={name}
+                        subheader={
+                            <div>
+                                <Typography>{destination}</Typography>
+                                <Typography>
+                                    {moment(new Date(dateTime)).format(
+                                        "dddd, MMMM Do YYYY, h:mm a"
+                                    )}
+                                </Typography>
+                            </div>
+                        }
+                        action={
+                            canEdit && (
+                                <IconButton title="Edit" onClick={handleToggleEditing}>
+                                    <Icon>edit</Icon>
+                                </IconButton>
+                            )
+                        }
+                    />
+                    <CardContent className={`${classes.content} ${classes.row}`}>
+                        <NavLink to={`/${user.displayName}/carpools`} className={classes.userLink}>
+                            <Avatar className={classes.avatar}>
+                                {getInitials(user.displayName)}
+                            </Avatar>
+                        </NavLink>
                         <div>
-                            <Typography>{destination}</Typography>
-                            <Typography>
-                                {moment(new Date(dateTime)).format("dddd, MMMM Do YYYY, h:mm a")}
+                            <Typography className={classes.displayName}>
+                                <NavLink to={`/${user.displayName}/carpools`}>
+                                    {user.displayName}
+                                </NavLink>
+                            </Typography>
+                            <Typography
+                                className={classes.metadata}
+                                title={moment(created)
+                                    .local()
+                                    .format("dddd, MMMM Do YYYY, h:mm a")}
+                            >
+                                created{" "}
+                                {moment(created)
+                                    .local()
+                                    .fromNow()}
                             </Typography>
                         </div>
-                    }
-                    action={
-                        canEdit && (
-                            <IconButton title="Edit" onClick={handleToggleEditing}>
-                                <Icon>edit</Icon>
-                            </IconButton>
-                        )
-                    }
-                />
+                    </CardContent>
+                </Fragment>
             )}
         </Card>
     );

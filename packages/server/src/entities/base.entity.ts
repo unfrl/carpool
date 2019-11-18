@@ -6,11 +6,11 @@ export abstract class BaseEntity {
     @ApiResponseModelProperty()
     public id: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: "timestamp with time zone" })
     @ApiResponseModelProperty()
     public created: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: "timestamp with time zone" })
     @ApiResponseModelProperty()
     public updated: Date;
 }

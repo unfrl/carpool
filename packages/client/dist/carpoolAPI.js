@@ -145,6 +145,12 @@ var CarpoolAPI = /** @class */ (function (_super) {
             options: options
         }, createPassengerOperationSpec, callback);
     };
+    CarpoolAPI.prototype.deletePassenger = function (id, options, callback) {
+        return this.sendOperationRequest({
+            id: id,
+            options: options
+        }, deletePassengerOperationSpec, callback);
+    };
     CarpoolAPI.prototype.getPassengers = function (id, options, callback) {
         return this.sendOperationRequest({
             id: id,
@@ -407,6 +413,18 @@ var createPassengerOperationSpec = {
         201: {
             bodyMapper: Mappers.PassengerDto
         },
+        default: {}
+    },
+    serializer: serializer
+};
+var deletePassengerOperationSpec = {
+    httpMethod: "DELETE",
+    path: "api/v1/drivers/{id}/passengers",
+    urlParameters: [
+        Parameters.id
+    ],
+    responses: {
+        204: {},
         default: {}
     },
     serializer: serializer

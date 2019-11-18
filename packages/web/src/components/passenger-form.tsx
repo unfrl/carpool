@@ -5,9 +5,6 @@ import { UpsertPassengerDto, isValidPhoneNumber } from "@carpool/core";
 import { AddressSearch, FormActions, PhoneNumberInput } from ".";
 
 const useStyles = makeStyles(theme => ({
-    heading: {
-        marginBottom: theme.spacing(2),
-    },
     root: {
         display: "flex",
         flexDirection: "column",
