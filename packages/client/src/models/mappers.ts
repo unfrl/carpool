@@ -194,6 +194,13 @@ export const CarpoolDto: msRest.CompositeMapper = {
           name: "String"
         }
       },
+      description: {
+        required: true,
+        serializedName: "description",
+        type: {
+          name: "String"
+        }
+      },
       urlId: {
         required: true,
         serializedName: "urlId",
@@ -250,6 +257,12 @@ export const UpsertCarpoolDto: msRest.CompositeMapper = {
       carpoolName: {
         required: true,
         serializedName: "carpoolName",
+        type: {
+          name: "String"
+        }
+      },
+      description: {
+        serializedName: "description",
         type: {
           name: "String"
         }

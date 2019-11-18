@@ -49,6 +49,7 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 carpoolName: "",
                 dateTime: new Date(),
                 destination: "",
+                description: "",
             }
         )
     );
@@ -77,7 +78,7 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 autoFocus={true}
             />
             <AddressSearch
-                value={state.destination}
+                value={state.destination || ""}
                 onChange={val => setState({ ...state, destination: val })}
                 required={true}
                 label="Destination"
@@ -93,6 +94,15 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 showTodayButton={true}
                 margin="normal"
                 fullWidth={true}
+            />
+            <TextField
+                label="Description"
+                value={state.description}
+                onChange={e => setState({ ...state, description: e.target.value })}
+                variant="outlined"
+                margin="normal"
+                fullWidth={true}
+                multiline={true}
             />
             <div className={classes.actions}>
                 <LoadingButton
