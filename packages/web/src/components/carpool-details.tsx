@@ -41,6 +41,19 @@ const useStyles = makeStyles(theme => ({
     metadata: {
         fontSize: 14,
     },
+    description: {
+        padding: 16,
+        paddingTop: 0,
+    },
+    details: {
+        fontWeight: 400,
+    },
+    icon: {
+        marginRight: theme.spacing(1),
+    },
+    spacer: {
+        marginTop: theme.spacing(1),
+    },
 }));
 
 export interface ICarpoolDetailsProps {
@@ -66,7 +79,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
-    const { name, destination, dateTime, created, user } = carpoolDto;
+    const { name, destination, dateTime, created, user, description } = carpoolDto;
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
@@ -91,6 +104,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                             carpoolName: name,
                             destination: destination,
                             dateTime: dateTime,
+                            description: description,
                         }}
                     />
                 </div>
@@ -100,12 +114,18 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                         title={name}
                         subheader={
                             <div>
-                                <Typography>{destination}</Typography>
-                                <Typography>
-                                    {moment(new Date(dateTime)).format(
-                                        "dddd, MMMM Do YYYY, h:mm a"
-                                    )}
-                                </Typography>
+                                <div className={`${classes.row} ${classes.spacer}`}>
+                                    <Icon className={classes.icon}>room</Icon>
+                                    <Typography>{destination}</Typography>
+                                </div>
+                                <div className={`${classes.row} ${classes.spacer}`}>
+                                    <Icon className={classes.icon}>schedule</Icon>
+                                    <Typography>
+                                        {moment(new Date(dateTime)).format(
+                                            "dddd, MMMM Do YYYY, h:mm a"
+                                        )}
+                                    </Typography>
+                                </div>
                             </div>
                         }
                         action={
@@ -116,6 +136,16 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                             )
                         }
                     />
+                    {description && (
+                        <div className={classes.description}>
+                            <Typography variant="h6" className={classes.details}>
+                                Description
+                            </Typography>
+                            <Typography variant="body1" color="textSecondary">
+                                {description}
+                            </Typography>
+                        </div>
+                    )}
                     <CardContent className={`${classes.content} ${classes.row}`}>
                         <NavLink to={`/${user.displayName}/carpools`} className={classes.userLink}>
                             <Avatar className={classes.avatar}>

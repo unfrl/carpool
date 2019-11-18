@@ -185,6 +185,13 @@ exports.CarpoolDto = {
                     name: "String"
                 }
             },
+            description: {
+                required: true,
+                serializedName: "description",
+                type: {
+                    name: "String"
+                }
+            },
             urlId: {
                 required: true,
                 serializedName: "urlId",
@@ -240,6 +247,12 @@ exports.UpsertCarpoolDto = {
             carpoolName: {
                 required: true,
                 serializedName: "carpoolName",
+                type: {
+                    name: "String"
+                }
+            },
+            description: {
+                serializedName: "description",
                 type: {
                     name: "String"
                 }

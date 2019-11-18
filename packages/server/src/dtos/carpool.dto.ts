@@ -10,6 +10,9 @@ export class CarpoolDto {
     public readonly name: string;
 
     @ApiResponseModelProperty()
+    public readonly description: string;
+
+    @ApiResponseModelProperty()
     public readonly urlId: string;
 
     @ApiResponseModelProperty()
