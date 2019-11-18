@@ -13,6 +13,9 @@ export class Carpool extends BaseEntity {
     @Column({ length: 14, unique: true })
     public urlId: string;
 
+    @Column({ nullable: true })
+    public description: string;
+
     @Column()
     public destination: string;
 
