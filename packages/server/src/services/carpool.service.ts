@@ -19,10 +19,11 @@ export class CarpoolService {
      * @param userId - ID of the user creating the carpool
      */
     public async createCarpool(carpoolDto: UpsertCarpoolDto, user: User): Promise<CarpoolDto> {
-        const { destination, carpoolName, dateTime } = carpoolDto;
+        const { destination, carpoolName, dateTime, description } = carpoolDto;
 
         const carpool = new Carpool();
         carpool.name = carpoolName;
+        carpool.description = description || "";
         carpool.destination = destination;
         carpool.dateTime = dateTime;
         carpool.createdBy = user;
@@ -98,9 +99,10 @@ export class CarpoolService {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        const { destination, carpoolName, dateTime } = carpoolDto;
+        const { destination, carpoolName, dateTime, description } = carpoolDto;
         //TODO: Add an entity mapper for obvious reasons...
         carpool.name = carpoolName;
+        carpool.description = description || "";
         carpool.destination = destination;
         carpool.dateTime = dateTime;
         carpool.updatedById = userId;

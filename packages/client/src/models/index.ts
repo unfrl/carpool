@@ -68,6 +68,7 @@ export interface UserDto {
 export interface CarpoolDto {
   id: string;
   name: string;
+  description: string;
   urlId: string;
   destination: string;
   dateTime: any;
@@ -81,6 +82,7 @@ export interface CarpoolDto {
  */
 export interface UpsertCarpoolDto {
   carpoolName: string;
+  description?: string;
   destination: string;
   dateTime: any;
 }
