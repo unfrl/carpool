@@ -80,6 +80,9 @@ export class AuthStore {
                 idToken,
                 displayName,
             });
+            if (result.error) {
+                throw new Error(result.error);
+            }
             if (result.nextStep !== SocialLoginSteps.None) {
                 return result;
             }

@@ -225,9 +225,6 @@ export class App extends Component<IAppProps, IAppState> {
             idToken,
             googleLoginData ? googleLoginData.displayName : undefined
         );
-        if (result.error) {
-            throw new Error(result.error);
-        }
 
         if (result.nextStep === SocialLoginSteps.DisplayNameRequired) {
             this.handleCloseDialogs();
