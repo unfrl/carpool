@@ -14,7 +14,7 @@ import {
 import { JwtPayload } from "../interfaces";
 import { authConfig } from "../config";
 import { UserService } from "./user.service";
-import { authProviderConfig, appConfig, SocialLoginSteps } from "@carpool/core";
+import { authProviderConfig, appConfig, SocialLoginSteps } from "@carpool/common";
 import cryptoRandomString = require("crypto-random-string");
 import IORedis = require("ioredis");
 import { MailerService } from "@nest-modules/mailer";
