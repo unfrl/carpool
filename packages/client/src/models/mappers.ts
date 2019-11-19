@@ -120,6 +120,13 @@ export const SocialAuthDto: msRest.CompositeMapper = {
         type: {
           name: "Number"
         }
+      },
+      error: {
+        required: true,
+        serializedName: "error",
+        type: {
+          name: "String"
+        }
       }
     }
   }

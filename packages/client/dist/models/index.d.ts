@@ -34,6 +34,7 @@ export interface GoogleSignInDto {
 export interface SocialAuthDto {
     accessToken: string;
     nextStep: number;
+    error: string;
 }
 /**
  * An interface representing PasswordResetRequestDto.

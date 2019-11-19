@@ -114,6 +114,13 @@ exports.SocialAuthDto = {
                 type: {
                     name: "Number"
                 }
+            },
+            error: {
+                required: true,
+                serializedName: "error",
+                type: {
+                    name: "String"
+                }
             }
         }
     }
