@@ -80,12 +80,15 @@ export class AuthStore {
                 idToken,
                 displayName,
             });
+
             if (result.error) {
                 throw new Error(result.error);
             }
+
             if (result.nextStep !== SocialLoginSteps.None) {
                 return result;
             }
+
             this.setAccessToken(result.accessToken);
 
             this._logger.info("Sign in success, fetching user...");

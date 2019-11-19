@@ -52,19 +52,21 @@ export class AuthService {
         let user = await this._userService.findOneByEmail(payload.email);
         const googleUserId = payload.sub;
         if (!user) {
-            const trimmedDisplayName = displayName ? displayName.trim() : "";
-            let displayNameTaken = trimmedDisplayName
-                ? await this._userService.displayNameExists(trimmedDisplayName)
-                : false;
+            const trimmedDisplayName = displayName?.trim();
+            const displayNameTaken =
+                trimmedDisplayName &&
+                (await this._userService.displayNameExists(trimmedDisplayName));
 
             if (!trimmedDisplayName || displayNameTaken) {
-                let response = new SocialAuthDto();
+                const response = new SocialAuthDto();
                 response.nextStep = SocialLoginSteps.DisplayNameRequired;
                 response.error = displayNameTaken
                     ? "The specified display name is already taken, please try again"
                     : undefined;
+
                 return response;
             }
+
             user = await this._userService.createGoogleUser(
                 payload.email,
                 googleUserId,
@@ -79,7 +81,7 @@ export class AuthService {
         //     user.googleId = googleUserId;
         //     Save this user???
         // }
-        let response = new SocialAuthDto();
+        const response = new SocialAuthDto();
         response.nextStep = SocialLoginSteps.None;
         response.accessToken = (await this.generateAccessToken(user.id)).accessToken;
         return response;

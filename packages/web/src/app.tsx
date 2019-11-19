@@ -16,7 +16,6 @@ import {
     UserMenu,
     UserMenuOption,
     AdditionalInfoDialog,
-    IAdditionalInfoDialogState,
     IAdditionalInfoData,
 } from "./components";
 import {

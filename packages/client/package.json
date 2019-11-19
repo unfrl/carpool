@@ -15,6 +15,6 @@
         "@azure/ms-rest-js": "^2.0.4"
     },
     "devDependencies": {
-        "typescript": "^3.6.3"
+        "typescript": "^3.7.2"
     }
 }
