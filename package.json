@@ -8,10 +8,11 @@
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 0",
-        "start:all": "concurrently -k  \"yarn start:common\" \"yarn start:core\"  \"yarn start:web\" \"yarn start:server\"",
+        "start:all": "concurrently -k \"yarn start:client\" \"yarn start:common\" \"yarn start:core\" \"yarn start:web\" \"yarn start:server\"",
+        "start:client": "cd packages/client && yarn watch",
         "start:common": "cd packages/common && yarn watch",
-        "start:web": "cd packages/web && yarn start",
         "start:core": "cd packages/core && yarn watch",
+        "start:web": "cd packages/web && yarn start",
         "start:server": "cd packages/server && yarn start:dev",
         "generate:client": "yarn build:client && yarn compile:client",
         "build:client": "cd packages/server && yarn build:client",
