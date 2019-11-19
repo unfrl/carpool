@@ -3,6 +3,7 @@ export declare const SignUpDto: msRest.CompositeMapper;
 export declare const SignInDto: msRest.CompositeMapper;
 export declare const AuthDto: msRest.CompositeMapper;
 export declare const GoogleSignInDto: msRest.CompositeMapper;
+export declare const SocialAuthDto: msRest.CompositeMapper;
 export declare const PasswordResetRequestDto: msRest.CompositeMapper;
 export declare const PasswordResetDto: msRest.CompositeMapper;
 export declare const UserDto: msRest.CompositeMapper;

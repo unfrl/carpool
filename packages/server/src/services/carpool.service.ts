@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository, getConnection, In } from "typeorm";
+import { Repository } from "typeorm";
 
 import { Carpool, User, Driver, Passenger } from "../entities";
 import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
 import { mapCarpoolToDto } from "../mappers";
 import { MailerService } from "@nest-modules/mailer";
-import { DriverService } from "./driver.service";
 
 @Injectable()
 export class CarpoolService {
@@ -15,7 +14,7 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>,
-        private readonly _mailerService: MailerService // private readonly _driverService: DriverService
+        private readonly _mailerService: MailerService
     ) {}
 
     //#region Public
@@ -155,9 +154,9 @@ export class CarpoolService {
                 participantIds.push(passenger.userId);
             });
         });
-        const participants = await this._userRepository.find({
-            id: In(participantIds),
-        });
+
+        const participants = await this._userRepository.findByIds(participantIds);
+
         const participantEmails = participants
             .filter(x => x.email !== user.email) //Dont email the person that made the update...
             .map((participant: User) => {
@@ -165,6 +164,8 @@ export class CarpoolService {
             });
 
         //TODO: We gunna need a background job scheduler, maybe bull: https://github.com/nestjsx/nest-bull
+        console.log("PARTICIPANTS:");
+        console.log(participantEmails);
         // await this._mailerService.sendMail({})
     }
 

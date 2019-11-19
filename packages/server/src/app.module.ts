@@ -33,7 +33,7 @@ import { OAuth2Client } from "google-auth-library";
         TypeOrmModule.forFeature([Carpool, Driver, Passenger, User]),
         PassportModule.register({ defaultStrategy: "jwt" }),
         JwtModule.register({
-            secretOrPrivateKey: authConfig.secret,
+            secret: authConfig.secret,
             signOptions: {
                 expiresIn: 3600,
             },

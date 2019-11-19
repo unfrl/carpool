@@ -79,7 +79,8 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
-   * Sign in using a google user's idToken. This will create a user if it doesnt exist.
+   * Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also
+   * request further steps, such as setting a display name.
    * @summary Sign in with Google
    * @param googleSignInDto
    * @param [options] The optional parameters
@@ -90,14 +91,14 @@ class CarpoolAPI extends CarpoolAPIContext {
    * @param googleSignInDto
    * @param callback The callback
    */
-  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
   /**
    * @param googleSignInDto
    * @param options The optional parameters
    * @param callback The callback
    */
-  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
-  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.SignInWithGoogleResponse> {
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
+  signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.SocialAuthDto>, callback?: msRest.ServiceCallback<Models.SocialAuthDto>): Promise<Models.SignInWithGoogleResponse> {
     return this.sendOperationRequest(
       {
         googleSignInDto,
@@ -597,7 +598,7 @@ const signInWithGoogleOperationSpec: msRest.OperationSpec = {
   },
   responses: {
     200: {
-      bodyMapper: Mappers.AuthDto
+      bodyMapper: Mappers.SocialAuthDto
     },
     default: {}
   },

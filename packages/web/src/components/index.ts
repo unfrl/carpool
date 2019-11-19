@@ -16,3 +16,4 @@ export * from "./not-found";
 export * from "./form-actions";
 export * from "./passenger-form";
 export * from "./phone-number-input";
+export * from "./additional-info-dialog";

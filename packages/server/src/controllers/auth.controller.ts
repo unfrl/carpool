@@ -18,6 +18,7 @@ import {
     PasswordResetRequestDto,
     PasswordResetDto,
     GoogleSignInDto,
+    SocialAuthDto,
 } from "../dtos";
 
 @ApiUseTags("Auth")
@@ -53,12 +54,14 @@ export class AuthController {
         operationId: "signInWithGoogle",
         title: "Sign in with Google",
         description:
-            "Sign in using a google user's idToken. This will create a user if it doesnt exist.",
+            "Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also request further steps, such as setting a display name.",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
+    @ApiResponse({ status: HttpStatus.OK, type: SocialAuthDto })
     @HttpCode(200)
     @Post("signinwithgoogle")
-    public async signInWithGoogle(@Body() googleSignInDto: GoogleSignInDto): Promise<AuthDto> {
+    public async signInWithGoogle(
+        @Body() googleSignInDto: GoogleSignInDto
+    ): Promise<SocialAuthDto> {
         let result = await this._authService.signInOrCreateUserWithGoogle(googleSignInDto);
         return result;
     }
