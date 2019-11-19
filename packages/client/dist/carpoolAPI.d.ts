@@ -48,7 +48,8 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
-     * Sign in using a google user's idToken. This will create a user if it doesnt exist.
+     * Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also
+     * request further steps, such as setting a display name.
      * @summary Sign in with Google
      * @param googleSignInDto
      * @param [options] The optional parameters

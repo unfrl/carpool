@@ -164,6 +164,8 @@ export class CarpoolService {
             });
 
         //TODO: We gunna need a background job scheduler, maybe bull: https://github.com/nestjsx/nest-bull
+        console.log("PARTICIPANTS:");
+        console.log(participantEmails);
         // await this._mailerService.sendMail({})
     }
 
