@@ -52,10 +52,12 @@ export class AuthService {
         let user = await this._userService.findOneByEmail(payload.email);
         const googleUserId = payload.sub;
         if (!user) {
-            let displayNameTaken = displayName
-                ? await this._userService.displayNameExists(displayName.trim())
+            const trimmedDisplayName = displayName ? displayName.trim() : "";
+            let displayNameTaken = trimmedDisplayName
+                ? await this._userService.displayNameExists(trimmedDisplayName)
                 : false;
-            if (!displayName || displayNameTaken) {
+
+            if (!trimmedDisplayName || displayNameTaken) {
                 let response = new SocialAuthDto();
                 response.nextStep = SocialLoginSteps.DisplayNameRequired;
                 response.error = displayNameTaken
@@ -66,7 +68,7 @@ export class AuthService {
             user = await this._userService.createGoogleUser(
                 payload.email,
                 googleUserId,
-                displayName,
+                trimmedDisplayName,
                 payload.given_name,
                 payload.family_name
             );
