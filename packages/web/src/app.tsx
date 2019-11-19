@@ -17,6 +17,7 @@ import {
     UserMenuOption,
     AdditionalInfoDialog,
     IAdditionalInfoDialogState,
+    IAdditionalInfoData,
 } from "./components";
 import {
     HomeScreen,
@@ -145,8 +146,8 @@ export class App extends Component<IAppProps, IAppState> {
                 )}
                 {this.state.showAdditionalInfoDialog && (
                     <AdditionalInfoDialog
-                        onSubmitAdditionalInfo={data => {
-                            this.handleGoogleLogin(this.state.socialProviderToken, data);
+                        onSubmitAdditionalInfo={async data => {
+                            await this.handleGoogleLogin(this.state.socialProviderToken, data);
                         }}
                         onClose={this.handleCloseDialogs}
                     />
@@ -218,16 +219,17 @@ export class App extends Component<IAppProps, IAppState> {
         }
     };
 
-    private handleGoogleLogin = async (
-        idToken: string,
-        googleLoginData?: IAdditionalInfoDialogState
-    ) => {
+    private handleGoogleLogin = async (idToken: string, googleLoginData?: IAdditionalInfoData) => {
         const { authStore } = this.injectedProps;
-        let additionalSteps = await authStore.signInWithGoogle(
+        let result = await authStore.signInWithGoogle(
             idToken,
             googleLoginData ? googleLoginData.displayName : undefined
         );
-        if (additionalSteps === SocialLoginSteps.DisplayNameRequired) {
+        if (result.error) {
+            throw new Error(result.error);
+        }
+
+        if (result.nextStep === SocialLoginSteps.DisplayNameRequired) {
             this.handleCloseDialogs();
             this.setState({ socialProviderToken: idToken });
             this.handleShowAdditionalInfoDialog();

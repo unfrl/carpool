@@ -8,4 +8,7 @@ import { SocialLoginSteps } from "@carpool/common";
 export class SocialAuthDto extends AuthDto {
     @ApiResponseModelProperty()
     public nextStep: SocialLoginSteps;
+
+    @ApiResponseModelProperty()
+    public error?: string;
 }

@@ -1,6 +1,6 @@
 import { observable, action, computed } from "mobx";
 
-import { UserDto } from "@carpool/client";
+import { UserDto, SocialAuthDto } from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 import { SocialLoginSteps } from "@carpool/common/dist";
@@ -74,21 +74,21 @@ export class AuthStore {
     public signInWithGoogle = async (
         idToken: string,
         displayName?: string
-    ): Promise<SocialLoginSteps> => {
+    ): Promise<SocialAuthDto> => {
         try {
             const result = await this._rootStore.apiClient.signInWithGoogle({
                 idToken,
                 displayName,
             });
             if (result.nextStep !== SocialLoginSteps.None) {
-                return result.nextStep;
+                return result;
             }
             this.setAccessToken(result.accessToken);
 
             this._logger.info("Sign in success, fetching user...");
 
             await this.fetchUserProfile();
-            return SocialLoginSteps.None;
+            return result;
         } catch (error) {
             this._logger.error("Failed to sign in with server using google idToken", error);
             throw error;
