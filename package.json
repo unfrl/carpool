@@ -8,14 +8,15 @@
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 0",
-        "start:all": "concurrently -k  \"yarn start:core\"  \"yarn start:web\" \"yarn start:server\"",
+        "start:all": "concurrently -k  \"yarn start:common\" \"yarn start:core\"  \"yarn start:web\" \"yarn start:server\"",
         "start:common": "cd packages/common && yarn watch",
         "start:web": "cd packages/web && yarn start",
         "start:core": "cd packages/core && yarn watch",
         "start:server": "cd packages/server && yarn start:dev",
         "generate:client": "yarn build:client && yarn compile:client",
         "build:client": "cd packages/server && yarn build:client",
-        "compile:client": "cd packages/client && yarn build"
+        "compile:client": "cd packages/client && yarn build",
+        "cleanup:containers": "docker stop carpool_postgres carpool_redis; docker rm carpool_postgres carpool_redis"
     },
     "keywords": [],
     "author": "",

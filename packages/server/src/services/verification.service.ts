@@ -4,7 +4,7 @@ import * as IORedis from "ioredis";
 import { MailerService } from "@nest-modules/mailer";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { appConfig } from "@carpool/core";
+import { appConfig } from "@carpool/common";
 
 import { User } from "../entities";
 import { VerificationDto } from "../dtos";

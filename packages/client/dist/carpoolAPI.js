@@ -205,7 +205,7 @@ var signInWithGoogleOperationSpec = {
     },
     responses: {
         200: {
-            bodyMapper: Mappers.AuthDto
+            bodyMapper: Mappers.SocialAuthDto
         },
         default: {}
     },

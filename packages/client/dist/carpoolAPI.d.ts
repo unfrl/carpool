@@ -48,7 +48,8 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      */
     signIn(signInDto: Models.SignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
     /**
-     * Sign in using a google user's idToken. This will create a user if it doesnt exist.
+     * Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also
+     * request further steps, such as setting a display name.
      * @summary Sign in with Google
      * @param googleSignInDto
      * @param [options] The optional parameters
@@ -59,13 +60,13 @@ declare class CarpoolAPI extends CarpoolAPIContext {
      * @param googleSignInDto
      * @param callback The callback
      */
-    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
     /**
      * @param googleSignInDto
      * @param options The optional parameters
      * @param callback The callback
      */
-    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+    signInWithGoogle(googleSignInDto: Models.GoogleSignInDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.SocialAuthDto>): void;
     /**
      * Sends a password reset to the specified email if it exists
      * @summary Request Password Reset
