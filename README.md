@@ -9,8 +9,6 @@ This is the monorepo for the server and web carpool projects. It is setup using 
 2. From root project directory, run `yarn install`. This will install the dependencies of all projects.
 3. To run server services/services and the core/web projects in dev mode, run `yarn start:all` after dependencies are installed.
 
-**Note:** on first run, you'll want to run `cd packages/client && yarn build` before running `yarn start:all`. Since they're run concurrently, the client won't be compiled before the core package is started up resulting in reference errors.
-
 # Notes
 
 -   The `client` project contains the auto-generated API client. Do not modify any code inside the lib directory -- files in this directory are overwritten each time the client is generated.
