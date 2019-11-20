@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 0",
         "build": "tsc",
-        "watch": "tsc -w"
+        "watch": "tsc -w",
+        "postinstall": "yarn build"
     },
     "keywords": [],
     "author": "",
