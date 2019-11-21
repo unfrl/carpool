@@ -23,7 +23,6 @@ import * as shortid from "shortid";
 
 import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
 import { CarpoolService } from "../services";
-import { CarpoolGateway } from "../gateways";
 import { UserRequest } from "../interfaces";
 import { CarpoolModificationGuard } from "../guards";
 import { CarpoolUpdateInterceptor } from "src/interceptors";
@@ -32,10 +31,7 @@ import { CarpoolUpdateInterceptor } from "src/interceptors";
 @ApiBearerAuth()
 @Controller("api/v1/carpools")
 export class CarpoolController {
-    public constructor(
-        private readonly _carpoolService: CarpoolService,
-        private readonly _carpoolGateway: CarpoolGateway
-    ) {}
+    public constructor(private readonly _carpoolService: CarpoolService) {}
 
     @ApiOperation({
         operationId: "createCarpool",
@@ -82,9 +78,7 @@ export class CarpoolController {
         @Req() request: UserRequest,
         @Body() carpoolDto: UpsertCarpoolDto
     ): Promise<CarpoolDto> {
-        const carpool = await this._carpoolService.updateCarpool(id, carpoolDto, request.user);
-
-        return carpool;
+        return await this._carpoolService.updateCarpool(id, carpoolDto, request.user);
     }
 
     @ApiOperation({
