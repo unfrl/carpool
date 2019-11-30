@@ -1,7 +1,16 @@
 import React, { FunctionComponent, useEffect, useState, Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
-import { makeStyles, CircularProgress, Card, Typography } from "@material-ui/core";
+import {
+    makeStyles,
+    CircularProgress,
+    Card,
+    Typography,
+    Paper,
+    Tabs,
+    Tab,
+    Grid,
+} from "@material-ui/core";
 
 import { CarpoolStore } from "@carpool/core";
 import { CarpoolList, DocumentHead, NotFound } from "../components";
@@ -14,6 +23,9 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         margin: "auto",
     },
+    tabsContainer: {
+        marginBottom: theme.spacing(2),
+    },
 }));
 
 export interface IUserCarpoolsScreenProps extends RouteComponentProps {
@@ -24,6 +36,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
     const classes = useStyles();
     const [notFound, setNotFound] = useState(false);
     const [ready, setReady] = useState(false);
+    const [tab, selectTab] = useState(0);
     const { match, carpoolStore } = props;
     const { displayName } = match.params as { displayName: string };
 
@@ -64,12 +77,36 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
             {carpoolStore.loading || !ready ? (
                 <CircularProgress className={classes.loading} />
             ) : (
-                <Card>
-                    <Typography variant="h6" align="center" className={classes.heading}>
-                        {displayName} Carpools
-                    </Typography>
-                    <CarpoolList carpools={carpoolStore.carpools} />
-                </Card>
+                <Grid container={true} spacing={2}>
+                    <Grid item={true} md={3} sm={12} style={{ display: "flex" }}>
+                        <div style={{ width: "100%", padding: 16 }}>
+                            <Typography variant="h6" align="center" className={classes.heading}>
+                                {displayName} Carpools
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid item={true} md={9} sm={12}>
+                        <Paper className={classes.tabsContainer}>
+                            <Tabs
+                                value={tab}
+                                indicatorColor="primary"
+                                textColor="primary"
+                                onChange={(_e, value) => selectTab(value)}
+                                variant="fullWidth"
+                            >
+                                <Tab label="Created" />
+                                <Tab label="Driving" />
+                                <Tab label="Passenger" />
+                            </Tabs>
+                        </Paper>
+                        <Card>
+                            {/* <Typography variant="h6" align="center" className={classes.heading}>
+                                {displayName} Carpools
+                            </Typography> */}
+                            <CarpoolList carpools={carpoolStore.carpools} />
+                        </Card>
+                    </Grid>
+                </Grid>
             )}
         </Fragment>
     );
