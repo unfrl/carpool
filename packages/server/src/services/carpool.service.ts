@@ -8,7 +8,7 @@ import { mapCarpoolToDto } from "../mappers";
 import { MailerService } from "@nest-modules/mailer";
 import { Queue } from "bull";
 import { InjectQueue } from "nest-bull";
-import { appConfig } from "@carpool/common"
+import { appConfig } from "@carpool/common";
 import { sendEmailFunctionName } from "src/processors";
 
 @Injectable()
@@ -18,9 +18,11 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>,
+        @InjectRepository(Driver)
+        private readonly _driverRepository: Repository<Driver>,
         private readonly _mailerService: MailerService,
-        @InjectQueue('bull') readonly mailQueue: Queue,
-    ) { }
+        @InjectQueue("bull") readonly mailQueue: Queue
+    ) {}
 
     //#region Public
     /**
@@ -94,6 +96,19 @@ export class CarpoolService {
     }
 
     /**
+     * Finds a list of carpools that the user is driving for.
+     * @param userId - ID of the user who is driving
+     */
+    public async findCarpoolsByDriver(userId: string): Promise<CarpoolDto[]> {
+        const drivers = await this._driverRepository.find({
+            where: { userId },
+            relations: ["carpool", "carpool.createdBy"],
+        });
+
+        return drivers.map(driver => mapCarpoolToDto(driver.carpool));
+    }
+
+    /**
      * Updates an existing carpool and returns the updated entity.
      * @param id - ID of the carpool to update
      * @param carpoolDto - DTO to update the carpool with
@@ -113,7 +128,10 @@ export class CarpoolService {
 
         const { destination, carpoolName, dateTime, description } = carpoolDto;
         let cleanDateTime = new Date(dateTime);
-        if (destination !== carpool.destination || cleanDateTime.getTime() !== carpool.dateTime.getTime()) {
+        if (
+            destination !== carpool.destination ||
+            cleanDateTime.getTime() !== carpool.dateTime.getTime()
+        ) {
             await this.notifyParticipantsOfCarpoolUpdate(carpool, user);
         }
 
@@ -170,14 +188,16 @@ export class CarpoolService {
 
         let carpoolUrl = `${appConfig.scheme}://${appConfig.host}/${carpool.urlId}/${carpool.name}`;
 
-        await Promise.all(participantEmails.map((email: string) => {
-            return this.mailQueue.add(sendEmailFunctionName, {
-                to: email,
-                from: "noreply@carpool+unfrl.com",
-                subject: "A carpool you are participating in has been updated!",
-                html: `<h1>Hello!</h1>\n<p>A carpool you are participating in has been updated, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see the updates</p>`,
-            });
-        }))
+        await Promise.all(
+            participantEmails.map((email: string) => {
+                return this.mailQueue.add(sendEmailFunctionName, {
+                    to: email,
+                    from: "noreply@carpool+unfrl.com",
+                    subject: "A carpool you are participating in has been updated!",
+                    html: `<h1>Hello!</h1>\n<p>A carpool you are participating in has been updated, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see the updates</p>`,
+                });
+            })
+        );
     }
 
     //#endregion

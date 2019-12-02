@@ -64,6 +64,29 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
         };
     }, [displayName]);
 
+    const handleSelectTab = async (selectedTab: number) => {
+        if (selectedTab === tab || !isCurrentUser) {
+            return;
+        }
+
+        selectTab(selectedTab);
+    };
+
+    const getCarpools = () => {
+        if (!isCurrentUser) {
+            return carpoolStore.carpools;
+        }
+
+        switch (tab) {
+            case 0:
+                return carpoolStore.carpools;
+            case 1:
+                return carpoolStore.userDrivingCarpools;
+            default:
+                return carpoolStore.carpools;
+        }
+    };
+
     if (notFound) {
         return <NotFound />;
     }
@@ -97,7 +120,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                                     value={tab}
                                     indicatorColor="primary"
                                     textColor="primary"
-                                    onChange={(_e, value) => selectTab(value)}
+                                    onChange={(_e, value) => handleSelectTab(value)}
                                     variant="fullWidth"
                                 >
                                     <Tab label="Created" />
@@ -111,7 +134,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                             )}
                         </Paper>
                         <Card>
-                            <CarpoolList carpools={carpoolStore.carpools} />
+                            <CarpoolList carpools={getCarpools()} />
                         </Card>
                     </Grid>
                 </Grid>

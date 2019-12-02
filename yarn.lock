@@ -2196,10 +2196,10 @@ autoprefixer@^9.4.2:
     postcss "^7.0.17"
     postcss-value-parser "^4.0.0"
 
-autorest@^2.0.4283:
-  version "2.0.4283"
-  resolved "https://registry.yarnpkg.com/autorest/-/autorest-2.0.4283.tgz#e23bd2ba7909f6094060b334f4393720e55db022"
-  integrity sha512-3jU9yDR71d2thRnKdPH03DaWbla1Iqnrx2rqUUwbMrb4di36a8+nttCQaTWG7biWPJc6Ke6zSSTzFH0uhya+Nw==
+autorest@^2.0.4407:
+  version "2.0.4407"
+  resolved "https://registry.yarnpkg.com/autorest/-/autorest-2.0.4407.tgz#56c29ab685b903e7a4cbdb0b0b5e671d174ab6fc"
+  integrity sha512-keyeMDb/bVNN8hnDd8o08UC2C1OE8HRhubxksljSvKM5osHIJnoKBA1k3kD7MPAJ/+m6UjDQXci3ronxZeYy+Q==
 
 autosuggest-highlight@^3.1.1:
   version "3.1.1"
