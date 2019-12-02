@@ -6,6 +6,10 @@ import { Carpool, User, Driver, Passenger } from "../entities";
 import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
 import { mapCarpoolToDto } from "../mappers";
 import { MailerService } from "@nest-modules/mailer";
+import { Queue } from "bull";
+import { InjectQueue } from "nest-bull";
+import { appConfig } from "@carpool/common"
+import { sendEmailFunctionName } from "src/processors";
 
 @Injectable()
 export class CarpoolService {
@@ -14,8 +18,9 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>,
-        private readonly _mailerService: MailerService
-    ) {}
+        private readonly _mailerService: MailerService,
+        @InjectQueue('bull') readonly mailQueue: Queue,
+    ) { }
 
     //#region Public
     /**
@@ -107,8 +112,8 @@ export class CarpoolService {
         }
 
         const { destination, carpoolName, dateTime, description } = carpoolDto;
-
-        if (destination !== carpool.destination || dateTime !== carpool.dateTime) {
+        let cleanDateTime = new Date(dateTime);
+        if (destination !== carpool.destination || cleanDateTime.getTime() !== carpool.dateTime.getTime()) {
             await this.notifyParticipantsOfCarpoolUpdate(carpool, user);
         }
 
@@ -163,10 +168,16 @@ export class CarpoolService {
                 return participant.email;
             });
 
-        //TODO: We gunna need a background job scheduler, maybe bull: https://github.com/nestjsx/nest-bull
-        console.log("PARTICIPANTS:");
-        console.log(participantEmails);
-        // await this._mailerService.sendMail({})
+        let carpoolUrl = `${appConfig.scheme}://${appConfig.host}/${carpool.urlId}/${carpool.name}`;
+
+        await Promise.all(participantEmails.map((email: string) => {
+            return this.mailQueue.add(sendEmailFunctionName, {
+                to: email,
+                from: "noreply@carpool+unfrl.com",
+                subject: "A carpool you are participating in has been updated!",
+                html: `<h1>Hello!</h1>\n<p>A carpool you are participating in has been updated, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see the updates</p>`,
+            });
+        }))
     }
 
     //#endregion

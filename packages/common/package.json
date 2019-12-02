@@ -11,6 +11,7 @@
         "postinstall": "yarn build"
     },
     "devDependencies": {
+        "@types/node": "^12.12.14",
         "typescript": "^3.7.2"
     }
 }
