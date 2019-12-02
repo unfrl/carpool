@@ -83,7 +83,11 @@ export class App extends Component<IAppProps, IAppState> {
                             path="/:displayName/carpools"
                             exact={true}
                             render={routeProps => (
-                                <UserCarpoolsScreen carpoolStore={carpoolStore} {...routeProps} />
+                                <UserCarpoolsScreen
+                                    authStore={authStore}
+                                    carpoolStore={carpoolStore}
+                                    {...routeProps}
+                                />
                             )}
                         />
                         <Route

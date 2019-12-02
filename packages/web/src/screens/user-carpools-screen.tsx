@@ -1,9 +1,18 @@
 import React, { FunctionComponent, useEffect, useState, Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
-import { makeStyles, CircularProgress, Card, Paper, Tabs, Tab, Grid } from "@material-ui/core";
+import {
+    makeStyles,
+    CircularProgress,
+    Card,
+    Paper,
+    Tabs,
+    Tab,
+    Grid,
+    Typography,
+} from "@material-ui/core";
 
-import { CarpoolStore } from "@carpool/core";
+import { CarpoolStore, AuthStore } from "@carpool/core";
 import { CarpoolList, DocumentHead, NotFound, UserProfileCard } from "../components";
 
 const useStyles = makeStyles(theme => ({
@@ -17,10 +26,15 @@ const useStyles = makeStyles(theme => ({
     userContainer: {
         width: "100%",
     },
+    header: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+    },
 }));
 
 export interface IUserCarpoolsScreenProps extends RouteComponentProps {
     carpoolStore: CarpoolStore;
+    authStore: AuthStore;
 }
 
 export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = observer(props => {
@@ -28,8 +42,10 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
     const [notFound, setNotFound] = useState(false);
     const [ready, setReady] = useState(false);
     const [tab, selectTab] = useState(0);
-    const { match, carpoolStore } = props;
+    const { match, carpoolStore, authStore } = props;
     const { displayName } = match.params as { displayName: string };
+
+    const isCurrentUser = authStore.user && authStore.user.displayName === displayName;
 
     useEffect(() => {
         const load = async () => {
@@ -76,17 +92,23 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                     </Grid>
                     <Grid item={true} md={9} sm={12}>
                         <Paper className={classes.tabsContainer}>
-                            <Tabs
-                                value={tab}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                onChange={(_e, value) => selectTab(value)}
-                                variant="fullWidth"
-                            >
-                                <Tab label="Created" />
-                                <Tab label="Driving" />
-                                <Tab label="Passenger" />
-                            </Tabs>
+                            {isCurrentUser ? (
+                                <Tabs
+                                    value={tab}
+                                    indicatorColor="primary"
+                                    textColor="primary"
+                                    onChange={(_e, value) => selectTab(value)}
+                                    variant="fullWidth"
+                                >
+                                    <Tab label="Created" />
+                                    <Tab label="Driving" />
+                                    <Tab label="Passenger" />
+                                </Tabs>
+                            ) : (
+                                <Typography variant="h6" align="center" className={classes.header}>
+                                    Carpools
+                                </Typography>
+                            )}
                         </Paper>
                         <Card>
                             <CarpoolList carpools={carpoolStore.carpools} />
