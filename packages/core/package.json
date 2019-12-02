@@ -13,13 +13,13 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@carpool/common": "^1.0.0",
         "@carpool/client": "0.0.6",
+        "@carpool/common": "^1.0.0",
         "mobx": "^5.13.0",
         "socket.io-client": "^2.3.0"
     },
     "devDependencies": {
-        "@types/node": "^10.16.3",
+        "@types/node": "^12.12.14",
         "@types/socket.io-client": "^1.4.32",
         "typescript": "^3.7.2"
     }
