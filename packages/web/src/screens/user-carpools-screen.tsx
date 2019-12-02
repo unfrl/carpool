@@ -1,30 +1,21 @@
 import React, { FunctionComponent, useEffect, useState, Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
-import {
-    makeStyles,
-    CircularProgress,
-    Card,
-    Typography,
-    Paper,
-    Tabs,
-    Tab,
-    Grid,
-} from "@material-ui/core";
+import { makeStyles, CircularProgress, Card, Paper, Tabs, Tab, Grid } from "@material-ui/core";
 
 import { CarpoolStore } from "@carpool/core";
-import { CarpoolList, DocumentHead, NotFound } from "../components";
+import { CarpoolList, DocumentHead, NotFound, UserProfileCard } from "../components";
 
 const useStyles = makeStyles(theme => ({
-    heading: {
-        marginTop: theme.spacing(2),
-    },
     loading: {
         display: "flex",
         margin: "auto",
     },
     tabsContainer: {
         marginBottom: theme.spacing(2),
+    },
+    userContainer: {
+        width: "100%",
     },
 }));
 
@@ -78,11 +69,9 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                 <CircularProgress className={classes.loading} />
             ) : (
                 <Grid container={true} spacing={2}>
-                    <Grid item={true} md={3} sm={12} style={{ display: "flex" }}>
-                        <div style={{ width: "100%", padding: 16 }}>
-                            <Typography variant="h6" align="center" className={classes.heading}>
-                                {displayName} Carpools
-                            </Typography>
+                    <Grid item={true} md={3} sm={12} xs={12}>
+                        <div className={classes.userContainer}>
+                            <UserProfileCard displayName={displayName} />
                         </div>
                     </Grid>
                     <Grid item={true} md={9} sm={12}>
@@ -100,9 +89,6 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
                             </Tabs>
                         </Paper>
                         <Card>
-                            {/* <Typography variant="h6" align="center" className={classes.heading}>
-                                {displayName} Carpools
-                            </Typography> */}
                             <CarpoolList carpools={carpoolStore.carpools} />
                         </Card>
                     </Grid>

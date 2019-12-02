@@ -2,15 +2,14 @@ import { HandlebarsAdapter } from "@nest-modules/mailer";
 
 const emailHost = process.env.EMAIL_HOST || "smtp.gmail.com";
 const emailUser = process.env.EMAIL_USER || "unfrltempcarpool@gmail.com";
-const emailPassword = process.env.EMAIL_PASSWORD || "testpass117";
+const emailPassword = process.env.EMAIL_PASSWORD || "astrongpass117";
 
 const transport =
-    process.env.EMAIL_CONNECTION_URL ||
-    `smtps://${emailUser}:${emailPassword}@${emailHost}`; //More info on connection urls here: https://nodemailer.com/smtp/ and https://nodemailer.com/usage/using-gmail/
+    process.env.EMAIL_CONNECTION_URL || `smtps://${emailUser}:${emailPassword}@${emailHost}`; //More info on connection urls here: https://nodemailer.com/smtp/ and https://nodemailer.com/usage/using-gmail/
 export const mailModuleConfig: any = {
     transport,
     defaults: {
-        from: 'Unfrl LLC <noreply@carpool+unfrl.com>',
+        from: "Unfrl LLC <noreply@carpool+unfrl.com>",
     },
     template: {
         dir: __dirname + "/templates",
@@ -27,9 +26,9 @@ export const emailConfig: any = {
     secure: false, // true for 465, false for other ports
     auth: {
         user: emailUser,
-        pass: emailPassword
+        pass: emailPassword,
     },
     defaults: {
-        from: 'Unfrl LLC <noreply@carpool+unfrl.com>',
-    }
+        from: "Unfrl LLC <noreply@carpool+unfrl.com>",
+    },
 };
