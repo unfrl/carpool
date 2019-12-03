@@ -48,13 +48,6 @@ export class UserController {
         return await this._carpoolService.findCarpoolsByCreatedBy(request.user.id);
     }
 
-    // TODO instead of separate endpoints for each (carpools i created, carpools i'm driving in, carpools i'm a passenger of):
-    // - modify "me/carpools" to accept a `type` query param with one of the three options (allow multiple?)
-    // - may want to update the response to include the type, e.g {type: 'created', carpools: ...}[]
-    // - carpool store can either store all w/ the type, or as dictionary, etc
-    // - ":displayName/carpools" could be updated to use similar logic but not accepting a type param -- only allowed to view created
-    //   - ^ b/c of this, we may want to conditionally fetch the carpools on the frontend depending if the page being requested is the current user
-    //       (e.g if is current user => me/carpools?type=created,driving,passenger else => :displayName/carpools)
     @ApiOperation({
         operationId: "getMyDrivingCarpools",
         title: "Get user's carpools they're driving for",

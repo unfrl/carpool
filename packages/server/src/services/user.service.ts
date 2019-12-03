@@ -48,7 +48,6 @@ export class UserService {
      * @param googleUserId - The google idToken provided by google after authentication
      * @param displayName - Unique display name for the user
      */
-
     public async createGoogleUser(
         email: string,
         googleUserId: string,

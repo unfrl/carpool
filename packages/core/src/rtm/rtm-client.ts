@@ -10,7 +10,7 @@ export class RtmClient {
     // methods
     public carpool: CarpoolMethods;
 
-    public constructor(baseUri: string) {
+    public constructor(baseUri: string, private readonly signRequest: () => string) {
         this._socket = io(baseUri);
         this._socket.on("connect", this.handleConnect);
         this._socket.on("disconnect", this.handleDisconnect);
@@ -39,9 +39,11 @@ export class RtmClient {
      * Wraps socket.emit in a promise.
      */
     private emitWrapper = async (action: string, data?: any): Promise<any> => {
+        const payload = Object.assign({}, data || {}, { accessToken: this.signRequest() });
+
         return new Promise((resolve, reject) => {
             try {
-                this._socket.emit(action, data, (result: any) => {
+                this._socket.emit(action, payload, (result: any) => {
                     resolve(result);
                 });
             } catch (error) {

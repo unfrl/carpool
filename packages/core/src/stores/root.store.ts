@@ -14,7 +14,7 @@ export class RootStore {
     public readonly driverStore: DriverStore;
 
     public constructor() {
-        this.rtmClient = new RtmClient(apiConfig.baseUri);
+        this.rtmClient = new RtmClient(apiConfig.baseUri, () => this.authStore.getAccessToken());
         this.apiClient = new CarpoolAPI(
             {
                 signRequest: async resource => {
