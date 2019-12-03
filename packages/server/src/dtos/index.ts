@@ -13,3 +13,4 @@ export * from "./password-reset.dto";
 export * from "./password-reset-request.dto";
 export * from "./google-sign-in.dto";
 export * from "./social.auth.dto";
+export * from "./driver-metadata.dto"

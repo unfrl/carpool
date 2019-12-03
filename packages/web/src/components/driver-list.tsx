@@ -71,10 +71,12 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             return <CircularProgress className={classes.progress} />;
         }
 
+
         if (!hasDrivers) {
+            let noDriversText = !!userId ? "No drivers yet. Be first!" : "Sign in to join as a passenger or offer to drive!";
             return (
                 <div className={classes.noDrivers}>
-                    <Typography variant="h5">No drivers yet. Be first!</Typography>
+                    <Typography variant="h5">{noDriversText}</Typography>
                     <Button
                         variant="contained"
                         color="primary"

@@ -428,6 +428,35 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Get the number of drivers and available seats for a carpool
+   * @summary Get Drivers Metadata
+   * @param id
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetDriversMetadataResponse>
+   */
+  getDriversMetadata(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetDriversMetadataResponse>;
+  /**
+   * @param id
+   * @param callback The callback
+   */
+  getDriversMetadata(id: string, callback: msRest.ServiceCallback<Models.DriverMetadataDto[]>): void;
+  /**
+   * @param id
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getDriversMetadata(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DriverMetadataDto[]>): void;
+  getDriversMetadata(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DriverMetadataDto[]>, callback?: msRest.ServiceCallback<Models.DriverMetadataDto[]>): Promise<Models.GetDriversMetadataResponse> {
+    return this.sendOperationRequest(
+      {
+        id,
+        options
+      },
+      getDriversMetadataOperationSpec,
+      callback) as Promise<Models.GetDriversMetadataResponse>;
+  }
+
+  /**
    * Creates a passenger based off the current user
    * @summary Create Passenger
    * @param upsertPassengerDto
@@ -809,6 +838,32 @@ const getDriversOperationSpec: msRest.OperationSpec = {
             type: {
               name: "Composite",
               className: "DriverDto"
+            }
+          }
+        }
+      }
+    },
+    default: {}
+  },
+  serializer
+};
+
+const getDriversMetadataOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/v1/carpools/{id}/drivers/metadata",
+  urlParameters: [
+    Parameters.id
+  ],
+  responses: {
+    200: {
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "DriverMetadataDto"
             }
           }
         }

@@ -85,6 +85,8 @@ export interface CarpoolDto {
   created: any;
   updated: any;
   user: UserDto;
+  driverCount: number;
+  remainingSeats: number;
 }
 
 /**
@@ -126,6 +128,14 @@ export interface DriverDto {
   user: UserDto;
   seatsRemaining: number;
   passengerUserIds: string[];
+}
+
+/**
+ * An interface representing DriverMetadataDto.
+ */
+export interface DriverMetadataDto {
+  driverCount: number;
+  remainingSeats: number;
 }
 
 /**
@@ -387,6 +397,26 @@ export type GetDriversResponse = Array<DriverDto> & {
        * The response body as parsed JSON or XML
        */
       parsedBody: DriverDto[];
+    };
+};
+
+/**
+ * Contains response data for the getDriversMetadata operation.
+ */
+export type GetDriversMetadataResponse = Array<DriverMetadataDto> & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: DriverMetadataDto[];
     };
 };
 

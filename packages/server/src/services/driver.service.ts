@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Driver, Carpool, User } from "../entities";
-import { UpsertDriverDto, DriverDto } from "../dtos";
+import { UpsertDriverDto, DriverDto, DriverMetadataDto } from "../dtos";
 import { mapDriverToDto } from "../mappers";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class DriverService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>
-    ) {}
+    ) { }
 
     /**
      * Creates a driver and returns the new entity.
@@ -66,6 +66,22 @@ export class DriverService {
         });
 
         return drivers.map(driver => mapDriverToDto(driver));
+    }
+
+    /**
+     * Finds the number of drivers and remaining available seats for a given carpool.
+     * @param carpoolId - ID of the carpool to find driver metadata for
+     */
+    public async findDriverMetadataByCarpoolId(carpoolId: string): Promise<DriverMetadataDto> {
+        let drivers = await this.findDriversByCarpoolId(carpoolId);
+        let driverCount = drivers.length;
+        let remainingSeats = 0;
+
+        drivers.forEach(d => {
+            remainingSeats += d.seatsRemaining;
+        })
+
+        return { driverCount, remainingSeats };
     }
 
     /**

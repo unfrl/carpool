@@ -35,7 +35,7 @@ export class CarpoolController {
     public constructor(
         private readonly _carpoolService: CarpoolService,
         private readonly _carpoolGateway: CarpoolGateway
-    ) {}
+    ) { }
 
     @ApiOperation({
         operationId: "createCarpool",

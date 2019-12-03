@@ -10,6 +10,7 @@ import { Queue } from "bull";
 import { InjectQueue } from "nest-bull";
 import { appConfig } from "@carpool/common"
 import { sendEmailFunctionName } from "src/processors";
+import { DriverService } from "./driver.service";
 
 @Injectable()
 export class CarpoolService {
@@ -18,8 +19,8 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>,
-        private readonly _mailerService: MailerService,
         @InjectQueue('bull') readonly mailQueue: Queue,
+        private readonly _driverService: DriverService
     ) { }
 
     //#region Public
@@ -54,7 +55,8 @@ export class CarpoolService {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return mapCarpoolToDto(carpool);
+        let result = mapCarpoolToDto(carpool);
+        return await this.addDriverMetadata(result);
     }
 
     /**
@@ -70,7 +72,8 @@ export class CarpoolService {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return mapCarpoolToDto(carpool);
+        let result = mapCarpoolToDto(carpool);
+        return await this.addDriverMetadata(result);
     }
 
     /**
@@ -144,6 +147,13 @@ export class CarpoolService {
     //#endregion
 
     //#region Private
+
+    private async addDriverMetadata(carpool: CarpoolDto): Promise<CarpoolDto> {
+        let metadata = await this._driverService.findDriverMetadataByCarpoolId(carpool.id);
+        carpool.remainingSeats = metadata.remainingSeats;
+        carpool.driverCount = metadata.driverCount;
+        return carpool;
+    }
 
     /**
      * Notifies the participants of a Carpool via email that it has been updated.

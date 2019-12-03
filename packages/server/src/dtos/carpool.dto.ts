@@ -29,4 +29,10 @@ export class CarpoolDto {
 
     @ApiResponseModelProperty()
     public readonly user: UserDto;
+
+    @ApiResponseModelProperty()
+    public driverCount?: number;
+
+    @ApiResponseModelProperty()
+    public remainingSeats?: number;
 }

@@ -280,6 +280,20 @@ export const CarpoolDto: msRest.CompositeMapper = {
           name: "Composite",
           className: "UserDto"
         }
+      },
+      driverCount: {
+        required: true,
+        serializedName: "driverCount",
+        type: {
+          name: "Number"
+        }
+      },
+      remainingSeats: {
+        required: true,
+        serializedName: "remainingSeats",
+        type: {
+          name: "Number"
+        }
       }
     }
   }
@@ -424,6 +438,30 @@ export const DriverDto: msRest.CompositeMapper = {
               name: "String"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const DriverMetadataDto: msRest.CompositeMapper = {
+  serializedName: "DriverMetadataDto",
+  type: {
+    name: "Composite",
+    className: "DriverMetadataDto",
+    modelProperties: {
+      driverCount: {
+        required: true,
+        serializedName: "driverCount",
+        type: {
+          name: "Number"
+        }
+      },
+      remainingSeats: {
+        required: true,
+        serializedName: "remainingSeats",
+        type: {
+          name: "Number"
         }
       }
     }

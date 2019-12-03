@@ -79,7 +79,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
-    const { name, destination, dateTime, created, user, description } = carpoolDto;
+    const { name, destination, dateTime, created, user, description, driverCount, remainingSeats } = carpoolDto;
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
@@ -109,70 +109,76 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                     />
                 </div>
             ) : (
-                <Fragment>
-                    <CardHeader
-                        title={name}
-                        subheader={
-                            <div>
-                                <div className={`${classes.row} ${classes.spacer}`}>
-                                    <Icon className={classes.icon}>room</Icon>
-                                    <Typography>{destination}</Typography>
+                    <Fragment>
+                        <CardHeader
+                            title={name}
+                            subheader={
+                                <div>
+                                    <div className={`${classes.row} ${classes.spacer}`}>
+                                        <Icon className={classes.icon}>room</Icon>
+                                        <Typography>{destination}</Typography>
+                                    </div>
+                                    <div className={`${classes.row} ${classes.spacer}`}>
+                                        <Icon className={classes.icon}>schedule</Icon>
+                                        <Typography>
+                                            {moment(new Date(dateTime)).format(
+                                                "dddd, MMMM Do YYYY, h:mm a"
+                                            )}
+                                        </Typography>
+                                    </div>
+                                    {driverCount > 0 &&
+                                        <div className={`${classes.row} ${classes.spacer}`}>
+                                            <Icon className={classes.icon}>emoji_people</Icon>
+                                            <Typography>This carpool has {driverCount} {driverCount == 1 ? "driver" : "drivers"} and {remainingSeats} available {remainingSeats == 1 ? "seat" : "seats"}</Typography>
+                                        </div>
+                                    }
                                 </div>
-                                <div className={`${classes.row} ${classes.spacer}`}>
-                                    <Icon className={classes.icon}>schedule</Icon>
-                                    <Typography>
-                                        {moment(new Date(dateTime)).format(
-                                            "dddd, MMMM Do YYYY, h:mm a"
-                                        )}
-                                    </Typography>
-                                </div>
+                            }
+                            action={
+                                canEdit && (
+                                    <IconButton title="Edit" onClick={handleToggleEditing}>
+                                        <Icon>edit</Icon>
+                                    </IconButton>
+                                )
+                            }
+                        />
+                        {description && (
+                            <div className={classes.description}>
+                                <Typography variant="h6" className={classes.details}>
+                                    Description
+                            </Typography>
+                                <Typography variant="body1" color="textSecondary">
+                                    {description}
+                                </Typography>
                             </div>
-                        }
-                        action={
-                            canEdit && (
-                                <IconButton title="Edit" onClick={handleToggleEditing}>
-                                    <Icon>edit</Icon>
-                                </IconButton>
-                            )
-                        }
-                    />
-                    {description && (
-                        <div className={classes.description}>
-                            <Typography variant="h6" className={classes.details}>
-                                Description
-                            </Typography>
-                            <Typography variant="body1" color="textSecondary">
-                                {description}
-                            </Typography>
-                        </div>
-                    )}
-                    <CardContent className={`${classes.content} ${classes.row}`}>
-                        <NavLink to={`/${user.displayName}/carpools`} className={classes.userLink}>
-                            <Avatar className={classes.avatar}>
-                                {getInitials(user.displayName)}
-                            </Avatar>
-                        </NavLink>
-                        <div>
-                            <Typography className={classes.displayName}>
-                                <NavLink to={`/${user.displayName}/carpools`}>
-                                    {user.displayName}
-                                </NavLink>
-                            </Typography>
-                            <Typography
-                                className={classes.metadata}
-                                title={moment(created)
-                                    .local()
-                                    .format("dddd, MMMM Do YYYY, h:mm a")}
-                            >
-                                created{" "}
-                                {moment(created)
-                                    .local()
-                                    .fromNow()}
-                            </Typography>
-                        </div>
-                    </CardContent>
-                </Fragment>
-            )}
+                        )}
+                        <CardContent className={`${classes.content} ${classes.row}`}>
+                            <NavLink to={`/${user.displayName}/carpools`} className={classes.userLink}>
+                                <Avatar className={classes.avatar}>
+                                    {getInitials(user.displayName)}
+                                </Avatar>
+                            </NavLink>
+                            <div>
+                                <Typography className={classes.displayName}>
+                                    <NavLink to={`/${user.displayName}/carpools`}>
+                                        {user.displayName}
+                                    </NavLink>
+                                </Typography>
+                                <Typography
+                                    className={classes.metadata}
+                                    title={moment(created)
+                                        .local()
+                                        .format("dddd, MMMM Do YYYY, h:mm a")}
+                                >
+                                    created{" "}
+                                    {moment(created)
+                                        .local()
+                                        .fromNow()}
+                                </Typography>
+                            </div>
+                        </CardContent>
+                    </Fragment>
+                )}
         </Card>
     );
 };
