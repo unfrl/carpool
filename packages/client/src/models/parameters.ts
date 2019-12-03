@@ -26,3 +26,13 @@ export const id: msRest.OperationURLParameter = {
     }
   }
 };
+export const type: msRest.OperationQueryParameter = {
+  parameterPath: "type",
+  mapper: {
+    required: true,
+    serializedName: "type",
+    type: {
+      name: "String"
+    }
+  }
+};

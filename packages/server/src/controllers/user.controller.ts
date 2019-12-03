@@ -6,11 +6,12 @@ import {
     Req,
     UseGuards,
     Param,
+    Query,
     NotFoundException,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
-import { UserDto, CarpoolDto } from "../dtos";
+import { UserDto, CarpoolDto, CarpoolQueryDto, CarpoolQueryResponseDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { CarpoolService, UserService } from "../services";
 import { mapUserToDto } from "../mappers";
@@ -41,11 +42,14 @@ export class UserController {
         title: "Get user's carpools",
         description: "Gets a collection of carpools created by the current user",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolQueryResponseDto, isArray: true })
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools")
-    public async getMyCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
-        return await this._carpoolService.findCarpoolsByCreatedBy(request.user.id);
+    public async getMyCarpools(
+        @Req() request: UserRequest,
+        @Query() query: CarpoolQueryDto
+    ): Promise<CarpoolQueryResponseDto[]> {
+        return await this._carpoolService.queryCarpoolsByUser(request.user.id, query.type);
     }
 
     @ApiOperation({

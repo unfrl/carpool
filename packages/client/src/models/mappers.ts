@@ -285,6 +285,31 @@ export const CarpoolDto: msRest.CompositeMapper = {
   }
 };
 
+export const CarpoolQueryResponseDto: msRest.CompositeMapper = {
+  serializedName: "CarpoolQueryResponseDto",
+  type: {
+    name: "Composite",
+    className: "CarpoolQueryResponseDto",
+    modelProperties: {
+      carpool: {
+        required: true,
+        serializedName: "carpool",
+        type: {
+          name: "Composite",
+          className: "CarpoolDto"
+        }
+      },
+      type: {
+        required: true,
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const UpsertCarpoolDto: msRest.CompositeMapper = {
   serializedName: "UpsertCarpoolDto",
   type: {
