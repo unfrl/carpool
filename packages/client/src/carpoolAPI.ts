@@ -194,22 +194,26 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Gets a collection of carpools created by the current user
    * @summary Get user's carpools
+   * @param type CSV w/ one or more available options: created,driving,passenger
    * @param [options] The optional parameters
    * @returns Promise<Models.GetMyCarpoolsResponse>
    */
-  getMyCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
+  getMyCarpools(type: string, options?: msRest.RequestOptionsBase): Promise<Models.GetMyCarpoolsResponse>;
   /**
+   * @param type CSV w/ one or more available options: created,driving,passenger
    * @param callback The callback
    */
-  getMyCarpools(callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
+  getMyCarpools(type: string, callback: msRest.ServiceCallback<Models.CarpoolQueryResponseDto[]>): void;
   /**
+   * @param type CSV w/ one or more available options: created,driving,passenger
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMyCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
-  getMyCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto[]>, callback?: msRest.ServiceCallback<Models.CarpoolDto[]>): Promise<Models.GetMyCarpoolsResponse> {
+  getMyCarpools(type: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolQueryResponseDto[]>): void;
+  getMyCarpools(type: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolQueryResponseDto[]>, callback?: msRest.ServiceCallback<Models.CarpoolQueryResponseDto[]>): Promise<Models.GetMyCarpoolsResponse> {
     return this.sendOperationRequest(
       {
+        type,
         options
       },
       getMyCarpoolsOperationSpec,
@@ -681,6 +685,9 @@ const getMyProfileOperationSpec: msRest.OperationSpec = {
 const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "api/v1/users/me/carpools",
+  queryParameters: [
+    Parameters.type
+  ],
   responses: {
     200: {
       bodyMapper: {
@@ -690,7 +697,7 @@ const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
           element: {
             type: {
               name: "Composite",
-              className: "CarpoolDto"
+              className: "CarpoolQueryResponseDto"
             }
           }
         }

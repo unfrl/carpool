@@ -6,17 +6,17 @@ import {
     Req,
     UseGuards,
     Param,
+    Query,
     NotFoundException,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
-import { UserDto, CarpoolDto } from "../dtos";
+import { UserDto, CarpoolDto, CarpoolQueryDto, CarpoolQueryResponseDto } from "../dtos";
 import { UserRequest } from "../interfaces";
 import { CarpoolService, UserService } from "../services";
 import { mapUserToDto } from "../mappers";
 
 @ApiUseTags("Users")
-@ApiBearerAuth()
 @Controller("api/v1/users")
 export class UserController {
     public constructor(
@@ -30,6 +30,7 @@ export class UserController {
         description: "Gets the current user's profile",
     })
     @ApiResponse({ status: HttpStatus.OK, type: UserDto })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"))
     @Get("me")
     public getMyProfile(@Req() request: UserRequest): UserDto {
@@ -41,11 +42,15 @@ export class UserController {
         title: "Get user's carpools",
         description: "Gets a collection of carpools created by the current user",
     })
-    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })
+    @ApiResponse({ status: HttpStatus.OK, type: CarpoolQueryResponseDto, isArray: true })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools")
-    public async getMyCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
-        return await this._carpoolService.findCarpoolsByCreatedBy(request.user.id);
+    public async getMyCarpools(
+        @Req() request: UserRequest,
+        @Query() query: CarpoolQueryDto
+    ): Promise<CarpoolQueryResponseDto[]> {
+        return await this._carpoolService.queryCarpoolsByUser(request.user.id, query.type);
     }
 
     @ApiOperation({
@@ -57,7 +62,7 @@ export class UserController {
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools/driving")
     public async getMyDrivingCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
-        return await this._carpoolService.findCarpoolsByDriverUserId(request.user.id);
+        return await this._carpoolService.findCarpoolsByDriver(request.user.id);
     }
 
     @ApiOperation({

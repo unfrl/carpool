@@ -50,7 +50,11 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
     useEffect(() => {
         const load = async () => {
             try {
-                await carpoolStore.loadUserCarpools(displayName);
+                if (isCurrentUser) {
+                    await carpoolStore.loadUserCarpools();
+                } else {
+                    await carpoolStore.loadCarpools(displayName);
+                }
                 setReady(true);
             } catch (error) {
                 setNotFound(true);
@@ -62,7 +66,7 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
         return () => {
             carpoolStore.clearCarpools();
         };
-    }, [displayName]);
+    }, [displayName, isCurrentUser]);
 
     const handleSelectTab = async (selectedTab: number) => {
         if (selectedTab === tab || !isCurrentUser) {
@@ -72,19 +76,23 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
         selectTab(selectedTab);
     };
 
+    const tabToType = () => {
+        switch (tab) {
+            case 0:
+                return "created";
+            case 1:
+                return "driving";
+            default:
+                return "passenger";
+        }
+    };
+
     const getCarpools = () => {
         if (!isCurrentUser) {
             return carpoolStore.carpools;
         }
 
-        switch (tab) {
-            case 0:
-                return carpoolStore.carpools;
-            case 1:
-                return carpoolStore.userDrivingCarpools;
-            default:
-                return carpoolStore.carpools;
-        }
+        return carpoolStore.getUserCarpoolsByType(tabToType());
     };
 
     if (notFound) {
@@ -107,38 +115,38 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
             {carpoolStore.loading || !ready ? (
                 <CircularProgress className={classes.loading} />
             ) : (
-                <Grid container={true} spacing={2}>
-                    <Grid item={true} md={3} sm={12} xs={12}>
-                        <div className={classes.userContainer}>
-                            <UserProfileCard displayName={displayName} />
-                        </div>
-                    </Grid>
-                    <Grid item={true} md={9} sm={12}>
-                        <Paper className={classes.tabsContainer}>
-                            {isCurrentUser ? (
-                                <Tabs
-                                    value={tab}
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    onChange={(_e, value) => handleSelectTab(value)}
-                                    variant="fullWidth"
-                                >
-                                    <Tab label="Created" />
-                                    <Tab label="Driving" />
-                                    <Tab label="Passenger" />
-                                </Tabs>
-                            ) : (
-                                <Typography variant="h6" align="center" className={classes.header}>
-                                    Carpools
+                    <Grid container={true} spacing={2}>
+                        <Grid item={true} md={3} sm={12} xs={12}>
+                            <div className={classes.userContainer}>
+                                <UserProfileCard displayName={displayName} />
+                            </div>
+                        </Grid>
+                        <Grid item={true} md={9} sm={12}>
+                            <Paper className={classes.tabsContainer}>
+                                {isCurrentUser ? (
+                                    <Tabs
+                                        value={tab}
+                                        indicatorColor="primary"
+                                        textColor="primary"
+                                        onChange={(_e, value) => handleSelectTab(value)}
+                                        variant="fullWidth"
+                                    >
+                                        <Tab label="Created" />
+                                        <Tab label="Driving" />
+                                        <Tab label="Passenger" />
+                                    </Tabs>
+                                ) : (
+                                        <Typography variant="h6" align="center" className={classes.header}>
+                                            Carpools
                                 </Typography>
-                            )}
-                        </Paper>
-                        <Card>
-                            <CarpoolList carpools={getCarpools()} />
-                        </Card>
+                                    )}
+                            </Paper>
+                            <Card>
+                                <CarpoolList carpools={getCarpools()} />
+                            </Card>
+                        </Grid>
                     </Grid>
-                </Grid>
-            )}
+                )}
         </Fragment>
     );
 });

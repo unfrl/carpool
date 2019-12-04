@@ -1,13 +1,4 @@
-import {
-    Controller,
-    Post,
-    Body,
-    HttpStatus,
-    HttpCode,
-    Param,
-    Put,
-    UnauthorizedException,
-} from "@nestjs/common";
+import { Controller, Post, Body, HttpStatus, HttpCode, Put } from "@nestjs/common";
 import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
