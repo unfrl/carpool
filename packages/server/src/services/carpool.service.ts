@@ -22,7 +22,7 @@ export class CarpoolService {
         @InjectRepository(Passenger)
         private readonly _passengerRepository: Repository<Passenger>,
         @InjectQueue("bull") readonly mailQueue: Queue
-    ) { }
+    ) {}
 
     //#region Public
     /**

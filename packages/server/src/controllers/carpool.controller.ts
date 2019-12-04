@@ -30,7 +30,7 @@ import { CarpoolUpdateInterceptor } from "src/interceptors";
 @ApiUseTags("Carpools")
 @Controller("api/v1/carpools")
 export class CarpoolController {
-    public constructor(private readonly _carpoolService: CarpoolService) { }
+    public constructor(private readonly _carpoolService: CarpoolService) {}
 
     @ApiOperation({
         operationId: "createCarpool",

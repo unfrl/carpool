@@ -17,8 +17,10 @@ import { CarpoolGateway } from "src/gateways";
 @ApiBearerAuth()
 @Controller("api/v1/carpools/:id/drivers")
 export class DriverController {
-    public constructor(private readonly _driverService: DriverService,
-        private readonly _carpoolGateway: CarpoolGateway) { }
+    public constructor(
+        private readonly _driverService: DriverService,
+        private readonly _carpoolGateway: CarpoolGateway
+    ) {}
 
     @ApiOperation({
         operationId: "createDriver",
@@ -35,7 +37,7 @@ export class DriverController {
     ): Promise<DriverDto> {
         const driver = await this._driverService.createDriver(id, request.user.id, createDriverDto);
         await this._carpoolGateway.emitDriverAdded(driver);
-        return driver
+        return driver;
     }
 
     @ApiOperation({

@@ -22,7 +22,7 @@ export class UserController {
     public constructor(
         private readonly _carpoolService: CarpoolService,
         private readonly _userService: UserService
-    ) { }
+    ) {}
 
     @ApiOperation({
         operationId: "getMyProfile",

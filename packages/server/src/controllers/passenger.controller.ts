@@ -32,7 +32,7 @@ export class PassengerController {
         private readonly _passengerService: PassengerService,
         private readonly _driverService: DriverService,
         private readonly _carpoolGateway: CarpoolGateway
-    ) { }
+    ) {}
 
     @ApiOperation({
         operationId: "createPassenger",
@@ -54,7 +54,7 @@ export class PassengerController {
         );
 
         await this.notifyDriverUpdated(passenger.driverId);
-        await this._carpoolGateway.emitPassengerAdded(passenger)
+        await this._carpoolGateway.emitPassengerAdded(passenger);
         return passenger;
     }
 
@@ -71,10 +71,13 @@ export class PassengerController {
         @Req() request: UserRequest,
         @Param("id") id: string
     ): Promise<void> {
-        const deletedPassengerDto = await this._passengerService.deletePassenger(request.user.id, id);
+        const deletedPassengerDto = await this._passengerService.deletePassenger(
+            request.user.id,
+            id
+        );
 
         await this.notifyDriverUpdated(id);
-        await this._carpoolGateway.emitPassengerRemoved(deletedPassengerDto)
+        await this._carpoolGateway.emitPassengerRemoved(deletedPassengerDto);
     }
 
     @ApiOperation({

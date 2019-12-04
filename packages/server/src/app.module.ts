@@ -4,7 +4,7 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import * as IORedis from "ioredis";
 import { MailerModule } from "@nest-modules/mailer";
-import { BullModule } from 'nest-bull';
+import { BullModule } from "nest-bull";
 
 import { authConfig, dbConfig, redisConfig, mailModuleConfig } from "./config";
 import {
@@ -44,13 +44,17 @@ import { sendEmail, sendEmailFunctionName } from "./processors";
             useFactory: () => mailModuleConfig,
         }),
         BullModule.register({
-            name: 'bull',
+            name: "bull",
             options: {
                 redis: redisConfig,
             },
-            processors: [{
-                concurrency: 1, name: sendEmailFunctionName, callback: sendEmail
-            }],
+            processors: [
+                {
+                    concurrency: 1,
+                    name: sendEmailFunctionName,
+                    callback: sendEmail,
+                },
+            ],
         }),
     ],
     controllers: [
@@ -77,7 +81,7 @@ import { sendEmail, sendEmailFunctionName } from "./processors";
         {
             provide: OAuth2Client,
             useValue: new OAuth2Client(),
-        }
+        },
     ],
 })
-export class AppModule { }
+export class AppModule {}

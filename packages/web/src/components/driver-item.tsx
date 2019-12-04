@@ -109,16 +109,16 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             </Button>
                         </Tooltip>
                     ) : (
-                            <Button
-                                disabled={!canJoin}
-                                variant="contained"
-                                color="primary"
-                                className={classes.action}
-                                onClick={props.onJoin}
-                            >
-                                Join
+                        <Button
+                            disabled={!canJoin}
+                            variant="contained"
+                            color="primary"
+                            className={classes.action}
+                            onClick={props.onJoin}
+                        >
+                            Join
                         </Button>
-                        )}
+                    )}
                     <Tooltip title={expanded ? "Hide details" : "Show details"}>
                         <IconButton
                             size="small"
@@ -154,11 +154,14 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             {color} {type}
                         </Typography>
                     </div>
-                    {driver.passengers && driver.passengers.map(passenger => {
-                        return (
-                            <Typography key={passenger.id}>{`passenger: ${passenger.id} @ ${passenger.address}`}</Typography>
-                        )
-                    })}
+                    {driver.passengers &&
+                        driver.passengers.map(passenger => {
+                            return (
+                                <Typography
+                                    key={passenger.id}
+                                >{`passenger: ${passenger.id} @ ${passenger.address}`}</Typography>
+                            );
+                        })}
                 </div>
             </Collapse>
         </div>

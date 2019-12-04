@@ -3,7 +3,7 @@ import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/com
 import { RtmClient } from "../rtm-client";
 
 export class CarpoolMethods {
-    constructor(private readonly _rtmClient: RtmClient) { }
+    constructor(private readonly _rtmClient: RtmClient) {}
 
     //#region Actions
 
@@ -13,9 +13,12 @@ export class CarpoolMethods {
     };
 
     public joinDriverRoom = async (carpoolId: string, driverId: string): Promise<boolean> => {
-        const response = await this._rtmClient.emit(driverMessages.actions.join, { carpoolId, driverId });
+        const response = await this._rtmClient.emit(driverMessages.actions.join, {
+            carpoolId,
+            driverId,
+        });
         return response.successful;
-    }
+    };
 
     //#endregion
 

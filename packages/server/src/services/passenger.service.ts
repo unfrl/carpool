@@ -22,7 +22,7 @@ export class PassengerService {
         private readonly _userRepository: Repository<User>,
         @InjectRepository(Carpool)
         private readonly _carpoolRepository: Repository<Carpool>
-    ) { }
+    ) {}
 
     /**
      * Creates a passenger from an existing user and returns the new entity.
@@ -65,7 +65,10 @@ export class PassengerService {
      * @param driverId - ID of the driver to remove passenger from
      */
     public async deletePassenger(userId: string, driverId: string): Promise<PassengerDto> {
-        const passenger = await this._passengerRepository.findOne({ where: { userId, driverId }, relations: ["user"] });
+        const passenger = await this._passengerRepository.findOne({
+            where: { userId, driverId },
+            relations: ["user"],
+        });
         if (!passenger) {
             throw new NotFoundException("Passenger not found");
         }
@@ -88,8 +91,8 @@ export class PassengerService {
 
         if (driver.userId !== userId) {
             const carpool = await this._carpoolRepository.findOne({
-                where: { createdById: userId }
-            })
+                where: { createdById: userId },
+            });
             if (!carpool) {
                 throw new ForbiddenException("User is not the driver or creator");
             }
