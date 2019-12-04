@@ -1,5 +1,5 @@
-import { CarpoolDto, DriverDto } from "@carpool/client";
-import { carpoolMessages, driverMessages } from "@carpool/common";
+import { CarpoolDto, DriverDto, PassengerDto } from "@carpool/client";
+import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/common";
 import { RtmClient } from "../rtm-client";
 
 export class CarpoolMethods {
@@ -12,6 +12,14 @@ export class CarpoolMethods {
         return response.successful;
     };
 
+    public joinDriverRoom = async (carpoolId: string, driverId: string): Promise<boolean> => {
+        const response = await this._rtmClient.emit(driverMessages.actions.join, {
+            carpoolId,
+            driverId,
+        });
+        return response.successful;
+    };
+
     //#endregion
 
     //#region Events
@@ -20,8 +28,23 @@ export class CarpoolMethods {
         this._rtmClient.on(carpoolMessages.events.updated, cb);
     };
 
+    public onDriverAdded = (cb: (driver: DriverDto) => void) => {
+        this._rtmClient.on(driverMessages.events.added, cb);
+    };
+
     public onDriverUpdated = (cb: (driver: DriverDto) => void) => {
         this._rtmClient.on(driverMessages.events.updated, cb);
+    };
+
+    //TODO: we dont currently handle a driver leaving (driverMessages.events.removed) (should be addressed in #119)
+    //TODO: we dont currently handle a passenger being updated (passengerMessages.events.updated) (should be addressed in #101)
+
+    public onPassengerAdded = (cb: (passenger: PassengerDto) => void) => {
+        this._rtmClient.on(passengerMessages.events.added, cb);
+    };
+
+    public onPassengerRemoved = (cb: (passenger: PassengerDto) => void) => {
+        this._rtmClient.on(passengerMessages.events.removed, cb);
     };
 
     //#endregion

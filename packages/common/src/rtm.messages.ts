@@ -8,6 +8,9 @@ export const carpoolMessages = {
 };
 
 export const driverMessages = {
+    actions: {
+        join: "driver.join",
+    },
     events: {
         added: "driver.added",
         updated: "driver.updated",

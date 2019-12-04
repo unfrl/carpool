@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Passenger, Driver, User } from "../entities";
+import { Passenger, Driver, User, Carpool } from "../entities";
 import { UpsertPassengerDto, PassengerDto } from "../dtos";
 import { mapPassengerToDto } from "../mappers";
 
@@ -19,7 +19,9 @@ export class PassengerService {
         @InjectRepository(Driver)
         private readonly _driverRepository: Repository<Driver>,
         @InjectRepository(User)
-        private readonly _userRepository: Repository<User>
+        private readonly _userRepository: Repository<User>,
+        @InjectRepository(Carpool)
+        private readonly _carpoolRepository: Repository<Carpool>
     ) {}
 
     /**
@@ -62,13 +64,18 @@ export class PassengerService {
      * @param userId - ID of the user to remove as passenger
      * @param driverId - ID of the driver to remove passenger from
      */
-    public async deletePassenger(userId: string, driverId: string): Promise<void> {
-        const passenger = await this._passengerRepository.findOne({ where: { userId, driverId } });
+    public async deletePassenger(userId: string, driverId: string): Promise<PassengerDto> {
+        const passenger = await this._passengerRepository.findOne({
+            where: { userId, driverId },
+            relations: ["user"],
+        });
         if (!passenger) {
             throw new NotFoundException("Passenger not found");
         }
-
+        const id = passenger.id;
         await this._passengerRepository.remove(passenger);
+        passenger.id = id;
+        return mapPassengerToDto(passenger);
     }
 
     /**
@@ -83,7 +90,12 @@ export class PassengerService {
         }
 
         if (driver.userId !== userId) {
-            throw new ForbiddenException("User is not the driver");
+            const carpool = await this._carpoolRepository.findOne({
+                where: { createdById: userId },
+            });
+            if (!carpool) {
+                throw new ForbiddenException("User is not the driver or creator");
+            }
         }
 
         const passengers = await this._passengerRepository.find({

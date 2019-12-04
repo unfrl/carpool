@@ -2,9 +2,9 @@ import { SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/web
 import { Socket, Server } from "socket.io";
 import * as jwt from "jsonwebtoken";
 
-import { carpoolMessages, driverMessages } from "@carpool/common";
+import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/common";
 import { CarpoolService, DriverService } from "../services";
-import { DriverDto, CarpoolDto } from "../dtos";
+import { DriverDto, CarpoolDto, PassengerDto } from "../dtos";
 import { JwtPayload } from "../interfaces";
 import { authConfig } from "../config";
 
@@ -37,6 +37,60 @@ export class CarpoolGateway {
         private readonly _carpoolService: CarpoolService,
         private readonly _driverService: DriverService
     ) {}
+
+    /**
+     * Client has requested to join the carpool as a driver
+     */
+    @SubscribeMessage(driverMessages.actions.join)
+    public async handleJoinCarpoolAsDriver(
+        socket: Socket,
+        data: { carpoolId: string; accessToken?: string }
+    ) {
+        const { carpoolId, accessToken } = data;
+
+        if (!accessToken) {
+            return { successful: false, error: `Unauthorized - No token provided` };
+        }
+
+        let carpool: CarpoolDto | undefined;
+        try {
+            carpool = await this._carpoolService.findCarpoolById(carpoolId);
+        } catch (error) {
+            console.log("Failed to find carpool", error);
+            return { successful: false, error: `Carpool not found for ID: ${carpoolId}` };
+        }
+
+        try {
+            const { sub } = jwt.verify(accessToken, authConfig.secret) as JwtPayload;
+
+            if (carpool.user.id === sub) {
+                return {
+                    successful: true,
+                    error: `Request to join driver room ignored - creators dont need to join this room`,
+                };
+            }
+
+            let driverId: string | undefined;
+            try {
+                driverId = await this._driverService.findDriverIdByUserCarpoolId(sub, carpoolId);
+            } catch (error) {
+                console.log("Failed to find driverId", error);
+                return {
+                    successful: false,
+                    error: `No driver found on Carpool ${carpoolId} with the corresponding userId`,
+                };
+            }
+
+            // driver room receives updates to their passengers
+            socket.join(getCarpoolDriverRoom(carpoolId, driverId));
+            return {
+                successful: true,
+                data: "Successfully joined!",
+            };
+        } catch (error) {
+            return { successful: false, error: `Unable to decode JWT` };
+        }
+    }
 
     /**
      * Client has requested to join a carpool to listen for updates.
@@ -141,8 +195,52 @@ export class CarpoolGateway {
             .emit(driverMessages.events.removed, driverDto);
     }
 
-    // TODO: need event + DTO wiring
-    public emitPassengerAdded() {}
-    public emitPassengerUpdated() {}
-    public emitPassengerRemoved() {}
+    /**
+     * Emit passenger added event to the carpool creator room and the passenger's driver's room
+     * @param passengerDto The added passenger to send
+     */
+    public async emitPassengerAdded(passengerDto: PassengerDto) {
+        let carpoolId = await this._carpoolService.findCarpoolIdByDriverId(passengerDto.driverId);
+
+        this._wsServer
+            .to(getCarpoolDriverRoom(carpoolId, passengerDto.driverId))
+            .emit(passengerMessages.events.added, passengerDto);
+
+        this._wsServer
+            .to(getCarpoolCreatorRoom(carpoolId))
+            .emit(passengerMessages.events.added, passengerDto);
+    }
+
+    /**
+     * Emit passenger update event to the carpool creator room and the passenger's driver's room
+     * @param passengerDto The added passenger to send
+     */
+    public async emitPassengerUpdated(passengerDto: PassengerDto) {
+        let carpoolId = await this._carpoolService.findCarpoolIdByDriverId(passengerDto.driverId);
+
+        this._wsServer
+            .to(getCarpoolDriverRoom(carpoolId, passengerDto.driverId))
+            .emit(passengerMessages.events.updated, passengerDto);
+
+        this._wsServer
+            .to(getCarpoolCreatorRoom(carpoolId))
+            .emit(passengerMessages.events.updated, passengerDto);
+    }
+
+    /**
+     * Emit passenger removed event to the carpool creator room and the passenger's driver's room
+     * @param passengerId The removed passenger Id to send
+     * @param driverId The removed passenger's driver's Id
+     */
+    public async emitPassengerRemoved(passengerDto: PassengerDto) {
+        let carpoolId = await this._carpoolService.findCarpoolIdByDriverId(passengerDto.driverId);
+
+        this._wsServer
+            .to(getCarpoolDriverRoom(carpoolId, passengerDto.driverId))
+            .emit(passengerMessages.events.removed, passengerDto);
+
+        this._wsServer
+            .to(getCarpoolCreatorRoom(carpoolId))
+            .emit(passengerMessages.events.removed, passengerDto);
+    }
 }

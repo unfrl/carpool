@@ -396,6 +396,52 @@ export const UpsertDriverDto: msRest.CompositeMapper = {
   }
 };
 
+export const PassengerDto: msRest.CompositeMapper = {
+  serializedName: "PassengerDto",
+  type: {
+    name: "Composite",
+    className: "PassengerDto",
+    modelProperties: {
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      phoneNumber: {
+        required: true,
+        serializedName: "phoneNumber",
+        type: {
+          name: "String"
+        }
+      },
+      address: {
+        required: true,
+        serializedName: "address",
+        type: {
+          name: "String"
+        }
+      },
+      user: {
+        required: true,
+        serializedName: "user",
+        type: {
+          name: "Composite",
+          className: "UserDto"
+        }
+      },
+      driverId: {
+        required: true,
+        serializedName: "driverId",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const DriverDto: msRest.CompositeMapper = {
   serializedName: "DriverDto",
   type: {
@@ -450,6 +496,19 @@ export const DriverDto: msRest.CompositeMapper = {
             }
           }
         }
+      },
+      passengers: {
+        required: true,
+        serializedName: "passengers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PassengerDto"
+            }
+          }
+        }
       }
     }
   }
@@ -470,52 +529,6 @@ export const UpsertPassengerDto: msRest.CompositeMapper = {
       address: {
         required: true,
         serializedName: "address",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const PassengerDto: msRest.CompositeMapper = {
-  serializedName: "PassengerDto",
-  type: {
-    name: "Composite",
-    className: "PassengerDto",
-    modelProperties: {
-      id: {
-        required: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      phoneNumber: {
-        required: true,
-        serializedName: "phoneNumber",
-        type: {
-          name: "String"
-        }
-      },
-      address: {
-        required: true,
-        serializedName: "address",
-        type: {
-          name: "String"
-        }
-      },
-      user: {
-        required: true,
-        serializedName: "user",
-        type: {
-          name: "Composite",
-          className: "UserDto"
-        }
-      },
-      driverId: {
-        required: true,
-        serializedName: "driverId",
         type: {
           name: "String"
         }

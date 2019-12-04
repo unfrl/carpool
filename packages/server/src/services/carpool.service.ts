@@ -1,13 +1,12 @@
 import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { InjectQueue } from "nest-bull";
-import { Queue } from "bull";
-
 import { appConfig } from "@carpool/common";
 import { Carpool, User, Driver, Passenger } from "../entities";
 import { UpsertCarpoolDto, CarpoolDto, CarpoolQueryResponseDto, CarpoolQueryType } from "../dtos";
 import { mapCarpoolToDto } from "../mappers";
+import { Queue } from "bull";
+import { InjectQueue } from "nest-bull";
 import { sendEmailFunctionName } from "../processors";
 
 @Injectable()
@@ -143,6 +142,14 @@ export class CarpoolService {
         return drivers.map(driver => mapCarpoolToDto(driver.carpool));
     }
 
+    /**
+     * Finds the carpool that the givern driver is driving in
+     * @param driverId - ID of the driver who is in the carpool
+     */
+    public async findCarpoolIdByDriverId(driverId: string): Promise<string> {
+        const driver = await this._driverRepository.findOneOrFail(driverId);
+        return driver.carpoolId;
+    }
     /**
      * Finds a list of carpools that the user is a passenger for.
      * @param userId - ID of the user who is a passenger

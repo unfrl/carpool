@@ -54,14 +54,14 @@ export class PassengerController {
         );
 
         await this.notifyDriverUpdated(passenger.driverId);
-
+        await this._carpoolGateway.emitPassengerAdded(passenger);
         return passenger;
     }
 
     @ApiOperation({
         operationId: "deletePassenger",
         title: "Delete Passenger",
-        description: "Deletes a passenger based off the current user ",
+        description: "Deletes a passenger based off the current user",
     })
     @ApiResponse({ status: HttpStatus.NO_CONTENT })
     @UseGuards(AuthGuard("jwt"))
@@ -71,9 +71,13 @@ export class PassengerController {
         @Req() request: UserRequest,
         @Param("id") id: string
     ): Promise<void> {
-        await this._passengerService.deletePassenger(request.user.id, id);
+        const deletedPassengerDto = await this._passengerService.deletePassenger(
+            request.user.id,
+            id
+        );
 
         await this.notifyDriverUpdated(id);
+        await this._carpoolGateway.emitPassengerRemoved(deletedPassengerDto);
     }
 
     @ApiOperation({

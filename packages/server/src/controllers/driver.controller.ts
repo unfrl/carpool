@@ -11,12 +11,16 @@ import { AuthGuard } from "@nestjs/passport";
 import { UserRequest } from "../interfaces";
 import { UpsertDriverDto, DriverDto } from "../dtos";
 import { DriverService } from "../services";
+import { CarpoolGateway } from "src/gateways";
 
 @ApiUseTags("Drivers")
 @ApiBearerAuth()
 @Controller("api/v1/carpools/:id/drivers")
 export class DriverController {
-    public constructor(private readonly _driverService: DriverService) {}
+    public constructor(
+        private readonly _driverService: DriverService,
+        private readonly _carpoolGateway: CarpoolGateway
+    ) {}
 
     @ApiOperation({
         operationId: "createDriver",
@@ -31,7 +35,9 @@ export class DriverController {
         @Param("id") id: string,
         @Body() createDriverDto: UpsertDriverDto
     ): Promise<DriverDto> {
-        return await this._driverService.createDriver(id, request.user.id, createDriverDto);
+        const driver = await this._driverService.createDriver(id, request.user.id, createDriverDto);
+        await this._carpoolGateway.emitDriverAdded(driver);
+        return driver;
     }
 
     @ApiOperation({

@@ -128,6 +128,17 @@ export interface UpsertDriverDto {
 }
 
 /**
+ * An interface representing PassengerDto.
+ */
+export interface PassengerDto {
+  id: string;
+  phoneNumber: string;
+  address: string;
+  user: UserDto;
+  driverId: string;
+}
+
+/**
  * An interface representing DriverDto.
  */
 export interface DriverDto {
@@ -137,6 +148,7 @@ export interface DriverDto {
   user: UserDto;
   seatsRemaining: number;
   passengerUserIds: string[];
+  passengers: PassengerDto[];
 }
 
 /**
@@ -145,17 +157,6 @@ export interface DriverDto {
 export interface UpsertPassengerDto {
   phoneNumber?: string;
   address: string;
-}
-
-/**
- * An interface representing PassengerDto.
- */
-export interface PassengerDto {
-  id: string;
-  phoneNumber: string;
-  address: string;
-  user: UserDto;
-  driverId: string;
 }
 
 /**
