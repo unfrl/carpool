@@ -13,12 +13,6 @@ export class CarpoolStore {
     @observable
     public carpools: CarpoolDto[] = [];
 
-    /**
-     * Collection of carpools that the current user (is authenticated) is driving for.
-     */
-    @observable
-    public userDrivingCarpools: CarpoolDto[] = [];
-
     @observable
     public selectedCarpoolId: string = "";
 
@@ -203,11 +197,6 @@ export class CarpoolStore {
         const index = this.carpools.findIndex(c => c.id === carpool.id);
         if (index > -1) {
             this.carpools[index] = carpool;
-        }
-
-        const drivingIndex = this.carpools.findIndex(c => c.id === carpool.id);
-        if (drivingIndex > -1) {
-            this.userDrivingCarpools[drivingIndex] = carpool;
         }
     };
 
