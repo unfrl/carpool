@@ -291,26 +291,6 @@ export type GetMyCarpoolsResponse = Array<CarpoolQueryResponseDto> & {
 };
 
 /**
- * Contains response data for the getMyDrivingCarpools operation.
- */
-export type GetMyDrivingCarpoolsResponse = Array<CarpoolDto> & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: CarpoolDto[];
-    };
-};
-
-/**
  * Contains response data for the getUserCarpools operation.
  */
 export type GetUserCarpoolsResponse = Array<CarpoolDto> & {

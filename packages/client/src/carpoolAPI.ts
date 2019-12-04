@@ -221,31 +221,6 @@ class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
-   * Gets a collection of carpools that the current user is a driver of
-   * @summary Get user's carpools they're driving for
-   * @param [options] The optional parameters
-   * @returns Promise<Models.GetMyDrivingCarpoolsResponse>
-   */
-  getMyDrivingCarpools(options?: msRest.RequestOptionsBase): Promise<Models.GetMyDrivingCarpoolsResponse>;
-  /**
-   * @param callback The callback
-   */
-  getMyDrivingCarpools(callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  getMyDrivingCarpools(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto[]>): void;
-  getMyDrivingCarpools(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto[]>, callback?: msRest.ServiceCallback<Models.CarpoolDto[]>): Promise<Models.GetMyDrivingCarpoolsResponse> {
-    return this.sendOperationRequest(
-      {
-        options
-      },
-      getMyDrivingCarpoolsOperationSpec,
-      callback) as Promise<Models.GetMyDrivingCarpoolsResponse>;
-  }
-
-  /**
    * Get a user's carpools by their display name
    * @summary Get a user's carpools
    * @param displayName
@@ -698,29 +673,6 @@ const getMyCarpoolsOperationSpec: msRest.OperationSpec = {
             type: {
               name: "Composite",
               className: "CarpoolQueryResponseDto"
-            }
-          }
-        }
-      }
-    },
-    default: {}
-  },
-  serializer
-};
-
-const getMyDrivingCarpoolsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "api/v1/users/me/carpools/driving",
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "CarpoolDto"
             }
           }
         }
