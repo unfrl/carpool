@@ -33,6 +33,9 @@ export class CarpoolMethods {
         this._rtmClient.on(driverMessages.events.updated, cb);
     };
 
+    //TODO: we dont currently handle a driver leaving (driverMessages.events.removed) (should be addressed in #119)
+    //TODO: we dont currently handle a passenger being updated (passengerMessages.events.updated) (should be addressed in #101)
+
     public onPassengerAdded = (cb: (passenger: PassengerDto) => void) => {
         this._rtmClient.on(passengerMessages.events.added, cb);
     };
