@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Passenger, Driver, User } from "../entities";
+import { Passenger, Driver, User, Carpool } from "../entities";
 import { UpsertPassengerDto, PassengerDto } from "../dtos";
 import { mapPassengerToDto } from "../mappers";
 
@@ -19,7 +19,9 @@ export class PassengerService {
         @InjectRepository(Driver)
         private readonly _driverRepository: Repository<Driver>,
         @InjectRepository(User)
-        private readonly _userRepository: Repository<User>
+        private readonly _userRepository: Repository<User>,
+        @InjectRepository(Carpool)
+        private readonly _carpoolRepository: Repository<Carpool>
     ) { }
 
     /**
@@ -85,7 +87,12 @@ export class PassengerService {
         }
 
         if (driver.userId !== userId) {
-            throw new ForbiddenException("User is not the driver");
+            const carpool = await this._carpoolRepository.findOne({
+                where: { createdById: userId }
+            })
+            if (!carpool) {
+                throw new ForbiddenException("User is not the driver or creator");
+            }
         }
 
         const passengers = await this._passengerRepository.find({

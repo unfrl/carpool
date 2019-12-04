@@ -53,7 +53,7 @@ export class PassengerController {
             createPassengerDto
         );
 
-        // await this.notifyDriverUpdated(passenger.driverId);
+        await this.notifyDriverUpdated(passenger.driverId);
         await this._carpoolGateway.emitPassengerAdded(passenger)
         return passenger;
     }
@@ -73,7 +73,7 @@ export class PassengerController {
     ): Promise<void> {
         const deletedPassengerDto = await this._passengerService.deletePassenger(request.user.id, id);
 
-        // await this.notifyDriverUpdated(id);
+        await this.notifyDriverUpdated(id);
         await this._carpoolGateway.emitPassengerRemoved(deletedPassengerDto)
     }
 

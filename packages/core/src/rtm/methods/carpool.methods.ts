@@ -12,6 +12,11 @@ export class CarpoolMethods {
         return response.successful;
     };
 
+    public joinDriverRoom = async (carpoolId: string, driverId: string): Promise<boolean> => {
+        const response = await this._rtmClient.emit(driverMessages.actions.join, { carpoolId, driverId });
+        return response.successful;
+    }
+
     //#endregion
 
     //#region Events

@@ -39,6 +39,51 @@ export class CarpoolGateway {
     ) { }
 
     /**
+     * Client has requested to join the carpool as a driver
+     */
+    @SubscribeMessage(driverMessages.actions.join)
+    public async handleJoinCarpoolAsDriver(
+        socket: Socket,
+        data: { carpoolId: string, accessToken?: string }
+    ) {
+        const { carpoolId, accessToken } = data;
+
+        try {
+            await this._carpoolService.findCarpoolById(carpoolId);
+        } catch (error) {
+            console.log("Failed to find carpool", error);
+            return { successful: false, error: `Carpool not found for ID: ${carpoolId}` };
+        }
+
+        if (!accessToken) {
+            return { successful: false, error: `Unauthorized - No token provided` };
+        }
+
+        try {
+            const { sub } = jwt.verify(accessToken, authConfig.secret) as JwtPayload;
+
+            let driverId: string | undefined;
+            try {
+                driverId = await this._driverService.findDriverIdByUserCarpoolId(sub, carpoolId);
+            } catch (error) {
+                console.log("Failed to find driverId", error);
+                return { successful: false, error: `No driver found on Carpool ${carpoolId} with the corresponding userId` };
+            }
+
+            // driver room receives updates to their passengers
+            socket.join(getCarpoolDriverRoom(carpoolId, driverId));
+            return {
+                successful: true,
+                data: "Successfully joined!",
+            }
+
+        } catch (error) {
+            return { successful: false, error: `Unable to decode JWT` };
+        }
+    }
+
+
+    /**
      * Client has requested to join a carpool to listen for updates.
      */
     @SubscribeMessage(carpoolMessages.actions.join)

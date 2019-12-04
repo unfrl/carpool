@@ -26,7 +26,7 @@ export class DriverStore {
         );
 
         this._rootStore.rtmClient.carpool.onDriverUpdated(this.setUpdatedDriver);
-        this._rootStore.rtmClient.carpool.onDriverAdded((driver) => { this.addDriver(driver); });
+        this._rootStore.rtmClient.carpool.onDriverAdded(this.addDriver);
         this._rootStore.rtmClient.carpool.onPassengerAdded(this.addPassenger)
         this._rootStore.rtmClient.carpool.onPassengerRemoved(this.removePassenger);
     }
@@ -98,10 +98,17 @@ export class DriverStore {
 
             const drivers = await this._rootStore.apiClient.getDrivers(carpoolId);
             if (this._rootStore.authStore.user) {
-                let userDriverIndex = drivers.findIndex((driver) => driver.user.id == this._rootStore.authStore.user!.id);
+                if (this._rootStore.carpoolStore.selectedCarpool?.user.id === this._rootStore.authStore.user!.id) { //The current user is the creator of this carpool, load ALL passenger info
+                    for (const driver of drivers) {
+                        driver.passengers = await this._rootStore.apiClient.getPassengers(driver.id);
+                    }
+                }
+                else {
+                    let userDriverIndex = drivers.findIndex((driver) => driver.user.id == this._rootStore.authStore.user!.id);
 
-                if (userDriverIndex > -1) { //The current user is a driver, so we should load their passenger info as well
-                    drivers[userDriverIndex].passengers = await this._rootStore.apiClient.getPassengers(drivers[userDriverIndex].id);
+                    if (userDriverIndex > -1) { //The current user is a driver, so we should load their passenger info as well
+                        drivers[userDriverIndex].passengers = await this._rootStore.apiClient.getPassengers(drivers[userDriverIndex].id);
+                    }
                 }
             }
 
@@ -118,6 +125,17 @@ export class DriverStore {
     @action
     private addDriver = (driver: DriverDto) => {
         this.drivers.push(driver);
+        if (this._rootStore.authStore.user?.id === driver.user.id) {
+            this.joinAsDriver(driver.carpoolId, driver.id); //Join 'your' driver room to listen for updates to passengers
+        }
+    };
+
+    /**
+     * Joins the driver room to subscribe for real-time updates.
+     */
+    private joinAsDriver = async (carpoolId: string, driverId: string) => {
+        this._logger.info("Joining driver room:", carpoolId);
+        await this._rootStore.rtmClient.carpool.joinDriverRoom(carpoolId, driverId);
     };
 
     @action
@@ -125,15 +143,18 @@ export class DriverStore {
 
         const index = this.drivers.findIndex(d => d.id === passenger.driverId);
         if (index > -1) {
-            this.drivers[index].passengers.push(passenger);
-            console.log(this.drivers[index]);
+            if (this.drivers[index].passengers) {
+                this.drivers[index].passengers.push(passenger);
+            }
+            else {
+                this.drivers[index].passengers = [passenger];
+            }
         }
 
     }
 
     @action
     private removePassenger = (passenger: PassengerDto) => {
-        console.log(this.drivers[0].passengerUserIds.length);
 
         this.drivers.forEach(driver => {
             if (driver.passengerUserIds) {
@@ -153,7 +174,6 @@ export class DriverStore {
             }
 
         });
-        console.log(this.drivers[0].passengerUserIds.length);
     }
 
     @action
@@ -166,6 +186,7 @@ export class DriverStore {
         const index = this.drivers.findIndex(d => d.id === driver.id);
         if (index > -1) {
             driver.passengers = this.drivers[index].passengers; //The passengers are not updated here
+            driver.passengerUserIds = this.drivers[index].passengerUserIds //The passengers are not updated here
             this.drivers[index] = driver;
         }
     };

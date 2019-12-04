@@ -154,7 +154,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             {color} {type}
                         </Typography>
                     </div>
-                    {currentUserIsDriver && driver.passengers && driver.passengers.map(passenger => {
+                    {driver.passengers && driver.passengers.map(passenger => {
                         return (
                             <Typography key={passenger.id}>{`passenger: ${passenger.id} @ ${passenger.address}`}</Typography>
                         )
