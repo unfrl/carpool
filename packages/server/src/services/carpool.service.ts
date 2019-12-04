@@ -1,15 +1,14 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-
-import { Carpool, User, Driver, Passenger } from "../entities";
-import { UpsertCarpoolDto, CarpoolDto } from "../dtos";
-import { mapCarpoolToDto } from "../mappers";
-import { MailerService } from "@nest-modules/mailer";
-import { Queue } from "bull";
 import { InjectQueue } from "nest-bull";
-import { appConfig } from "@carpool/common"
-import { sendEmailFunctionName } from "src/processors";
+import { Queue } from "bull";
+
+import { appConfig } from "@carpool/common";
+import { Carpool, User, Driver, Passenger } from "../entities";
+import { UpsertCarpoolDto, CarpoolDto, CarpoolQueryResponseDto, CarpoolQueryType } from "../dtos";
+import { mapCarpoolToDto } from "../mappers";
+import { sendEmailFunctionName } from "../processors";
 
 @Injectable()
 export class CarpoolService {
@@ -18,9 +17,12 @@ export class CarpoolService {
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
         private readonly _userRepository: Repository<User>,
-        private readonly _mailerService: MailerService,
-        @InjectQueue('bull') readonly mailQueue: Queue,
-    ) { }
+        @InjectRepository(Driver)
+        private readonly _driverRepository: Repository<Driver>,
+        @InjectRepository(Passenger)
+        private readonly _passengerRepository: Repository<Passenger>,
+        @InjectQueue("bull") readonly mailQueue: Queue
+    ) {}
 
     //#region Public
     /**
@@ -82,6 +84,41 @@ export class CarpoolService {
     }
 
     /**
+     * Query on one or more types (specified in the CarpoolQueryDto) for the user's carpools.
+     * @param userId - ID of the user to query on behalf of
+     * @param query - The query to perform
+     */
+    public async queryCarpoolsByUser(
+        userId: string,
+        type: string
+    ): Promise<CarpoolQueryResponseDto[]> {
+        const processQueryType = (type: CarpoolQueryType): Promise<CarpoolDto[]> => {
+            switch (type) {
+                case CarpoolQueryType.created:
+                    return this.findCarpoolsByCreatedBy(userId);
+                case CarpoolQueryType.driving:
+                    return this.findCarpoolsByDriver(userId);
+                case CarpoolQueryType.passenger:
+                    return this.findCarpoolsByPassenger(userId);
+                default:
+                    throw new BadRequestException("Unrecognized carpool query type");
+            }
+        };
+
+        const response: CarpoolQueryResponseDto[] = [];
+
+        // TODO: wasn't able to get nest to parse as an array, only as comma delimited string, so it needs to be split and converted to CarpoolQueryType
+        for (const strType of type.split(",")) {
+            const queryType = strType as CarpoolQueryType;
+            const carpools = await processQueryType(queryType);
+
+            response.push(...carpools.map(carpool => ({ type: queryType, carpool })));
+        }
+
+        return response;
+    }
+
+    /**
      * Finds a list of carpools by the user who created them.
      * @param createdById - ID of the user who created the carpools
      */
@@ -91,6 +128,32 @@ export class CarpoolService {
             relations: ["createdBy"],
         });
         return carpools.map(carpool => mapCarpoolToDto(carpool));
+    }
+
+    /**
+     * Finds a list of carpools that the user is driving for.
+     * @param userId - ID of the user who is driving
+     */
+    public async findCarpoolsByDriver(userId: string): Promise<CarpoolDto[]> {
+        const drivers = await this._driverRepository.find({
+            where: { userId },
+            relations: ["carpool", "carpool.createdBy"],
+        });
+
+        return drivers.map(driver => mapCarpoolToDto(driver.carpool));
+    }
+
+    /**
+     * Finds a list of carpools that the user is a passenger for.
+     * @param userId - ID of the user who is a passenger
+     */
+    public async findCarpoolsByPassenger(userId: string): Promise<CarpoolDto[]> {
+        const passengers = await this._passengerRepository.find({
+            where: { userId },
+            relations: ["driver", "driver.carpool", "driver.carpool.createdBy"],
+        });
+
+        return passengers.map(passenger => mapCarpoolToDto(passenger.driver.carpool));
     }
 
     /**
@@ -113,7 +176,10 @@ export class CarpoolService {
 
         const { destination, carpoolName, dateTime, description } = carpoolDto;
         let cleanDateTime = new Date(dateTime);
-        if (destination !== carpool.destination || cleanDateTime.getTime() !== carpool.dateTime.getTime()) {
+        if (
+            destination !== carpool.destination ||
+            cleanDateTime.getTime() !== carpool.dateTime.getTime()
+        ) {
             await this.notifyParticipantsOfCarpoolUpdate(carpool, user);
         }
 
@@ -170,14 +236,16 @@ export class CarpoolService {
 
         let carpoolUrl = `${appConfig.scheme}://${appConfig.host}/${carpool.urlId}/${carpool.name}`;
 
-        await Promise.all(participantEmails.map((email: string) => {
-            return this.mailQueue.add(sendEmailFunctionName, {
-                to: email,
-                from: "noreply@carpool+unfrl.com",
-                subject: "A carpool you are participating in has been updated!",
-                html: `<h1>Hello!</h1>\n<p>A carpool you are participating in has been updated, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see the updates</p>`,
-            });
-        }))
+        await Promise.all(
+            participantEmails.map((email: string) => {
+                return this.mailQueue.add(sendEmailFunctionName, {
+                    to: email,
+                    from: "noreply@carpool+unfrl.com",
+                    subject: "A carpool you are participating in has been updated!",
+                    html: `<h1>Hello!</h1>\n<p>A carpool you are participating in has been updated, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see the updates</p>`,
+                });
+            })
+        );
     }
 
     //#endregion

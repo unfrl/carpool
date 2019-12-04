@@ -22,7 +22,7 @@ export const Content: FunctionComponent<IContentProps> = props => {
     const classes = useStyles();
 
     return (
-        <Container maxWidth="md" className={classes.container}>
+        <Container maxWidth="lg" className={classes.container}>
             <div className={classes.toolbar} />
             {props.children}
         </Container>

@@ -7,6 +7,7 @@ export * from "./driver-form";
 export * from "./driver-list";
 export * from "./user-dialog";
 export * from "./user-menu";
+export * from "./user-profile-card";
 export * from "./carpool-form";
 export * from "./carpool-details";
 export * from "./carpool-list";

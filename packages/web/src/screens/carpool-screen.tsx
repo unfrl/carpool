@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Redirect } from "react-router";
-import { CircularProgress, Typography, makeStyles } from "@material-ui/core";
+import { CircularProgress, Typography, Container, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 
 import {
@@ -135,7 +135,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const { name, destination, dateTime } = selectedCarpool;
 
     return (
-        <div>
+        <Container maxWidth="md">
             <DocumentHead
                 screenTitle={name}
                 description={`${name} ${destination} ${new Date(dateTime).toLocaleString()}`}
@@ -200,6 +200,6 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                     </div>
                 </AppDialog>
             )}
-        </div>
+        </Container>
     );
 });

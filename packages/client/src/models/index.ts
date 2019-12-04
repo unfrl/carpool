@@ -88,6 +88,17 @@ export interface CarpoolDto {
 }
 
 /**
+ * An interface representing CarpoolQueryResponseDto.
+ */
+export interface CarpoolQueryResponseDto {
+  carpool: CarpoolDto;
+  /**
+   * Possible values include: 'created', 'driving', 'passenger'
+   */
+  type: Type;
+}
+
+/**
  * An interface representing UpsertCarpoolDto.
  */
 export interface UpsertCarpoolDto {
@@ -106,7 +117,7 @@ export interface Car {
   /**
    * Possible values include: 'sedan', 'truck', 'suv', 'van'
    */
-  type: Type;
+  type: Type1;
 }
 
 /**
@@ -164,11 +175,19 @@ export interface CarpoolAPIOptions extends ServiceClientOptions {
 
 /**
  * Defines values for Type.
+ * Possible values include: 'created', 'driving', 'passenger'
+ * @readonly
+ * @enum {string}
+ */
+export type Type = 'created' | 'driving' | 'passenger';
+
+/**
+ * Defines values for Type1.
  * Possible values include: 'sedan', 'truck', 'suv', 'van'
  * @readonly
  * @enum {string}
  */
-export type Type = 'sedan' | 'truck' | 'suv' | 'van';
+export type Type1 = 'sedan' | 'truck' | 'suv' | 'van';
 
 /**
  * Contains response data for the signIn operation.
@@ -253,7 +272,7 @@ export type GetMyProfileResponse = UserDto & {
 /**
  * Contains response data for the getMyCarpools operation.
  */
-export type GetMyCarpoolsResponse = Array<CarpoolDto> & {
+export type GetMyCarpoolsResponse = Array<CarpoolQueryResponseDto> & {
   /**
    * The underlying HTTP response.
    */
@@ -266,7 +285,7 @@ export type GetMyCarpoolsResponse = Array<CarpoolDto> & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CarpoolDto[];
+      parsedBody: CarpoolQueryResponseDto[];
     };
 };
 

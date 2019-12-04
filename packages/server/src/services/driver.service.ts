@@ -56,6 +56,22 @@ export class DriverService {
     }
 
     /**
+     * Finds the driver ID for a user in a carpool, returning undefined if not found.
+     * @param userId - ID of the user to check for as a driver
+     * @param carpoolId - ID of the carpool to find driver for
+     */
+    public async findDriverIdByUserCarpoolId(
+        userId: string,
+        carpoolId: string
+    ): Promise<string | undefined> {
+        const driver = await this._driverRepository.findOne({
+            where: { userId, carpoolId },
+        });
+
+        return driver?.id;
+    }
+
+    /**
      * Finds a list of drivers signed up for a carpool.
      * @param carpoolId - ID of the carpool to find drivers for
      */

@@ -3,6 +3,7 @@ export * from "./sign-up.dto";
 export * from "./sign-in.dto";
 export * from "./user.dto";
 export * from "./carpool.dto";
+export * from "./carpool-query.dto";
 export * from "./upsert-carpool.dto";
 export * from "./upsert-driver.dto";
 export * from "./upsert-passenger.dto";
