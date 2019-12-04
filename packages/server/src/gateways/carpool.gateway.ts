@@ -52,8 +52,9 @@ export class CarpoolGateway {
             return { successful: false, error: `Unauthorized - No token provided` };
         }
 
+        let carpool: CarpoolDto | undefined;
         try {
-            await this._carpoolService.findCarpoolById(carpoolId);
+            carpool = await this._carpoolService.findCarpoolById(carpoolId);
         } catch (error) {
             console.log("Failed to find carpool", error);
             return { successful: false, error: `Carpool not found for ID: ${carpoolId}` };
@@ -61,6 +62,13 @@ export class CarpoolGateway {
 
         try {
             const { sub } = jwt.verify(accessToken, authConfig.secret) as JwtPayload;
+
+            if (carpool.user.id === sub) {
+                return {
+                    successful: true,
+                    error: `Request to join driver room ignored - creators dont need to join this room`,
+                };
+            }
 
             let driverId: string | undefined;
             try {

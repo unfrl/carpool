@@ -5,7 +5,6 @@ import { appConfig } from "@carpool/common";
 import { Carpool, User, Driver, Passenger } from "../entities";
 import { UpsertCarpoolDto, CarpoolDto, CarpoolQueryResponseDto, CarpoolQueryType } from "../dtos";
 import { mapCarpoolToDto } from "../mappers";
-import { MailerService } from "@nest-modules/mailer";
 import { Queue } from "bull";
 import { InjectQueue } from "nest-bull";
 import { sendEmailFunctionName } from "../processors";
@@ -148,7 +147,7 @@ export class CarpoolService {
      * @param driverId - ID of the driver who is in the carpool
      */
     public async findCarpoolIdByDriverId(driverId: string): Promise<string> {
-        const driver = await this._driverRepository.findOne(driverId);
+        const driver = await this._driverRepository.findOneOrFail(driverId);
         return driver.carpoolId;
     }
     /**
