@@ -53,18 +53,6 @@ export class UserController {
     }
 
     @ApiOperation({
-        operationId: "getMyDrivingCarpools",
-        title: "Get user's carpools they're driving for",
-        description: "Gets a collection of carpools that the current user is a driver of",
-    })
-    @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })
-    @UseGuards(AuthGuard("jwt"))
-    @Get("me/carpools/driving")
-    public async getMyDrivingCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
-        return await this._carpoolService.findCarpoolsByDriver(request.user.id);
-    }
-
-    @ApiOperation({
         operationId: "getUserCarpools",
         title: "Get a user's carpools",
         description: "Get a user's carpools by their display name",
