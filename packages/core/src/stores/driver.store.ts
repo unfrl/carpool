@@ -49,7 +49,7 @@ export class DriverStore {
                 createPassengerDto,
                 driverId
             );
-            // TODO: decide what to do with passengers...
+
             const index = this.drivers.findIndex(d => d.id === driverId);
             if (index > -1) {
                 const passengers = (this.drivers[index].passengers || []).slice();
