@@ -48,15 +48,15 @@ export class CarpoolGateway {
     ) {
         const { carpoolId, accessToken } = data;
 
+        if (!accessToken) {
+            return { successful: false, error: `Unauthorized - No token provided` };
+        }
+
         try {
             await this._carpoolService.findCarpoolById(carpoolId);
         } catch (error) {
             console.log("Failed to find carpool", error);
             return { successful: false, error: `Carpool not found for ID: ${carpoolId}` };
-        }
-
-        if (!accessToken) {
-            return { successful: false, error: `Unauthorized - No token provided` };
         }
 
         try {
