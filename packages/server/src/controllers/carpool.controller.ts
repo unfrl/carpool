@@ -28,7 +28,6 @@ import { CarpoolModificationGuard } from "../guards";
 import { CarpoolUpdateInterceptor } from "src/interceptors";
 
 @ApiUseTags("Carpools")
-@ApiBearerAuth()
 @Controller("api/v1/carpools")
 export class CarpoolController {
     public constructor(private readonly _carpoolService: CarpoolService) {}
@@ -39,6 +38,7 @@ export class CarpoolController {
         description: "Create a new Carpool",
     })
     @ApiCreatedResponse({ type: CarpoolDto })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"))
     @Post()
     public async createCarpool(
@@ -70,6 +70,7 @@ export class CarpoolController {
         description: "Update a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @UseInterceptors(CarpoolUpdateInterceptor)
     @Put(":id")
@@ -87,6 +88,7 @@ export class CarpoolController {
         description: "Delete a Carpool",
     })
     @ApiResponse({ status: HttpStatus.NO_CONTENT })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"), CarpoolModificationGuard)
     @Delete(":id")
     public async deleteCarpool(@Param("id") id: string): Promise<void> {

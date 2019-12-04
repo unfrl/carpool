@@ -17,7 +17,6 @@ import { CarpoolService, UserService } from "../services";
 import { mapUserToDto } from "../mappers";
 
 @ApiUseTags("Users")
-@ApiBearerAuth()
 @Controller("api/v1/users")
 export class UserController {
     public constructor(
@@ -31,6 +30,7 @@ export class UserController {
         description: "Gets the current user's profile",
     })
     @ApiResponse({ status: HttpStatus.OK, type: UserDto })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"))
     @Get("me")
     public getMyProfile(@Req() request: UserRequest): UserDto {
@@ -43,6 +43,7 @@ export class UserController {
         description: "Gets a collection of carpools created by the current user",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolQueryResponseDto, isArray: true })
+    @ApiBearerAuth()
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools")
     public async getMyCarpools(
