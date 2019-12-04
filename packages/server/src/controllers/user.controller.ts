@@ -22,7 +22,7 @@ export class UserController {
     public constructor(
         private readonly _carpoolService: CarpoolService,
         private readonly _userService: UserService
-    ) {}
+    ) { }
 
     @ApiOperation({
         operationId: "getMyProfile",
@@ -57,7 +57,7 @@ export class UserController {
     @UseGuards(AuthGuard("jwt"))
     @Get("me/carpools/driving")
     public async getMyDrivingCarpools(@Req() request: UserRequest): Promise<CarpoolDto[]> {
-        return await this._carpoolService.findCarpoolsByDriver(request.user.id);
+        return await this._carpoolService.findCarpoolsByDriverUserId(request.user.id);
     }
 
     @ApiOperation({

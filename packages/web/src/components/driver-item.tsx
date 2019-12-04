@@ -13,6 +13,7 @@ import {
 import { deepPurple } from "@material-ui/core/colors";
 
 import { getInitials, DriverDto } from "@carpool/core";
+import { observer } from "mobx-react";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -70,7 +71,7 @@ export interface IDriverItemProps {
     onLeave: () => void;
 }
 
-export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
+export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
     const { driver, currentUserIsDriver, currentUserIsPassenger, canJoin } = props;
@@ -108,16 +109,16 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                             </Button>
                         </Tooltip>
                     ) : (
-                        <Button
-                            disabled={!canJoin}
-                            variant="contained"
-                            color="primary"
-                            className={classes.action}
-                            onClick={props.onJoin}
-                        >
-                            Join
+                            <Button
+                                disabled={!canJoin}
+                                variant="contained"
+                                color="primary"
+                                className={classes.action}
+                                onClick={props.onJoin}
+                            >
+                                Join
                         </Button>
-                    )}
+                        )}
                     <Tooltip title={expanded ? "Hide details" : "Show details"}>
                         <IconButton
                             size="small"
@@ -153,8 +154,13 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = props => {
                             {color} {type}
                         </Typography>
                     </div>
+                    {currentUserIsDriver && driver.passengers && driver.passengers.map(passenger => {
+                        return (
+                            <Typography key={passenger.id}>{`passenger: ${passenger.id} @ ${passenger.address}`}</Typography>
+                        )
+                    })}
                 </div>
             </Collapse>
         </div>
     );
-};
+});

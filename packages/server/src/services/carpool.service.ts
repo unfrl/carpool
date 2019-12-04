@@ -21,7 +21,7 @@ export class CarpoolService {
         @InjectRepository(Driver)
         private readonly _driverRepository: Repository<Driver>,
         @InjectQueue("bull") readonly mailQueue: Queue
-    ) {}
+    ) { }
 
     //#region Public
     /**
@@ -98,13 +98,22 @@ export class CarpoolService {
      * Finds a list of carpools that the user is driving for.
      * @param userId - ID of the user who is driving
      */
-    public async findCarpoolsByDriver(userId: string): Promise<CarpoolDto[]> {
+    public async findCarpoolsByDriverUserId(userId: string): Promise<CarpoolDto[]> {
         const drivers = await this._driverRepository.find({
             where: { userId },
             relations: ["carpool", "carpool.createdBy"],
         });
 
         return drivers.map(driver => mapCarpoolToDto(driver.carpool));
+    }
+
+    /**
+     * Finds the carpool that the givern driver is driving in
+     * @param driverId - ID of the driver who is in the carpool
+     */
+    public async findCarpoolIdByDriverId(driverId: string): Promise<string> {
+        const driver = await this._driverRepository.findOne(driverId);
+        return driver.carpoolId;
     }
 
     /**

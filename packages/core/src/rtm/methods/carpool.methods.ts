@@ -1,9 +1,9 @@
-import { CarpoolDto, DriverDto } from "@carpool/client";
-import { carpoolMessages, driverMessages } from "@carpool/common";
+import { CarpoolDto, DriverDto, PassengerDto } from "@carpool/client";
+import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/common";
 import { RtmClient } from "../rtm-client";
 
 export class CarpoolMethods {
-    constructor(private readonly _rtmClient: RtmClient) {}
+    constructor(private readonly _rtmClient: RtmClient) { }
 
     //#region Actions
 
@@ -20,8 +20,20 @@ export class CarpoolMethods {
         this._rtmClient.on(carpoolMessages.events.updated, cb);
     };
 
+    public onDriverAdded = (cb: (driver: DriverDto) => void) => {
+        this._rtmClient.on(driverMessages.events.added, cb);
+    };
+
     public onDriverUpdated = (cb: (driver: DriverDto) => void) => {
         this._rtmClient.on(driverMessages.events.updated, cb);
+    };
+
+    public onPassengerAdded = (cb: (passenger: PassengerDto) => void) => {
+        this._rtmClient.on(passengerMessages.events.added, cb);
+    };
+
+    public onPassengerRemoved = (cb: (passenger: PassengerDto) => void) => {
+        this._rtmClient.on(passengerMessages.events.removed, cb);
     };
 
     //#endregion
