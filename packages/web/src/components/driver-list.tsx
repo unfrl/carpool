@@ -74,17 +74,27 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
         if (!hasDrivers) {
             return (
                 <div className={classes.noDrivers}>
-                    <Typography variant="h5">No drivers yet. Be first!</Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        className={classes.callToAction}
-                        onClick={onOfferToDrive}
-                        disabled={!canOfferToDrive}
-                    >
-                        Offer to Drive
-                    </Button>
+                    {userId && (
+                        <React.Fragment>
+                            <Typography variant="h5">No drivers yet. Be first!</Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                className={classes.callToAction}
+                                onClick={onOfferToDrive}
+                                disabled={!canOfferToDrive}
+                            >
+                                Offer to Drive
+                            </Button>
+                        </React.Fragment>
+                    )}
+                    {!userId && (
+                        <Typography variant="h5">
+                            Login to join as a passenger or offer to ride!
+                        </Typography>
+                    )}
+
                     <img src={cityDriver} className={classes.image} />
                 </div>
             );
