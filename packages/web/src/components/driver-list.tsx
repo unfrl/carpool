@@ -91,7 +91,7 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                     )}
                     {!userId && (
                         <Typography variant="h5">
-                            Login to join as a passenger or offer to ride!
+                            Login to join as a passenger or offer to drive!
                         </Typography>
                     )}
 
