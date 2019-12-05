@@ -4,6 +4,7 @@ export const carpoolMessages = {
     },
     events: {
         updated: "carpool.updated",
+        metadataUpdated: "carpool.metadata.updated",
     },
 };
 

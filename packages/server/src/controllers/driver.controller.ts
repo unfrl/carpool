@@ -46,6 +46,7 @@ export class DriverController {
         description: "Get all the drivers signed up for a carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: DriverDto, isArray: true })
+    @UseGuards(AuthGuard("jwt"))
     @Get()
     public async getDrivers(@Param("id") id: string): Promise<DriverDto[]> {
         return await this._driverService.findDriversByCarpoolId(id);

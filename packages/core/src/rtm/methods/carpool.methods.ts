@@ -1,4 +1,4 @@
-import { CarpoolDto, DriverDto, PassengerDto } from "@carpool/client";
+import { CarpoolDto, DriverDto, PassengerDto, CarpoolMetadataDto } from "@carpool/client";
 import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/common";
 import { RtmClient } from "../rtm-client";
 
@@ -45,6 +45,10 @@ export class CarpoolMethods {
 
     public onPassengerRemoved = (cb: (passenger: PassengerDto) => void) => {
         this._rtmClient.on(passengerMessages.events.removed, cb);
+    };
+
+    public onMetadataUpdated = (cb: (metadata: CarpoolMetadataDto) => void) => {
+        this._rtmClient.on(carpoolMessages.events.metadataUpdated, cb);
     };
 
     //#endregion

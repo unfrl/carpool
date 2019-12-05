@@ -1,6 +1,11 @@
 import { observable, action, computed, when, reaction } from "mobx";
 
-import { UpsertCarpoolDto, CarpoolDto, CarpoolQueryResponseDto } from "@carpool/client";
+import {
+    UpsertCarpoolDto,
+    CarpoolDto,
+    CarpoolQueryResponseDto,
+    CarpoolMetadataDto,
+} from "@carpool/client";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -29,6 +34,7 @@ export class CarpoolStore {
 
     public constructor(private readonly _rootStore: RootStore) {
         this._rootStore.rtmClient.carpool.onCarpoolUpdated(this.setUpdatedCarpool);
+        this._rootStore.rtmClient.carpool.onMetadataUpdated(this.metadataUpdated);
 
         reaction(
             () => this._rootStore.authStore.isAuthenticated,
@@ -95,7 +101,7 @@ export class CarpoolStore {
 
             let carpool = this.carpools.find(c => c.urlId === carpoolUrlId);
             if (!carpool) {
-                carpool = await this._rootStore.apiClient.getCarpool(carpoolUrlId);
+                carpool = await this._rootStore.apiClient.getCarpool(true, carpoolUrlId);
                 this.addCarpool(carpool);
             }
 
@@ -190,6 +196,13 @@ export class CarpoolStore {
     @action
     private clearUserCarpools = () => {
         this._userCarpools = [];
+    };
+
+    @action
+    private metadataUpdated = (metadata: CarpoolMetadataDto) => {
+        if (this.selectedCarpool) {
+            this.selectedCarpool.metadata = metadata;
+        }
     };
 
     @action

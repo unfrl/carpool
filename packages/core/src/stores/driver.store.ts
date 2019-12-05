@@ -15,9 +15,12 @@ export class DriverStore {
 
     public constructor(private readonly _rootStore: RootStore) {
         reaction(
-            () => this._rootStore.carpoolStore.selectedCarpoolId,
-            async carpoolId => {
-                if (carpoolId) {
+            () => ({
+                carpoolId: this._rootStore.carpoolStore.selectedCarpoolId,
+                authenticated: this._rootStore.authStore.isAuthenticated,
+            }),
+            async ({ carpoolId, authenticated }) => {
+                if (carpoolId && authenticated) {
                     await this.loadDrivers(carpoolId);
                 } else {
                     this.clearDrivers();
@@ -27,7 +30,7 @@ export class DriverStore {
 
         this._rootStore.rtmClient.carpool.onDriverUpdated(this.setUpdatedDriver);
         this._rootStore.rtmClient.carpool.onDriverAdded(this.addDriver);
-        this._rootStore.rtmClient.carpool.onPassengerAdded(this.addPassenger)
+        this._rootStore.rtmClient.carpool.onPassengerAdded(this.addPassenger);
         this._rootStore.rtmClient.carpool.onPassengerRemoved(this.removePassenger);
     }
 
@@ -50,16 +53,6 @@ export class DriverStore {
                 driverId
             );
 
-            const index = this.drivers.findIndex(d => d.id === driverId);
-            if (index > -1) {
-                const passengers = (this.drivers[index].passengers || []).slice();
-                passengers.push(passenger);
-                this.drivers[index].passengers = passengers;
-
-                const passengerUserIds = (this.drivers[index].passengerUserIds || []).slice();
-                passengerUserIds.push(passenger.user.id);
-                this.drivers[index].passengerUserIds = passengerUserIds;
-            }
             this._logger.info("Passenger created!", passenger);
         } catch (error) {
             this._logger.error("Failed to create passenger", error);
@@ -71,15 +64,26 @@ export class DriverStore {
             await this._rootStore.apiClient.deletePassenger(driverId);
             const userId = this._rootStore.authStore.user?.id;
             if (userId) {
-                const driverPassengerUserIdIndex = this.drivers.findIndex(d => d.passengerUserIds.indexOf(userId) > -1);
+                const driverPassengerUserIdIndex = this.drivers.findIndex(
+                    d => d.passengerUserIds.indexOf(userId) > -1
+                );
                 if (driverPassengerUserIdIndex > -1) {
-                    const passengerUserIdIndex = this.drivers[driverPassengerUserIdIndex].passengerUserIds.indexOf(userId);
-                    this.drivers[driverPassengerUserIdIndex].passengerUserIds.splice(passengerUserIdIndex, 1);
+                    const passengerUserIdIndex = this.drivers[
+                        driverPassengerUserIdIndex
+                    ].passengerUserIds.indexOf(userId);
+                    this.drivers[driverPassengerUserIdIndex].passengerUserIds.splice(
+                        passengerUserIdIndex,
+                        1
+                    );
                 }
 
-                const driverPassengerIndex = this.drivers.findIndex(d => d.passengers.findIndex(p => p.user.id === userId) > -1);
+                const driverPassengerIndex = this.drivers.findIndex(
+                    d => d.passengers.findIndex(p => p.user.id === userId) > -1
+                );
                 if (driverPassengerIndex > -1) {
-                    const passengerIndex = this.drivers[driverPassengerIndex].passengers.findIndex(p => p.user.id === userId);
+                    const passengerIndex = this.drivers[driverPassengerIndex].passengers.findIndex(
+                        p => p.user.id === userId
+                    );
                     this.drivers[driverPassengerIndex].passengers.splice(passengerIndex, 1);
                 }
             }
@@ -98,16 +102,28 @@ export class DriverStore {
 
             const drivers = await this._rootStore.apiClient.getDrivers(carpoolId);
             if (this._rootStore.authStore.user) {
-                if (this._rootStore.carpoolStore.selectedCarpool?.user.id === this._rootStore.authStore.user!.id) { //The current user is the creator of this carpool, load ALL passenger info
+                if (
+                    this._rootStore.carpoolStore.selectedCarpool?.user.id ===
+                    this._rootStore.authStore.user!.id
+                ) {
+                    //The current user is the creator of this carpool, load ALL passenger info
                     for (const driver of drivers) {
-                        driver.passengers = await this._rootStore.apiClient.getPassengers(driver.id);
+                        driver.passengers = await this._rootStore.apiClient.getPassengers(
+                            driver.id
+                        );
                     }
-                }
-                else {
-                    let userDriverIndex = drivers.findIndex((driver) => driver.user.id == this._rootStore.authStore.user!.id);
+                } else {
+                    let userDriverIndex = drivers.findIndex(
+                        driver => driver.user.id == this._rootStore.authStore.user!.id
+                    );
 
-                    if (userDriverIndex > -1) { //The current user is a driver, so we should load their passenger info as well
-                        drivers[userDriverIndex].passengers = await this._rootStore.apiClient.getPassengers(drivers[userDriverIndex].id);
+                    if (userDriverIndex > -1) {
+                        //The current user is a driver, so we should load their passenger info as well
+                        drivers[
+                            userDriverIndex
+                        ].passengers = await this._rootStore.apiClient.getPassengers(
+                            drivers[userDriverIndex].id
+                        );
                     }
                 }
             }
@@ -140,25 +156,23 @@ export class DriverStore {
 
     @action
     private addPassenger = (passenger: PassengerDto) => {
-
         const index = this.drivers.findIndex(d => d.id === passenger.driverId);
         if (index > -1) {
             if (this.drivers[index].passengers) {
                 this.drivers[index].passengers.push(passenger);
-            }
-            else {
+            } else {
                 this.drivers[index].passengers = [passenger];
             }
         }
-
-    }
+    };
 
     @action
     private removePassenger = (passenger: PassengerDto) => {
-
         this.drivers.forEach(driver => {
             if (driver.passengerUserIds) {
-                const passengerIdIndex = driver.passengerUserIds.findIndex(passengerUserId => passengerUserId === passenger.user.id);
+                const passengerIdIndex = driver.passengerUserIds.findIndex(
+                    passengerUserId => passengerUserId === passenger.user.id
+                );
 
                 if (passengerIdIndex > -1) {
                     driver.passengerUserIds.splice(passengerIdIndex, 1);
@@ -166,15 +180,16 @@ export class DriverStore {
             }
             // If the current user is the driver they will also have a populated passenger list, from which we must remove the passenger
             if (driver.passengers.length) {
-                const passengerIndex = driver.passengers.findIndex(pass => pass.id === passenger.id);
+                const passengerIndex = driver.passengers.findIndex(
+                    pass => pass.id === passenger.id
+                );
 
                 if (passengerIndex > -1) {
                     driver.passengers.splice(passengerIndex, 1);
                 }
             }
-
         });
-    }
+    };
 
     @action
     private setDrivers = (drivers: DriverDto[]) => {
@@ -186,7 +201,7 @@ export class DriverStore {
         const index = this.drivers.findIndex(d => d.id === driver.id);
         if (index > -1) {
             driver.passengers = this.drivers[index].passengers; //The passengers are not updated here
-            driver.passengerUserIds = this.drivers[index].passengerUserIds //The passengers are not updated here
+            driver.passengerUserIds = this.drivers[index].passengerUserIds; //The passengers are not updated here
             this.drivers[index] = driver;
         }
     };

@@ -165,11 +165,19 @@ export class CarpoolGateway {
         this._wsServer.to(getCarpoolRoom(carpool.id)).emit(carpoolMessages.events.updated, carpool);
     }
 
+    public async emitCarpoolMetadataUpdated(carpoolId: string) {
+        const metadata = await this._carpoolService.getCarpoolMetadata(carpoolId);
+        this._wsServer
+            .to(getCarpoolRoom(carpoolId))
+            .emit(carpoolMessages.events.metadataUpdated, metadata);
+    }
+
     /**
      * Emit driver added event to the carpool room.
      * @param driverDto - The added driver to send
      */
     public emitDriverAdded(driverDto: DriverDto) {
+        this.emitCarpoolMetadataUpdated(driverDto.carpoolId);
         this._wsServer
             .to(getCarpoolAuthenticatedRoom(driverDto.carpoolId))
             .emit(driverMessages.events.added, driverDto);
@@ -190,6 +198,7 @@ export class CarpoolGateway {
      * @param driverDto - The removed driver to send
      */
     public emitDriverRemoved(driverDto: DriverDto) {
+        this.emitCarpoolMetadataUpdated(driverDto.carpoolId);
         this._wsServer
             .to(getCarpoolAuthenticatedRoom(driverDto.carpoolId))
             .emit(driverMessages.events.removed, driverDto);
@@ -202,6 +211,7 @@ export class CarpoolGateway {
     public async emitPassengerAdded(passengerDto: PassengerDto) {
         let carpoolId = await this._carpoolService.findCarpoolIdByDriverId(passengerDto.driverId);
 
+        this.emitCarpoolMetadataUpdated(carpoolId);
         this._wsServer
             .to(getCarpoolDriverRoom(carpoolId, passengerDto.driverId))
             .emit(passengerMessages.events.added, passengerDto);
@@ -235,6 +245,7 @@ export class CarpoolGateway {
     public async emitPassengerRemoved(passengerDto: PassengerDto) {
         let carpoolId = await this._carpoolService.findCarpoolIdByDriverId(passengerDto.driverId);
 
+        this.emitCarpoolMetadataUpdated(carpoolId);
         this._wsServer
             .to(getCarpoolDriverRoom(carpoolId, passengerDto.driverId))
             .emit(passengerMessages.events.removed, passengerDto);

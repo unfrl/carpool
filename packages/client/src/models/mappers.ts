@@ -211,6 +211,30 @@ export const UserDto: msRest.CompositeMapper = {
   }
 };
 
+export const CarpoolMetadataDto: msRest.CompositeMapper = {
+  serializedName: "CarpoolMetadataDto",
+  type: {
+    name: "Composite",
+    className: "CarpoolMetadataDto",
+    modelProperties: {
+      seatsRemaining: {
+        required: true,
+        serializedName: "seatsRemaining",
+        type: {
+          name: "Number"
+        }
+      },
+      driverCount: {
+        required: true,
+        serializedName: "driverCount",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
 export const CarpoolDto: msRest.CompositeMapper = {
   serializedName: "CarpoolDto",
   type: {
@@ -279,6 +303,14 @@ export const CarpoolDto: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "UserDto"
+        }
+      },
+      metadata: {
+        required: true,
+        serializedName: "metadata",
+        type: {
+          name: "Composite",
+          className: "CarpoolMetadataDto"
         }
       }
     }
