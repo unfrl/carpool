@@ -15,9 +15,12 @@ export class DriverStore {
 
     public constructor(private readonly _rootStore: RootStore) {
         reaction(
-            () => this._rootStore.carpoolStore.selectedCarpoolId,
-            async carpoolId => {
-                if (carpoolId && this._rootStore.authStore.isAuthenticated) {
+            () => ({
+                carpoolId: this._rootStore.carpoolStore.selectedCarpoolId,
+                authenticated: this._rootStore.authStore.isAuthenticated,
+            }),
+            async ({ carpoolId, authenticated }) => {
+                if (carpoolId && authenticated) {
                     await this.loadDrivers(carpoolId);
                 } else {
                     this.clearDrivers();
