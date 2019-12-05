@@ -17,6 +17,7 @@ import {
     UseGuards,
     Req,
     UseInterceptors,
+    Query,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import * as shortid from "shortid";
@@ -55,12 +56,15 @@ export class CarpoolController {
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
     @Get(":id")
-    public async getById(@Param("id") id: string): Promise<CarpoolDto> {
+    public async getById(
+        @Param("id") id: string,
+        @Query("includeMetadata") includeMetadata: boolean = false
+    ): Promise<CarpoolDto> {
         // Allowing GET to be by their GUID or their URL ID
-        if (shortid.isValid(id)) {
-            return await this._carpoolService.findCarpoolByUrlId(id);
+        if (id.length < 14 && shortid.isValid(id)) {
+            return await this._carpoolService.findCarpoolByUrlId(id, includeMetadata);
         } else {
-            return await this._carpoolService.findCarpoolById(id);
+            return await this._carpoolService.findCarpoolById(id, includeMetadata);
         }
     }
 

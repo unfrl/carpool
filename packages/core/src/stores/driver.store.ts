@@ -50,16 +50,6 @@ export class DriverStore {
                 driverId
             );
 
-            const index = this.drivers.findIndex(d => d.id === driverId);
-            if (index > -1) {
-                const passengers = (this.drivers[index].passengers || []).slice();
-                passengers.push(passenger);
-                this.drivers[index].passengers = passengers;
-
-                const passengerUserIds = (this.drivers[index].passengerUserIds || []).slice();
-                passengerUserIds.push(passenger.user.id);
-                this.drivers[index].passengerUserIds = passengerUserIds;
-            }
             this._logger.info("Passenger created!", passenger);
         } catch (error) {
             this._logger.error("Failed to create passenger", error);

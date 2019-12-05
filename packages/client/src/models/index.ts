@@ -73,6 +73,14 @@ export interface UserDto {
 }
 
 /**
+ * An interface representing CarpoolMetadataDto.
+ */
+export interface CarpoolMetadataDto {
+  seatsRemaining: number;
+  driverCount: number;
+}
+
+/**
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
@@ -85,6 +93,7 @@ export interface CarpoolDto {
   created: any;
   updated: any;
   user: UserDto;
+  metadata: CarpoolMetadataDto;
 }
 
 /**

@@ -14,6 +14,7 @@ import moment from "moment";
 
 import { CarpoolDto, UpsertCarpoolDto, getInitials } from "@carpool/core";
 import { CarpoolForm, NavLink } from ".";
+import { observer } from "mobx-react";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -75,11 +76,17 @@ export interface ICarpoolDetailsProps {
     saving: boolean;
 }
 
-export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => {
+export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(props => {
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
-    const { name, destination, dateTime, created, user, description } = carpoolDto;
+    const { name, destination, dateTime, created, user, description, metadata } = carpoolDto;
+    let seatsRemaining,
+        driverCount = 0;
+    if (metadata) {
+        seatsRemaining = metadata.seatsRemaining;
+        driverCount = metadata.driverCount;
+    }
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
         if (canEdit) {
@@ -125,6 +132,16 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
                                             "dddd, MMMM Do YYYY, h:mm a"
                                         )}
                                     </Typography>
+                                </div>
+                                <div className={`${classes.row} ${classes.spacer}`}>
+                                    <Icon className={classes.icon}>emoji_people</Icon>
+                                    <Typography>{`There ${
+                                        driverCount === 1 ? "is" : "are"
+                                    } ${driverCount} ${
+                                        driverCount === 1 ? "driver" : "drivers"
+                                    } and ${seatsRemaining} ${
+                                        seatsRemaining === 1 ? "seat" : "seats"
+                                    } remaining`}</Typography>
                                 </div>
                             </div>
                         }
@@ -175,4 +192,4 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = props => 
             )}
         </Card>
     );
-};
+});

@@ -104,7 +104,6 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
             <Fragment>
                 {drivers.map(driver => {
                     const { seatsRemaining } = driver;
-
                     const canJoin =
                         !!userId &&
                         seatsRemaining > 0 &&

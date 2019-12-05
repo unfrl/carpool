@@ -281,25 +281,29 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Retrieve a Carpool by its GUID or its URL ID
    * @summary Get Carpool
+   * @param includeMetadata
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.GetCarpoolResponse>
    */
-  getCarpool(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetCarpoolResponse>;
+  getCarpool(includeMetadata: boolean, id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetCarpoolResponse>;
   /**
+   * @param includeMetadata
    * @param id
    * @param callback The callback
    */
-  getCarpool(id: string, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
+  getCarpool(includeMetadata: boolean, id: string, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
   /**
+   * @param includeMetadata
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getCarpool(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
-  getCarpool(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto>, callback?: msRest.ServiceCallback<Models.CarpoolDto>): Promise<Models.GetCarpoolResponse> {
+  getCarpool(includeMetadata: boolean, id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CarpoolDto>): void;
+  getCarpool(includeMetadata: boolean, id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CarpoolDto>, callback?: msRest.ServiceCallback<Models.CarpoolDto>): Promise<Models.GetCarpoolResponse> {
     return this.sendOperationRequest(
       {
+        includeMetadata,
         id,
         options
       },
@@ -733,6 +737,9 @@ const getCarpoolOperationSpec: msRest.OperationSpec = {
   path: "api/v1/carpools/{id}",
   urlParameters: [
     Parameters.id
+  ],
+  queryParameters: [
+    Parameters.includeMetadata
   ],
   responses: {
     200: {

@@ -26,6 +26,16 @@ export const id: msRest.OperationURLParameter = {
     }
   }
 };
+export const includeMetadata: msRest.OperationQueryParameter = {
+  parameterPath: "includeMetadata",
+  mapper: {
+    required: true,
+    serializedName: "includeMetadata",
+    type: {
+      name: "Boolean"
+    }
+  }
+};
 export const type: msRest.OperationQueryParameter = {
   parameterPath: "type",
   mapper: {

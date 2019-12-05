@@ -3,11 +3,18 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { appConfig } from "@carpool/common";
 import { Carpool, User, Driver, Passenger } from "../entities";
-import { UpsertCarpoolDto, CarpoolDto, CarpoolQueryResponseDto, CarpoolQueryType } from "../dtos";
+import {
+    UpsertCarpoolDto,
+    CarpoolDto,
+    CarpoolQueryResponseDto,
+    CarpoolQueryType,
+    CarpoolMetadataDto,
+} from "../dtos";
 import { mapCarpoolToDto } from "../mappers";
 import { Queue } from "bull";
 import { InjectQueue } from "nest-bull";
 import { sendEmailFunctionName } from "../processors";
+import { DriverService } from "./driver.service";
 
 @Injectable()
 export class CarpoolService {
@@ -20,7 +27,8 @@ export class CarpoolService {
         private readonly _driverRepository: Repository<Driver>,
         @InjectRepository(Passenger)
         private readonly _passengerRepository: Repository<Passenger>,
-        @InjectQueue("bull") readonly mailQueue: Queue
+        @InjectQueue("bull") readonly mailQueue: Queue,
+        private readonly _driverService: DriverService
     ) {}
 
     //#region Public
@@ -49,20 +57,24 @@ export class CarpoolService {
      * Finds a carpool by its ID.
      * @param id - ID of the carpool
      */
-    public async findCarpoolById(id: string): Promise<CarpoolDto> {
+    public async findCarpoolById(id: string, includeMetadata = false): Promise<CarpoolDto> {
         const carpool = await this._carpoolRepository.findOne(id, { relations: ["createdBy"] });
         if (!carpool) {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return mapCarpoolToDto(carpool);
+        let carpoolDto = mapCarpoolToDto(carpool);
+        if (includeMetadata) {
+            carpoolDto = await this.addCarpoolMetadata(carpoolDto);
+        }
+        return carpoolDto;
     }
 
     /**
      * Finds a carpool by its URL ID.
      * @param urlId - URL ID of the carpool
      */
-    public async findCarpoolByUrlId(urlId: string): Promise<CarpoolDto> {
+    public async findCarpoolByUrlId(urlId: string, includeMetadata = false): Promise<CarpoolDto> {
         const carpool = await this._carpoolRepository.findOne({
             where: { urlId },
             relations: ["createdBy"],
@@ -71,7 +83,32 @@ export class CarpoolService {
             throw new NotFoundException("No Carpool was found with the provided ID");
         }
 
-        return mapCarpoolToDto(carpool);
+        let carpoolDto = mapCarpoolToDto(carpool);
+        if (includeMetadata) {
+            carpoolDto = await this.addCarpoolMetadata(carpoolDto);
+        }
+        return carpoolDto;
+    }
+
+    /**
+     * Retrives the metadata for a given carpool
+     * @param carpoolId - ID of the carpool whose metadata will be retrieved
+     */
+    public async getCarpoolMetadata(carpoolId: string): Promise<CarpoolMetadataDto> {
+        let metaData = new CarpoolMetadataDto();
+        const drivers = await this._driverService.findDriversByCarpoolId(carpoolId);
+        metaData.driverCount = drivers.length;
+        let seatsRemaining = 0;
+        for (const driver of drivers) {
+            seatsRemaining += driver.seatsRemaining;
+        }
+        metaData.seatsRemaining = seatsRemaining;
+        return metaData;
+    }
+
+    private async addCarpoolMetadata(carpool: CarpoolDto): Promise<CarpoolDto> {
+        carpool.metadata = await this.getCarpoolMetadata(carpool.id);
+        return carpool;
     }
 
     /**

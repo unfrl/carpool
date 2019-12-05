@@ -1,6 +1,7 @@
 import { ApiResponseModelProperty } from "@nestjs/swagger";
 
 import { UserDto } from ".";
+import { CarpoolMetadataDto } from "./carpool.metadata.dto";
 
 export class CarpoolDto {
     @ApiResponseModelProperty()
@@ -29,4 +30,7 @@ export class CarpoolDto {
 
     @ApiResponseModelProperty()
     public readonly user: UserDto;
+
+    @ApiResponseModelProperty()
+    public metadata?: CarpoolMetadataDto;
 }
