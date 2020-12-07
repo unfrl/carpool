@@ -1,28 +1,28 @@
-import { ApiResponseModelProperty } from "@nestjs/swagger";
+import { ApiResponseProperty } from "@nestjs/swagger";
 
 import { Car } from "../interfaces";
 import { UserDto } from "./";
 import { PassengerDto } from "./passenger.dto";
 
 export class DriverDto {
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly id: string;
 
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly car: Car;
 
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly carpoolId: string;
 
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly user: UserDto;
 
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly seatsRemaining: number;
 
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public readonly passengerUserIds: string[];
 
-    @ApiResponseModelProperty({ type: [PassengerDto] })
+    @ApiResponseProperty({ type: [PassengerDto] })
     public passengers?: PassengerDto[]
 }

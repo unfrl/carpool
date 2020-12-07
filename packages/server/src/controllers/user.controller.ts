@@ -1,4 +1,4 @@
-import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from "@nestjs/swagger";
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from "@nestjs/swagger";
 import {
     Controller,
     Get,
@@ -16,7 +16,7 @@ import { UserRequest } from "../interfaces";
 import { CarpoolService, UserService } from "../services";
 import { mapUserToDto } from "../mappers";
 
-@ApiUseTags("Users")
+@ApiTags("Users")
 @Controller("api/v1/users")
 export class UserController {
     public constructor(
@@ -26,7 +26,7 @@ export class UserController {
 
     @ApiOperation({
         operationId: "getMyProfile",
-        title: "Get user profile",
+        summary: "Get user profile",
         description: "Gets the current user's profile",
     })
     @ApiResponse({ status: HttpStatus.OK, type: UserDto })
@@ -39,7 +39,7 @@ export class UserController {
 
     @ApiOperation({
         operationId: "getMyCarpools",
-        title: "Get user's carpools",
+        summary: "Get user's carpools",
         description: "Gets a collection of carpools created by the current user",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolQueryResponseDto, isArray: true })
@@ -55,7 +55,7 @@ export class UserController {
 
     @ApiOperation({
         operationId: "getUserCarpools",
-        title: "Get a user's carpools",
+        summary: "Get a user's carpools",
         description: "Get a user's carpools by their display name",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto, isArray: true })

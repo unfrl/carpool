@@ -1,6 +1,6 @@
 import {
     ApiOperation,
-    ApiUseTags,
+    ApiTags,
     ApiCreatedResponse,
     ApiBearerAuth,
     ApiResponse,
@@ -24,7 +24,7 @@ import { UserRequest } from "../interfaces";
 import { PassengerService, DriverService } from "../services";
 import { CarpoolGateway } from "../gateways";
 
-@ApiUseTags("Passengers")
+@ApiTags("Passengers")
 @ApiBearerAuth()
 @Controller("api/v1/drivers/:id/passengers")
 export class PassengerController {
@@ -36,7 +36,7 @@ export class PassengerController {
 
     @ApiOperation({
         operationId: "createPassenger",
-        title: "Create Passenger",
+        summary: "Create Passenger",
         description: "Creates a passenger based off the current user ",
     })
     @ApiCreatedResponse({ type: PassengerDto })
@@ -60,7 +60,7 @@ export class PassengerController {
 
     @ApiOperation({
         operationId: "deletePassenger",
-        title: "Delete Passenger",
+        summary: "Delete Passenger",
         description: "Deletes a passenger based off the current user",
     })
     @ApiResponse({ status: HttpStatus.NO_CONTENT })
@@ -82,7 +82,7 @@ export class PassengerController {
 
     @ApiOperation({
         operationId: "getPassengers",
-        title: "Get Passengers",
+        summary: "Get Passengers",
         description: "Get passengers for a driver",
     })
     @ApiResponse({ status: HttpStatus.OK, type: PassengerDto, isArray: true })

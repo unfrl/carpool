@@ -1,4 +1,4 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsDefined } from "class-validator";
 
 export enum CarType {
@@ -9,16 +9,16 @@ export enum CarType {
 }
 
 export class Car {
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public capacity: number;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public color: string;
 
     // Note: this repition is necessary for swagger: https://docs.nestjs.com/recipes/swagger#working-with-enums
-    @ApiModelProperty({ enum: ["sedan", "truck", "suv", "van"] })
+    @ApiProperty({ enum: ["sedan", "truck", "suv", "van"] })
     @IsDefined()
     public type: CarType;
 }

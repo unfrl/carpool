@@ -1,10 +1,10 @@
-import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { Controller, Put, Body, HttpStatus } from "@nestjs/common";
 
 import { VerificationService, AuthService } from "../services";
 import { AuthDto, VerificationDto } from "../dtos";
 
-@ApiUseTags("Verification")
+@ApiTags("Verification")
 @Controller("api/v1/verification")
 export class VerificationController {
     public constructor(
@@ -14,7 +14,7 @@ export class VerificationController {
 
     @ApiOperation({
         operationId: "verifyUser",
-        title: "Verify User",
+        summary: "Verify User",
         description: "Verify a User using the token emailed to them during account creation",
     })
     @ApiResponse({ status: HttpStatus.OK, type: AuthDto })

@@ -1,17 +1,17 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsDefined } from "class-validator";
 
 export class PasswordResetDto {
-    @ApiModelProperty()
+    @ApiProperty()
     @IsEmail()
     @IsDefined()
     public email: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public token: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public newPassword: string;
 }

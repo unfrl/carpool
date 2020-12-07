@@ -1,4 +1,4 @@
-import { ApiResponseModelProperty, ApiModelProperty } from "@nestjs/swagger";
+import { ApiResponseProperty, ApiProperty } from "@nestjs/swagger";
 
 import { CarpoolDto } from "./carpool.dto";
 
@@ -9,16 +9,16 @@ export enum CarpoolQueryType {
 }
 
 export class CarpoolQueryDto {
-    @ApiModelProperty({
+    @ApiProperty({
         description: "CSV w/ one or more available options: created,driving,passenger",
     })
     public readonly type: string;
 }
 
 export class CarpoolQueryResponseDto {
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public carpool: CarpoolDto;
 
-    @ApiModelProperty({ enum: ["created", "driving", "passenger"] })
+    @ApiProperty({ enum: ["created", "driving", "passenger"] })
     public type: CarpoolQueryType;
 }

@@ -1,12 +1,12 @@
-import { ApiModelProperty, ApiModelPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 import { IsDefined } from "class-validator";
 
 export class GoogleSignInDto {
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public readonly idToken: string;
 
-    @ApiModelPropertyOptional()
+    @ApiPropertyOptional()
     public readonly displayName?: string;
 }
