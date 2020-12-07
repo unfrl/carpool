@@ -5648,6 +5648,11 @@ gcp-metadata@^3.2.0:
     gaxios "^2.0.1"
     json-bigint "^0.3.0"
 
+gensync@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
+  integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
+
 get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
@@ -10828,7 +10833,7 @@ react-app-polyfill@^0.2.2:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
-react-autosuggest@react-autosuggest:
+react-autosuggest@10.0.4:
   version "10.0.4"
   resolved "https://registry.yarnpkg.com/react-autosuggest/-/react-autosuggest-10.0.4.tgz#451b8d95200faf2725a4b45dd005df673a3edb18"
   integrity sha512-UM4Kh7ao0+zo9xhX35jt0iS8uPsDWDUiN2Sjgi4Q+eGp6632LJ9tlvUcZSq3Zg0HPDsvO/haw8ZBo/9YqPDTVg==

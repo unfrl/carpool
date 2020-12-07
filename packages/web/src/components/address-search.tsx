@@ -153,20 +153,20 @@ export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
             renderSuggestion={renderSuggestion}
             onSuggestionSelected={handleSuggestionSelected}
             inputProps={{
-                classes: classes,
+                // classes: classes,
                 id: "address-search",
-                label: props.label,
+                // label: props.label,
                 placeholder: props.placeholder,
                 value: props.value,
                 onChange: handleChange,
                 required: props.required,
                 autoFocus: props.autoFocus,
-                inputRef: node => {
+                ref: node => {
                     setAnchorEl(node);
                 },
-                InputLabelProps: {
-                    shrink: true,
-                },
+                // InputLabelProps: {
+                //     shrink: true,
+                // },
             }}
             theme={{
                 suggestionsList: classes.suggestionsList,

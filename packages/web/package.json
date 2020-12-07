@@ -12,6 +12,7 @@
         "@material-ui/styles": "^4.4.3",
         "@types/react-datepicker": "^2.9.2",
         "autosuggest-highlight": "^3.1.1",
+        "gensync": "^1.0.0-beta.2",
         "lodash": "^4.17.15",
         "mobx": "^5.13.0",
         "mobx-react": "^6.1.3",

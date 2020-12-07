@@ -84,7 +84,8 @@ export const AppDialog: FunctionComponent<IAppDialog> = props => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={props.contentStyle}>{props.children}</DialogContent>
+            {/* <DialogContent style={props.contentStyle}>{props.children}</DialogContent> */}
+            <DialogContent>{props.children}</DialogContent>
         </Dialog>
     );
 };
