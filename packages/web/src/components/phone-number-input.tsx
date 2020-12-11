@@ -36,7 +36,7 @@ export const PhoneNumberInput: FunctionComponent<IPhoneNumberInputProps> = props
             InputProps={{ inputComponent: TextMaskCustom }}
             variant="outlined"
             margin="normal"
-            // {...rest}
+            {...rest}
         />
     );
 };

@@ -50,10 +50,6 @@ export interface IAppDialog {
      * Set to true to make the dialog take up its full width.
      */
     fullWidth?: boolean;
-    /**
-     * Optional inline styles to apply to the dialog content.
-     */
-    contentStyle?: React.CSSProperties;
 }
 
 export const AppDialog: FunctionComponent<IAppDialog> = props => {
@@ -84,7 +80,6 @@ export const AppDialog: FunctionComponent<IAppDialog> = props => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            {/* <DialogContent style={props.contentStyle}>{props.children}</DialogContent> */}
             <DialogContent>{props.children}</DialogContent>
         </Dialog>
     );

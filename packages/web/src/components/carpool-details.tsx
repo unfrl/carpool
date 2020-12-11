@@ -81,8 +81,9 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
     const { name, destination, dateTime, created, user, description, metadata } = carpoolDto;
-    let seatsRemaining,
-        driverCount = 0;
+
+    let seatsRemaining = 0;
+    let driverCount = 0;
     if (metadata) {
         seatsRemaining = metadata.seatsRemaining;
         driverCount = metadata.driverCount;
