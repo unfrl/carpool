@@ -1,6 +1,6 @@
 import {
     ApiOperation,
-    ApiUseTags,
+    ApiTags,
     ApiResponse,
     ApiCreatedResponse,
     ApiBearerAuth,
@@ -28,14 +28,14 @@ import { UserRequest } from "../interfaces";
 import { CarpoolModificationGuard } from "../guards";
 import { CarpoolUpdateInterceptor } from "src/interceptors";
 
-@ApiUseTags("Carpools")
+@ApiTags("Carpools")
 @Controller("api/v1/carpools")
 export class CarpoolController {
     public constructor(private readonly _carpoolService: CarpoolService) {}
 
     @ApiOperation({
         operationId: "createCarpool",
-        title: "Create Carpool",
+        summary: "Create Carpool",
         description: "Create a new Carpool",
     })
     @ApiCreatedResponse({ type: CarpoolDto })
@@ -51,7 +51,7 @@ export class CarpoolController {
 
     @ApiOperation({
         operationId: "getCarpool",
-        title: "Get Carpool",
+        summary: "Get Carpool",
         description: "Retrieve a Carpool by its GUID or its URL ID",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
@@ -70,7 +70,7 @@ export class CarpoolController {
 
     @ApiOperation({
         operationId: "updateCarpool",
-        title: "Update Carpool",
+        summary: "Update Carpool",
         description: "Update a Carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: CarpoolDto })
@@ -88,7 +88,7 @@ export class CarpoolController {
 
     @ApiOperation({
         operationId: "deleteCarpool",
-        title: "Delete Carpool",
+        summary: "Delete Carpool",
         description: "Delete a Carpool",
     })
     @ApiResponse({ status: HttpStatus.NO_CONTENT })

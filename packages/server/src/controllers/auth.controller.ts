@@ -1,5 +1,5 @@
 import { Controller, Post, Body, HttpStatus, HttpCode, Put } from "@nestjs/common";
-import { ApiUseTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 import { AuthService } from "../services";
 import {
@@ -12,14 +12,14 @@ import {
     SocialAuthDto,
 } from "../dtos";
 
-@ApiUseTags("Auth")
+@ApiTags("Auth")
 @Controller("api/v1/auth")
 export class AuthController {
     public constructor(private readonly _authService: AuthService) {}
 
     @ApiOperation({
         operationId: "signUp",
-        title: "Sign up",
+        summary: "Sign up",
         description: "Sign up a new user",
     })
     @ApiResponse({ status: HttpStatus.OK })
@@ -31,7 +31,7 @@ export class AuthController {
 
     @ApiOperation({
         operationId: "signIn",
-        title: "Sign in",
+        summary: "Sign in",
         description: "Sign in an existing user",
     })
     @ApiResponse({ status: HttpStatus.OK, type: AuthDto })
@@ -43,7 +43,7 @@ export class AuthController {
 
     @ApiOperation({
         operationId: "signInWithGoogle",
-        title: "Sign in with Google",
+        summary: "Sign in with Google",
         description:
             "Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also request further steps, such as setting a display name.",
     })
@@ -59,7 +59,7 @@ export class AuthController {
 
     @ApiOperation({
         operationId: "requestPasswordReset",
-        title: "Request Password Reset",
+        summary: "Request Password Reset",
         description: "Sends a password reset to the specified email if it exists",
     })
     @ApiResponse({ status: HttpStatus.OK })
@@ -73,7 +73,7 @@ export class AuthController {
 
     @ApiOperation({
         operationId: "resetPassword",
-        title: "Reset User Password",
+        summary: "Reset User Password",
         description:
             "Reset a User's password using the token emailed to them after requesting a password reset",
     })

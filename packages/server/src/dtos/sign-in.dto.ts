@@ -1,13 +1,13 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, MinLength, IsDefined } from "class-validator";
 
 export class SignInDto {
-    @ApiModelProperty()
+    @ApiProperty()
     @IsEmail()
     @IsDefined()
     public readonly email: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @MinLength(8)
     @IsDefined()
     public readonly password: string;

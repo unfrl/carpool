@@ -1,15 +1,15 @@
-import { ApiModelProperty, ApiModelPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsDefined, IsOptional } from "class-validator";
 
 /**
  * DTO for creating a passenger for an authenticated user.
  */
 export class UpsertPassengerDto {
-    @ApiModelPropertyOptional()
+    @ApiPropertyOptional()
     @IsOptional()
     public readonly phoneNumber: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public readonly address: string;
 }

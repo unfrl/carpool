@@ -4,9 +4,9 @@ import { Button, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
     actions: {
         display: "flex",
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         marginTop: theme.spacing(2),
     },
     cancel: {
@@ -26,6 +26,9 @@ export const FormActions: FunctionComponent<IFormActionsProps> = props => {
 
     return (
         <div className={classes.actions}>
+            <Button className={classes.cancel} onClick={props.onCancel}>
+                Cancel
+            </Button>
             <Button
                 variant="contained"
                 color="primary"
@@ -34,9 +37,6 @@ export const FormActions: FunctionComponent<IFormActionsProps> = props => {
                 onClick={props.onConfirm}
             >
                 {props.confirmText || "Finish"}
-            </Button>
-            <Button className={classes.cancel} onClick={props.onCancel}>
-                Cancel
             </Button>
         </div>
     );

@@ -1,40 +1,40 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class Address {
     /**
      * E.g. street name ==> 230 S 500 W
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public name: string;
     /**
      * E.g. state name ==> Utah
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public administrative: string;
     /**
      * E.g. Salt Lake County
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public county?: string;
     /**
      * E.g. Salt Lake City
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public city: string;
     /**
      * E.g. United States of America
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public country: string;
     /**
      * E.g. us
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public countryCode: string;
     /**
      * E.g. 84190
      */
-    @ApiModelProperty()
+    @ApiProperty()
     public postcode: string;
 
     public latlng?: {

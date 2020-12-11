@@ -37,7 +37,7 @@ import { sendEmail, sendEmailFunctionName } from "./processors";
         JwtModule.register({
             secret: authConfig.secret,
             signOptions: {
-                expiresIn: 3600,
+                expiresIn: "7d",
             },
         }),
         MailerModule.forRootAsync({

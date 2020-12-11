@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const renderInputComponent = (inputProps: any) => {
-    const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+    const { inputRef = () => {}, ref, ...other } = inputProps;
 
     return (
         <TextField
@@ -34,10 +34,8 @@ const renderInputComponent = (inputProps: any) => {
                     ref(node);
                     inputRef(node);
                 },
-                classes: {
-                    input: classes.input,
-                },
             }}
+            label="Address"
             {...other}
         />
     );
@@ -110,7 +108,6 @@ export interface IAddressSearchProps {
     value: string;
     onChange: (newValue: string) => void;
     required?: boolean;
-    label?: string;
     placeholder?: string;
     autoFocus?: boolean;
 }
@@ -153,19 +150,14 @@ export const AddressSearch: FunctionComponent<IAddressSearchProps> = props => {
             renderSuggestion={renderSuggestion}
             onSuggestionSelected={handleSuggestionSelected}
             inputProps={{
-                classes: classes,
                 id: "address-search",
-                label: props.label,
                 placeholder: props.placeholder,
                 value: props.value,
                 onChange: handleChange,
                 required: props.required,
                 autoFocus: props.autoFocus,
-                inputRef: node => {
+                ref: node => {
                     setAnchorEl(node);
-                },
-                InputLabelProps: {
-                    shrink: true,
                 },
             }}
             theme={{

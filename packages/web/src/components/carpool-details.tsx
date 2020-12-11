@@ -81,8 +81,9 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
     const { name, destination, dateTime, created, user, description, metadata } = carpoolDto;
-    let seatsRemaining,
-        driverCount = 0;
+
+    let seatsRemaining = 0;
+    let driverCount = 0;
     if (metadata) {
         seatsRemaining = metadata.seatsRemaining;
         driverCount = metadata.driverCount;
@@ -123,7 +124,14 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
                             <div>
                                 <div className={`${classes.row} ${classes.spacer}`}>
                                     <Icon className={classes.icon}>room</Icon>
-                                    <Typography>{destination}</Typography>
+                                    <Typography>
+                                        <a
+                                            href={`https://maps.google.com/?q=${destination}`}
+                                            target="_blank"
+                                        >
+                                            {destination}
+                                        </a>
+                                    </Typography>
                                 </div>
                                 <div className={`${classes.row} ${classes.spacer}`}>
                                     <Icon className={classes.icon}>schedule</Icon>

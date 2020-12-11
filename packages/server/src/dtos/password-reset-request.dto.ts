@@ -1,9 +1,9 @@
 import { IsEmail, IsDefined } from "class-validator";
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class PasswordResetRequestDto {
     @IsEmail()
     @IsDefined()
-    @ApiModelProperty()
+    @ApiProperty()
     public readonly email: string;
 }

@@ -1,6 +1,6 @@
 import {
     ApiOperation,
-    ApiUseTags,
+    ApiTags,
     ApiCreatedResponse,
     ApiBearerAuth,
     ApiResponse,
@@ -13,7 +13,7 @@ import { UpsertDriverDto, DriverDto } from "../dtos";
 import { DriverService } from "../services";
 import { CarpoolGateway } from "src/gateways";
 
-@ApiUseTags("Drivers")
+@ApiTags("Drivers")
 @ApiBearerAuth()
 @Controller("api/v1/carpools/:id/drivers")
 export class DriverController {
@@ -24,7 +24,7 @@ export class DriverController {
 
     @ApiOperation({
         operationId: "createDriver",
-        title: "Create Driver",
+        summary: "Create Driver",
         description: "Create a driver for a carpool",
     })
     @ApiCreatedResponse({ type: DriverDto })
@@ -42,7 +42,7 @@ export class DriverController {
 
     @ApiOperation({
         operationId: "getDrivers",
-        title: "Get Drivers",
+        summary: "Get Drivers",
         description: "Get all the drivers signed up for a carpool",
     })
     @ApiResponse({ status: HttpStatus.OK, type: DriverDto, isArray: true })

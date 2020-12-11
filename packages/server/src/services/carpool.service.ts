@@ -235,8 +235,8 @@ export class CarpoolService {
         carpool.updatedById = user.id;
 
         await this._carpoolRepository.save(carpool);
-
-        return await this.findCarpoolById(id);
+        // TODO: this is a hack to ensure the metadata is populated when an update is made to e.g. carpool's description - otherwise it won't be populated
+        return await this.findCarpoolById(id, true);
     }
 
     /**

@@ -60,7 +60,7 @@ export const PassengerForm: FunctionComponent<IPassengerFormProps> = props => {
                 value={state.address}
                 onChange={val => setState({ ...state, address: val })}
                 required={true}
-                label="Address"
+                placeholder="Search for your pickup location"
                 autoFocus={true}
             />
             <PhoneNumberInput

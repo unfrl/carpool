@@ -1,10 +1,10 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsDefined } from "class-validator";
 
 import { Car } from "../interfaces";
 
 export class UpsertDriverDto {
-    @ApiModelProperty()
+    @ApiProperty()
     @IsDefined()
     public readonly car: Car;
 }

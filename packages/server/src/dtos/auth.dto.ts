@@ -1,9 +1,9 @@
-import { ApiResponseModelProperty } from "@nestjs/swagger";
+import { ApiResponseProperty } from "@nestjs/swagger";
 
 /**
  * DTO is returned from a successful sign in/up.
  */
 export class AuthDto {
-    @ApiResponseModelProperty()
+    @ApiResponseProperty()
     public accessToken: string;
 }
