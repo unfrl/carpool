@@ -8,9 +8,9 @@ import { AddressSearch, LoadingButton } from ".";
 const useStyles = makeStyles(theme => ({
     actions: {
         display: "flex",
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         marginTop: theme.spacing(2),
     },
     cancel: {
@@ -104,6 +104,9 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                 multiline={true}
             />
             <div className={classes.actions}>
+                <Button variant="text" className={classes.cancel} onClick={props.onCancel}>
+                    Cancel
+                </Button>
                 <LoadingButton
                     color="primary"
                     type="submit"
@@ -111,9 +114,6 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
                     text={isEditing ? "Save" : "Create"}
                     loading={props.saving}
                 />
-                <Button variant="text" className={classes.cancel} onClick={props.onCancel}>
-                    Cancel
-                </Button>
             </div>
         </form>
     );

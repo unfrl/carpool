@@ -52,7 +52,8 @@ export class DriverStore {
                 createPassengerDto,
                 driverId
             );
-
+            // TODO: right now we're relying on the driver updated event to notify *this* user when they've been added
+            // -- need to decide if this is the best approach
             this._logger.info("Passenger created!", passenger);
         } catch (error) {
             this._logger.error("Failed to create passenger", error);
@@ -62,32 +63,7 @@ export class DriverStore {
     public removeUserPassenger = async (driverId: string) => {
         try {
             await this._rootStore.apiClient.deletePassenger(driverId);
-            const userId = this._rootStore.authStore.user?.id;
-            if (userId) {
-                const driverPassengerUserIdIndex = this.drivers.findIndex(
-                    d => d.passengerUserIds.indexOf(userId) > -1
-                );
-                if (driverPassengerUserIdIndex > -1) {
-                    const passengerUserIdIndex = this.drivers[
-                        driverPassengerUserIdIndex
-                    ].passengerUserIds.indexOf(userId);
-                    this.drivers[driverPassengerUserIdIndex].passengerUserIds.splice(
-                        passengerUserIdIndex,
-                        1
-                    );
-                }
-
-                const driverPassengerIndex = this.drivers.findIndex(
-                    d => d.passengers.findIndex(p => p.user.id === userId) > -1
-                );
-                if (driverPassengerIndex > -1) {
-                    const passengerIndex = this.drivers[driverPassengerIndex].passengers.findIndex(
-                        p => p.user.id === userId
-                    );
-                    this.drivers[driverPassengerIndex].passengers.splice(passengerIndex, 1);
-                }
-            }
-
+            // TODO: same as with create user, we rely on the driver updated event to notify self
             this._logger.info("Passenger deleted!");
         } catch (error) {
             this._logger.error("Failed to delete passenger", error);
@@ -100,6 +76,7 @@ export class DriverStore {
 
             this._logger.info("Loading drivers for carpool ID", carpoolId);
 
+            // TODO: refactor loading passenger logic to own store
             const drivers = await this._rootStore.apiClient.getDrivers(carpoolId);
             if (this._rootStore.authStore.user) {
                 if (
@@ -154,6 +131,7 @@ export class DriverStore {
         await this._rootStore.rtmClient.carpool.joinDriverRoom(carpoolId, driverId);
     };
 
+    // TODO: move this logic to passenger store
     @action
     private addPassenger = (passenger: PassengerDto) => {
         const index = this.drivers.findIndex(d => d.id === passenger.driverId);
@@ -200,8 +178,9 @@ export class DriverStore {
     private setUpdatedDriver = (driver: DriverDto) => {
         const index = this.drivers.findIndex(d => d.id === driver.id);
         if (index > -1) {
+            // TODO: want to break out passengers into own store and remove the passengers field from driver dto
             driver.passengers = this.drivers[index].passengers; //The passengers are not updated here
-            driver.passengerUserIds = this.drivers[index].passengerUserIds; //The passengers are not updated here
+            // driver.passengerUserIds = this.drivers[index].passengerUserIds; //The passengers are not updated here
             this.drivers[index] = driver;
         }
     };

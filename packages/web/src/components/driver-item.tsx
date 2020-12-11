@@ -154,14 +154,34 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             {color} {type}
                         </Typography>
                     </div>
-                    {driver.passengers &&
-                        driver.passengers.map(passenger => {
-                            return (
-                                <Typography
-                                    key={passenger.id}
-                                >{`passenger: ${passenger.id} @ ${passenger.address}`}</Typography>
-                            );
-                        })}
+                    {driver.passengers && (
+                        <>
+                            <div className={classes.spacer} />
+                            <Typography variant="subtitle2">Passengers</Typography>
+                            <Divider />
+                            <div className={classes.spacer} />
+                            {driver.passengers.map(passenger => {
+                                return (
+                                    <Typography key={passenger.id} variant="body2">
+                                        {passenger.user.displayName}
+                                        <a
+                                            href={`tel:${passenger.phoneNumber}`}
+                                            style={{ marginLeft: 8 }}
+                                        >
+                                            {passenger.phoneNumber}
+                                        </a>
+                                        <a
+                                            href={`https://maps.google.com/?q=${passenger.address}`}
+                                            target="_blank"
+                                            style={{ marginLeft: 8 }}
+                                        >
+                                            {passenger.address}
+                                        </a>
+                                    </Typography>
+                                );
+                            })}
+                        </>
+                    )}
                 </div>
             </Collapse>
         </div>
