@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
     IconButton,
     Icon,
@@ -11,10 +11,12 @@ import {
 } from "@material-ui/core";
 import amber from "@material-ui/core/colors/amber";
 import moment from "moment";
+import { observer } from "mobx-react";
 
 import { CarpoolDto, UpsertCarpoolDto, getInitials } from "@carpool/core";
-import { CarpoolForm, NavLink } from ".";
-import { observer } from "mobx-react";
+import { ActionLink } from "./action-link";
+import { CarpoolForm } from "./carpool-form";
+import { NavLink } from "./nav-link";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -76,17 +78,20 @@ export interface ICarpoolDetailsProps {
     saving: boolean;
 }
 
-export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(props => {
+export const CarpoolDetails: React.FC<ICarpoolDetailsProps> = observer(props => {
     const classes = useStyles();
     const [editing, setEditing] = useState(false);
     const { carpoolDto, canEdit, onSave, saving } = props;
     const { name, destination, dateTime, created, user, description, metadata } = carpoolDto;
 
-    let seatsRemaining = 0;
-    let driverCount = 0;
+    let availableSeats = "";
     if (metadata) {
-        seatsRemaining = metadata.seatsRemaining;
-        driverCount = metadata.driverCount;
+        const { seatsRemaining, driverCount } = metadata;
+        availableSeats = `There ${driverCount === 1 ? "is" : "are"} ${driverCount} ${
+            driverCount === 1 ? "driver" : "drivers"
+        } and ${seatsRemaining} ${seatsRemaining === 1 ? "seat" : "seats"} remaining`;
+    } else {
+        availableSeats = "No drivers yet";
     }
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
@@ -125,12 +130,9 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
                                 <div className={`${classes.row} ${classes.spacer}`}>
                                     <Icon className={classes.icon}>room</Icon>
                                     <Typography>
-                                        <a
-                                            href={`https://maps.google.com/?q=${destination}`}
-                                            target="_blank"
-                                        >
+                                        <ActionLink type="address" link={destination}>
                                             {destination}
-                                        </a>
+                                        </ActionLink>
                                     </Typography>
                                 </div>
                                 <div className={`${classes.row} ${classes.spacer}`}>
@@ -143,13 +145,7 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
                                 </div>
                                 <div className={`${classes.row} ${classes.spacer}`}>
                                     <Icon className={classes.icon}>emoji_people</Icon>
-                                    <Typography>{`There ${
-                                        driverCount === 1 ? "is" : "are"
-                                    } ${driverCount} ${
-                                        driverCount === 1 ? "driver" : "drivers"
-                                    } and ${seatsRemaining} ${
-                                        seatsRemaining === 1 ? "seat" : "seats"
-                                    } remaining`}</Typography>
+                                    <Typography>{availableSeats}</Typography>
                                 </div>
                             </div>
                         }
@@ -166,7 +162,11 @@ export const CarpoolDetails: FunctionComponent<ICarpoolDetailsProps> = observer(
                             <Typography variant="h6" className={classes.details}>
                                 Description
                             </Typography>
-                            <Typography variant="body1" color="textSecondary">
+                            <Typography
+                                variant="body1"
+                                color="textSecondary"
+                                style={{ whiteSpace: "pre-line" }}
+                            >
                                 {description}
                             </Typography>
                         </div>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, Suspense, useState } from "react";
 import {
     Avatar,
     Typography,
@@ -8,12 +8,16 @@ import {
     Collapse,
     Tooltip,
     Divider,
+    CircularProgress,
     makeStyles,
 } from "@material-ui/core";
 import { deepPurple } from "@material-ui/core/colors";
+import { observer } from "mobx-react";
 
 import { getInitials, DriverDto } from "@carpool/core";
-import { observer } from "mobx-react";
+import { ActionLink } from "./action-link";
+
+const PassengersTable = React.lazy(() => import("./passengers-table"));
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -142,7 +146,9 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             email
                         </Icon>
                         <Typography variant="body2">
-                            <a href={`mailto:${email}`}>{email}</a>
+                            <ActionLink type="email" link={email}>
+                                {email}
+                            </ActionLink>
                         </Typography>
                     </div>
                     <div className={classes.spacer} />
@@ -159,27 +165,9 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             <div className={classes.spacer} />
                             <Typography variant="subtitle2">Passengers</Typography>
                             <Divider />
-                            <div className={classes.spacer} />
-                            {driver.passengers.map(passenger => {
-                                return (
-                                    <Typography key={passenger.id} variant="body2">
-                                        {passenger.user.displayName}
-                                        <a
-                                            href={`tel:${passenger.phoneNumber}`}
-                                            style={{ marginLeft: 8 }}
-                                        >
-                                            {passenger.phoneNumber}
-                                        </a>
-                                        <a
-                                            href={`https://maps.google.com/?q=${passenger.address}`}
-                                            target="_blank"
-                                            style={{ marginLeft: 8 }}
-                                        >
-                                            {passenger.address}
-                                        </a>
-                                    </Typography>
-                                );
-                            })}
+                            <Suspense fallback={<CircularProgress />}>
+                                <PassengersTable passengers={driver.passengers} />
+                            </Suspense>
                         </>
                     )}
                 </div>
