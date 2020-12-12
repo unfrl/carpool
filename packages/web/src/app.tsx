@@ -196,6 +196,7 @@ export class App extends Component<IAppProps, IAppState> {
 
         if (authStore.isAuthenticated) {
             authStore.signOut();
+            window.location.href = "/";
         } else {
             this.handleShowDialog();
         }
