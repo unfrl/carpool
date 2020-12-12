@@ -10,10 +10,15 @@ export class RtmClient {
     // methods
     public carpool: CarpoolMethods;
 
-    public constructor(baseUri: string, private readonly signRequest: () => string) {
+    public constructor(
+        baseUri: string,
+        onConnect: () => void,
+        onDisconnect: () => void,
+        private readonly signRequest: () => string
+    ) {
         this._socket = io(baseUri);
-        this._socket.on("connect", this.handleConnect);
-        this._socket.on("disconnect", this.handleDisconnect);
+        this._socket.on("connect", onConnect);
+        this._socket.on("disconnect", onDisconnect);
 
         this.carpool = new CarpoolMethods(this);
     }
@@ -51,13 +56,5 @@ export class RtmClient {
                 reject(error);
             }
         });
-    };
-
-    private handleConnect = () => {
-        this._logger.info("RTM API connected");
-    };
-
-    private handleDisconnect = () => {
-        this._logger.info("RTM API disconnected");
     };
 }

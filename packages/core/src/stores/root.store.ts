@@ -1,9 +1,16 @@
+import { action, observable } from "mobx";
+
 import { CarpoolAPI } from "@carpool/client";
-import { AuthStore, CarpoolStore, DriverStore } from ".";
+import { AuthStore } from "./auth.store";
+import { CarpoolStore } from "./carpool.store";
+import { DriverStore } from "./driver.store";
 import { RtmClient } from "../rtm";
 import { apiConfig } from "../config";
+import { Logger } from "../utils";
 
 export class RootStore {
+    private readonly _logger: Logger;
+
     // api
     public readonly apiClient: CarpoolAPI;
     public readonly rtmClient: RtmClient;
@@ -13,8 +20,21 @@ export class RootStore {
     public readonly carpoolStore: CarpoolStore;
     public readonly driverStore: DriverStore;
 
+    /**
+     * Tracks whether the client is connected to the RTM API.
+     */
+    @observable
+    public rtmConnected: boolean = false;
+
     public constructor() {
-        this.rtmClient = new RtmClient(apiConfig.baseUri, () => this.authStore.getAccessToken());
+        this._logger = new Logger("RootStore");
+
+        this.rtmClient = new RtmClient(
+            apiConfig.baseUri,
+            this.handleConnect,
+            this.handleDisconnect,
+            this.handleSignRequest
+        );
         this.apiClient = new CarpoolAPI(
             {
                 signRequest: async resource => {
@@ -32,4 +52,27 @@ export class RootStore {
         this.carpoolStore = new CarpoolStore(this);
         this.driverStore = new DriverStore(this);
     }
+
+    private handleConnect = (): void => {
+        this._logger.info("RTM API connected");
+        this.setRtmConnected(true);
+    };
+
+    private handleDisconnect = (): void => {
+        this._logger.info("RTM API disconnected");
+        this.setRtmConnected(false);
+    };
+
+    private handleSignRequest = (): string => {
+        return this.authStore.getAccessToken();
+    };
+
+    //#region Actions
+
+    @action
+    private setRtmConnected = (connected: boolean): void => {
+        this.rtmConnected = connected;
+    };
+
+    //#endregion
 }

@@ -45,6 +45,21 @@ export class CarpoolStore {
                 }
             }
         );
+
+        // We register this in a reaction in order to handle potential WSS disconnection.
+        // That way, if the client disconnects and then reconnects, they'll rejoin the carpool
+        // room if they have a selected carpool ID.
+        reaction(
+            () => ({
+                rtmConnected: this._rootStore.rtmConnected,
+                carpoolId: this.selectedCarpoolId,
+            }),
+            async ({ rtmConnected, carpoolId }) => {
+                if (rtmConnected && !!carpoolId) {
+                    await this.joinCarpool(carpoolId);
+                }
+            }
+        );
     }
 
     /**
@@ -106,8 +121,6 @@ export class CarpoolStore {
             }
 
             this.setSelectedCarpoolId(carpool.id);
-
-            await this.joinCarpool(carpool.id);
         } catch (error) {
             this._logger.error("Failed to select carpool", error);
         } finally {
