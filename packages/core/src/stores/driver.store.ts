@@ -1,4 +1,4 @@
-import { action, observable, reaction } from "mobx";
+import { action, observable, reaction, when } from "mobx";
 
 import { DriverDto, UpsertDriverDto, UpsertPassengerDto, PassengerDto } from "@carpool/client";
 import { Logger } from "../utils";
@@ -128,6 +128,8 @@ export class DriverStore {
      */
     private joinAsDriver = async (carpoolId: string, driverId: string) => {
         this._logger.info("Joining driver room:", carpoolId);
+        // Ensure we are connected to RTM API before attempting to join
+        await when(() => this._rootStore.rtmConnected);
         await this._rootStore.rtmClient.carpool.joinDriverRoom(carpoolId, driverId);
     };
 

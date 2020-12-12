@@ -5,8 +5,10 @@ import { JwtModule } from "@nestjs/jwt";
 import * as IORedis from "ioredis";
 import { MailerModule } from "@nest-modules/mailer";
 import { BullModule } from "nest-bull";
+import { OAuth2Client } from "google-auth-library";
 
 import { authConfig, dbConfig, redisConfig, mailModuleConfig } from "./config";
+import { Carpool, Driver, Passenger, User } from "./entities";
 import {
     AuthController,
     UserController,
@@ -25,8 +27,6 @@ import {
     VerificationService,
     JwtStrategy,
 } from "./services";
-import { Carpool, Driver, Passenger, User } from "./entities";
-import { OAuth2Client } from "google-auth-library";
 import { sendEmail, sendEmailFunctionName } from "./processors";
 
 @Module({
