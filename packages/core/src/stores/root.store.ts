@@ -33,7 +33,7 @@ export class RootStore {
             apiConfig.baseUri,
             this.handleConnect,
             this.handleDisconnect,
-            this.handleSignRequest
+            () => this.authStore.getAccessToken()
         );
         this.apiClient = new CarpoolAPI(
             {
@@ -61,10 +61,6 @@ export class RootStore {
     private handleDisconnect = (): void => {
         this._logger.info("RTM API disconnected");
         this.setRtmConnected(false);
-    };
-
-    private handleSignRequest = (): string => {
-        return this.authStore.getAccessToken();
     };
 
     //#region Actions
