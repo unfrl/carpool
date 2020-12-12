@@ -1,3 +1,4 @@
+export * from "./action-link";
 export * from "./address-search";
 export * from "./app-dialog";
 export * from "./app-header";
@@ -16,5 +17,6 @@ export * from "./loading-button";
 export * from "./not-found";
 export * from "./form-actions";
 export * from "./passenger-form";
+export * from "./passengers-table";
 export * from "./phone-number-input";
 export * from "./additional-info-dialog";
