@@ -27,7 +27,8 @@ export class CarpoolService {
         private readonly _driverRepository: Repository<Driver>,
         @InjectRepository(Passenger)
         private readonly _passengerRepository: Repository<Passenger>,
-        @InjectQueue("bull") readonly mailQueue: Queue,
+        @InjectQueue("bull")
+        readonly mailQueue: Queue,
         private readonly _driverService: DriverService
     ) {}
 

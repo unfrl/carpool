@@ -72,7 +72,7 @@ export interface IDriverItemProps {
     currentUserIsPassenger: boolean;
     canJoin: boolean;
     onJoin: () => void;
-    onLeave: () => void;
+    onLeave: (isDriver: boolean) => void;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props => {
@@ -108,12 +108,23 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                 <div className={classes.actions}>
                     {currentUserIsPassenger ? (
                         <Tooltip title="You're a passenger!">
-                            <Button color="primary" variant="contained" onClick={props.onLeave}>
+                            <Button color="primary" variant="contained" onClick={() => {props.onLeave(false)}}>
                                 Leave
                             </Button>
                         </Tooltip>
                     ) : (
+                        currentUserIsDriver ?
+                        ( 
                         <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.action}
+                            onClick={() => {props.onLeave(true)}}
+                        >
+                            Quit
+                        </Button>
+                        ) : (
+                            <Button
                             disabled={!canJoin}
                             variant="contained"
                             color="primary"
@@ -122,6 +133,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                         >
                             Join
                         </Button>
+                        )
                     )}
                     <Tooltip title={expanded ? "Hide details" : "Show details"}>
                         <IconButton

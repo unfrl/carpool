@@ -52,6 +52,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const [showDriverForm, setShowDriverForm] = useState(false);
     const [driverId, setDriverId] = useState<string | undefined>();
     const [removeFromDriverId, setRemoveFromDriverId] = useState<string | undefined>();
+    const [quittingDriverId, setQuittingDriverId] = useState<string | undefined>();
 
     const canUserEdit = Boolean(
         authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.user.id
@@ -97,6 +98,22 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             await driverStore.removeUserPassenger(removeFromDriverId);
         }
         setRemoveFromDriverId(undefined);
+    };
+
+    const handleShowQuitConfirmation = (driverId: string) => {
+        setQuittingDriverId(driverId);
+    }
+
+    const handleCancelQuit = () => {
+        setQuittingDriverId(undefined);
+    }
+
+    const handleConfirmQuit = async () => {
+        if (quittingDriverId) {
+            console.log("TODO: Should call: await driverStore.removeDriver(quittingDriverId);")
+            //await driverStore.removeDriver(quittingDriverId);
+        }
+        setQuittingDriverId(undefined);
     };
 
     const handleSaveDriverForm = async (createDriverDto: UpsertDriverDto) => {
@@ -153,6 +170,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 onOfferToDrive={handleToggleDriverForm}
                 onJoinAsPassenger={handleShowPassengerForm}
                 onRemovePassenger={handleShowLeaveConfirmation}
+                onRemoveDriver={handleShowQuitConfirmation}
             />
             {showDriverForm && (
                 <AppDialog
@@ -196,6 +214,27 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                             canSave={true}
                             onCancel={handleCancelLeave}
                             onConfirm={handleConfirmLeave}
+                        />
+                    </div>
+                </AppDialog>
+            )}
+            {quittingDriverId && (
+                <AppDialog title="Step down from being a driver?" onClose={handleCancelQuit} color="primary">
+                    <div className={classes.confirmContent}>
+                        <Typography
+                            variant="subtitle1"
+                            align="center"
+                            className={classes.confirmText}
+                        >
+                            Are you sure you want to step down?
+                            <br />
+                            You can always volunteer to drive again if you change your mind later.
+                        </Typography>
+                        <FormActions
+                            confirmText="Leave"
+                            canSave={true}
+                            onCancel={handleCancelQuit}
+                            onConfirm={handleConfirmQuit}
                         />
                     </div>
                 </AppDialog>

@@ -44,6 +44,7 @@ export interface IDriverListProps {
     onOfferToDrive: () => void;
     onJoinAsPassenger: (driverId: string) => void;
     onRemovePassenger: (driverId: string) => void;
+    onRemoveDriver: (driverId: string) => void;
 }
 
 export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
@@ -120,7 +121,9 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                             )}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
-                            onLeave={() => props.onRemovePassenger(driver.id)}
+                            onLeave={(isDriver :boolean) => {
+                                isDriver ? props.onRemoveDriver(driver.id) : props.onRemovePassenger(driver.id)
+                            }}
                         />
                     );
                 })}

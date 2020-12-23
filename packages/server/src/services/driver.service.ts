@@ -2,9 +2,13 @@ import { Injectable, NotFoundException, ConflictException } from "@nestjs/common
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Driver, Carpool, User } from "../entities";
+import { Driver, Carpool, User, Passenger } from "../entities";
 import { UpsertDriverDto, DriverDto } from "../dtos";
 import { mapDriverToDto } from "../mappers";
+import { InjectQueue } from "nest-bull";
+import { sendEmailFunctionName } from "../processors";
+import { Queue } from "bull";
+import { appConfig } from "@carpool/common";
 
 @Injectable()
 export class DriverService {
@@ -14,7 +18,9 @@ export class DriverService {
         @InjectRepository(Carpool)
         private readonly _carpoolRepository: Repository<Carpool>,
         @InjectRepository(User)
-        private readonly _userRepository: Repository<User>
+        private readonly _userRepository: Repository<User>,
+        @InjectQueue("bull")
+        readonly mailQueue: Queue,
     ) {}
 
     /**
@@ -53,6 +59,43 @@ export class DriverService {
         await this._driverRepository.save(driver);
 
         return mapDriverToDto(driver);
+    }
+
+    /**
+     * Remove the driver from the specified carpool
+     * @param id 
+     * @param userId 
+     */
+    public async deleteDriver(carpoolId: string, driverId: string): Promise<Driver>{
+        const carpool = await this._carpoolRepository.findOne(carpoolId);
+        if (!carpool) {
+            throw new NotFoundException("Carpool not found");
+        }
+
+        const driver = await this._driverRepository.findOne({ where: { carpoolId, id: driverId } });
+        if (!driver) {
+            throw new NotFoundException("No Driver was found with the provided carpoolId and userId");
+        }
+
+        const removedDriver = await this._driverRepository.remove(driver);
+        let passengerEmails = [];
+        removedDriver.passengers.map((passenger: Passenger) => {
+            passengerEmails.push(passenger.user.email);
+        })
+        let carpoolUrl = `${appConfig.scheme}://${appConfig.host}/${carpool.urlId}/${carpool.name}`;
+
+        await Promise.all(
+            passengerEmails.map((email: string) => {
+                return this.mailQueue.add(sendEmailFunctionName, {
+                    to: email,
+                    from: "noreply@carpool+unfrl.com",
+                    subject: "Your driver has removed themselves",
+                    html: `<h1>Hello!</h1>\n<p>Your driver has removed themselves, please go to <a href=\"${carpoolUrl}\">${carpoolUrl}</a> to see pick a different one or to offer to drive.</p>`,
+                });
+            })
+        );
+
+        return removedDriver;
     }
 
     /**

@@ -5,13 +5,15 @@ import {
     ApiBearerAuth,
     ApiResponse,
 } from "@nestjs/swagger";
-import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get } from "@nestjs/common";
+import { Post, Body, Controller, Param, UseGuards, Req, HttpStatus, Get, Delete } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserRequest } from "../interfaces";
 import { UpsertDriverDto, DriverDto } from "../dtos";
 import { DriverService } from "../services";
 import { CarpoolGateway } from "src/gateways";
+import { DriverModificationGuard } from "../guards";
+import { mapDriverToDto } from "../mappers"
 
 @ApiTags("Drivers")
 @ApiBearerAuth()
@@ -32,10 +34,10 @@ export class DriverController {
     @Post()
     public async createDriver(
         @Req() request: UserRequest,
-        @Param("id") id: string,
+        @Param("id") carpoolId: string,
         @Body() createDriverDto: UpsertDriverDto
     ): Promise<DriverDto> {
-        const driver = await this._driverService.createDriver(id, request.user.id, createDriverDto);
+        const driver = await this._driverService.createDriver(carpoolId, request.user.id, createDriverDto);
         await this._carpoolGateway.emitDriverAdded(driver);
         return driver;
     }
@@ -48,7 +50,25 @@ export class DriverController {
     @ApiResponse({ status: HttpStatus.OK, type: DriverDto, isArray: true })
     @UseGuards(AuthGuard("jwt"))
     @Get()
-    public async getDrivers(@Param("id") id: string): Promise<DriverDto[]> {
-        return await this._driverService.findDriversByCarpoolId(id);
+    public async getDrivers(@Param("id") carpoolId: string): Promise<DriverDto[]> {
+        return await this._driverService.findDriversByCarpoolId(carpoolId);
+    }
+
+    @ApiOperation({
+        operationId: "deleteDriver",
+        summary: "Delete Driver",
+        description: "Delete the specified driver, email any of their passengers"
+    })
+    @ApiResponse({ status: HttpStatus.NO_CONTENT })
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard("jwt"), DriverModificationGuard)
+    @Delete(":driverId")
+    public async removeDriver(
+        @Req() request: UserRequest,
+        @Param("id") carpoolId: string,
+        @Param("driverId") driverId: string
+    ): Promise<void> {
+        const driver = await this._driverService.deleteDriver(carpoolId, driverId);
+        await this._carpoolGateway.emitDriverRemoved(mapDriverToDto(driver));
     }
 }

@@ -70,6 +70,17 @@ export class DriverStore {
         }
     };
 
+    public removeDriver = async (driverId: string) => {
+        console.log(`TODO: Remove the driver ${driverId}`);
+        // try {
+        //     await this._rootStore.apiClient.deleteDriver(driverId);
+        //     // TODO: same as with create user, we rely on the driver updated event to notify self
+        //     this._logger.info("Passenger deleted!");
+        // } catch (error) {
+        //     this._logger.error("Failed to delete passenger", error);
+        // }
+    }
+
     private loadDrivers = async (carpoolId: string) => {
         try {
             this.setLoading(true);

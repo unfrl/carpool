@@ -2513,10 +2513,10 @@ autoprefixer@^9.4.2:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-autorest@^2.0.4407:
-  version "2.0.4413"
-  resolved "https://registry.yarnpkg.com/autorest/-/autorest-2.0.4413.tgz#2d38bcbea54431dbca0014d8c2374866b6ff7009"
-  integrity sha512-Ttx/O6Yag5q8fpJDvllgf/joLuVPBySkbAqDF7+9jAmscCPQplYjA9H/N12bwkhh+6YR3ugWZHQq3NTN33hkAg==
+autorest@^3.0.6322:
+  version "3.0.6322"
+  resolved "https://registry.yarnpkg.com/autorest/-/autorest-3.0.6322.tgz#ba3b4b7d2373602b9988d4b64522d8edb2946bcd"
+  integrity sha512-q0W5FD8TmxCqpPiD9fXGPbt+DCyf3brGvAAnzoFSngcaBgwy/CfvUVVXbwcHEUYzFive++tpQwM6Q0SFHEfKbQ==
 
 autosuggest-highlight@^3.1.1:
   version "3.1.1"
