@@ -17,7 +17,7 @@
         "generate:client": "yarn build:client && yarn compile:client",
         "build:client": "cd packages/server && yarn build:client",
         "compile:client": "cd packages/client && yarn build",
-        "cleanup:containers": "docker stop carpool_postgres carpool_redis; docker rm carpool_postgres carpool_redis"
+        "cleanup:containers": "docker stop carpool_postgres carpool_redis carpool_maildev; docker rm carpool_postgres carpool_redis carpool_maildev"
     },
     "keywords": [],
     "author": "",

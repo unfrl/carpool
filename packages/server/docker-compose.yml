@@ -55,3 +55,10 @@ services:
       - "8081:8081"
     depends_on:
       - redis
+
+  maildev:
+    container_name: carpool_maildev
+    image: maildev/maildev:2.0.0-beta3
+    ports:
+      - "1080:1080"
+      - "1025:1025"

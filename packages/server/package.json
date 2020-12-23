@@ -7,7 +7,7 @@
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
         "start": "ts-node -r tsconfig-paths/register src/main.ts",
-        "dev-prep": "docker stop -t 2 carpool_postgres carpool_adminer carpool_redis carpool_redis_commander ; docker-compose up -d postgres adminer redis redis_commander",
+        "dev-prep": "docker stop -t 2 carpool_postgres carpool_adminer carpool_redis carpool_redis_commander carpool_maildev ; docker-compose up -d postgres adminer redis redis_commander maildev",
         "start:dev": "yarn run dev-prep ; nodemon",
         "start:debug": "yarn run dev-prep ; nodemon --config nodemon-debug.json",
         "prestart:prod": "rimraf dist && npm run build",
