@@ -7,7 +7,8 @@ export const sendEmail = async (job) => {
     let emailPayload = job.data;
 
     try {
-        await emailTransport.sendMail(emailPayload);
+        let transporter = nodemailer.createTransport(emailTransport);
+        await transporter.sendMail(emailPayload);
     }
     catch (error) {
         console.log("Error while sending email: " + error);
