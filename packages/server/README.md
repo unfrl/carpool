@@ -6,19 +6,24 @@
 
 The server requires a postgres database, redis instance, and email credentials to be fully functional. All of these can be configured via environment variables:
 
-| Environment Variable |   Default   |                                                                                                                                                                                                  Description |
-| -------------------- | :---------: | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| DB_HOST              |  localhost  |                                                                                                                                                                    The host address of the postgres instance |
-| DB_PORT              |    5432     |                                                                                                                                                                The port used by the target postgres instance |
-| DB_USERNAME          |    local    |                                                                                                                                                            The user used to connect to the postgres instance |
-| DB_PASSWORD          |    local    |                                                                                                                          The password used to connect to the postgres instance (**dont** use the default...) |
-| DB_NAME              |   carpool   |                                                                                                                             The name of the database used by the carpool server within the postgres instance |
-| AUTH_SECRET          | supersecret |                                                                                                                 The secret used to sign JWT tokens (**dont** use the default, use `ssh-keygen` or something) |
-| AUTH_SALT_OR_ROUNDS  |     10      |                                                                                                                                                   The number of rounds used by bcrypt when generating a hash |
-| EMAIL_CONNECTION_URL |     NA      | Should look something like `smtps://angrykoolaidman@gmail.com:<password>@smtp.gmail.com` info [here](https://nodemailer.com/usage/using-gmail/) gmail info [here](https://nodemailer.com/usage/using-gmail/) |
-| NODE_ENV             | development |                                                                                                                                     The deployment environment, expected to be `development` or `production` |
-| REDIS_HOST           |  localhost  |                                                                                                                                                                       The host address of the redis instance |
-| REDIS_PORT           |    6379     |                                                                                                                                                                   The port used by the target redis instance |
+| Environment Variable |       Default       |                                                                                  Description |
+| -------------------- | :-----------------: | -------------------------------------------------------------------------------------------: |
+| DB_HOST              |      localhost      |                                                    The host address of the postgres instance |
+| DB_PORT              |        5432         |                                                The port used by the target postgres instance |
+| DB_USERNAME          |        local        |                                            The user used to connect to the postgres instance |
+| DB_PASSWORD          |        local        |          The password used to connect to the postgres instance (**dont** use the default...) |
+| DB_NAME              |       carpool       |             The name of the database used by the carpool server within the postgres instance |
+| AUTH_SECRET          |     supersecret     | The secret used to sign JWT tokens (**dont** use the default, use `ssh-keygen` or something) |
+| AUTH_SALT_OR_ROUNDS  |         10          |                                   The number of rounds used by bcrypt when generating a hash |
+| EMAIL_HOST           |      localhost      |                                                                  The host of the smtp server |
+| EMAIL_PORT           |        1025         |                                                                  The port of the smtp server |
+| EMAIL_AUTH_USER      | unfrl@fakeemail.com |                                                The user to authenticate with the smtp server |
+| EMAIL_AUTH_PASSWORD  |         ""          |                                            The password to authenticate with the smtp server |
+| EMAIL_IGNORE_TLS     |        true         |                              Whether or not to ignore tls when connecting to the smtp server |
+| EMAIL_SECURE         |        false        |                                  Whether or not the connection to the smtp server is secured |
+| NODE_ENV             |     development     |                     The deployment environment, expected to be `development` or `production` |
+| REDIS_HOST           |      localhost      |                                                       The host address of the redis instance |
+| REDIS_PORT           |        6379         |                                                   The port used by the target redis instance |
 
 ## Carpool information restrictions
 

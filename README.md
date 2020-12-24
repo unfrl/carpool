@@ -6,7 +6,17 @@ This is the monorepo for the server and web carpool projects. It is setup using 
 
 1. Ensure Node.js LTS, Docker, and yarn are installed.
 2. From root project directory, run `yarn install`. This will install the dependencies of all projects.
-3. To run server services/services and the core/web projects in dev mode, run `yarn start:all` after dependencies are installed.
+3. To run server services/services and the core/web projects in dev mode, run `yarn start:all` after dependencies are installed. (See **Dev Services** below)
+
+# Dev Services
+
+When run in dev mode we start up all of the required supporting services in containers, below is a table of where to access their management UIs:
+
+| Service            | Port(s) |
+| ------------------ | ------- |
+| Adminer (Postgres) | 9000    |
+| Redis Commander    | 6379    |
+| Maildev (Email)    | 1080    |
 
 # Notes
 
