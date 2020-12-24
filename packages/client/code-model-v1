@@ -1,0 +1,5806 @@
+{
+ "$id": "1",
+ "modelTypes": [
+  {
+   "$id": "2",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "3",
+     "isReadOnly": false,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "4",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "5",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "6",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "7",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "8",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "9",
+     "isReadOnly": false,
+     "realPath": [
+      "password"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "10",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "11",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "12",
+      "fixed": false,
+      "raw": "password"
+     },
+     "serializedName": "password",
+     "modelType": {
+      "$id": "13",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "14",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "15",
+     "isReadOnly": false,
+     "realPath": [
+      "displayName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "16",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "17",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "18",
+      "fixed": false,
+      "raw": "displayName"
+     },
+     "serializedName": "displayName",
+     "modelType": {
+      "$id": "19",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "20",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "SignUpDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "21",
+    "fixed": false,
+    "raw": "SignUpDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "SignUpDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/SignUpDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "22",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "23",
+     "isReadOnly": false,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "24",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "25",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "26",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "27",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "28",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "29",
+     "isReadOnly": false,
+     "realPath": [
+      "password"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "30",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "31",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "32",
+      "fixed": false,
+      "raw": "password"
+     },
+     "serializedName": "password",
+     "modelType": {
+      "$id": "33",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "34",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "SignInDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "35",
+    "fixed": false,
+    "raw": "SignInDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "SignInDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/SignInDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "36",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "37",
+     "isReadOnly": true,
+     "realPath": [
+      "accessToken"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "38",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "39",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "40",
+      "fixed": false,
+      "raw": "accessToken"
+     },
+     "serializedName": "accessToken",
+     "modelType": {
+      "$id": "41",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "42",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "AuthDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "43",
+    "fixed": false,
+    "raw": "AuthDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "AuthDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/AuthDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "44",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "45",
+     "isReadOnly": false,
+     "realPath": [
+      "idToken"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "46",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "47",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "48",
+      "fixed": false,
+      "raw": "idToken"
+     },
+     "serializedName": "idToken",
+     "modelType": {
+      "$id": "49",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "50",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "51",
+     "isReadOnly": false,
+     "realPath": [
+      "displayName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "52",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "53",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "54",
+      "fixed": false,
+      "raw": "displayName"
+     },
+     "serializedName": "displayName",
+     "modelType": {
+      "$id": "55",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "56",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "GoogleSignInDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "57",
+    "fixed": false,
+    "raw": "GoogleSignInDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "GoogleSignInDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/GoogleSignInDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "58",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "59",
+     "isReadOnly": true,
+     "realPath": [
+      "accessToken"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "60",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "61",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "62",
+      "fixed": false,
+      "raw": "accessToken"
+     },
+     "serializedName": "accessToken",
+     "modelType": {
+      "$id": "63",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "64",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "65",
+     "isReadOnly": true,
+     "realPath": [
+      "nextStep"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "66",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "67",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "68",
+      "fixed": false,
+      "raw": "nextStep"
+     },
+     "serializedName": "nextStep",
+     "modelType": {
+      "$id": "69",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "double",
+      "name": {
+       "$id": "70",
+       "fixed": false,
+       "raw": "Double"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "71",
+     "isReadOnly": true,
+     "realPath": [
+      "error"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "72",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "73",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "74",
+      "fixed": false,
+      "raw": "error"
+     },
+     "serializedName": "error",
+     "modelType": {
+      "$id": "75",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "76",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "SocialAuthDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "77",
+    "fixed": false,
+    "raw": "SocialAuthDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "SocialAuthDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/SocialAuthDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "78",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "79",
+     "isReadOnly": false,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "80",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "81",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "82",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "83",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "84",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "PasswordResetRequestDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "85",
+    "fixed": false,
+    "raw": "PasswordResetRequestDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "PasswordResetRequestDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/PasswordResetRequestDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "86",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "87",
+     "isReadOnly": false,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "88",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "89",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "90",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "91",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "92",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "93",
+     "isReadOnly": false,
+     "realPath": [
+      "token"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "94",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "95",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "96",
+      "fixed": false,
+      "raw": "token"
+     },
+     "serializedName": "token",
+     "modelType": {
+      "$id": "97",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "98",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "99",
+     "isReadOnly": false,
+     "realPath": [
+      "newPassword"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "100",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "101",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "102",
+      "fixed": false,
+      "raw": "newPassword"
+     },
+     "serializedName": "newPassword",
+     "modelType": {
+      "$id": "103",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "104",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "PasswordResetDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "105",
+    "fixed": false,
+    "raw": "PasswordResetDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "PasswordResetDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/PasswordResetDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "106",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "107",
+     "isReadOnly": false,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "108",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "109",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "110",
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "111",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "112",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "113",
+     "isReadOnly": false,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "114",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "115",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "116",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "117",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "118",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "119",
+     "isReadOnly": false,
+     "realPath": [
+      "displayName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "120",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "121",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "122",
+      "fixed": false,
+      "raw": "displayName"
+     },
+     "serializedName": "displayName",
+     "modelType": {
+      "$id": "123",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "124",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "UserDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "125",
+    "fixed": false,
+    "raw": "UserDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "UserDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/UserDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "126",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "127",
+     "isReadOnly": true,
+     "realPath": [
+      "seatsRemaining"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "128",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "129",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "130",
+      "fixed": false,
+      "raw": "seatsRemaining"
+     },
+     "serializedName": "seatsRemaining",
+     "modelType": {
+      "$id": "131",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "double",
+      "name": {
+       "$id": "132",
+       "fixed": false,
+       "raw": "Double"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "133",
+     "isReadOnly": true,
+     "realPath": [
+      "driverCount"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "134",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "135",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "136",
+      "fixed": false,
+      "raw": "driverCount"
+     },
+     "serializedName": "driverCount",
+     "modelType": {
+      "$id": "137",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "double",
+      "name": {
+       "$id": "138",
+       "fixed": false,
+       "raw": "Double"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "CarpoolMetadataDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "139",
+    "fixed": false,
+    "raw": "CarpoolMetadataDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolMetadataDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolMetadataDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "140",
+   "$type": "CompositeType",
+   "serializedName": "CarpoolDto-user",
+   "baseModelType": {
+    "$ref": "106"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "141",
+    "fixed": false,
+    "raw": "CarpoolDto-user"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolDto-user",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolDto-user"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "142",
+   "$type": "CompositeType",
+   "serializedName": "CarpoolDto-metadata",
+   "baseModelType": {
+    "$ref": "126"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "143",
+    "fixed": false,
+    "raw": "CarpoolDto-metadata"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolDto-metadata",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolDto-metadata"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "144",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "145",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "146",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "147",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "148",
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "149",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "150",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "151",
+     "isReadOnly": true,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "152",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "153",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "154",
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "155",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "156",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "157",
+     "isReadOnly": true,
+     "realPath": [
+      "description"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "158",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "159",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "160",
+      "fixed": false,
+      "raw": "description"
+     },
+     "serializedName": "description",
+     "modelType": {
+      "$id": "161",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "162",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "163",
+     "isReadOnly": true,
+     "realPath": [
+      "urlId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "164",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "165",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "166",
+      "fixed": false,
+      "raw": "urlId"
+     },
+     "serializedName": "urlId",
+     "modelType": {
+      "$id": "167",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "168",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "169",
+     "isReadOnly": true,
+     "realPath": [
+      "destination"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "170",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "171",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "172",
+      "fixed": false,
+      "raw": "destination"
+     },
+     "serializedName": "destination",
+     "modelType": {
+      "$id": "173",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "174",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "175",
+     "isReadOnly": true,
+     "realPath": [
+      "dateTime"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "176",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "177",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "178",
+      "fixed": false,
+      "raw": "dateTime"
+     },
+     "serializedName": "dateTime",
+     "modelType": {
+      "$id": "179",
+      "$type": "PrimaryType",
+      "format": "date-time",
+      "knownPrimaryType": "dateTime",
+      "name": {
+       "$id": "180",
+       "fixed": false,
+       "raw": "DateTime"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "181",
+     "isReadOnly": true,
+     "realPath": [
+      "created"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "182",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "183",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "184",
+      "fixed": false,
+      "raw": "created"
+     },
+     "serializedName": "created",
+     "modelType": {
+      "$id": "185",
+      "$type": "PrimaryType",
+      "format": "date-time",
+      "knownPrimaryType": "dateTime",
+      "name": {
+       "$id": "186",
+       "fixed": false,
+       "raw": "DateTime"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "187",
+     "isReadOnly": true,
+     "realPath": [
+      "updated"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "188",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "189",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "190",
+      "fixed": false,
+      "raw": "updated"
+     },
+     "serializedName": "updated",
+     "modelType": {
+      "$id": "191",
+      "$type": "PrimaryType",
+      "format": "date-time",
+      "knownPrimaryType": "dateTime",
+      "name": {
+       "$id": "192",
+       "fixed": false,
+       "raw": "DateTime"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "193",
+     "isReadOnly": true,
+     "realPath": [
+      "user"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "194",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "195",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "196",
+      "fixed": false,
+      "raw": "user"
+     },
+     "serializedName": "user",
+     "modelType": {
+      "$ref": "140"
+     }
+    },
+    {
+     "$id": "197",
+     "isReadOnly": true,
+     "realPath": [
+      "metadata"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "198",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "199",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "200",
+      "fixed": false,
+      "raw": "metadata"
+     },
+     "serializedName": "metadata",
+     "modelType": {
+      "$ref": "142"
+     }
+    }
+   ],
+   "serializedName": "CarpoolDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "201",
+    "fixed": false,
+    "raw": "CarpoolDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "202",
+   "$type": "CompositeType",
+   "serializedName": "CarpoolQueryResponseDto-carpool",
+   "baseModelType": {
+    "$ref": "144"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "203",
+    "fixed": false,
+    "raw": "CarpoolQueryResponseDto-carpool"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolQueryResponseDto-carpool",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolQueryResponseDto-carpool"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "204",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "205",
+     "isReadOnly": true,
+     "realPath": [
+      "carpool"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "206",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "207",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "208",
+      "fixed": false,
+      "raw": "carpool"
+     },
+     "serializedName": "carpool",
+     "modelType": {
+      "$ref": "202"
+     }
+    },
+    {
+     "$id": "209",
+     "isReadOnly": false,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "210",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "211",
+      "fixed": false
+     },
+     "extensions": {
+      "x-ms-metadata": {
+       "apiVersions": [
+        "1.0"
+       ],
+       "filename": [
+        "mem:///122?oai3.shaken.json"
+       ],
+       "name": "CarpoolQueryResponseDto-type",
+       "originalLocations": [
+        "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolQueryResponseDto-type"
+       ]
+      }
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "212",
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "213",
+      "$type": "EnumType",
+      "values": [
+       {
+        "$id": "214",
+        "name": "created",
+        "serializedName": "created"
+       },
+       {
+        "$id": "215",
+        "name": "driving",
+        "serializedName": "driving"
+       },
+       {
+        "$id": "216",
+        "name": "passenger",
+        "serializedName": "passenger"
+       }
+      ],
+      "oldModelAsString": false,
+      "modelAsString": true,
+      "underlyingType": {
+       "$id": "217",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "$id": "218",
+        "fixed": false,
+        "raw": "String"
+       },
+       "deprecated": false
+      },
+      "name": {
+       "$id": "219",
+       "fixed": false,
+       "raw": ""
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "CarpoolQueryResponseDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "220",
+    "fixed": false,
+    "raw": "CarpoolQueryResponseDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "CarpoolQueryResponseDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/CarpoolQueryResponseDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "221",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "222",
+     "isReadOnly": false,
+     "realPath": [
+      "carpoolName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "223",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "224",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "225",
+      "fixed": false,
+      "raw": "carpoolName"
+     },
+     "serializedName": "carpoolName",
+     "modelType": {
+      "$id": "226",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "227",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "228",
+     "isReadOnly": false,
+     "realPath": [
+      "description"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "229",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "230",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "231",
+      "fixed": false,
+      "raw": "description"
+     },
+     "serializedName": "description",
+     "modelType": {
+      "$id": "232",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "233",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "234",
+     "isReadOnly": false,
+     "realPath": [
+      "destination"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "235",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "236",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "237",
+      "fixed": false,
+      "raw": "destination"
+     },
+     "serializedName": "destination",
+     "modelType": {
+      "$id": "238",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "239",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "240",
+     "isReadOnly": false,
+     "realPath": [
+      "dateTime"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "241",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "242",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "243",
+      "fixed": false,
+      "raw": "dateTime"
+     },
+     "serializedName": "dateTime",
+     "modelType": {
+      "$id": "244",
+      "$type": "PrimaryType",
+      "format": "date-time",
+      "knownPrimaryType": "dateTime",
+      "name": {
+       "$id": "245",
+       "fixed": false,
+       "raw": "DateTime"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "UpsertCarpoolDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "246",
+    "fixed": false,
+    "raw": "UpsertCarpoolDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "UpsertCarpoolDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/UpsertCarpoolDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "247",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "248",
+     "isReadOnly": false,
+     "realPath": [
+      "capacity"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "249",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "250",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "251",
+      "fixed": false,
+      "raw": "capacity"
+     },
+     "serializedName": "capacity",
+     "modelType": {
+      "$id": "252",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "double",
+      "name": {
+       "$id": "253",
+       "fixed": false,
+       "raw": "Double"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "254",
+     "isReadOnly": false,
+     "realPath": [
+      "color"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "255",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "256",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "257",
+      "fixed": false,
+      "raw": "color"
+     },
+     "serializedName": "color",
+     "modelType": {
+      "$id": "258",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "259",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "260",
+     "isReadOnly": false,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "261",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "262",
+      "fixed": false
+     },
+     "extensions": {
+      "x-ms-metadata": {
+       "apiVersions": [
+        "1.0"
+       ],
+       "filename": [
+        "mem:///122?oai3.shaken.json"
+       ],
+       "name": "Car-type",
+       "originalLocations": [
+        "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/Car-type"
+       ]
+      }
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "263",
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "264",
+      "$type": "EnumType",
+      "values": [
+       {
+        "$id": "265",
+        "name": "sedan",
+        "serializedName": "sedan"
+       },
+       {
+        "$id": "266",
+        "name": "truck",
+        "serializedName": "truck"
+       },
+       {
+        "$id": "267",
+        "name": "suv",
+        "serializedName": "suv"
+       },
+       {
+        "$id": "268",
+        "name": "van",
+        "serializedName": "van"
+       }
+      ],
+      "oldModelAsString": false,
+      "modelAsString": true,
+      "underlyingType": {
+       "$id": "269",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "$id": "270",
+        "fixed": false,
+        "raw": "String"
+       },
+       "deprecated": false
+      },
+      "name": {
+       "$id": "271",
+       "fixed": false,
+       "raw": ""
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "Car",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "272",
+    "fixed": false,
+    "raw": "Car"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "Car",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/Car"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "273",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "274",
+     "isReadOnly": false,
+     "realPath": [
+      "car"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "275",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "276",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "277",
+      "fixed": false,
+      "raw": "car"
+     },
+     "serializedName": "car",
+     "modelType": {
+      "$ref": "247"
+     }
+    }
+   ],
+   "serializedName": "UpsertDriverDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "278",
+    "fixed": false,
+    "raw": "UpsertDriverDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "UpsertDriverDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/UpsertDriverDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "279",
+   "$type": "CompositeType",
+   "serializedName": "PassengerDto-user",
+   "baseModelType": {
+    "$ref": "106"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "280",
+    "fixed": false,
+    "raw": "PassengerDto-user"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "PassengerDto-user",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/PassengerDto-user"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "281",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "282",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "283",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "284",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "285",
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "286",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "287",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "288",
+     "isReadOnly": true,
+     "realPath": [
+      "phoneNumber"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "289",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "290",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "291",
+      "fixed": false,
+      "raw": "phoneNumber"
+     },
+     "serializedName": "phoneNumber",
+     "modelType": {
+      "$id": "292",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "293",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "294",
+     "isReadOnly": true,
+     "realPath": [
+      "address"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "295",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "296",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "297",
+      "fixed": false,
+      "raw": "address"
+     },
+     "serializedName": "address",
+     "modelType": {
+      "$id": "298",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "299",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "300",
+     "isReadOnly": true,
+     "realPath": [
+      "user"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "301",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "302",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "303",
+      "fixed": false,
+      "raw": "user"
+     },
+     "serializedName": "user",
+     "modelType": {
+      "$ref": "279"
+     }
+    },
+    {
+     "$id": "304",
+     "isReadOnly": true,
+     "realPath": [
+      "driverId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "305",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "306",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "307",
+      "fixed": false,
+      "raw": "driverId"
+     },
+     "serializedName": "driverId",
+     "modelType": {
+      "$id": "308",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "309",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "PassengerDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "310",
+    "fixed": false,
+    "raw": "PassengerDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "PassengerDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/PassengerDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "311",
+   "$type": "CompositeType",
+   "serializedName": "DriverDto-car",
+   "baseModelType": {
+    "$ref": "247"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "312",
+    "fixed": false,
+    "raw": "DriverDto-car"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "DriverDto-car",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/DriverDto-car"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "313",
+   "$type": "CompositeType",
+   "serializedName": "DriverDto-user",
+   "baseModelType": {
+    "$ref": "106"
+   },
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "314",
+    "fixed": false,
+    "raw": "DriverDto-user"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "DriverDto-user",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/DriverDto-user"
+     ]
+    },
+    "x-internal-autorest-anonymous-schema": {
+     "anonymous": true
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "315",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "316",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "317",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "318",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "319",
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "320",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "321",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "322",
+     "isReadOnly": true,
+     "realPath": [
+      "car"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "323",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "324",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "325",
+      "fixed": false,
+      "raw": "car"
+     },
+     "serializedName": "car",
+     "modelType": {
+      "$ref": "311"
+     }
+    },
+    {
+     "$id": "326",
+     "isReadOnly": true,
+     "realPath": [
+      "carpoolId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "327",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "328",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "329",
+      "fixed": false,
+      "raw": "carpoolId"
+     },
+     "serializedName": "carpoolId",
+     "modelType": {
+      "$id": "330",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "331",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "332",
+     "isReadOnly": true,
+     "realPath": [
+      "user"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "333",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "334",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "335",
+      "fixed": false,
+      "raw": "user"
+     },
+     "serializedName": "user",
+     "modelType": {
+      "$ref": "313"
+     }
+    },
+    {
+     "$id": "336",
+     "isReadOnly": true,
+     "realPath": [
+      "seatsRemaining"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "337",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "338",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "339",
+      "fixed": false,
+      "raw": "seatsRemaining"
+     },
+     "serializedName": "seatsRemaining",
+     "modelType": {
+      "$id": "340",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "double",
+      "name": {
+       "$id": "341",
+       "fixed": false,
+       "raw": "Double"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "342",
+     "isReadOnly": true,
+     "realPath": [
+      "passengerUserIds"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "343",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "344",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "345",
+      "fixed": false,
+      "raw": "passengerUserIds"
+     },
+     "serializedName": "passengerUserIds",
+     "modelType": {
+      "$id": "346",
+      "$type": "SequenceType",
+      "elementType": {
+       "$id": "347",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "$id": "348",
+        "fixed": false,
+        "raw": "String"
+       },
+       "deprecated": false
+      },
+      "name": {
+       "$id": "349",
+       "fixed": false
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "350",
+     "isReadOnly": true,
+     "realPath": [
+      "passengers"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "351",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "352",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "353",
+      "fixed": false,
+      "raw": "passengers"
+     },
+     "serializedName": "passengers",
+     "modelType": {
+      "$id": "354",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "281"
+      },
+      "name": {
+       "$id": "355",
+       "fixed": false
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "DriverDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "356",
+    "fixed": false,
+    "raw": "DriverDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "DriverDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/DriverDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "357",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "358",
+     "isReadOnly": false,
+     "realPath": [
+      "phoneNumber"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "359",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "360",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "361",
+      "fixed": false,
+      "raw": "phoneNumber"
+     },
+     "serializedName": "phoneNumber",
+     "modelType": {
+      "$id": "362",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "363",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "364",
+     "isReadOnly": false,
+     "realPath": [
+      "address"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "365",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "366",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "367",
+      "fixed": false,
+      "raw": "address"
+     },
+     "serializedName": "address",
+     "modelType": {
+      "$id": "368",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "369",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "UpsertPassengerDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "370",
+    "fixed": false,
+    "raw": "UpsertPassengerDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "UpsertPassengerDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/UpsertPassengerDto"
+     ]
+    }
+   },
+   "deprecated": false
+  },
+  {
+   "$id": "371",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "372",
+     "isReadOnly": true,
+     "realPath": [
+      "email"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "373",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "374",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "375",
+      "fixed": false,
+      "raw": "email"
+     },
+     "serializedName": "email",
+     "modelType": {
+      "$id": "376",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "377",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    },
+    {
+     "$id": "378",
+     "isReadOnly": true,
+     "realPath": [
+      "token"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "379",
+      "fixed": false
+     },
+     "deprecated": false,
+     "documentation": {
+      "$id": "380",
+      "fixed": false
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "$id": "381",
+      "fixed": false,
+      "raw": "token"
+     },
+     "serializedName": "token",
+     "modelType": {
+      "$id": "382",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "$id": "383",
+       "fixed": false,
+       "raw": "String"
+      },
+      "deprecated": false
+     }
+    }
+   ],
+   "serializedName": "VerificationDto",
+   "containsConstantProperties": false,
+   "name": {
+    "$id": "384",
+    "fixed": false,
+    "raw": "VerificationDto"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "VerificationDto",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/schemas/VerificationDto"
+     ]
+    }
+   },
+   "deprecated": false
+  }
+ ],
+ "name": "CarpoolAPI",
+ "namespace": "",
+ "modelsName": "Models",
+ "apiVersion": "1.0",
+ "baseUrl": "http://localhost",
+ "documentation": "Free carpool app for cool peeps and their friends",
+ "properties": [
+  {
+   "$id": "385",
+   "isReadOnly": false,
+   "realPath": [
+    "type"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "386",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "387",
+    "fixed": false,
+    "raw": "CSV w/ one or more available options: created,driving,passenger"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·v3tl3l·api-v1-users-me-carpools·get·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·v3tl3l·api-v1-users-me-carpools·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "388",
+    "fixed": false,
+    "raw": "type"
+   },
+   "serializedName": "type",
+   "modelType": {
+    "$id": "389",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "390",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "391",
+   "isReadOnly": false,
+   "realPath": [
+    "displayName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "392",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "393",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·wlstew·api-v1-users-displayname-carpools·get·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·wlstew·api-v1-users-displayname-carpools·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "394",
+    "fixed": false,
+    "raw": "displayName"
+   },
+   "serializedName": "displayName",
+   "modelType": {
+    "$id": "395",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "396",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "397",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "398",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "399",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1k26fn4·api-v1-carpools-id·get·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1k26fn4·api-v1-carpools-id·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "400",
+    "fixed": false,
+    "raw": "id"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "401",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "402",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "403",
+   "isReadOnly": false,
+   "realPath": [
+    "includeMetadata"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "404",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "405",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1xnqzuk·api-v1-carpools-id·get·parameters·1",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1xnqzuk·api-v1-carpools-id·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "406",
+    "fixed": false,
+    "raw": "includeMetadata"
+   },
+   "serializedName": "includeMetadata",
+   "modelType": {
+    "$id": "407",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "boolean",
+    "name": {
+     "$id": "408",
+     "fixed": false,
+     "raw": "Boolean"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "409",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "410",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "411",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1r0fhps·api-v1-carpools-id·put·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1r0fhps·api-v1-carpools-id·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "412",
+    "fixed": false,
+    "raw": "Id1"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "413",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "414",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "415",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "416",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "417",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1issfjt·api-v1-carpools-id·delete·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1issfjt·api-v1-carpools-id·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "418",
+    "fixed": false,
+    "raw": "Id2"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "419",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "420",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "421",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "422",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "423",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·eoppys·api-v1-carpools-id-drivers·post·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·eoppys·api-v1-carpools-id-drivers·post·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "424",
+    "fixed": false,
+    "raw": "Id3"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "425",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "426",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "427",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "428",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "429",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·15wsach·api-v1-carpools-id-drivers·get·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·15wsach·api-v1-carpools-id-drivers·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "430",
+    "fixed": false,
+    "raw": "Id4"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "431",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "432",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "433",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "434",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "435",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·e8za3d·api-v1-carpools-id-drivers-driverid·delete·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·e8za3d·api-v1-carpools-id-drivers-driverid·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "436",
+    "fixed": false,
+    "raw": "Id5"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "437",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "438",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "439",
+   "isReadOnly": false,
+   "realPath": [
+    "driverId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "440",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "441",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1kl4acs·api-v1-carpools-id-drivers-driverid·delete·parameters·1",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1kl4acs·api-v1-carpools-id-drivers-driverid·delete·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "442",
+    "fixed": false,
+    "raw": "driverId"
+   },
+   "serializedName": "driverId",
+   "modelType": {
+    "$id": "443",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "444",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "445",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "446",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "447",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·1w2ikvn·api-v1-drivers-id-passengers·post·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1w2ikvn·api-v1-drivers-id-passengers·post·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "448",
+    "fixed": false,
+    "raw": "Id6"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "449",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "450",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "451",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "452",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "453",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·8gqm0a·api-v1-drivers-id-passengers·delete·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·8gqm0a·api-v1-drivers-id-passengers·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "454",
+    "fixed": false,
+    "raw": "Id7"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "455",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "456",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  },
+  {
+   "$id": "457",
+   "isReadOnly": false,
+   "realPath": [
+    "id"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "458",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "459",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "1.0"
+     ],
+     "filename": [
+      "mem:///122?oai3.shaken.json"
+     ],
+     "name": "paths·igix0x·api-v1-drivers-id-passengers·get·parameters·0",
+     "originalLocations": [
+      "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·igix0x·api-v1-drivers-id-passengers·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "460",
+    "fixed": false,
+    "raw": "Id8"
+   },
+   "serializedName": "id",
+   "modelType": {
+    "$id": "461",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "462",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  }
+ ],
+ "operations": [
+  {
+   "$id": "463",
+   "methods": [
+    {
+     "$id": "464",
+     "parameters": [
+      {
+       "$id": "465",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "466",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "467",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1f7wz9l·api-v1-auth-signup·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·1f7wz9l·api-v1-auth-signup·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "468",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "2"
+       }
+      }
+     ],
+     "name": {
+      "$id": "469",
+      "fixed": false,
+      "raw": "signUp"
+     },
+     "group": {
+      "$id": "470",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "signUp",
+     "url": "/api/v1/auth/signup",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "OK": {
+       "$id": "471",
+       "extensions": {
+        "$id": "472",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·o86uch·api-v1-auth-signup·post·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·o86uch·api-v1-auth-signup·post·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "473",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "474",
+      "isNullable": true
+     },
+     "description": "Sign up a new user",
+     "summary": "Sign up",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "475",
+     "parameters": [
+      {
+       "$id": "476",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "477",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "478",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1m9k0e7·api-v1-auth-signin·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·1m9k0e7·api-v1-auth-signin·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "479",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "22"
+       }
+      }
+     ],
+     "name": {
+      "$id": "480",
+      "fixed": false,
+      "raw": "signIn"
+     },
+     "group": {
+      "$id": "481",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "signIn",
+     "url": "/api/v1/auth/signin",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "OK": {
+       "$id": "482",
+       "body": {
+        "$ref": "36"
+       },
+       "extensions": {
+        "$id": "483",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1ohvj2r·api-v1-auth-signin·post·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1ohvj2r·api-v1-auth-signin·post·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "484",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "485",
+      "body": {
+       "$ref": "36"
+      },
+      "isNullable": true
+     },
+     "description": "Sign in an existing user",
+     "summary": "Sign in",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "486",
+     "parameters": [
+      {
+       "$id": "487",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "488",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "489",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·xfl47e·api-v1-auth-signinwithgoogle·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·xfl47e·api-v1-auth-signinwithgoogle·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "490",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "44"
+       }
+      }
+     ],
+     "name": {
+      "$id": "491",
+      "fixed": false,
+      "raw": "signInWithGoogle"
+     },
+     "group": {
+      "$id": "492",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "signInWithGoogle",
+     "url": "/api/v1/auth/signinwithgoogle",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "OK": {
+       "$id": "493",
+       "body": {
+        "$ref": "58"
+       },
+       "extensions": {
+        "$id": "494",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1gc65ac·api-v1-auth-signinwithgoogle·post·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1gc65ac·api-v1-auth-signinwithgoogle·post·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "495",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "496",
+      "body": {
+       "$ref": "58"
+      },
+      "isNullable": true
+     },
+     "description": "Sign in using a google user's idToken. This will create a user if it doesnt exist. It might also request further steps, such as setting a display name.",
+     "summary": "Sign in with Google",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "497",
+     "parameters": [
+      {
+       "$id": "498",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "499",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "500",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·f2ibqd·api-v1-auth-requestpasswordreset·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·f2ibqd·api-v1-auth-requestpasswordreset·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "501",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "78"
+       }
+      }
+     ],
+     "name": {
+      "$id": "502",
+      "fixed": false,
+      "raw": "requestPasswordReset"
+     },
+     "group": {
+      "$id": "503",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "requestPasswordReset",
+     "url": "/api/v1/auth/requestpasswordreset",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "OK": {
+       "$id": "504",
+       "extensions": {
+        "$id": "505",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·ajt6x·api-v1-auth-requestpasswordreset·post·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·ajt6x·api-v1-auth-requestpasswordreset·post·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "506",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "507",
+      "isNullable": true
+     },
+     "description": "Sends a password reset to the specified email if it exists",
+     "summary": "Request Password Reset",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "508",
+     "parameters": [
+      {
+       "$id": "509",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "510",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "511",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·xwhn5a·api-v1-auth-resetpassword·put·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·xwhn5a·api-v1-auth-resetpassword·put·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "512",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "86"
+       }
+      }
+     ],
+     "name": {
+      "$id": "513",
+      "fixed": false,
+      "raw": "resetPassword"
+     },
+     "group": {
+      "$id": "514",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "resetPassword",
+     "url": "/api/v1/auth/resetpassword",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "$id": "515",
+       "body": {
+        "$ref": "36"
+       },
+       "extensions": {
+        "$id": "516",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1jusf2v·api-v1-auth-resetpassword·put·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1jusf2v·api-v1-auth-resetpassword·put·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "517",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "518",
+      "body": {
+       "$ref": "36"
+      },
+      "isNullable": true
+     },
+     "description": "Reset a User's password using the token emailed to them after requesting a password reset",
+     "summary": "Reset User Password",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "519",
+     "name": {
+      "$id": "520",
+      "fixed": false,
+      "raw": "getMyProfile"
+     },
+     "group": {
+      "$id": "521",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getMyProfile",
+     "url": "/api/v1/users/me",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "522",
+       "body": {
+        "$ref": "106"
+       },
+       "extensions": {
+        "$id": "523",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·au2ka3·api-v1-users-me·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·au2ka3·api-v1-users-me·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "524",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "525",
+      "body": {
+       "$ref": "106"
+      },
+      "isNullable": true
+     },
+     "description": "Gets the current user's profile",
+     "summary": "Get user profile",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "526",
+     "parameters": [
+      {
+       "$id": "527",
+       "clientProperty": {
+        "$ref": "385"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "528",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "529",
+        "fixed": false,
+        "raw": "CSV w/ one or more available options: created,driving,passenger"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·v3tl3l·api-v1-users-me-carpools·get·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·v3tl3l·api-v1-users-me-carpools·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "530",
+        "fixed": false,
+        "raw": "type"
+       },
+       "serializedName": "type",
+       "modelType": {
+        "$id": "531",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "532",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "533",
+      "fixed": false,
+      "raw": "getMyCarpools"
+     },
+     "group": {
+      "$id": "534",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getMyCarpools",
+     "url": "/api/v1/users/me/carpools",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "535",
+       "body": {
+        "$id": "536",
+        "$type": "SequenceType",
+        "elementType": {
+         "$ref": "204"
+        },
+        "name": {
+         "$id": "537",
+         "fixed": false
+        },
+        "deprecated": false
+       },
+       "extensions": {
+        "$id": "538",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1grwqcr·api-v1-users-me-carpools·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1grwqcr·api-v1-users-me-carpools·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "539",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "540",
+      "body": {
+       "$ref": "536"
+      },
+      "isNullable": true
+     },
+     "description": "Gets a collection of carpools created by the current user",
+     "summary": "Get user's carpools",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "541",
+     "parameters": [
+      {
+       "$id": "542",
+       "clientProperty": {
+        "$ref": "391"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "543",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "544",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·wlstew·api-v1-users-displayname-carpools·get·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·wlstew·api-v1-users-displayname-carpools·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "545",
+        "fixed": false,
+        "raw": "displayName"
+       },
+       "serializedName": "displayName",
+       "modelType": {
+        "$id": "546",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "547",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "548",
+      "fixed": false,
+      "raw": "getUserCarpools"
+     },
+     "group": {
+      "$id": "549",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getUserCarpools",
+     "url": "/api/v1/users/{displayName}/carpools",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "550",
+       "body": {
+        "$id": "551",
+        "$type": "SequenceType",
+        "elementType": {
+         "$ref": "144"
+        },
+        "name": {
+         "$id": "552",
+         "fixed": false
+        },
+        "deprecated": false
+       },
+       "extensions": {
+        "$id": "553",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1nt5yv3·api-v1-users-displayname-carpools·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1nt5yv3·api-v1-users-displayname-carpools·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "554",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "555",
+      "body": {
+       "$ref": "551"
+      },
+      "isNullable": true
+     },
+     "description": "Get a user's carpools by their display name",
+     "summary": "Get a user's carpools",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "556",
+     "parameters": [
+      {
+       "$id": "557",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "558",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "559",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1h3h21h·api-v1-carpools·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·1h3h21h·api-v1-carpools·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "560",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "221"
+       }
+      }
+     ],
+     "name": {
+      "$id": "561",
+      "fixed": false,
+      "raw": "createCarpool"
+     },
+     "group": {
+      "$id": "562",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "createCarpool",
+     "url": "/api/v1/carpools",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "Created": {
+       "$id": "563",
+       "body": {
+        "$ref": "144"
+       },
+       "extensions": {
+        "$id": "564",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·14cmn00·api-v1-carpools·post·responses·201",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·14cmn00·api-v1-carpools·post·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "565",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "566",
+      "body": {
+       "$ref": "144"
+      },
+      "isNullable": true
+     },
+     "description": "Create a new Carpool",
+     "summary": "Create Carpool",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "567",
+     "parameters": [
+      {
+       "$id": "568",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "569",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "570",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1k26fn4·api-v1-carpools-id·get·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1k26fn4·api-v1-carpools-id·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "571",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "572",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "573",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      },
+      {
+       "$id": "574",
+       "clientProperty": {
+        "$ref": "403"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "575",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "576",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1xnqzuk·api-v1-carpools-id·get·parameters·1",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1xnqzuk·api-v1-carpools-id·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "577",
+        "fixed": false,
+        "raw": "includeMetadata"
+       },
+       "serializedName": "includeMetadata",
+       "modelType": {
+        "$id": "578",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "boolean",
+        "name": {
+         "$id": "579",
+         "fixed": false,
+         "raw": "Boolean"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "580",
+      "fixed": false,
+      "raw": "getCarpool"
+     },
+     "group": {
+      "$id": "581",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getCarpool",
+     "url": "/api/v1/carpools/{id}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "582",
+       "body": {
+        "$ref": "144"
+       },
+       "extensions": {
+        "$id": "583",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·7wmode·api-v1-carpools-id·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·7wmode·api-v1-carpools-id·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "584",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "585",
+      "body": {
+       "$ref": "144"
+      },
+      "isNullable": true
+     },
+     "description": "Retrieve a Carpool by its GUID or its URL ID",
+     "summary": "Get Carpool",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "586",
+     "parameters": [
+      {
+       "$id": "587",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "588",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "589",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1wp9qsz·api-v1-carpools-id·put·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·1wp9qsz·api-v1-carpools-id·put·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "590",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "221"
+       }
+      },
+      {
+       "$id": "591",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "592",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "593",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1r0fhps·api-v1-carpools-id·put·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1r0fhps·api-v1-carpools-id·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "594",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "595",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "596",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "597",
+      "fixed": false,
+      "raw": "updateCarpool"
+     },
+     "group": {
+      "$id": "598",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "updateCarpool",
+     "url": "/api/v1/carpools/{id}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "$id": "599",
+       "body": {
+        "$ref": "144"
+       },
+       "extensions": {
+        "$id": "600",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·dk64gc·api-v1-carpools-id·put·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·dk64gc·api-v1-carpools-id·put·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "601",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "602",
+      "body": {
+       "$ref": "144"
+      },
+      "isNullable": true
+     },
+     "description": "Update a Carpool",
+     "summary": "Update Carpool",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "603",
+     "parameters": [
+      {
+       "$id": "604",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "605",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "606",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1issfjt·api-v1-carpools-id·delete·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1issfjt·api-v1-carpools-id·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "607",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "608",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "609",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "610",
+      "fixed": false,
+      "raw": "deleteCarpool"
+     },
+     "group": {
+      "$id": "611",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "deleteCarpool",
+     "url": "/api/v1/carpools/{id}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "NoContent": {
+       "$id": "612",
+       "extensions": {
+        "$id": "613",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·e801g3·api-v1-carpools-id·delete·responses·204",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·e801g3·api-v1-carpools-id·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "614",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "615",
+      "isNullable": true
+     },
+     "description": "Delete a Carpool",
+     "summary": "Delete Carpool",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "616",
+     "parameters": [
+      {
+       "$id": "617",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "618",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "619",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·355tli·api-v1-carpools-id-drivers·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·355tli·api-v1-carpools-id-drivers·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "620",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "273"
+       }
+      },
+      {
+       "$id": "621",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "622",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "623",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·eoppys·api-v1-carpools-id-drivers·post·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·eoppys·api-v1-carpools-id-drivers·post·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "624",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "625",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "626",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "627",
+      "fixed": false,
+      "raw": "createDriver"
+     },
+     "group": {
+      "$id": "628",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "createDriver",
+     "url": "/api/v1/carpools/{id}/drivers",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "Created": {
+       "$id": "629",
+       "body": {
+        "$ref": "315"
+       },
+       "extensions": {
+        "$id": "630",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·15ntqnf·api-v1-carpools-id-drivers·post·responses·201",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·15ntqnf·api-v1-carpools-id-drivers·post·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "631",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "632",
+      "body": {
+       "$ref": "315"
+      },
+      "isNullable": true
+     },
+     "description": "Create a driver for a carpool",
+     "summary": "Create Driver",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "633",
+     "parameters": [
+      {
+       "$id": "634",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "635",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "636",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·15wsach·api-v1-carpools-id-drivers·get·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·15wsach·api-v1-carpools-id-drivers·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "637",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "638",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "639",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "640",
+      "fixed": false,
+      "raw": "getDrivers"
+     },
+     "group": {
+      "$id": "641",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getDrivers",
+     "url": "/api/v1/carpools/{id}/drivers",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "642",
+       "body": {
+        "$id": "643",
+        "$type": "SequenceType",
+        "elementType": {
+         "$ref": "315"
+        },
+        "name": {
+         "$id": "644",
+         "fixed": false
+        },
+        "deprecated": false
+       },
+       "extensions": {
+        "$id": "645",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1f5fagk·api-v1-carpools-id-drivers·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1f5fagk·api-v1-carpools-id-drivers·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "646",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "647",
+      "body": {
+       "$ref": "643"
+      },
+      "isNullable": true
+     },
+     "description": "Get all the drivers signed up for a carpool",
+     "summary": "Get Drivers",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "648",
+     "parameters": [
+      {
+       "$id": "649",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "650",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "651",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·e8za3d·api-v1-carpools-id-drivers-driverid·delete·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·e8za3d·api-v1-carpools-id-drivers-driverid·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "652",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "653",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "654",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      },
+      {
+       "$id": "655",
+       "clientProperty": {
+        "$ref": "439"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "656",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "657",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1kl4acs·api-v1-carpools-id-drivers-driverid·delete·parameters·1",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1kl4acs·api-v1-carpools-id-drivers-driverid·delete·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "658",
+        "fixed": false,
+        "raw": "driverId"
+       },
+       "serializedName": "driverId",
+       "modelType": {
+        "$id": "659",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "660",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "661",
+      "fixed": false,
+      "raw": "deleteDriver"
+     },
+     "group": {
+      "$id": "662",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "deleteDriver",
+     "url": "/api/v1/carpools/{id}/drivers/{driverId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "NoContent": {
+       "$id": "663",
+       "extensions": {
+        "$id": "664",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·ddtaor·api-v1-carpools-id-drivers-driverid·delete·responses·204",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·ddtaor·api-v1-carpools-id-drivers-driverid·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "665",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "666",
+      "isNullable": true
+     },
+     "description": "Delete the specified driver, email any of their passengers",
+     "summary": "Delete Driver",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       },
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "667",
+     "parameters": [
+      {
+       "$id": "668",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "669",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "670",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·15lv12a·api-v1-drivers-id-passengers·post·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·15lv12a·api-v1-drivers-id-passengers·post·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "671",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "357"
+       }
+      },
+      {
+       "$id": "672",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "673",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "674",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1w2ikvn·api-v1-drivers-id-passengers·post·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·1w2ikvn·api-v1-drivers-id-passengers·post·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "675",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "676",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "677",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "678",
+      "fixed": false,
+      "raw": "createPassenger"
+     },
+     "group": {
+      "$id": "679",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "createPassenger",
+     "url": "/api/v1/drivers/{id}/passengers",
+     "isAbsoluteUrl": false,
+     "httpMethod": "post",
+     "responses": {
+      "Created": {
+       "$id": "680",
+       "body": {
+        "$ref": "281"
+       },
+       "extensions": {
+        "$id": "681",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1skl6ib·api-v1-drivers-id-passengers·post·responses·201",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1skl6ib·api-v1-drivers-id-passengers·post·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "682",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "683",
+      "body": {
+       "$ref": "281"
+      },
+      "isNullable": true
+     },
+     "description": "Creates a passenger based off the current user ",
+     "summary": "Create Passenger",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "684",
+     "parameters": [
+      {
+       "$id": "685",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "686",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "687",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·8gqm0a·api-v1-drivers-id-passengers·delete·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·8gqm0a·api-v1-drivers-id-passengers·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "688",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "689",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "690",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "691",
+      "fixed": false,
+      "raw": "deletePassenger"
+     },
+     "group": {
+      "$id": "692",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "deletePassenger",
+     "url": "/api/v1/drivers/{id}/passengers",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "NoContent": {
+       "$id": "693",
+       "extensions": {
+        "$id": "694",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·14bj3dq·api-v1-drivers-id-passengers·delete·responses·204",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·14bj3dq·api-v1-drivers-id-passengers·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "695",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "696",
+      "isNullable": true
+     },
+     "description": "Deletes a passenger based off the current user",
+     "summary": "Delete Passenger",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "697",
+     "parameters": [
+      {
+       "$id": "698",
+       "clientProperty": {
+        "$ref": "397"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "699",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "700",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·igix0x·api-v1-drivers-id-passengers·get·parameters·0",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/parameters/paths·igix0x·api-v1-drivers-id-passengers·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "701",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "702",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "703",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "704",
+      "fixed": false,
+      "raw": "getPassengers"
+     },
+     "group": {
+      "$id": "705",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "getPassengers",
+     "url": "/api/v1/drivers/{id}/passengers",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "706",
+       "body": {
+        "$id": "707",
+        "$type": "SequenceType",
+        "elementType": {
+         "$ref": "281"
+        },
+        "name": {
+         "$id": "708",
+         "fixed": false
+        },
+        "deprecated": false
+       },
+       "extensions": {
+        "$id": "709",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·wduwt·api-v1-drivers-id-passengers·get·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·wduwt·api-v1-drivers-id-passengers·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "710",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "711",
+      "body": {
+       "$ref": "707"
+      },
+      "isNullable": true
+     },
+     "description": "Get passengers for a driver",
+     "summary": "Get Passengers",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [],
+      "security": [
+       {
+        "bearer": []
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "712",
+     "parameters": [
+      {
+       "$id": "713",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "714",
+        "fixed": false
+       },
+       "deprecated": false,
+       "documentation": {
+        "$id": "715",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1h69btd·api-v1-verification·put·requestbody",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/requestBodies/paths·1h69btd·api-v1-verification·put·requestbody"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "716",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "371"
+       }
+      }
+     ],
+     "name": {
+      "$id": "717",
+      "fixed": false,
+      "raw": "verifyUser"
+     },
+     "group": {
+      "$id": "718",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "verifyUser",
+     "url": "/api/v1/verification",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "$id": "719",
+       "body": {
+        "$ref": "36"
+       },
+       "extensions": {
+        "$id": "720",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "1.0"
+         ],
+         "filename": [
+          "mem:///122?oai3.shaken.json"
+         ],
+         "name": "paths·1sx6cgn·api-v1-verification·put·responses·200",
+         "originalLocations": [
+          "file:///home/andrew/dev/carpool/packages/server/api-swagger-spec.json#/components/responses/paths·1sx6cgn·api-v1-verification·put·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "721",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "722",
+      "body": {
+       "$ref": "36"
+      },
+      "isNullable": true
+     },
+     "description": "Verify a User using the token emailed to them during account creation",
+     "summary": "Verify User",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "$id": "723",
+    "fixed": false,
+    "raw": ""
+   },
+   "typeName": {
+    "$id": "724",
+    "fixed": false
+   },
+   "nameForProperty": "CarpoolAPI"
+  }
+ ]
+}

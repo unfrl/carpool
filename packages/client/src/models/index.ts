@@ -27,7 +27,10 @@ export interface SignInDto {
  * An interface representing AuthDto.
  */
 export interface AuthDto {
-  accessToken: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly accessToken: string;
 }
 
 /**
@@ -42,9 +45,18 @@ export interface GoogleSignInDto {
  * An interface representing SocialAuthDto.
  */
 export interface SocialAuthDto {
-  accessToken: string;
-  nextStep: number;
-  error: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly accessToken: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextStep: number;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly error: string;
 }
 
 /**
@@ -76,31 +88,88 @@ export interface UserDto {
  * An interface representing CarpoolMetadataDto.
  */
 export interface CarpoolMetadataDto {
-  seatsRemaining: number;
-  driverCount: number;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly seatsRemaining: number;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly driverCount: number;
+}
+
+/**
+ * An interface representing CarpoolDtoUser.
+ */
+export interface CarpoolDtoUser extends UserDto {
+}
+
+/**
+ * An interface representing CarpoolDtoMetadata.
+ */
+export interface CarpoolDtoMetadata extends CarpoolMetadataDto {
 }
 
 /**
  * An interface representing CarpoolDto.
  */
 export interface CarpoolDto {
-  id: string;
-  name: string;
-  description: string;
-  urlId: string;
-  destination: string;
-  dateTime: any;
-  created: any;
-  updated: any;
-  user: UserDto;
-  metadata: CarpoolMetadataDto;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly description: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly urlId: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly destination: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly dateTime: Date;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly created: Date;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly updated: Date;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly user: CarpoolDtoUser;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly metadata: CarpoolDtoMetadata;
+}
+
+/**
+ * An interface representing CarpoolQueryResponseDtoCarpool.
+ */
+export interface CarpoolQueryResponseDtoCarpool extends CarpoolDto {
 }
 
 /**
  * An interface representing CarpoolQueryResponseDto.
  */
 export interface CarpoolQueryResponseDto {
-  carpool: CarpoolDto;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly carpool: CarpoolQueryResponseDtoCarpool;
   /**
    * Possible values include: 'created', 'driving', 'passenger'
    */
@@ -114,7 +183,7 @@ export interface UpsertCarpoolDto {
   carpoolName: string;
   description?: string;
   destination: string;
-  dateTime: any;
+  dateTime: Date;
 }
 
 /**
@@ -137,27 +206,81 @@ export interface UpsertDriverDto {
 }
 
 /**
+ * An interface representing PassengerDtoUser.
+ */
+export interface PassengerDtoUser extends UserDto {
+}
+
+/**
  * An interface representing PassengerDto.
  */
 export interface PassengerDto {
-  id: string;
-  phoneNumber: string;
-  address: string;
-  user: UserDto;
-  driverId: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly phoneNumber: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly address: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly user: PassengerDtoUser;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly driverId: string;
+}
+
+/**
+ * An interface representing DriverDtoCar.
+ */
+export interface DriverDtoCar extends Car {
+}
+
+/**
+ * An interface representing DriverDtoUser.
+ */
+export interface DriverDtoUser extends UserDto {
 }
 
 /**
  * An interface representing DriverDto.
  */
 export interface DriverDto {
-  id: string;
-  car: Car;
-  carpoolId: string;
-  user: UserDto;
-  seatsRemaining: number;
-  passengerUserIds: string[];
-  passengers: PassengerDto[];
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly car: DriverDtoCar;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly carpoolId: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly user: DriverDtoUser;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly seatsRemaining: number;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly passengerUserIds: string[];
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly passengers: PassengerDto[];
 }
 
 /**
@@ -172,8 +295,14 @@ export interface UpsertPassengerDto {
  * An interface representing VerificationDto.
  */
 export interface VerificationDto {
-  email: string;
-  token: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly email: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly token: string;
 }
 
 /**

@@ -16,6 +16,16 @@ export const displayName: msRest.OperationURLParameter = {
     }
   }
 };
+export const driverId: msRest.OperationURLParameter = {
+  parameterPath: "driverId",
+  mapper: {
+    required: true,
+    serializedName: "driverId",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const id: msRest.OperationURLParameter = {
   parameterPath: "id",
   mapper: {
