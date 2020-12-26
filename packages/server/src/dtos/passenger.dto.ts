@@ -4,17 +4,17 @@ import { UserDto } from "./user.dto";
 
 export class PassengerDto {
     @ApiResponseProperty()
-    public readonly id: string;
+    public id: string;
 
     @ApiResponseProperty()
-    public readonly phoneNumber: string;
+    public phoneNumber: string;
 
     @ApiResponseProperty()
-    public readonly address: string;
+    public address: string;
 
     @ApiResponseProperty()
-    public readonly user: UserDto;
+    public user: UserDto;
 
     @ApiResponseProperty()
-    public readonly driverId: string;
+    public driverId: string;
 }

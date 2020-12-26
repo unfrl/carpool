@@ -116,7 +116,7 @@ export class CarpoolStore {
 
             let carpool = this.carpools.find(c => c.urlId === carpoolUrlId);
             if (!carpool) {
-                carpool = await this._rootStore.apiClient.getCarpool(true, carpoolUrlId);
+                carpool = await this._rootStore.apiClient.getCarpool(carpoolUrlId, true);
                 this.addCarpool(carpool);
             }
 

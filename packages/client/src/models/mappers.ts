@@ -241,28 +241,6 @@ export const CarpoolMetadataDto: msRest.CompositeMapper = {
   }
 };
 
-export const CarpoolDtoUser: msRest.CompositeMapper = {
-  serializedName: "CarpoolDto-user",
-  type: {
-    name: "Composite",
-    className: "CarpoolDtoUser",
-    modelProperties: {
-      ...UserDto.type.modelProperties
-    }
-  }
-};
-
-export const CarpoolDtoMetadata: msRest.CompositeMapper = {
-  serializedName: "CarpoolDto-metadata",
-  type: {
-    name: "Composite",
-    className: "CarpoolDtoMetadata",
-    modelProperties: {
-      ...CarpoolMetadataDto.type.modelProperties
-    }
-  }
-};
-
 export const CarpoolDto: msRest.CompositeMapper = {
   serializedName: "CarpoolDto",
   type: {
@@ -271,7 +249,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
     modelProperties: {
       id: {
         required: true,
-        readOnly: true,
         serializedName: "id",
         type: {
           name: "String"
@@ -279,7 +256,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       name: {
         required: true,
-        readOnly: true,
         serializedName: "name",
         type: {
           name: "String"
@@ -287,7 +263,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       description: {
         required: true,
-        readOnly: true,
         serializedName: "description",
         type: {
           name: "String"
@@ -295,7 +270,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       urlId: {
         required: true,
-        readOnly: true,
         serializedName: "urlId",
         type: {
           name: "String"
@@ -303,7 +277,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       destination: {
         required: true,
-        readOnly: true,
         serializedName: "destination",
         type: {
           name: "String"
@@ -311,7 +284,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       dateTime: {
         required: true,
-        readOnly: true,
         serializedName: "dateTime",
         type: {
           name: "DateTime"
@@ -319,7 +291,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       created: {
         required: true,
-        readOnly: true,
         serializedName: "created",
         type: {
           name: "DateTime"
@@ -327,7 +298,6 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       updated: {
         required: true,
-        readOnly: true,
         serializedName: "updated",
         type: {
           name: "DateTime"
@@ -335,20 +305,18 @@ export const CarpoolDto: msRest.CompositeMapper = {
       },
       user: {
         required: true,
-        readOnly: true,
         serializedName: "user",
         type: {
           name: "Composite",
-          className: "CarpoolDtoUser"
+          className: "UserDto"
         }
       },
       metadata: {
         required: true,
-        readOnly: true,
         serializedName: "metadata",
         type: {
           name: "Composite",
-          className: "CarpoolDtoMetadata"
+          className: "CarpoolMetadataDto"
         }
       }
     }
@@ -540,28 +508,6 @@ export const PassengerDto: msRest.CompositeMapper = {
   }
 };
 
-export const DriverDtoCar: msRest.CompositeMapper = {
-  serializedName: "DriverDto-car",
-  type: {
-    name: "Composite",
-    className: "DriverDtoCar",
-    modelProperties: {
-      ...Car.type.modelProperties
-    }
-  }
-};
-
-export const DriverDtoUser: msRest.CompositeMapper = {
-  serializedName: "DriverDto-user",
-  type: {
-    name: "Composite",
-    className: "DriverDtoUser",
-    modelProperties: {
-      ...UserDto.type.modelProperties
-    }
-  }
-};
-
 export const DriverDto: msRest.CompositeMapper = {
   serializedName: "DriverDto",
   type: {
@@ -570,7 +516,6 @@ export const DriverDto: msRest.CompositeMapper = {
     modelProperties: {
       id: {
         required: true,
-        readOnly: true,
         serializedName: "id",
         type: {
           name: "String"
@@ -578,16 +523,14 @@ export const DriverDto: msRest.CompositeMapper = {
       },
       car: {
         required: true,
-        readOnly: true,
         serializedName: "car",
         type: {
           name: "Composite",
-          className: "DriverDtoCar"
+          className: "Car"
         }
       },
       carpoolId: {
         required: true,
-        readOnly: true,
         serializedName: "carpoolId",
         type: {
           name: "String"
@@ -595,16 +538,14 @@ export const DriverDto: msRest.CompositeMapper = {
       },
       user: {
         required: true,
-        readOnly: true,
         serializedName: "user",
         type: {
           name: "Composite",
-          className: "DriverDtoUser"
+          className: "UserDto"
         }
       },
       seatsRemaining: {
         required: true,
-        readOnly: true,
         serializedName: "seatsRemaining",
         type: {
           name: "Number"
@@ -612,7 +553,6 @@ export const DriverDto: msRest.CompositeMapper = {
       },
       passengerUserIds: {
         required: true,
-        readOnly: true,
         serializedName: "passengerUserIds",
         type: {
           name: "Sequence",
@@ -625,7 +565,6 @@ export const DriverDto: msRest.CompositeMapper = {
       },
       passengers: {
         required: true,
-        readOnly: true,
         serializedName: "passengers",
         type: {
           name: "Sequence",
