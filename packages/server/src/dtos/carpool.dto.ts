@@ -1,36 +1,36 @@
-import { ApiResponseProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 import { UserDto } from ".";
 import { CarpoolMetadataDto } from "./carpool.metadata.dto";
 
 export class CarpoolDto {
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly id: string;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly name: string;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly description: string;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly urlId: string;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly destination: string;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly dateTime: Date;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly created: Date;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly updated: Date;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public readonly user: UserDto;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public metadata?: CarpoolMetadataDto;
 }

@@ -43,9 +43,7 @@ export class RootStore {
                     return resource;
                 },
             },
-            {
-                baseUri: apiConfig.baseUri,
-            }
+            apiConfig.baseUri
         );
 
         this.authStore = new AuthStore(this);

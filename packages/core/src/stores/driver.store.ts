@@ -36,7 +36,7 @@ export class DriverStore {
 
     public createDriver = async (carpoolId: string, createDriverDto: UpsertDriverDto) => {
         try {
-            await this._rootStore.apiClient.createDriver(createDriverDto, carpoolId);
+            await this._rootStore.apiClient.createDriver(carpoolId, createDriverDto);
         } catch (error) {
             this._logger.error("Failed to create driver", error);
             throw error;
@@ -49,8 +49,8 @@ export class DriverStore {
     ) => {
         try {
             const passenger = await this._rootStore.apiClient.createPassenger(
-                createPassengerDto,
-                driverId
+                driverId,
+                createPassengerDto
             );
             // TODO: right now we're relying on the driver updated event to notify *this* user when they've been added
             // -- need to decide if this is the best approach

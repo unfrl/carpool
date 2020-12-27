@@ -48,6 +48,7 @@ async function bootstrap() {
 
     // Configure swagger documentation
     const options = new DocumentBuilder()
+        .setContact("Unfrl", "unfrl.com", "info@unfrl.com")
         .setTitle("Carpool API")
         .setDescription("Free carpool app for cool peeps and their friends")
         .setVersion("1.0")
