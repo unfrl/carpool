@@ -52,7 +52,8 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const [showDriverForm, setShowDriverForm] = useState(false);
     const [driverId, setDriverId] = useState<string | undefined>();
     const [removeFromDriverId, setRemoveFromDriverId] = useState<string | undefined>();
-    const [quittingDriverId, setQuittingDriverId] = useState<string | undefined>();
+    const [removingDriverId, setRemovingDriverId] = useState<string | undefined>();
+    const [driverRemovedByCreator, setDriverRemovedByCreator] = useState<boolean | undefined>();
 
     const canUserEdit = Boolean(
         authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.user.id
@@ -100,19 +101,20 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         setRemoveFromDriverId(undefined);
     };
 
-    const handleShowQuitConfirmation = (driverId: string) => {
-        setQuittingDriverId(driverId);
+    const handleShowRemoveDriverConfirmation = (driverId: string, isDriver: boolean) => {
+        setDriverRemovedByCreator(!isDriver);
+        setRemovingDriverId(driverId);
     };
 
     const handleCancelQuit = () => {
-        setQuittingDriverId(undefined);
+        setRemovingDriverId(undefined);
     };
 
     const handleConfirmQuit = async () => {
-        if (quittingDriverId) {
-            await driverStore.removeDriver(selectedCarpoolId, quittingDriverId);
+        if (removingDriverId) {
+            await driverStore.removeDriver(selectedCarpoolId, removingDriverId);
         }
-        setQuittingDriverId(undefined);
+        setRemovingDriverId(undefined);
     };
 
     const handleSaveDriverForm = async (createDriverDto: UpsertDriverDto) => {
@@ -165,11 +167,12 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             <DriverList
                 drivers={driverStore.drivers}
                 loading={driverStore.loading}
+                carpoolCreatorId={selectedCarpool.user.id}
                 userId={authStore.user ? authStore.user.id : undefined}
                 onOfferToDrive={handleToggleDriverForm}
                 onJoinAsPassenger={handleShowPassengerForm}
                 onRemovePassenger={handleShowLeaveConfirmation}
-                onRemoveDriver={handleShowQuitConfirmation}
+                onRemoveDriver={handleShowRemoveDriverConfirmation}
             />
             {showDriverForm && (
                 <AppDialog
@@ -217,7 +220,7 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                     </div>
                 </AppDialog>
             )}
-            {quittingDriverId && (
+            {removingDriverId && (
                 <AppDialog
                     title="Step down from being a driver?"
                     onClose={handleCancelQuit}
@@ -229,9 +232,20 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                             align="center"
                             className={classes.confirmText}
                         >
-                            Are you sure you want to step down?
-                            <br />
-                            You can always volunteer to drive again if you change your mind later.
+                            {driverRemovedByCreator ? (
+                                <div>
+                                Are you sure you want to remove this driver?
+                                </div>
+                            ) :
+                            (
+                                <div>
+                                Are you sure you want to step down?
+                                <br />
+                                You can always volunteer to drive again if you change your mind later.
+                                </div>
+                            )
+                        }
+                            
                         </Typography>
                         <FormActions
                             confirmText="Leave"

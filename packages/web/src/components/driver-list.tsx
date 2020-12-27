@@ -40,16 +40,17 @@ const useStyles = makeStyles(theme => ({
 export interface IDriverListProps {
     drivers: DriverDto[];
     userId?: string;
+    carpoolCreatorId: string;
     loading: boolean;
     onOfferToDrive: () => void;
     onJoinAsPassenger: (driverId: string) => void;
     onRemovePassenger: (driverId: string) => void;
-    onRemoveDriver: (driverId: string) => void;
+    onRemoveDriver: (driverId: string, isDriver: boolean) => void;
 }
 
 export const DriverList: FunctionComponent<IDriverListProps> = observer(props => {
     const classes = useStyles();
-    const { drivers, userId, loading, onOfferToDrive } = props;
+    const { drivers, userId, loading, onOfferToDrive, carpoolCreatorId } = props;
     const hasDrivers = drivers.length > 0;
 
     let currentUserIsDriving = false;
@@ -119,10 +120,14 @@ export const DriverList: FunctionComponent<IDriverListProps> = observer(props =>
                             currentUserIsPassenger={Boolean(
                                 userId && driver.passengerUserIds.indexOf(userId) > -1
                             )}
+                            currentUserIsCreator = {userId == carpoolCreatorId}
                             canJoin={canJoin}
                             onJoin={() => props.onJoinAsPassenger(driver.id)}
-                            onLeave={(isDriver :boolean) => {
-                                isDriver ? props.onRemoveDriver(driver.id) : props.onRemovePassenger(driver.id)
+                            onPassengerLeave={() => {
+                                props.onRemovePassenger(driver.id)
+                            }}
+                            onRemoveDriver={() => {
+                                props.onRemoveDriver(driver.id, driver.user.id === userId)
                             }}
                         />
                     );
