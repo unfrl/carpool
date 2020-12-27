@@ -562,22 +562,26 @@ class CarpoolAPI extends CarpoolAPIContext {
   /**
    * Verify a User using the token emailed to them during account creation
    * @summary Verify User
+   * @param body
    * @param [options] The optional parameters
    * @returns Promise<Models.VerifyUserResponse>
    */
-  verifyUser(options?: msRest.RequestOptionsBase): Promise<Models.VerifyUserResponse>;
+  verifyUser(body: Models.VerificationDto, options?: msRest.RequestOptionsBase): Promise<Models.VerifyUserResponse>;
   /**
+   * @param body
    * @param callback The callback
    */
-  verifyUser(callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  verifyUser(body: Models.VerificationDto, callback: msRest.ServiceCallback<Models.AuthDto>): void;
   /**
+   * @param body
    * @param options The optional parameters
    * @param callback The callback
    */
-  verifyUser(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
-  verifyUser(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.VerifyUserResponse> {
+  verifyUser(body: Models.VerificationDto, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AuthDto>): void;
+  verifyUser(body: Models.VerificationDto, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AuthDto>, callback?: msRest.ServiceCallback<Models.AuthDto>): Promise<Models.VerifyUserResponse> {
     return this.sendOperationRequest(
       {
+        body,
         options
       },
       verifyUserOperationSpec,

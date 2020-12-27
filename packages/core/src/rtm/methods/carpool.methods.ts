@@ -32,6 +32,10 @@ export class CarpoolMethods {
         this._rtmClient.on(driverMessages.events.added, cb);
     };
 
+    public onDriverRemoved = (cb: (driver: DriverDto) => void) => {
+        this._rtmClient.on(driverMessages.events.removed, cb);
+    };
+
     public onDriverUpdated = (cb: (driver: DriverDto) => void) => {
         this._rtmClient.on(driverMessages.events.updated, cb);
     };

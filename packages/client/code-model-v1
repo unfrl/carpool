@@ -2540,7 +2540,7 @@
    "properties": [
     {
      "$id": "364",
-     "isReadOnly": true,
+     "isReadOnly": false,
      "realPath": [
       "email"
      ],
@@ -2576,7 +2576,7 @@
     },
     {
      "$id": "370",
-     "isReadOnly": true,
+     "isReadOnly": false,
      "realPath": [
       "token"
      ],

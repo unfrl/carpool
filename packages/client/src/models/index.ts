@@ -220,14 +220,8 @@ export interface UpsertPassengerDto {
  * An interface representing VerificationDto.
  */
 export interface VerificationDto {
-  /**
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly email: string;
-  /**
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly token: string;
+  email: string;
+  token: string;
 }
 
 /**

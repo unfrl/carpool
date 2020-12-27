@@ -102,16 +102,15 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
 
     const handleShowQuitConfirmation = (driverId: string) => {
         setQuittingDriverId(driverId);
-    }
+    };
 
     const handleCancelQuit = () => {
         setQuittingDriverId(undefined);
-    }
+    };
 
     const handleConfirmQuit = async () => {
         if (quittingDriverId) {
-            console.log("TODO: Should call: await driverStore.removeDriver(quittingDriverId);")
-            //await driverStore.removeDriver(quittingDriverId);
+            await driverStore.removeDriver(selectedCarpoolId, quittingDriverId);
         }
         setQuittingDriverId(undefined);
     };
@@ -219,7 +218,11 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                 </AppDialog>
             )}
             {quittingDriverId && (
-                <AppDialog title="Step down from being a driver?" onClose={handleCancelQuit} color="primary">
+                <AppDialog
+                    title="Step down from being a driver?"
+                    onClose={handleCancelQuit}
+                    color="primary"
+                >
                     <div className={classes.confirmContent}>
                         <Typography
                             variant="subtitle1"

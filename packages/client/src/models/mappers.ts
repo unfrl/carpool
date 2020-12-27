@@ -611,7 +611,6 @@ export const VerificationDto: msRest.CompositeMapper = {
     modelProperties: {
       email: {
         required: true,
-        readOnly: true,
         serializedName: "email",
         type: {
           name: "String"
@@ -619,7 +618,6 @@ export const VerificationDto: msRest.CompositeMapper = {
       },
       token: {
         required: true,
-        readOnly: true,
         serializedName: "token",
         type: {
           name: "String"
