@@ -121,7 +121,7 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                             className={classes.action}
                             onClick={() => {props.onLeave(true)}}
                         >
-                            Quit
+                            Step Down
                         </Button>
                         ) : (
                             <Button
