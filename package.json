@@ -7,14 +7,12 @@
         "packages/*"
     ],
     "scripts": {
-        "preinstall": "yarn install:client && yarn compile:client",
         "test": "echo \"Error: no test specified\" && exit 0",
         "start:all": "concurrently -k \"yarn start:common\" \"yarn start:core\" \"yarn start:web\" \"yarn start:server\"",
         "start:common": "cd packages/common && yarn watch",
         "start:core": "cd packages/core && yarn watch",
         "start:web": "cd packages/web && yarn start",
         "start:server": "cd packages/server && yarn start:dev",
-        "install:client": "cd packages/client && yarn",
         "generate:client": "yarn build:client && yarn compile:client",
         "build:client": "cd packages/server && yarn build:client",
         "compile:client": "cd packages/client && yarn build",
