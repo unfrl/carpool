@@ -6,8 +6,7 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
-        "test": "echo \"NOTE: need tests for core still!\" && exit 0",
-        "postinstall": "yarn build"
+        "test": "echo \"NOTE: need tests for core still!\" && exit 0"
     },
     "keywords": [],
     "author": "",
