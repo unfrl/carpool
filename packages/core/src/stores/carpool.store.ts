@@ -5,7 +5,7 @@ import {
     CarpoolDto,
     CarpoolQueryResponseDto,
     CarpoolMetadataDto,
-} from "@carpool/client";
+} from "@unfrl/carpool-sdk";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 
@@ -96,7 +96,7 @@ export class CarpoolStore {
         try {
             this.setSaving(true);
 
-            const carpool = await this._rootStore.apiClient.updateCarpool(carpoolDto, carpoolId);
+            const carpool = await this._rootStore.apiClient.updateCarpool(carpoolId, carpoolDto);
 
             this.setUpdatedCarpool(carpool);
         } catch (error) {
@@ -116,7 +116,7 @@ export class CarpoolStore {
 
             let carpool = this.carpools.find(c => c.urlId === carpoolUrlId);
             if (!carpool) {
-                carpool = await this._rootStore.apiClient.getCarpool(true, carpoolUrlId);
+                carpool = await this._rootStore.apiClient.getCarpool(carpoolUrlId, true);
                 this.addCarpool(carpool);
             }
 

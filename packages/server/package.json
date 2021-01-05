@@ -17,7 +17,7 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "build:client": "autorest api-swagger.yaml"
+        "build:sdk": "autorest api-swagger.yaml"
     },
     "dependencies": {
         "@carpool/common": "^1.0.0",
@@ -72,7 +72,6 @@
         "@types/socket.io": "^2.1.4",
         "@types/socket.io-redis": "^1.0.25",
         "@types/supertest": "^2.0.5",
-        "autorest": "^2.0.4407",
         "jest": "^23.5.0",
         "nodemon": "^1.18.3",
         "supertest": "^3.1.0",

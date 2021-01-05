@@ -1,9 +1,9 @@
-import { ApiResponseProperty, ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CarpoolMetadataDto {
-    @ApiResponseProperty()
+    @ApiProperty()
     public seatsRemaining: number;
 
-    @ApiResponseProperty()
+    @ApiProperty()
     public driverCount: number;
 }

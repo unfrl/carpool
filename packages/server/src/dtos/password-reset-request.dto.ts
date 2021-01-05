@@ -5,5 +5,5 @@ export class PasswordResetRequestDto {
     @IsEmail()
     @IsDefined()
     @ApiProperty()
-    public readonly email: string;
+    public email: string;
 }

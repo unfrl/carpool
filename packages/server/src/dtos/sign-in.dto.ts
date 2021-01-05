@@ -5,10 +5,10 @@ export class SignInDto {
     @ApiProperty()
     @IsEmail()
     @IsDefined()
-    public readonly email: string;
+    public email: string;
 
     @ApiProperty()
     @MinLength(8)
     @IsDefined()
-    public readonly password: string;
+    public password: string;
 }

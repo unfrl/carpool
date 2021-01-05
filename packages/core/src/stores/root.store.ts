@@ -1,6 +1,6 @@
 import { action, observable } from "mobx";
 
-import { CarpoolAPI } from "@carpool/client";
+import { CarpoolAPI } from "@unfrl/carpool-sdk";
 import { AuthStore } from "./auth.store";
 import { CarpoolStore } from "./carpool.store";
 import { DriverStore } from "./driver.store";
@@ -43,9 +43,7 @@ export class RootStore {
                     return resource;
                 },
             },
-            {
-                baseUri: apiConfig.baseUri,
-            }
+            apiConfig.baseUri
         );
 
         this.authStore = new AuthStore(this);

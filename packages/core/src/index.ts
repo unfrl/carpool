@@ -1,4 +1,4 @@
-export * from "@carpool/client";
+export * from "@unfrl/carpool-sdk";
 export * from "@carpool/common";
 
 export * from "./config";

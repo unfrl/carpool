@@ -1,4 +1,4 @@
-import { CarpoolDto, DriverDto, PassengerDto, CarpoolMetadataDto } from "@carpool/client";
+import { CarpoolDto, DriverDto, PassengerDto, CarpoolMetadataDto } from "@unfrl/carpool-sdk";
 import { carpoolMessages, driverMessages, passengerMessages } from "@carpool/common";
 import { RtmClient } from "../rtm-client";
 

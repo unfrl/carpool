@@ -6,5 +6,5 @@ import { Car } from "../interfaces";
 export class UpsertDriverDto {
     @ApiProperty()
     @IsDefined()
-    public readonly car: Car;
+    public car: Car;
 }

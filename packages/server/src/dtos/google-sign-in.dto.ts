@@ -5,8 +5,8 @@ import { IsDefined } from "class-validator";
 export class GoogleSignInDto {
     @ApiProperty()
     @IsDefined()
-    public readonly idToken: string;
+    public idToken: string;
 
     @ApiPropertyOptional()
-    public readonly displayName?: string;
+    public displayName?: string;
 }

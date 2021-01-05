@@ -1,5 +1,6 @@
 input-file: api-swagger-spec.json
 add-credentials: true
+generate-metadata: false
 
 typescript:
-    output-folder: ../client
+    output-folder: ../sdk

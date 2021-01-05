@@ -7,9 +7,9 @@ import { IsDefined, IsOptional } from "class-validator";
 export class UpsertPassengerDto {
     @ApiPropertyOptional()
     @IsOptional()
-    public readonly phoneNumber: string;
+    public phoneNumber: string;
 
     @ApiProperty()
     @IsDefined()
-    public readonly address: string;
+    public address: string;
 }
