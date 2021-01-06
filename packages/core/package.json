@@ -13,7 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@carpool/client": "0.0.6",
+        "@unfrl/carpool-sdk": "file:../sdk",
         "@carpool/common": "^1.0.0",
         "mobx": "^5.13.0",
         "socket.io-client": "^2.3.0"

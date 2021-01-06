@@ -4,18 +4,18 @@ import { Length, IsDefined, IsDateString, IsOptional } from "class-validator";
 export class UpsertCarpoolDto {
     @ApiProperty()
     @Length(5, 50)
-    public readonly carpoolName: string;
+    public carpoolName: string;
 
     @ApiPropertyOptional()
     @IsOptional()
-    public readonly description: string;
+    public description: string;
 
     @ApiProperty()
     @IsDefined()
-    public readonly destination: string;
+    public destination: string;
 
     @ApiProperty()
     @IsDateString()
     @IsDefined()
-    public readonly dateTime: Date;
+    public dateTime: Date;
 }

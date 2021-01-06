@@ -1,6 +1,6 @@
 import { observable, action, computed } from "mobx";
 
-import { UserDto, SocialAuthDto } from "@carpool/client";
+import { UserDto, SocialAuthDto } from "@unfrl/carpool-sdk";
 import { Logger } from "../utils";
 import { RootStore } from "./root.store";
 import { SocialLoginSteps } from "@carpool/common/dist";

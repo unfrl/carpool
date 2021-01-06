@@ -7,13 +7,13 @@ import { IsDefined, IsEmail } from "class-validator";
 export class UserDto {
     @ApiProperty()
     @IsDefined()
-    public readonly id: string;
+    public id: string;
 
     @ApiProperty()
     @IsEmail()
-    public readonly email: string;
+    public email: string;
 
     @ApiProperty()
     @IsDefined()
-    public readonly displayName: string;
+    public displayName: string;
 }

@@ -9,5 +9,5 @@ import { SignInDto } from "./sign-in.dto";
 export class SignUpDto extends SignInDto {
     @ApiProperty()
     @Length(5, 50)
-    public readonly displayName: string;
+    public displayName: string;
 }
