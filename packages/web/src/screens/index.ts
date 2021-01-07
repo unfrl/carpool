@@ -1,3 +1,4 @@
+export * from "./authentication-screen";
 export * from "./create-carpool-screen";
 export * from "./carpool-screen";
 export * from "./user-carpools-screen";

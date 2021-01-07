@@ -19,6 +19,7 @@ import {
     IAdditionalInfoData,
 } from "./components";
 import {
+    AuthenticationScreen,
     HomeScreen,
     CreateCarpoolScreen,
     CarpoolScreen,
@@ -133,6 +134,20 @@ export class App extends Component<IAppProps, IAppState> {
                                     authStore={authStore}
                                     mode={ScreenMode.PasswordReset}
                                 />
+                            )}
+                        />
+                        <Route
+                            path="/sign-up"
+                            exact={true}
+                            render={_routeProps => (
+                                <AuthenticationScreen isSignUp={true} authStore={authStore} />
+                            )}
+                        />
+                        <Route
+                            path="/sign-in"
+                            exact={true}
+                            render={_routeProps => (
+                                <AuthenticationScreen isSignUp={false} authStore={authStore} />
                             )}
                         />
                         <Route component={NotFoundScreen} />
