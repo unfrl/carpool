@@ -6,6 +6,7 @@ export * from "./document-head";
 export * from "./content";
 export * from "./driver-form";
 export * from "./driver-list";
+export * from "./email-sent";
 export * from "./user-dialog";
 export * from "./user-menu";
 export * from "./user-profile-card";

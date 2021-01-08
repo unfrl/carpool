@@ -9,14 +9,15 @@ import { RouterStore } from "mobx-react-router";
 
 import { AuthStore, CarpoolStore, DriverStore, SocialLoginSteps } from "@carpool/core";
 import {
+    AdditionalInfoDialog,
     AppHeader,
-    UserDialog,
     Content,
     DocumentHead,
+    IAdditionalInfoData,
+    NavLink,
+    UserDialog,
     UserMenu,
     UserMenuOption,
-    AdditionalInfoDialog,
-    IAdditionalInfoData,
 } from "./components";
 import {
     AuthenticationScreen,
@@ -187,9 +188,9 @@ export class App extends Component<IAppProps, IAppState> {
         }
 
         return (
-            <Button color="inherit" onClick={this.handleAuthClick}>
-                Sign in
-            </Button>
+            <NavLink to="/sign-in">
+                <Button color="inherit">Sign in</Button>
+            </NavLink>
         );
     };
 
