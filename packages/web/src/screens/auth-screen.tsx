@@ -173,7 +173,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                     <Button
                         fullWidth={true}
                         variant="contained"
-                        color="secondary"
+                        color="primary"
                         size="large"
                         type="submit"
                     >
