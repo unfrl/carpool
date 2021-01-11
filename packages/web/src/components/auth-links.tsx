@@ -13,17 +13,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const AuthLinks: React.FC = () => {
+export interface IAuthLinksProps {
+    size?: "small" | "medium" | "large";
+}
+
+export const AuthLinks: React.FC<IAuthLinksProps> = props => {
     const classes = useStyles();
 
     return (
         <div className={classes.container}>
             <NavLink to="/sign-in">
-                <Button color="inherit">Sign in</Button>
+                <Button color="inherit" variant="outlined" {...props}>
+                    Sign in
+                </Button>
             </NavLink>
             <div className={classes.spacer} />
             <NavLink to="/sign-up">
-                <Button color="secondary" variant="contained">
+                <Button color="secondary" variant="contained" {...props}>
                     Create Account
                 </Button>
             </NavLink>

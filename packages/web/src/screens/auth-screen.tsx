@@ -65,16 +65,6 @@ export interface IAuthScreenState {
     displayName: string;
     error?: string;
 }
-/**
- * TODOS:
- * - break out google auth flow into own container component
- * -- this will handle logic for displaying display name field if more info is required
- * -- ideally should include sign up vs sign in flow
- * - come up with better way of doing the redirect for signing in
- * - fix sign up links for create carpool route
- * -- ideally this could be a "protected" route that displays the default sign in required if user is not auth'd
- * - impl reset password page
- */
 
 export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
     const classes = useStyles();
@@ -183,7 +173,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                     <Button
                         fullWidth={true}
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         size="large"
                         type="submit"
                     >
