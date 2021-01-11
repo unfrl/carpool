@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export interface IAuthenticationScreenProps {
+export interface IAuthScreenProps {
     /**
      * Set to true for new user sign up otherwise defaults to sign in.
      */
@@ -59,17 +59,27 @@ export interface IAuthenticationScreenProps {
     authStore: AuthStore;
 }
 
-export interface IAuthenticationScreenState {
+export interface IAuthScreenState {
     email: string;
     password: string;
     displayName: string;
     error?: string;
 }
+/**
+ * TODOS:
+ * - break out google auth flow into own container component
+ * -- this will handle logic for displaying display name field if more info is required
+ * -- ideally should include sign up vs sign in flow
+ * - come up with better way of doing the redirect for signing in
+ * - fix sign up links for create carpool route
+ * -- ideally this could be a "protected" route that displays the default sign in required if user is not auth'd
+ * - impl reset password page
+ */
 
-export const AuthenticationScreen: React.FC<IAuthenticationScreenProps> = observer(props => {
+export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
     const classes = useStyles();
     const { isSignUp, authStore } = props;
-    const [state, setState] = React.useState<IAuthenticationScreenState>({
+    const [state, setState] = React.useState<IAuthScreenState>({
         email: "",
         password: "",
         displayName: "",

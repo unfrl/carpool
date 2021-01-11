@@ -11,6 +11,7 @@ import { AuthStore, CarpoolStore, DriverStore, SocialLoginSteps } from "@carpool
 import {
     AdditionalInfoDialog,
     AppHeader,
+    AuthLinks,
     Content,
     DocumentHead,
     IAdditionalInfoData,
@@ -20,7 +21,7 @@ import {
     UserMenuOption,
 } from "./components";
 import {
-    AuthenticationScreen,
+    AuthScreen,
     HomeScreen,
     CreateCarpoolScreen,
     CarpoolScreen,
@@ -141,14 +142,14 @@ export class App extends Component<IAppProps, IAppState> {
                             path="/sign-up"
                             exact={true}
                             render={_routeProps => (
-                                <AuthenticationScreen isSignUp={true} authStore={authStore} />
+                                <AuthScreen isSignUp={true} authStore={authStore} />
                             )}
                         />
                         <Route
                             path="/sign-in"
                             exact={true}
                             render={_routeProps => (
-                                <AuthenticationScreen isSignUp={false} authStore={authStore} />
+                                <AuthScreen isSignUp={false} authStore={authStore} />
                             )}
                         />
                         <Route component={NotFoundScreen} />
@@ -187,11 +188,7 @@ export class App extends Component<IAppProps, IAppState> {
             return <UserMenu user={user} onMenuOptionSelected={this.handleMenuOptionSelected} />;
         }
 
-        return (
-            <NavLink to="/sign-in">
-                <Button color="inherit">Sign in</Button>
-            </NavLink>
-        );
+        return <AuthLinks />;
     };
 
     private handleMenuOptionSelected = (option: UserMenuOption) => {
