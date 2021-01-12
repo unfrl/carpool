@@ -35,14 +35,13 @@ const useStyles = makeStyles(theme => ({
 export interface ICreateCarpoolScreenProps {
     initialized: boolean;
     isAuthenticated: boolean;
-    onSignIn: () => void;
     carpoolStore: CarpoolStore;
     routerStore: RouterStore;
 }
 
 export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> = observer(props => {
     const classes = useStyles();
-    const { initialized, isAuthenticated, onSignIn, carpoolStore, routerStore } = props;
+    const { initialized, isAuthenticated, carpoolStore, routerStore } = props;
     const [newCarpool, setNewCarpool] = useState<CarpoolDto | undefined>();
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {

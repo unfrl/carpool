@@ -16,15 +16,20 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const EmailSent: React.FC = () => {
+export interface IEmailSentProps {
+    title?: string;
+    description: string;
+}
+
+export const EmailSent: React.FC<IEmailSentProps> = props => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography align="center" variant="h3">
-                Email sent!
+                {props.title || "Email sent!"}
             </Typography>
             <Typography align="center" variant="subtitle1">
-                Please click the verification email we sent you to finish setting up your account.
+                {props.description}
             </Typography>
             <div className={classes.spacer} />
             <Slide direction="up" in={true} timeout={500}>

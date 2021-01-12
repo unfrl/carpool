@@ -148,7 +148,9 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
 
     const renderBody = () => {
         if (isSignUp && signUpSuccess) {
-            return <EmailSent />;
+            return (
+                <EmailSent description="Please click the verification email we sent you to finish setting up your account." />
+            );
         }
 
         if (googleLoginState.additionalInfoRequired) {
