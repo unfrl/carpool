@@ -19,6 +19,5 @@ export * from "./not-found";
 export * from "./passenger-form";
 export * from "./passengers-table";
 export * from "./phone-number-input";
-export * from "./user-dialog";
 export * from "./user-menu";
 export * from "./user-profile-card";
