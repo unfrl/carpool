@@ -16,7 +16,7 @@ import {
 import { Alert } from "@material-ui/lab";
 
 import { AuthStore, authProviderConfig } from "@carpool/core";
-import { DocumentHead, EmailSent, NavLink } from "../components";
+import { Conditional, DocumentHead, EmailSent, NavLink } from "../components";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -131,12 +131,12 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                     Welcome!
                 </Typography>
                 <div className={classes.spacer} />
-                {state.error && (
+                <Conditional shouldDisplay={!!state.error}>
                     <Alert severity="error" onClose={handleClearError}>
                         {state.error}
                     </Alert>
-                )}
-                {isSignUp && (
+                </Conditional>
+                <Conditional shouldDisplay={isSignUp}>
                     <TextField
                         label="Display name"
                         required={true}
@@ -145,7 +145,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                         variant="outlined"
                         margin="normal"
                     />
-                )}
+                </Conditional>
                 <TextField
                     label="Email address"
                     required={true}
@@ -164,11 +164,11 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                     variant="outlined"
                     margin="normal"
                 />
-                {!isSignUp && (
+                <Conditional shouldDisplay={!isSignUp}>
                     <NavLink to="/reset-password">
                         <Typography align="right">Forgot password?</Typography>
                     </NavLink>
-                )}
+                </Conditional>
                 <div className={classes.actions}>
                     <Button
                         fullWidth={true}
@@ -180,7 +180,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                         {isSignUp ? "Sign up" : "Sign in"}
                     </Button>
                     <div className={classes.spacer} />
-                    {isSignUp ? (
+                    <Conditional shouldDisplay={isSignUp}>
                         <NavLink to="/sign-in">
                             <Button
                                 fullWidth={true}
@@ -191,7 +191,8 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                                 Existing account
                             </Button>
                         </NavLink>
-                    ) : (
+                    </Conditional>
+                    <Conditional shouldDisplay={!isSignUp}>
                         <NavLink to="/sign-up">
                             <Button
                                 fullWidth={true}
@@ -202,8 +203,8 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                                 Create an account
                             </Button>
                         </NavLink>
-                    )}
-                    {authProviderConfig.googleClientId && (
+                    </Conditional>
+                    <Conditional shouldDisplay={!!authProviderConfig.googleClientId}>
                         <>
                             <div className={classes.spacer} />
                             <div className={classes.orDivider}>
@@ -220,7 +221,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                                 buttonText={`Sign ${isSignUp ? "up" : "in"} with Google`}
                             />
                         </>
-                    )}
+                    </Conditional>
                 </div>
             </form>
         );
