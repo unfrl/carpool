@@ -8,6 +8,14 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "space-between",
     },
+    title: {
+        display: "inline",
+        marginLeft: theme.spacing(1),
+        [theme.breakpoints.down("xs")]: {
+            display: "none",
+            marginLeft: 0,
+        },
+    },
 }));
 
 export interface IAppHeaderProps {
@@ -29,7 +37,8 @@ export const AppHeader: FunctionComponent<IAppHeaderProps> = props => {
             <Toolbar className={classes.toolbar}>
                 <NavLink to="/">
                     <Typography variant="h6">
-                        <span role="img">🚙</span> {props.title || "Carpool"}
+                        <span role="img">🚙</span>
+                        <span className={classes.title}>{props.title || "Carpool"}</span>
                     </Typography>
                 </NavLink>
                 {props.rightOption}

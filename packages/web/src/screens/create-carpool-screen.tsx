@@ -1,11 +1,11 @@
 import React, { FunctionComponent, Fragment, useState } from "react";
 import { Redirect } from "react-router";
-import { Card, Typography, Button, CircularProgress, makeStyles } from "@material-ui/core";
+import { Card, Typography, CircularProgress, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 import { RouterStore } from "mobx-react-router";
 
 import { CarpoolStore, CarpoolDto, UpsertCarpoolDto } from "@carpool/core";
-import { CarpoolForm, DocumentHead } from "../components";
+import { AuthLinks, CarpoolForm, DocumentHead } from "../components";
 import { getCarpoolPath } from "../utils";
 import toyCar from "../images/toy-car.svg";
 
@@ -35,14 +35,13 @@ const useStyles = makeStyles(theme => ({
 export interface ICreateCarpoolScreenProps {
     initialized: boolean;
     isAuthenticated: boolean;
-    onSignIn: () => void;
     carpoolStore: CarpoolStore;
     routerStore: RouterStore;
 }
 
 export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> = observer(props => {
     const classes = useStyles();
-    const { initialized, isAuthenticated, onSignIn, carpoolStore, routerStore } = props;
+    const { initialized, isAuthenticated, carpoolStore, routerStore } = props;
     const [newCarpool, setNewCarpool] = useState<CarpoolDto | undefined>();
 
     const handleSave = async (carpoolDto: UpsertCarpoolDto) => {
@@ -81,9 +80,7 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
                         You need an account to create a carpool. <br /> Sign in to get started!
                     </Typography>
                     <div className={classes.signIn}>
-                        <Button variant="contained" size="large" color="primary" onClick={onSignIn}>
-                            Sign In
-                        </Button>
+                        <AuthLinks size="large" />
                     </div>
                     <img src={toyCar} alt="Toy car" className={classes.carImage} />
                 </Fragment>
