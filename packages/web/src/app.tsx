@@ -125,15 +125,19 @@ export class App extends Component<IAppProps> {
                         <Route
                             path="/sign-up"
                             exact={true}
-                            render={_routeProps => (
-                                <AuthScreen isSignUp={true} authStore={authStore} />
+                            render={routeProps => (
+                                <AuthScreen isSignUp={true} authStore={authStore} {...routeProps} />
                             )}
                         />
                         <Route
                             path="/sign-in"
                             exact={true}
-                            render={_routeProps => (
-                                <AuthScreen isSignUp={false} authStore={authStore} />
+                            render={routeProps => (
+                                <AuthScreen
+                                    isSignUp={false}
+                                    authStore={authStore}
+                                    {...routeProps}
+                                />
                             )}
                         />
                         <Route

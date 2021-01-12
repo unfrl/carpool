@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+// TODO: move to a routes definition somewhere and/or move this into props
+const excludedReturnPaths = ["/", "/sign-up", "/sign-in", "/reset-password"];
+
 export interface IAuthLinksProps {
     size?: "small" | "medium" | "large";
 }
@@ -20,9 +23,14 @@ export interface IAuthLinksProps {
 export const AuthLinks: React.FC<IAuthLinksProps> = props => {
     const classes = useStyles();
 
+    const returnTo =
+        excludedReturnPaths.indexOf(window.location.pathname) < 0
+            ? `?return-to=${window.location.pathname}`
+            : "";
+
     return (
         <div className={classes.container}>
-            <NavLink to="/sign-in">
+            <NavLink to={`/sign-in${returnTo}`}>
                 <Button color="inherit" variant="outlined" {...props}>
                     Sign in
                 </Button>

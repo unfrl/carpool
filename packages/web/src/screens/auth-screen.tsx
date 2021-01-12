@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import { Redirect } from "react-router-dom";
+import { Redirect, RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react";
 import {
     Backdrop,
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export interface IAuthScreenProps {
+export interface IAuthScreenProps extends RouteComponentProps {
     /**
      * Set to true for new user sign up otherwise defaults to sign in.
      */
@@ -143,7 +143,10 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
     };
 
     if (authStore.isAuthenticated) {
-        return <Redirect to={"/"} />;
+        const { search } = props.location;
+        const returnTo = new URLSearchParams(search).get("return-to");
+
+        return <Redirect to={returnTo || "/"} />;
     }
 
     const renderBody = () => {
