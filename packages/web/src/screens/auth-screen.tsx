@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
-import { AuthStore, authProviderConfig } from "@carpool/core";
+import { AuthStore, SocialLoginSteps, authProviderConfig } from "@carpool/core";
 import { Conditional, DocumentHead, EmailSent, NavLink } from "../components";
 
 const useStyles = makeStyles(theme => ({
@@ -63,7 +63,6 @@ export interface IAuthScreenState {
     email: string;
     password: string;
     displayName: string;
-    error?: string;
 }
 
 export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
@@ -73,17 +72,27 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
         email: "",
         password: "",
         displayName: "",
-        error: "",
     });
+    const [error, setError] = React.useState("");
     const [signUpSuccess, setSignUpSuccess] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(false);
+    const [googleLoginState, setGoogleLoginState] = React.useState({
+        idToken: "",
+        displayName: "",
+        additionalInfoRequired: false,
+    });
 
     const handleGoogleSuccess = async response => {
+        console.log("SUCCESS!!!", response);
         const idToken = response.Zi.id_token;
         if (!idToken) {
             console.error("Unable to extract google user idToken from login response");
         }
-        // await props.onGoogleLogin(idToken);
+
+        const result = await authStore.signInWithGoogle(idToken);
+        if (result.nextStep === SocialLoginSteps.DisplayNameRequired) {
+            setGoogleLoginState({ idToken, displayName: "", additionalInfoRequired: true });
+        }
     };
 
     const handleGoogleFailure = response => {
@@ -91,8 +100,25 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
         console.log(response);
     };
 
+    const handleFinishGoogleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            setLoading(true);
+
+            await authStore.signInWithGoogle(
+                googleLoginState.idToken,
+                googleLoginState.displayName
+            );
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleClearError = () => {
-        setState({ ...state, error: "" });
+        setError("");
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -110,7 +136,7 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
                 await authStore.signIn(state.email, state.password);
             }
         } catch (error) {
-            setState({ ...state, error: error.message });
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -125,15 +151,59 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
             return <EmailSent />;
         }
 
+        if (googleLoginState.additionalInfoRequired) {
+            return (
+                <form onSubmit={handleFinishGoogleLogin} className={classes.form}>
+                    <Typography variant="h3" align="center">
+                        Last step!
+                    </Typography>
+                    <div className={classes.spacer} />
+                    <Typography align="center">
+                        Please enter a display name to create your account.
+                    </Typography>
+                    <div className={classes.spacer} />
+                    <Conditional shouldDisplay={!!error}>
+                        <Alert severity="error" onClose={handleClearError}>
+                            {error}
+                        </Alert>
+                    </Conditional>
+                    <TextField
+                        label="Display name"
+                        required={true}
+                        value={googleLoginState.displayName}
+                        onChange={e =>
+                            setGoogleLoginState({
+                                ...googleLoginState,
+                                displayName: e.target.value,
+                            })
+                        }
+                        variant="outlined"
+                        margin="normal"
+                    />
+                    <div className={classes.actions}>
+                        <Button
+                            fullWidth={true}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            type="submit"
+                        >
+                            Finish
+                        </Button>
+                    </div>
+                </form>
+            );
+        }
+
         return (
             <form onSubmit={handleSubmit} className={classes.form}>
                 <Typography variant="h3" align="center">
                     Welcome!
                 </Typography>
                 <div className={classes.spacer} />
-                <Conditional shouldDisplay={!!state.error}>
+                <Conditional shouldDisplay={!!error}>
                     <Alert severity="error" onClose={handleClearError}>
-                        {state.error}
+                        {error}
                     </Alert>
                 </Conditional>
                 <Conditional shouldDisplay={isSignUp}>
