@@ -10,9 +10,5 @@ export interface IConditionalProps {
  */
 export const Conditional: React.FC<IConditionalProps> = props => {
     const { shouldDisplay, children } = props;
-    if (!shouldDisplay) {
-        return null;
-    }
-
-    return children;
+    return !!shouldDisplay ? children : null;
 };
