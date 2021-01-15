@@ -63,7 +63,7 @@ export const HomeScreen: FunctionComponent = () => {
                     Save on gas, make new friends, reduce your carbon footprint, and get where you
                     need to go!
                 </Typography>
-                <NavLink to="/create" className={classes.createCarpool}>
+                <NavLink to="/carpools/create" className={classes.createCarpool}>
                     <Button variant="contained" color="primary" size="large">
                         Create a Carpool
                     </Button>
