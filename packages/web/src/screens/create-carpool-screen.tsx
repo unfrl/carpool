@@ -1,13 +1,15 @@
 import React, { FunctionComponent, Fragment, useState } from "react";
 import { Redirect } from "react-router";
-import { Card, Typography, CircularProgress, makeStyles } from "@material-ui/core";
+import { Card, CircularProgress, Typography, makeStyles } from "@material-ui/core";
 import { observer } from "mobx-react";
 import { RouterStore } from "mobx-react-router";
 
 import { CarpoolStore, CarpoolDto, UpsertCarpoolDto } from "@carpool/core";
-import { AuthLinks, CarpoolForm, DocumentHead } from "../components";
+import { AuthLinks, DocumentHead } from "../components";
 import { getCarpoolPath } from "../utils";
 import toyCar from "../images/toy-car.svg";
+
+const CarpoolForm = React.lazy(() => import("../components/carpool-form"));
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -69,11 +71,13 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
                 Create a Carpool
             </Typography>
             {isAuthenticated ? (
-                <CarpoolForm
-                    onSave={handleSave}
-                    onCancel={handleCancel}
-                    saving={carpoolStore.saving}
-                />
+                <React.Suspense fallback={<CircularProgress />}>
+                    <CarpoolForm
+                        onSave={handleSave}
+                        onCancel={handleCancel}
+                        saving={carpoolStore.saving}
+                    />
+                </React.Suspense>
             ) : (
                 <Fragment>
                     <Typography variant="subtitle1" align="center">

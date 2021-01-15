@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
 import {
-    IconButton,
-    Icon,
-    Card,
-    CardHeader,
-    CardContent,
-    Typography,
     Avatar,
+    Card,
+    CardContent,
+    CardHeader,
+    CircularProgress,
+    Icon,
+    IconButton,
+    Typography,
     makeStyles,
 } from "@material-ui/core";
 import amber from "@material-ui/core/colors/amber";
@@ -15,8 +16,9 @@ import { observer } from "mobx-react";
 
 import { CarpoolDto, UpsertCarpoolDto, getInitials } from "@carpool/core";
 import { ActionLink } from "./action-link";
-import { CarpoolForm } from "./carpool-form";
 import { NavLink } from "./nav-link";
+
+const CarpoolForm = React.lazy(() => import("./carpool-form"));
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -109,17 +111,19 @@ export const CarpoolDetails: React.FC<ICarpoolDetailsProps> = observer(props => 
         <Card>
             {editing && canEdit ? (
                 <div className={classes.form}>
-                    <CarpoolForm
-                        onSave={handleSave}
-                        onCancel={handleToggleEditing}
-                        saving={saving}
-                        existingCarpool={{
-                            carpoolName: name,
-                            destination: destination,
-                            dateTime: dateTime,
-                            description: description,
-                        }}
-                    />
+                    <React.Suspense fallback={<CircularProgress />}>
+                        <CarpoolForm
+                            onSave={handleSave}
+                            onCancel={handleToggleEditing}
+                            saving={saving}
+                            existingCarpool={{
+                                carpoolName: name,
+                                destination: destination,
+                                dateTime: dateTime,
+                                description: description,
+                            }}
+                        />
+                    </React.Suspense>
                 </div>
             ) : (
                 <Fragment>
