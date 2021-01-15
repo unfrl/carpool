@@ -6,5 +6,5 @@ import slugify from "slugify";
  * @param urlId - The carpool URL ID, not the GUID!
  */
 export const getCarpoolPath = (name: string, urlId: string) => {
-    return `/${urlId}/${slugify(name, { lower: true })}`;
+    return `/carpools/${urlId}/${slugify(name, { lower: true })}`;
 };

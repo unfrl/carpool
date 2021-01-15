@@ -69,7 +69,7 @@ export class App extends Component<IAppProps> {
                         <Switch>
                             <Route path="/" exact={true} component={HomeScreen} />
                             <Route
-                                path="/:displayName/carpools"
+                                path="/users/:displayName/carpools"
                                 exact={true}
                                 render={routeProps => (
                                     <UserCarpoolsScreen
@@ -80,7 +80,7 @@ export class App extends Component<IAppProps> {
                                 )}
                             />
                             <Route
-                                path="/create"
+                                path="/carpools/create"
                                 exact={true}
                                 render={_routeProps => (
                                     <CreateCarpoolScreen
@@ -182,7 +182,9 @@ export class App extends Component<IAppProps> {
             case UserMenuOption.profile:
                 return;
             case UserMenuOption.carpools:
-                return routerStore.push({ pathname: `/${authStore.user!.displayName}/carpools` });
+                return routerStore.push({
+                    pathname: `/users/${authStore.user!.displayName}/carpools`,
+                });
             case UserMenuOption.signOut:
                 return this.handleSignOut();
         }

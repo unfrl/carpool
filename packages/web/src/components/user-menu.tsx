@@ -85,7 +85,7 @@ export const UserMenu: FunctionComponent<IUserMenuProps> = props => {
     return (
         <div>
             <div className={classes.buttons}>
-                <NavLink to="/create" className={classes.createLink}>
+                <NavLink to="/carpools/create" className={classes.createLink}>
                     <Button variant="outlined" color="secondary">
                         Create
                     </Button>
