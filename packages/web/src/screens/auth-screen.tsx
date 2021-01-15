@@ -314,3 +314,5 @@ export const AuthScreen: React.FC<IAuthScreenProps> = observer(props => {
         </Container>
     );
 });
+
+export default AuthScreen;

@@ -4,3 +4,5 @@ import { NotFound } from "../components";
 export const NotFoundScreen: FunctionComponent = () => {
     return <NotFound />;
 };
+
+export default NotFoundScreen;

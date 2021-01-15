@@ -150,3 +150,5 @@ export const UserCarpoolsScreen: FunctionComponent<IUserCarpoolsScreenProps> = o
         </Fragment>
     );
 });
+
+export default UserCarpoolsScreen;

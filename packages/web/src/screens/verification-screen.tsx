@@ -36,8 +36,8 @@ const styles = (theme: Theme) =>
         },
         loader: {
             display: "flex",
-            justifyContent: "center"
-        }
+            justifyContent: "center",
+        },
     });
 
 export interface IVerificationScreenProps extends WithStyles<typeof styles> {
@@ -63,7 +63,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         readyForRedirect: false,
         newPassword: "",
         newPasswordDuplicate: "",
-        loading: false
+        loading: false,
     };
 
     private _token?;
@@ -93,12 +93,17 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
         e.preventDefault();
         try {
             this.setState({ loading: true });
-            await this.props.authStore.resetpassword(this._token, this._email, this.state.newPassword);
+            await this.props.authStore.resetpassword(
+                this._token,
+                this._email,
+                this.state.newPassword
+            );
+        } finally {
+            setTimeout(() => {
+                this.setState({ readyForRedirect: true });
+            }, 500);
         }
-        finally {
-            setTimeout(() => { this.setState({ readyForRedirect: true }) }, 500);
-        }
-    }
+    };
 
     public render() {
         const { classes } = this.props;
@@ -110,7 +115,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
                 <div className={classes.loader}>
                     <CircularProgress></CircularProgress>
                 </div>
-            )
+            );
         }
         if (this.props.mode === ScreenMode.Verification) {
             return (
@@ -126,7 +131,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
                 <DocumentHead screenTitle="Reset Password" />
                 <Typography variant="h6" align="center">
                     Password Reset
-                    </Typography>
+                </Typography>
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         className={classes.password}
@@ -160,7 +165,7 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
                             }
                         >
                             Change Password
-                    </Button>
+                        </Button>
                     </div>
                 </form>
             </Card>
@@ -169,3 +174,5 @@ class _VerificationScreen extends Component<IVerificationScreenProps, IVerificat
 }
 
 export const VerificationScreen = withStyles(styles)(_VerificationScreen);
+
+export default VerificationScreen;

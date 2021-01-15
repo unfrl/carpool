@@ -13,13 +13,13 @@ import {
     UpsertPassengerDto,
 } from "@carpool/core";
 import {
-    CarpoolDetails,
-    DriverList,
-    DocumentHead,
     AppDialog,
+    CarpoolDetails,
+    DocumentHead,
     DriverForm,
-    PassengerForm,
+    DriverList,
     FormActions,
+    PassengerForm,
 } from "../components";
 
 const useStyles = makeStyles(theme => ({
@@ -203,3 +203,5 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
         </Container>
     );
 });
+
+export default CarpoolScreen;

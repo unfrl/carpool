@@ -75,3 +75,5 @@ export const HomeScreen: FunctionComponent = () => {
         </Grid>
     );
 };
+
+export default HomeScreen;

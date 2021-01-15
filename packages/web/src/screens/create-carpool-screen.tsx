@@ -88,3 +88,5 @@ export const CreateCarpoolScreen: FunctionComponent<ICreateCarpoolScreenProps> =
         </Card>
     );
 });
+
+export default CreateCarpoolScreen;
