@@ -118,3 +118,5 @@ export const CarpoolForm: FunctionComponent<ICarpoolFormProps> = props => {
         </form>
     );
 };
+
+export default CarpoolForm;

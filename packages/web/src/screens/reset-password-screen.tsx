@@ -119,3 +119,5 @@ export const ResetPasswordScreen: React.FC<IResetPasswordScreenProps> = props =>
         </Container>
     );
 };
+
+export default ResetPasswordScreen;

@@ -14,6 +14,7 @@ export * from "./driver-list";
 export * from "./email-sent";
 export * from "./form-actions";
 export * from "./loading-button";
+export * from "./loading-indicator";
 export * from "./nav-link";
 export * from "./not-found";
 export * from "./passenger-form";
