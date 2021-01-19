@@ -29,6 +29,7 @@ export class CarpoolAPI extends CarpoolAPIContext {
     createDriver(id: string, body: UpsertDriverDto, options?: coreHttp.OperationOptions): Promise<CarpoolAPICreateDriverResponse>;
     createPassenger(id: string, body: UpsertPassengerDto, options?: coreHttp.OperationOptions): Promise<CarpoolAPICreatePassengerResponse>;
     deleteCarpool(id: string, options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse>;
+    deleteDriver(id: string, driverId: string, options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse>;
     deletePassenger(id: string, options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse>;
     getCarpool(id: string, includeMetadata: boolean, options?: coreHttp.OperationOptions): Promise<CarpoolAPIGetCarpoolResponse>;
     getDrivers(id: string, options?: coreHttp.OperationOptions): Promise<CarpoolAPIGetDriversResponse>;

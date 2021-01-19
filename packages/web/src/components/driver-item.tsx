@@ -47,7 +47,13 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         alignItems: "center",
     },
+    actionButtons: {
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+    },
     action: {
+        marginTop: theme.spacing(1),
         marginLeft: theme.spacing(1),
     },
     expanded: {
@@ -70,15 +76,23 @@ export interface IDriverItemProps {
     driver: DriverDto;
     currentUserIsDriver: boolean;
     currentUserIsPassenger: boolean;
+    currentUserIsCreator: boolean;
     canJoin: boolean;
     onJoin: () => void;
-    onLeave: () => void;
+    onPassengerLeave: () => void;
+    onRemoveDriver: () => void;
 }
 
 export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props => {
     const [expanded, setExpanded] = useState(false);
     const classes = useStyles();
-    const { driver, currentUserIsDriver, currentUserIsPassenger, canJoin } = props;
+    const {
+        driver,
+        currentUserIsDriver,
+        currentUserIsPassenger,
+        currentUserIsCreator,
+        canJoin,
+    } = props;
     const { car, user, seatsRemaining } = driver;
     const { displayName, email } = user;
     const { color, type } = car;
@@ -106,23 +120,61 @@ export const DriverItem: FunctionComponent<IDriverItemProps> = observer(props =>
                     </div>
                 </div>
                 <div className={classes.actions}>
-                    {currentUserIsPassenger ? (
-                        <Tooltip title="You're a passenger!">
-                            <Button color="primary" variant="contained" onClick={props.onLeave}>
-                                Leave
+                    <div className={classes.actionButtons}>
+                        {currentUserIsPassenger ? (
+                            <Tooltip title="You're a passenger!">
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={() => {
+                                        props.onPassengerLeave();
+                                    }}
+                                >
+                                    Leave
+                                </Button>
+                            </Tooltip>
+                        ) : currentUserIsDriver ? (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.action}
+                                onClick={() => props.onRemoveDriver()}
+                            >
+                                Step Down
                             </Button>
-                        </Tooltip>
-                    ) : (
-                        <Button
-                            disabled={!canJoin}
-                            variant="contained"
-                            color="primary"
-                            className={classes.action}
-                            onClick={props.onJoin}
-                        >
-                            Join
-                        </Button>
-                    )}
+                        ) : currentUserIsCreator ? (
+                            <div>
+                                <Button
+                                    disabled={!canJoin}
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.action}
+                                    onClick={() => props.onRemoveDriver()}
+                                >
+                                    Remove
+                                </Button>
+                                <Button
+                                    disabled={!canJoin}
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.action}
+                                    onClick={props.onJoin}
+                                >
+                                    Join
+                                </Button>
+                            </div>
+                        ) : (
+                            <Button
+                                disabled={!canJoin}
+                                variant="contained"
+                                color="primary"
+                                className={classes.action}
+                                onClick={props.onJoin}
+                            >
+                                Join
+                            </Button>
+                        )}
+                    </div>
                     <Tooltip title={expanded ? "Hide details" : "Show details"}>
                         <IconButton
                             size="small"

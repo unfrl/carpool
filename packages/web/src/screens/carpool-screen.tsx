@@ -52,6 +52,8 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
     const [showDriverForm, setShowDriverForm] = useState(false);
     const [driverId, setDriverId] = useState<string | undefined>();
     const [removeFromDriverId, setRemoveFromDriverId] = useState<string | undefined>();
+    const [removingDriverId, setRemovingDriverId] = useState<string | undefined>();
+    const [driverRemovedByCreator, setDriverRemovedByCreator] = useState<boolean | undefined>();
 
     const canUserEdit = Boolean(
         authStore.user && selectedCarpool && authStore.user.id === selectedCarpool.user.id
@@ -97,6 +99,22 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             await driverStore.removeUserPassenger(removeFromDriverId);
         }
         setRemoveFromDriverId(undefined);
+    };
+
+    const handleShowRemoveDriverConfirmation = (driverId: string, isDriver: boolean) => {
+        setDriverRemovedByCreator(!isDriver);
+        setRemovingDriverId(driverId);
+    };
+
+    const handleCancelQuit = () => {
+        setRemovingDriverId(undefined);
+    };
+
+    const handleConfirmQuit = async () => {
+        if (removingDriverId) {
+            await driverStore.removeDriver(selectedCarpoolId, removingDriverId);
+        }
+        setRemovingDriverId(undefined);
     };
 
     const handleSaveDriverForm = async (createDriverDto: UpsertDriverDto) => {
@@ -149,10 +167,12 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
             <DriverList
                 drivers={driverStore.drivers}
                 loading={driverStore.loading}
+                carpoolCreatorId={selectedCarpool.user.id}
                 userId={authStore.user ? authStore.user.id : undefined}
                 onOfferToDrive={handleToggleDriverForm}
                 onJoinAsPassenger={handleShowPassengerForm}
                 onRemovePassenger={handleShowLeaveConfirmation}
+                onRemoveDriver={handleShowRemoveDriverConfirmation}
             />
             {showDriverForm && (
                 <AppDialog
@@ -163,6 +183,38 @@ export const CarpoolScreen: FunctionComponent<ICarpoolScreenProps> = observer(pr
                     maxWidth="xs"
                 >
                     <DriverForm onSave={handleSaveDriverForm} onCancel={handleToggleDriverForm} />
+                </AppDialog>
+            )}
+            {removingDriverId && (
+                <AppDialog
+                    title="Step down from being a driver?"
+                    onClose={handleCancelQuit}
+                    color="primary"
+                >
+                    <div className={classes.confirmContent}>
+                        <Typography
+                            variant="subtitle1"
+                            align="center"
+                            className={classes.confirmText}
+                        >
+                            {driverRemovedByCreator ? (
+                                <div>Are you sure you want to remove this driver?</div>
+                            ) : (
+                                <div>
+                                    Are you sure you want to step down?
+                                    <br />
+                                    You can always volunteer to drive again if you change your mind
+                                    later.
+                                </div>
+                            )}
+                        </Typography>
+                        <FormActions
+                            confirmText="Leave"
+                            canSave={true}
+                            onCancel={handleCancelQuit}
+                            onConfirm={handleConfirmQuit}
+                        />
+                    </div>
                 </AppDialog>
             )}
             {driverId && (
