@@ -30,6 +30,7 @@ export class DriverStore {
 
         this._rootStore.rtmClient.carpool.onDriverUpdated(this.setUpdatedDriver);
         this._rootStore.rtmClient.carpool.onDriverAdded(this.addDriver);
+        this._rootStore.rtmClient.carpool.onDriverRemoved(this.handleDriverRemoved);
         this._rootStore.rtmClient.carpool.onPassengerAdded(this.addPassenger);
         this._rootStore.rtmClient.carpool.onPassengerRemoved(this.removePassenger);
     }
@@ -67,6 +68,16 @@ export class DriverStore {
             this._logger.info("Passenger deleted!");
         } catch (error) {
             this._logger.error("Failed to delete passenger", error);
+        }
+    };
+
+    public removeDriver = async (carpoolId: string, driverId: string) => {
+        try {
+            await this._rootStore.apiClient.deleteDriver(carpoolId, driverId);
+            // TODO: same as with create user, we rely on the driver updated event to notify self
+            this._logger.info("Driver deleted!");
+        } catch (error) {
+            this._logger.error("Failed to delete driver", error);
         }
     };
 
@@ -185,6 +196,11 @@ export class DriverStore {
             // driver.passengerUserIds = this.drivers[index].passengerUserIds; //The passengers are not updated here
             this.drivers[index] = driver;
         }
+    };
+
+    @action
+    private handleDriverRemoved = (driver: DriverDto) => {
+        this.drivers.splice(this.drivers.indexOf(driver), 1);
     };
 
     @action

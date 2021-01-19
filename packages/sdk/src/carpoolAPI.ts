@@ -302,6 +302,26 @@ export class CarpoolAPI extends CarpoolAPIContext {
   }
 
   /**
+   * Delete the specified driver, email any of their passengers
+   * @param id
+   * @param driverId
+   * @param options The options parameters.
+   */
+  deleteDriver(
+    id: string,
+    driverId: string,
+    options?: coreHttp.OperationOptions
+  ): Promise<coreHttp.RestResponse> {
+    const operationOptions: coreHttp.RequestOptionsBase = coreHttp.operationOptionsToRequestOptionsBase(
+      options || {}
+    );
+    return this.sendOperationRequest(
+      { id, driverId, options: operationOptions },
+      deleteDriverOperationSpec
+    ) as Promise<coreHttp.RestResponse>;
+  }
+
+  /**
    * Creates a passenger based off the current user
    * @param id
    * @param body
@@ -567,6 +587,13 @@ const getDriversOperationSpec: coreHttp.OperationSpec = {
   },
   urlParameters: [Parameters.$host, Parameters.id],
   headerParameters: [Parameters.accept1],
+  serializer
+};
+const deleteDriverOperationSpec: coreHttp.OperationSpec = {
+  path: "/api/v1/carpools/{id}/drivers/{driverId}",
+  httpMethod: "DELETE",
+  responses: { 204: {} },
+  urlParameters: [Parameters.$host, Parameters.id, Parameters.driverId],
   serializer
 };
 const createPassengerOperationSpec: coreHttp.OperationSpec = {

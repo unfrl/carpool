@@ -142,6 +142,17 @@ export const body6: OperationParameter = {
   mapper: UpsertDriverDtoMapper
 };
 
+export const driverId: OperationURLParameter = {
+  parameterPath: "driverId",
+  mapper: {
+    serializedName: "driverId",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
 export const body7: OperationParameter = {
   parameterPath: "body",
   mapper: UpsertPassengerDtoMapper
