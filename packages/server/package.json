@@ -39,7 +39,7 @@
         "google-auth-library": "^5.5.1",
         "guid-typescript": "^1.0.9",
         "ioredis": "^4.14.1",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "nest-bull": "^0.9.0",
         "nodemailer": "^6.3.1",
         "passport": "^0.4.0",
